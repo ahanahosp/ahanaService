@@ -1,0 +1,56 @@
+<ehcache>
+
+    <diskStore path="java.io.tmpdir"/>
+
+    <defaultCache
+
+        maxElementsInMemory="100"
+
+        eternal="true"
+
+        overflowToDisk="true"
+
+        timeToIdleSeconds="86400"
+
+        timeToLiveSeconds="86400"
+
+        diskPersistent="false"
+
+        diskExpiryThreadIntervalSeconds="1000"/>  
+
+        
+
+  	<cache name="LOOKUPS_CACHE"
+
+        maxElementsInMemory="50000"
+
+        eternal="true"
+
+        timeToIdleSeconds="86400"
+
+        timeToLiveSeconds="86400"
+
+        diskExpiryThreadIntervalSeconds="1000"
+
+        overflowToDisk="true" >
+
+	</cache>
+	
+	<cache name="ERROR_LOOKUP_CACHE"
+
+        maxElementsInMemory="50000"
+
+        eternal="true"
+
+        timeToIdleSeconds="86400"
+
+        timeToLiveSeconds="86400"
+
+        diskExpiryThreadIntervalSeconds="1000"
+
+        overflowToDisk="true" >
+
+	</cache>
+	
+
+</ehcache>
