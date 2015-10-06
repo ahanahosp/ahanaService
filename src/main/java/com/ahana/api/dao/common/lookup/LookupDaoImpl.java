@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.transform.Transformers;
@@ -13,8 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ahana.api.common.Constants;
 import com.ahana.api.dao.common.AhanaDaoSupport;
-import com.ahana.api.domain.common.NameValue;
 import com.ahana.api.domain.common.AhanaLookupVO;
+import com.ahana.api.domain.common.NameValue;
 
 @Transactional(readOnly = true)
 public class LookupDaoImpl extends AhanaDaoSupport implements LookupDao {

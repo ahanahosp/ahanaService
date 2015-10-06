@@ -1,6 +1,6 @@
 package com.ahana.api.dao.common;
 
-import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.collections.CollectionUtils;
 import org.hibernate.Query;
 import org.springframework.transaction.annotation.Transactional;
 

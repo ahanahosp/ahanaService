@@ -47,7 +47,7 @@ public class UserManagerImpl implements UserManager {
 		if(SecurityContextHolder.getContext() != null && SecurityContextHolder.getContext().getAuthentication()!= null){
 			//String loggedInUserId = ((UserProfile) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
 			if (StringUtils.isNotBlank(userProfile.getUserId()) && !userProfile.getUserId() .matches(CommonUtils.VALID_EMAIL_REGEXP)) {
-					throw new AhanaBusinessException(ErrorConstants.USER_ID_INVALID_FORMAT);
+					//throw new AhanaBusinessException(ErrorConstants.USER_ID_INVALID_FORMAT);
 				}
            /* if(StringUtils.isNotBlank(userProfile.getUserId()) && !userProfile.getUserId().toLowerCase().equals(loggedInUserId.toLowerCase())){
             	throw new AhanaBusinessException(CommonErrorConstants.SERVICE_DENIED);

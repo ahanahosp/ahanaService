@@ -80,8 +80,6 @@ public class CommonUtils {
 			} else {
 				mimeType = "image/png";
 			}
-		}else{
-			throw new AhanaBusinessException(ErrorConstants.INVALID_EXTENSION);
 		}
 		return mimeType;
 	}
