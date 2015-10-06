@@ -107,7 +107,7 @@ public class PatientRegistration implements AhanaVO {
 	@Length(max = 50, min = 3, message = ErrorConstants.PATIENT_TYPE_LENGTH_IS_INVALID)
 	@Pattern(regexp = "[a-z-A-Z]*", message = ErrorConstants.PATIENT_TYPE_MUST_BE_ALPHABETICAL)
 	@Column(name = "patient_type", nullable = false)
-	private String patinetType;
+	private String patientType;
 
 	@NotBlank(message = ErrorConstants.ADDRESS_IS_REQUIRED)
 	@Length(max = 100, min = 5, message = ErrorConstants.ADDRESS_IS_INVALID_LENGTH)
@@ -295,12 +295,12 @@ public class PatientRegistration implements AhanaVO {
 		this.registrationMode = registrationMode;
 	}
 
-	public String getPatinetType() {
-		return patinetType;
+	public String getPatientType() {
+		return patientType;
 	}
 
-	public void setPatinetType(String patinetType) {
-		this.patinetType = patinetType;
+	public void setPatientType(String patientType) {
+		this.patientType = patientType;
 	}
 
 	public String getAddress() {
