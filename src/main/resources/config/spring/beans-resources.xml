@@ -138,6 +138,7 @@
 				<value>com.ahana.api.domain.user.UserProfile</value>
 				<value>com.ahana.api.domain.user.UserRole</value>
 				<value>com.ahana.api.domain.user.DocFile</value>
+				<value>com.ahana.api.domain.common.PatientRegistration</value>
 			</list>
 		</property>
 	</bean>
@@ -163,6 +164,7 @@
 				<value>com.ahana.api.domain.user.DocFile</value>	
 				<value>com.ahana.api.domain.common.AhanaLookupVO</value>
 				<value>com.ahana.api.domain.common.LookupPK</value>	
+				<value>com.ahana.api.domain.common.PatientRegistration</value>
 			</list>
 		</property>
 	</bean>

@@ -42,7 +42,7 @@ public class PatientRegistration implements AhanaVO {
 	private Timestamp registrationDate;
 
 	@NotBlank(message = ErrorConstants.SALUTATION_IS_REQUIRED)
-	@Length(max = 10, min = 2, message =ErrorConstants.SALUTATION_IS_INVALID_LENGTH)
+	@Length(max = 10, min = 2, message = ErrorConstants.SALUTATION_IS_INVALID_LENGTH)
 	@Pattern(regexp = "[a-z-A-Z]*", message = ErrorConstants.SALUTATION_MUST_BE_ALPHABETICAL)
 	@Column(name = "salutation", nullable = false)
 	private String salutation;
@@ -53,11 +53,17 @@ public class PatientRegistration implements AhanaVO {
 	@Column(name = "first_name", nullable = false)
 	private String firstName;
 
+	@Column(name = "middle_name")
+	private String middleName;
+
 	@NotBlank(message = ErrorConstants.LAST_NAME_IS_REQUIRED)
 	@Length(max = 50, min = 3, message = ErrorConstants.LAST_NAME_IS_INVALID_LENGTH)
 	@Pattern(regexp = "[a-z-A-Z]*", message = ErrorConstants.LAST_NAME_MUST_BE_ALPHABETICAL)
 	@Column(name = "last_name", nullable = false)
 	private String lastName;
+
+	@Column(name = "care_taker_type")
+	private String careTakerType;
 
 	@Column(name = "care_taker_name")
 	private String careTakerName;
@@ -134,7 +140,7 @@ public class PatientRegistration implements AhanaVO {
 	private String zip;
 
 	@Transient
-	private boolean sameAsCurrentAddress=false;
+	private boolean sameAsCurrentAddress = false;
 
 	@Column(name = "permanent_address")
 	private String permanentAddress;
@@ -423,6 +429,22 @@ public class PatientRegistration implements AhanaVO {
 
 	public void setPatientReference(String patientReference) {
 		this.patientReference = patientReference;
+	}
+
+	public String getMiddleName() {
+		return middleName;
+	}
+
+	public void setMiddleName(String middleName) {
+		this.middleName = middleName;
+	}
+
+	public String getCareTakerType() {
+		return careTakerType;
+	}
+
+	public void setCareTakerType(String careTakerType) {
+		this.careTakerType = careTakerType;
 	}
 
 }
