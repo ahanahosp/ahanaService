@@ -74,13 +74,13 @@ public class PatientRegistration implements AhanaVO {
 	private Timestamp dateOfBirth;
 
 	@NotBlank(message = ErrorConstants.GENDER_IS_REQUIRED)
-	@Length(max = 6, min = 4, message = ErrorConstants.GENDER_IS_INVALID_LENGTH)
+	@Length(max = 6, min = 1, message = ErrorConstants.GENDER_IS_INVALID_LENGTH)
 	@Pattern(regexp = "[a-z-A-Z]*", message = ErrorConstants.GENDER_MUST_BE_ALPHABETICAL)
 	@Column(name = "gender", nullable = false)
 	private String gender;
 
 	@NotBlank(message = ErrorConstants.MARITAL_STATUS_IS_REQUIRED)
-	@Length(max = 15, min = 5, message = ErrorConstants.MARITAL_STATUS_LENGTH_IS_INVALID)
+	@Length(max = 15, min = 1, message = ErrorConstants.MARITAL_STATUS_LENGTH_IS_INVALID)
 	@Pattern(regexp = "[a-z-A-Z]*", message = ErrorConstants.MARITAL_STATUS_MUST_BE_ALPHABETICAL)
 	@Column(name = "marital_status", nullable = false)
 	private String maritalStatus;
@@ -116,19 +116,19 @@ public class PatientRegistration implements AhanaVO {
 	private String address;
 
 	@NotBlank(message = ErrorConstants.COUNTRY_REQUIRED)
-	@Length(max = 50, min = 3, message = ErrorConstants.COUNTRY_REQUIRED)
+	@Length(max = 50, min = 1, message = ErrorConstants.COUNTRY_REQUIRED)
 	@Pattern(regexp = "[a-z-A-Z]*", message = ErrorConstants.COUNTRY_MUST_BE_ALPHABETICAL)
 	@Column(name = "country", nullable = false, length = 50)
 	private String country;
 
 	@NotBlank(message = ErrorConstants.STATE_IS_REQUIRED)
-	@Length(max = 50, min = 3, message = ErrorConstants.STATE_IS_INVALID_LENGTH)
+	@Length(max = 50, min = 1, message = ErrorConstants.STATE_IS_INVALID_LENGTH)
 	@Pattern(regexp = "[a-z-A-Z]*", message = ErrorConstants.STATE_MUST_BE_ALPHABETICAL)
 	@Column(name = "state", nullable = false, length = 50)
 	private String state;
 
 	@NotBlank(message = ErrorConstants.CITY_IS_REQUIRED)
-	@Length(max = 50, min = 3, message = ErrorConstants.CITY_IS_INVALID_LENGTH)
+	@Length(max = 50, min = 1, message = ErrorConstants.CITY_IS_INVALID_LENGTH)
 	@Pattern(regexp = "[a-z-A-Z]*", message = ErrorConstants.CITY_MUST_BE_ALPHABETICAL)
 	@Column(name = "city", nullable = false, length = 50)
 	private String city;
@@ -164,7 +164,7 @@ public class PatientRegistration implements AhanaVO {
 	private String secondaryContact;
 
 	@NotBlank(message = ErrorConstants.MOBILE_NUMBER_IS_REQUIRED)
-	@Length(max = 12, min = 10, message = ErrorConstants.MOBILE_NUMBER_IS_INVALID_LENGTH)
+	@Length(max = 12, min = 5, message = ErrorConstants.MOBILE_NUMBER_IS_INVALID_LENGTH)
 	@Pattern(regexp = "[0-9]*", message = ErrorConstants.MOBILE_NUMBER_MUST_BE_NUMBER)
 	@Column(name = "mobile")
 	private String mobile;
