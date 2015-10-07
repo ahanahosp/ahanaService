@@ -1,11 +1,7 @@
 package com.ahana.api.service.user;
 
 import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,9 +21,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.ahana.api.common.BaseService;
 import com.ahana.api.common.CommonUtils;
-import com.ahana.api.common.Constants;
-import com.ahana.api.common.mail.LookupConstants;
-import com.ahana.api.domain.common.AhanaLookupVO;
 import com.ahana.api.domain.common.NameValue;
 import com.ahana.api.domain.common.SearchRequest;
 import com.ahana.api.domain.user.DocFile;
@@ -111,12 +104,6 @@ public class UserServiceImpl extends BaseService implements UserService {
 	}
 	
 	@Override
-	@RequestMapping(value = "/loadRole",method=RequestMethod.GET)
-	public String loadRole(HttpServletRequest request,HttpServletResponse response) {
-		return Constants.DASH_BOARD_HOME;
-	}
-	
-	@Override
 	@RequestMapping(value = "/editUser",method=RequestMethod.POST)
 	public String editUser(@RequestBody UserProfile user, HttpServletRequest request) throws AhanaBusinessException {
 		String responseJson=null;
@@ -178,62 +165,11 @@ public class UserServiceImpl extends BaseService implements UserService {
 	}
 	
 	@Override
-	@RequestMapping(value = "/populateLookupData",method=RequestMethod.GET)
-	public @ResponseBody String populateLookupData(@RequestParam("requestFrom") String requestFrom,HttpServletRequest request,HttpServletResponse response) throws AhanaBusinessException {
-		String responseJson=null;
-		Map<String, List<?>> resultObj=new HashMap<String, List<?>>();
-		List<NameValue> countryList= lookupService.getLookupsByCategory(LookupConstants.LOOKUP_COUNTRY);
-		resultObj.put("countryDetails", countryList);
-		List<NameValue> userTypes= new ArrayList<NameValue>();
-		if(StringUtils.isNotBlank(requestFrom)){
-			AhanaLookupVO ahanaLookupVO=lookupService.getLookupsByCode(requestFrom);
-			NameValue nameValue=new NameValue();
-			nameValue.setLabel(ahanaLookupVO.getDescription());
-			nameValue.setValue(ahanaLookupVO.getCode());
-			userTypes.add(nameValue);
-		}else{
-			userTypes= lookupService.getLookupsByCategory(LookupConstants.LOOKUP_USER_TYPE);
-		}
-		resultObj.put("userTypeDetails", userTypes);
-		String institutionType=CommonUtils.getInstitutionType();
-		List<NameValue> designationDetails=new ArrayList<NameValue>();
-		if(StringUtils.isNotBlank(institutionType) && institutionType.equalsIgnoreCase("School")){
-			designationDetails=lookupService.getLookupsByCategory(LookupConstants.LOOKUP_DESIG_SCHOOL);
-		}else{
-			designationDetails=lookupService.getLookupsByCategory(LookupConstants.LOOKUP_DESIG_OTHERS);
-		}
-		resultObj.put("designationDetails", designationDetails);
-		List<NameValue> salutation= lookupService.getLookupsByCategory(LookupConstants.LOOKUP_SALUTATION);
-		resultObj.put("salutationDetails", salutation);
-		responseJson=handleSuccess("populatedDetails",resultObj);
-		return responseJson;
-	}
-	
-	@Override
 	@RequestMapping(value = "/populateState",method=RequestMethod.GET)
 	public @ResponseBody String populateState(@RequestParam("countryId") String countryId,HttpServletRequest request,HttpServletResponse response) throws AhanaBusinessException {
 		String responseJson=null;
 		List<NameValue> stateDetails= lookupService.getLookupsByCategory("STATE_"+countryId.toUpperCase());
 		responseJson=handleSuccess("stateDetails",stateDetails);
-		return responseJson;
-	}
-	
-	@Override
-	@RequestMapping(value = "/getUserProfileByOid",method=RequestMethod.GET)
-	public @ResponseBody String getUserProfileByOid(@RequestParam("oid") String userOid, HttpServletRequest request) throws AhanaBusinessException {
-		String responseJson=null;
-		UserProfile userProfile=null;//userManager.getUserProfileByUserOid(userOid);
-		if(userProfile!=null){
-			Set<Roles> roles = userProfile.getRoles();
-			if (roles != null && roles.size() > 0) {
-				for (Object roleObj : roles) {
-					Roles roleVO = (Roles) roleObj;
-					userProfile.setRoleOid(roleVO.getOid());
-				}
-			}
-			userProfile.setRoles(null);
-		}
-		responseJson=handleSuccess("userProfile",userProfile);
 		return responseJson;
 	}
 }

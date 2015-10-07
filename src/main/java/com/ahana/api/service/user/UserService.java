@@ -22,8 +22,6 @@ public interface UserService {
 
 	String getActiveRoles(HttpServletRequest request) throws AhanaBusinessException;
 
-	String loadRole(HttpServletRequest request, HttpServletResponse response);
-
 	String editUser(UserProfile userVO, HttpServletRequest request) throws AhanaBusinessException;
 
 	String uploadUserProfilePicture(MultipartFile profilePicture,HttpServletRequest request);
@@ -31,10 +29,6 @@ public interface UserService {
 	void downloadPhoto(String userOid,HttpServletRequest request,HttpServletResponse response);
 
 	String populateState(String countryId, HttpServletRequest request,HttpServletResponse response) throws AhanaBusinessException;
-
-	String populateLookupData(String requestFrom, HttpServletRequest request,HttpServletResponse response) throws AhanaBusinessException;
-
-	String getUserProfileByOid(String userOid, HttpServletRequest request)throws AhanaBusinessException;
 
 	String createRole(Roles roles, BindingResult errorResult)throws AhanaBusinessException;
 
