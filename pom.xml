@@ -16,6 +16,21 @@
 	</properties>
 	<dependencies>
 		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>2.6.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.6.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.module</groupId>
+			<artifactId>jackson-module-jaxb-annotations</artifactId>
+			<version>2.6.2</version>
+		</dependency>
+		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
 			<version>3.4</version>
@@ -471,11 +486,15 @@
 						<phase>compile</phase>
 						<configuration>
 							<target name="populateAhanaErrorConstant">
-								<taskdef name="readXLS" classname="com.ahana.api.system.security.error.ErrorConstantsGenerator" classpathref="maven.runtime.classpath"></taskdef>
+								<taskdef name="readXLS"
+									classname="com.ahana.api.system.security.error.ErrorConstantsGenerator"
+									classpathref="maven.runtime.classpath"></taskdef>
 								<fileset dir="${basedir}/" id="errorConstantJavaFile">
-									<include name="src/main/java/com/ahana/api/common/ErrorConstants.java" />
+									<include
+										name="src/main/java/com/ahana/api/common/ErrorConstants.java" />
 								</fileset>
-								<readXLS xmltemplatepath="src/main/resources/config/error_constants_mapping.xml" xlstemplatepath="src/main/resources/config/AhanaErrordictionary.xls">
+								<readXLS xmltemplatepath="src/main/resources/config/error_constants_mapping.xml"
+									xlstemplatepath="src/main/resources/config/AhanaErrordictionary.xls">
 									<errorConstantFile refid="errorConstantJavaFile" />
 								</readXLS>
 							</target>

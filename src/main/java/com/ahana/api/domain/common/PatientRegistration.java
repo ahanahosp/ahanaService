@@ -170,7 +170,7 @@ public class PatientRegistration implements AhanaVO {
 	private String mobile;
 
 	@Column(name = "referal_hospital")
-	private String referal_hospital;
+	private String referalHospital;
 
 	@Column(name = "patient_reference")
 	private String patientReference;
@@ -415,14 +415,6 @@ public class PatientRegistration implements AhanaVO {
 		this.mobile = mobile;
 	}
 
-	public String getReferal_hospital() {
-		return referal_hospital;
-	}
-
-	public void setReferal_hospital(String referal_hospital) {
-		this.referal_hospital = referal_hospital;
-	}
-
 	public String getPatientReference() {
 		return patientReference;
 	}
@@ -445,6 +437,14 @@ public class PatientRegistration implements AhanaVO {
 
 	public void setCareTakerType(String careTakerType) {
 		this.careTakerType = careTakerType;
+	}
+
+	public String getReferalHospital() {
+		return referalHospital;
+	}
+
+	public void setReferalHospital(String referalHospital) {
+		this.referalHospital = referalHospital;
 	}
 
 }

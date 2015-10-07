@@ -78,7 +78,7 @@ public class PatientRegistrationServiceImpl extends BaseService implements Patie
 	}
 	
 	@Override
-	@RequestMapping(value = "/populateState",method=RequestMethod.GET)
+	@RequestMapping(value = "/services/rest/registration/populateState",method=RequestMethod.GET)
 	public @ResponseBody String populateState(@RequestParam("countryId") String countryId) throws AhanaBusinessException {
 		String responseJson=null;
 		List<NameValue> stateDetails= lookupService.getLookupsByCategory("STATE_"+countryId.toUpperCase());
