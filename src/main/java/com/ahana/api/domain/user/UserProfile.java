@@ -18,16 +18,20 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.Pattern;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.ahana.api.common.Constants;
 import com.ahana.api.common.AhanaVO;
+import com.ahana.api.common.ErrorConstants;
 
 
 @SuppressWarnings("serial")
@@ -54,10 +58,31 @@ public class UserProfile implements UserDetails,AhanaVO {
 			@Parameter(name = "max_lo", value = "100000") })
     @Column(name = "oid")
     private String oid;
+    
+    /*@NotBlank(message = ErrorConstants.SALUTATION_IS_REQUIRED)
+	@Length(max = 10, min = 2, message = ErrorConstants.SALUTATION_IS_INVALID_LENGTH)
+	@Pattern(regexp = "[a-z-A-Z]*", message = ErrorConstants.SALUTATION_MUST_BE_ALPHABETICAL)
+	@Column(name = "salutation", nullable = false)
+	private String salutation;
+
+	@NotBlank(message = ErrorConstants.FIRST_NAME_IS_REQUIRED)
+	@Length(max = 50, min = 3, message = ErrorConstants.FIRST_NAME_IS_INVALID_LENGTH)
+	@Pattern(regexp = "[a-z-A-Z]*", message = ErrorConstants.FIRST_NAME_MUST_BE_ALPHABETICAL)
+	@Column(name = "first_name", nullable = false)
+	private String firstName;
+
+	@NotBlank(message = ErrorConstants.LAST_NAME_IS_REQUIRED)
+	@Length(max = 50, min = 3, message = ErrorConstants.LAST_NAME_IS_INVALID_LENGTH)
+	@Pattern(regexp = "[a-z-A-Z]*", message = ErrorConstants.LAST_NAME_MUST_BE_ALPHABETICAL)
+	@Column(name = "last_name", nullable = false)
+	private String lastName;*/
 
     @Column(name = "password",nullable=false,length=100)
     private String password="cc03e747a6afbbcbf8be7668acfebee5";//By default test123
 
+    @NotBlank(message = ErrorConstants.LAST_NAME_IS_REQUIRED)
+	@Length(max = 50, min = 3, message = ErrorConstants.LAST_NAME_IS_INVALID_LENGTH)
+	@Pattern(regexp = "[a-z-A-Z]*", message = ErrorConstants.LAST_NAME_MUST_BE_ALPHABETICAL)
     @Column(name = "user_id",nullable=false,unique=true,length=100)
     private String userId;
 

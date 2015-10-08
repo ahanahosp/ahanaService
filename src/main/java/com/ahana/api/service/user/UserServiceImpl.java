@@ -41,18 +41,7 @@ public class UserServiceImpl extends BaseService implements UserService {
 	private UserManager userManager;
 	
 	@Autowired
-	private LookupManager lookupService;
-	
-	@Override
-	@RequestMapping(value = "/loadUserPage",method=RequestMethod.GET)
-	public @ResponseBody String loadUserPage(@RequestParam("type") String type,HttpServletRequest request,HttpServletResponse response) throws AhanaBusinessException {
-		String responseJson=null;
-		SearchRequest searchRequest=new SearchRequest();
-		searchRequest.setType(type);
-		//searchRequest=userManager.getUsers(searchRequest);
-		responseJson=handleSuccess("userDetails",searchRequest.getResponse());
-		return responseJson;
-	}
+	private LookupManager lookupCacheManager;
 	
 	@Override
 	@RequestMapping(value = "/createUser",method=RequestMethod.POST)
@@ -168,7 +157,7 @@ public class UserServiceImpl extends BaseService implements UserService {
 	@RequestMapping(value = "/populateState",method=RequestMethod.GET)
 	public @ResponseBody String populateState(@RequestParam("countryId") String countryId,HttpServletRequest request,HttpServletResponse response) throws AhanaBusinessException {
 		String responseJson=null;
-		List<NameValue> stateDetails= lookupService.getLookupsByCategory("STATE_"+countryId.toUpperCase());
+		List<NameValue> stateDetails= lookupCacheManager.getLookupsByCategory("STATE_"+countryId.toUpperCase());
 		responseJson=handleSuccess("stateDetails",stateDetails);
 		return responseJson;
 	}

@@ -112,7 +112,7 @@ public class AhanaApplicationInitializer extends ContextLoaderListener {
 			}else if(environment.equalsIgnoreCase(Constants.PRODUCTION)){
 				((ConfigurableWebApplicationContext)ctx).getEnvironment().setActiveProfiles(Constants.PRODUCTION);
 			}
-			LookupManager lookupManager = (LookupManager) ctx.getBean("lookupService");
+			LookupManager lookupManager = (LookupManager) ctx.getBean("lookupCacheManager");
 			Cache lookupCache = (Cache) ctx.getBean("lookupCache");
 			loadAllLookup(lookupManager, lookupCache);
 		} catch (Exception exp) {

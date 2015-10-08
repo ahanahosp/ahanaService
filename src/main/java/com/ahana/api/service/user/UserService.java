@@ -12,8 +12,6 @@ import com.ahana.api.system.security.exception.AhanaBusinessException;
 
 public interface UserService {
 
-	String loadUserPage(String type,HttpServletRequest request, HttpServletResponse response)throws AhanaBusinessException;
-
 	String createUser(UserProfile userProfile, HttpServletRequest request)throws AhanaBusinessException;
 
 	String loadRolePage(HttpServletRequest request,HttpServletResponse response)throws AhanaBusinessException;
