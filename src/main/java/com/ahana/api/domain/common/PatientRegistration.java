@@ -14,6 +14,7 @@ import javax.validation.constraints.Pattern;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -43,24 +44,24 @@ public class PatientRegistration implements AhanaVO {
 
 	@NotBlank(message = ErrorConstants.SALUTATION_IS_REQUIRED)
 	@Length(max = 10, min = 2, message = ErrorConstants.SALUTATION_IS_INVALID_LENGTH)
-	@Pattern(regexp = "[a-z-A-Z]*", message = ErrorConstants.SALUTATION_MUST_BE_ALPHABETICAL)
-	@Column(name = "salutation", nullable = false)
+	@Pattern(regexp = "[a-z-A-Z\\.]*", message = ErrorConstants.SALUTATION_MUST_BE_ALPHABETICAL)
+	@Column(name = "salutation", nullable = false, length = 10)
 	private String salutation;
 
 	@NotBlank(message = ErrorConstants.FIRST_NAME_IS_REQUIRED)
 	@Length(max = 50, min = 3, message = ErrorConstants.FIRST_NAME_IS_INVALID_LENGTH)
 	@Pattern(regexp = "[a-z-A-Z]*", message = ErrorConstants.FIRST_NAME_MUST_BE_ALPHABETICAL)
-	@Column(name = "first_name", nullable = false)
+	@Column(name = "first_name", nullable = false, length = 50)
 	private String firstName;
 
-	@Column(name = "middle_name")
-	private String middleName;
+	@Column(name = "last_name", length = 50)
+	private String lastName;
 
 	@NotBlank(message = ErrorConstants.LAST_NAME_IS_REQUIRED)
-	@Length(max = 50, min = 3, message = ErrorConstants.LAST_NAME_IS_INVALID_LENGTH)
-	@Pattern(regexp = "[a-z-A-Z]*", message = ErrorConstants.LAST_NAME_MUST_BE_ALPHABETICAL)
-	@Column(name = "last_name", nullable = false)
-	private String lastName;
+	@Length(max = 100, min = 3, message = ErrorConstants.LAST_NAME_IS_INVALID_LENGTH)
+	@Pattern(regexp = "[a-z-A-Z\\.]*", message = ErrorConstants.LAST_NAME_MUST_BE_ALPHABETICAL)
+	@Column(name = "father_or_spouse_name", nullable = false, length = 100)
+	private String fatherOrSpouseName;
 
 	@Column(name = "care_taker_type")
 	private String careTakerType;
@@ -76,13 +77,13 @@ public class PatientRegistration implements AhanaVO {
 	@NotBlank(message = ErrorConstants.GENDER_IS_REQUIRED)
 	@Length(max = 6, min = 1, message = ErrorConstants.GENDER_IS_INVALID_LENGTH)
 	@Pattern(regexp = "[a-z-A-Z]*", message = ErrorConstants.GENDER_MUST_BE_ALPHABETICAL)
-	@Column(name = "gender", nullable = false)
+	@Column(name = "gender", nullable = false, length = 6)
 	private String gender;
 
 	@NotBlank(message = ErrorConstants.MARITAL_STATUS_IS_REQUIRED)
 	@Length(max = 15, min = 1, message = ErrorConstants.MARITAL_STATUS_LENGTH_IS_INVALID)
 	@Pattern(regexp = "[a-z-A-Z]*", message = ErrorConstants.MARITAL_STATUS_MUST_BE_ALPHABETICAL)
-	@Column(name = "marital_status", nullable = false)
+	@Column(name = "marital_status", nullable = false, length = 15)
 	private String maritalStatus;
 
 	@Column(name = "occupation")
@@ -95,6 +96,7 @@ public class PatientRegistration implements AhanaVO {
 	private String category;
 
 	@Column(name = "email_id")
+	@Email(message = ErrorConstants.EMAIL_ID_IS_INVALID)
 	private String emailId;
 
 	@Column(name = "referal_doctor")
@@ -106,7 +108,7 @@ public class PatientRegistration implements AhanaVO {
 	@NotBlank(message = ErrorConstants.PATIENT_TYPE_IS_REQUIRED)
 	@Length(max = 50, min = 3, message = ErrorConstants.PATIENT_TYPE_LENGTH_IS_INVALID)
 	@Pattern(regexp = "[a-z-A-Z]*", message = ErrorConstants.PATIENT_TYPE_MUST_BE_ALPHABETICAL)
-	@Column(name = "patient_type", nullable = false)
+	@Column(name = "patient_type", nullable = false, length = 50)
 	private String patientType;
 
 	@NotBlank(message = ErrorConstants.ADDRESS_IS_REQUIRED)
@@ -172,7 +174,9 @@ public class PatientRegistration implements AhanaVO {
 	@Column(name = "referal_hospital")
 	private String referalHospital;
 
-	@Column(name = "patient_reference")
+	@NotBlank(message = ErrorConstants.PATIENT_REFERENCE_NO_REQUIRED)
+	@Length(max = 50, min = 3, message = ErrorConstants.PATIENT_REFERENCE_NO_LENGTH_IS_INVALID)
+	@Column(name = "patient_reference", nullable = false, length = 50)
 	private String patientReference;
 
 	public String getOid() {
@@ -423,14 +427,6 @@ public class PatientRegistration implements AhanaVO {
 		this.patientReference = patientReference;
 	}
 
-	public String getMiddleName() {
-		return middleName;
-	}
-
-	public void setMiddleName(String middleName) {
-		this.middleName = middleName;
-	}
-
 	public String getCareTakerType() {
 		return careTakerType;
 	}
@@ -447,4 +443,11 @@ public class PatientRegistration implements AhanaVO {
 		this.referalHospital = referalHospital;
 	}
 
+	public String getFatherOrSpouseName() {
+		return fatherOrSpouseName;
+	}
+
+	public void setFatherOrSpouseName(String fatherOrSpouseName) {
+		this.fatherOrSpouseName = fatherOrSpouseName;
+	}
 }

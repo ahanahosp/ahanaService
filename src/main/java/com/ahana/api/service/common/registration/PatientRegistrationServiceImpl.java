@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ahana.api.common.BaseService;
 import com.ahana.api.domain.common.PatientRegistration;
+import com.ahana.api.domain.common.QuickRegistration;
 import com.ahana.api.manager.common.registration.PatientRegistrationManager;
 
 @Controller
@@ -29,30 +30,43 @@ public class PatientRegistrationServiceImpl extends BaseService implements Patie
 		if (result.hasErrors()) {
 			return handleError(result.getAllErrors());
 		}
-		if (logger.isDebugEnabled()) {
-			logger.debug("savePatient----start--->"	+ System.currentTimeMillis());
-		}
-		long currentmilli = 0;
 		String jsonResponse = null;
 		try {
 			if (logger.isDebugEnabled()) {
-				currentmilli = System.currentTimeMillis();
+				logger.debug("savePatient----start--->"	+ System.currentTimeMillis());
 			}
-			patientRegistration = patientRegistrationManager.saveBuyer(patientRegistration);
+			patientRegistration = patientRegistrationManager.savePatient(patientRegistration);
 			jsonResponse = handleSuccess("patientRegistration",patientRegistration);
 			if (logger.isDebugEnabled()) {
 				logger.debug("savePatient: Success");
 			}
 		} catch (Throwable exc) {
 			jsonResponse = handleError(exc);
+			logger.error("savePatient::: Error:::", exc);
+		}
+		return jsonResponse;
+	}
+	
+	@Override
+	@RequestMapping(value = { "/services/rest/registration/saveQuickRegistration" }, method = RequestMethod.POST)
+	public @ResponseBody String saveQuickRegistration(@RequestBody @Valid QuickRegistration quickRegistration,BindingResult result) {
+		if (result.hasErrors()) {
+			return handleError(result.getAllErrors());
+		}
+		String jsonResponse = null;
+		try {
 			if (logger.isDebugEnabled()) {
-				logger.error("savePatient::: Error:::", exc);
+				logger.debug("saveQuickRegistration----start--->"	+ System.currentTimeMillis());
 			}
+			quickRegistration = patientRegistrationManager.saveQuickRegistration(quickRegistration);
+			jsonResponse = handleSuccess("quickRegistration",quickRegistration);
+			if (logger.isDebugEnabled()) {
+				logger.debug("saveQuickRegistration: Success");
+			}
+		} catch (Throwable exc) {
+			jsonResponse = handleError(exc);
+			logger.error("saveQuickRegistration::: Error:::", exc);
 		}
-		if (logger.isDebugEnabled()) {
-			logger.debug("savePatient----end--->"+ (System.currentTimeMillis() - currentmilli));
-		}
-		currentmilli = 0;
 		return jsonResponse;
 	}
 }

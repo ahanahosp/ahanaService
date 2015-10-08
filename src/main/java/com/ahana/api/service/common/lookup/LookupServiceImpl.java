@@ -53,7 +53,7 @@ public class LookupServiceImpl extends BaseService implements LookupService {
 	}
 	
 	@Override
-	@RequestMapping(value = "/services/rest/registration/populateState",method=RequestMethod.GET)
+	@RequestMapping(value = "/services/rest/lookup/populateState",method=RequestMethod.GET)
 	public @ResponseBody String populateState(@RequestParam("countryId") String countryId) throws AhanaBusinessException {
 		String responseJson=null;
 		List<NameValue> stateDetails= lookupCacheManager.getLookupsByCategory("STATE_"+countryId.toUpperCase());
