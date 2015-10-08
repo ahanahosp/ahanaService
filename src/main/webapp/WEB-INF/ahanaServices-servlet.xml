@@ -22,13 +22,11 @@
 						</bean>
 					</list>
 				</property>
-
 			</bean>
 		</mvc:message-converters>
 	</mvc:annotation-driven>
 
-	<bean id="jaxbAnnotationInspector"
-		class="com.fasterxml.jackson.module.jaxb.JaxbAnnotationIntrospector" />
+	<bean id="jaxbAnnotationInspector" class="com.fasterxml.jackson.module.jaxb.JaxbAnnotationIntrospector" />
 
 	<bean id="jacksonObjectMapper" class="com.fasterxml.jackson.databind.ObjectMapper">
 		<property name="annotationIntrospector" ref="jaxbAnnotationInspector" />
@@ -36,8 +34,7 @@
 
 	<context:component-scan base-package="com.ahana.api" />
 
-	<bean id="multipartResolver"
-		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="maxUploadSize" value="5000000" />
 	</bean>
 

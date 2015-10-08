@@ -85,8 +85,8 @@ public class IdGenerator implements PersistentIdentifierGenerator,
 			log.debug("new hi value: " + hi);
 		}
 		String nextOid=null;
-		if(idType.equalsIgnoreCase(Constants.ID_STAFF) || idType.equalsIgnoreCase(Constants.ID_PATIENT)){
-			nextOid= installId+hi;
+		if(idType.equalsIgnoreCase(Constants.ID_PATIENT)){
+			nextOid= installId+(hi+lo++);
 		}else{
 			nextOid= IdGenerator.getNextOid(installId,hi,(hi + lo++));
 		}
