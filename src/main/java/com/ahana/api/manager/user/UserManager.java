@@ -1,6 +1,8 @@
 package com.ahana.api.manager.user;
 
-import com.ahana.api.domain.user.DocFile;
+import java.util.List;
+import java.util.Map;
+
 import com.ahana.api.domain.user.Roles;
 import com.ahana.api.domain.user.UserProfile;
 import com.ahana.api.system.security.exception.AhanaBusinessException;
@@ -9,10 +11,12 @@ public interface UserManager {
 
 	UserProfile createUser(UserProfile userVO) throws AhanaBusinessException;
 
-	void uploadUserPhoto(DocFile docFile);
+	Roles createRole(Roles roles) throws AhanaBusinessException;
 
-	void createRole(Roles roles);
+	Roles getRoleByOid(String roleOid);
 
-	DocFile getUserPhoto(String userOid) throws AhanaBusinessException;
-	
+	List<Map<String, String>> getActiveRoles();
+
+	UserProfile getUserProfileByUserOid(String oid);
+
 }

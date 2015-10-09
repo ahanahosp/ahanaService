@@ -108,3 +108,29 @@ CREATE TABLE `user_roles` (
   KEY `fk7342994993ad290f` (`role_oid`),
   CONSTRAINT `fk7342994993ad290f` FOREIGN KEY (`role_oid`) REFERENCES `roles` (`oid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+CREATE TABLE `user_profile` (
+  `oid` varchar(20) NOT NULL,
+  `salutation` varchar(10) NOT NULL,
+  `first_name` varchar(50) NOT NULL,
+  `last_name` varchar(50)  NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `password_exp_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `user_id` varchar(100) NOT NULL,
+  `user_status` varchar(5) NOT NULL,
+  `address` varchar(100),  
+  `country` varchar(50) ,
+  `state` varchar(50),
+  `city` varchar(50),
+  `zip` varchar(10),
+  `email_id` varchar(100) NOT NULL,
+  `mobile_no` varchar(12) NOT NULL,
+  `primary_contact` varchar(12) DEFAULT NULL,
+  `secondary_contact` varchar(12) DEFAULT NULL,
+  `designation` varchar(100) DEFAULT NULL,
+  `speciality` varchar(100) DEFAULT NULL,
+  `care_provider` varchar(100) DEFAULT "FALSE",
+  PRIMARY KEY (`oid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

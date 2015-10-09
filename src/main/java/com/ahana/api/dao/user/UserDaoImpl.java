@@ -71,8 +71,7 @@ public class UserDaoImpl extends AhanaDaoSupport implements UserDao {
 			
 			//Setting Constructor
 			UserDetails userDetails = new UserProfile(userProfile.getOid(),userProfile.getUserId(), userProfile.getPassword(),
-					enabled, userProfile.isAccountExpired(), userProfile.isAccountLocked(),credentialsNonExpired, array,userProfile.getLanguage(),
-					userProfile.getLastLogon(),userProfile.getRoleOid(),userProfile.getUserType());
+					enabled, false, false,credentialsNonExpired, array,userProfile.getRoleOid());
 
 			if (CollectionUtils.isEmpty(userDetails.getAuthorities())) {
 				throw new UsernameNotFoundException("Authorities not found");
@@ -90,21 +89,21 @@ public class UserDaoImpl extends AhanaDaoSupport implements UserDao {
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	public UserProfile saveUser(UserProfile userProfile) {
-		getHibernateTemplate().saveOrUpdate(userProfile);
+		saveOrUpdate(userProfile);
 		return userProfile;
 	}
 	
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	public Roles createRole(Roles roles) {
-		getHibernateTemplate().saveOrUpdate(roles);
+		saveOrUpdate(roles);
 		return roles;
 	}
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	public UserRole createUserRole(UserRole userRoleVO) {
-		getHibernateTemplate().saveOrUpdate(userRoleVO);
+		saveOrUpdate(userRoleVO);
 		return userRoleVO;
 	}
 

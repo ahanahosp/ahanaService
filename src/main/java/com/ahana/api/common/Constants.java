@@ -39,8 +39,6 @@ public class Constants {
 
 	public static final String ENCRYPTION_ERROR = "ENCRYPTION ERROR";
 
-	public static final String DEFAULT_LOCALE = "en_US";
-
 	public static final String SUCCESS = "{\"Status\":\"Ok\"}";
 	public static final String ERROR = "{\"Status\":\"Error\"}";
 

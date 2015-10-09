@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -14,6 +15,8 @@ import org.hibernate.annotations.Parameter;
 import org.hibernate.validator.constraints.NotBlank;
 
 import com.ahana.api.common.AhanaVO;
+import com.ahana.api.common.Constants;
+import com.ahana.api.common.ErrorConstants;
 
 @SuppressWarnings("serial")
 @Entity
@@ -31,15 +34,18 @@ public class Roles implements AhanaVO {
 	@Column(name = "oid")
 	private String oid;
 
-	@NotBlank(message="role name required")
-	@Size(message="role name invalid length",min=2,max=50)
+	@NotBlank(message=ErrorConstants.ROLE_NAME_REQUIRED)
+	@Size(message=ErrorConstants.ROLE_NAME_INVALID_LENGTH,min=2,max=50)
+	@Pattern(regexp="[a-z-A-Z]*",message=ErrorConstants.ROLE_MUST_BE_ALPHABETICAL)
 	@Column(name = "role_name",unique=true,nullable=false,length=50)
 	private String roleName;
 
-	@NotBlank(message="role status required")
-	@Size(message="role status invalid length",min=1,max=5)
 	@Column(name="status",length=5)
 	private String roleStatus;
+	
+	public Roles(){
+		this.roleStatus=Constants.ACT;
+	}
 
 	public String getOid() {
 		return oid;

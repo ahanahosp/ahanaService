@@ -17,6 +17,7 @@ import com.ahana.api.domain.common.QuickRegistration;
 import com.ahana.api.manager.common.registration.PatientRegistrationManager;
 
 @Controller
+@RequestMapping("/services/rest/registration")
 public class PatientRegistrationServiceImpl extends BaseService implements PatientRegistrationService {
 
 	private static Logger logger = Logger.getLogger(PatientRegistrationServiceImpl.class);
@@ -25,7 +26,7 @@ public class PatientRegistrationServiceImpl extends BaseService implements Patie
 	private PatientRegistrationManager patientRegistrationManager;
 	
 	@Override
-	@RequestMapping(value = { "/services/rest/registration/savePatient" }, method = RequestMethod.POST)
+	@RequestMapping(value = { "/savePatient" }, method = RequestMethod.POST)
 	public @ResponseBody String savePatient(@RequestBody @Valid PatientRegistration patientRegistration,BindingResult result) {
 		if (result.hasErrors()) {
 			return handleError(result.getAllErrors());
@@ -48,7 +49,7 @@ public class PatientRegistrationServiceImpl extends BaseService implements Patie
 	}
 	
 	@Override
-	@RequestMapping(value = { "/services/rest/registration/saveQuickRegistration" }, method = RequestMethod.POST)
+	@RequestMapping(value = { "/saveQuickRegistration" }, method = RequestMethod.POST)
 	public @ResponseBody String saveQuickRegistration(@RequestBody @Valid QuickRegistration quickRegistration,BindingResult result) {
 		if (result.hasErrors()) {
 			return handleError(result.getAllErrors());

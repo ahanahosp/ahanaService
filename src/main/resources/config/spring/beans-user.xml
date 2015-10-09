@@ -15,9 +15,7 @@
 		
 		<bean id="userManager" parent="managerProxy">
 			<property name="target">
-		      <bean class="com.ahana.api.manager.user.UserManagerImpl">
-		      	<property name="userDao" ref="userDao"/>
-			 </bean>
+		      <bean class="com.ahana.api.manager.user.UserManagerImpl"/>
 		 </property>
 	</bean>
 	
