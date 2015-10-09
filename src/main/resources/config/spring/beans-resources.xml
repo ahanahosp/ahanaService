@@ -10,54 +10,21 @@
 		<property name="lookupDBNameLabel"><value>database.name</value></property>
 		<property name="lookupDBIpLabel"><value>database.ip</value></property>
 		<property name="lookupDBPortLabel"><value>database.port</value></property>
-
-		<property name="defaultReadOnly">
-            <value>false</value>
-        </property>
-       <property name="maxTotal">
-			<value>20</value>
-		</property>
-		<property name="maxIdle">
-			<value>3</value>
-		</property>
-		<property name="minIdle">
-			<value>2</value>
-		</property>
-		<property name="maxWaitMillis">
-			<value>10000</value>
-		</property>
-		<property name="validationQuery">
-			<value>select count(*) from seed_container</value>
-		</property>
-		<property name="testOnBorrow">
-			<value>true</value>
-		</property>
-		<property name="testOnReturn">
-			<value>false</value>
-		</property>
-		<property name="testWhileIdle">
-			<value>true</value>
-		</property>
-		<property name="driverClassName">
-			<value>org.postgresql.Driver</value>
-		</property>
-		<property name="removeAbandonedTimeout">
-			<value>60</value>
-		</property>
-		<property name="logAbandoned">
-			<value>true</value>
-		</property>
-		<property name="username">
-			<value></value>
-		</property>
-		<property name="password">
-			<value></value>
-		</property>
-		<property name="url">
-			<value>
-				jdbc:postgresql://databaseIP:databasePort/databaseName?defaultAutoCommit=false
-			</value>
-		</property>
+		<property name="defaultReadOnly" value="false"/>
+       	<property name="maxTotal" value="20"/>
+		<property name="maxIdle" value="3"/>
+		<property name="minIdle" value="2"/>
+		<property name="maxWaitMillis" value="10000"/>
+		<property name="validationQuery" value="select count(*) from seed_container"/>
+		<property name="testOnBorrow" value="true"/>
+		<property name="testOnReturn" value="false"/>
+		<property name="testWhileIdle" value="true"/>
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="removeAbandonedTimeout" value="60"/>
+		<property name="logAbandoned" value="true"/>
+		<property name="username" value=""/>
+		<property name="password" value=""/>
+		<property name="url" value="jdbc:mysql://databaseIP:databasePort/databaseName?defaultAutoCommit=false"/>
 	</bean>
 	
 	<bean id="readOnlyDataSource" class="com.ahana.api.system.security.common.ManagedDataSource">
@@ -67,63 +34,28 @@
 		<property name="lookupDBIpLabel"><value>database.readonly.ip</value></property>
 		<property name="lookupDBPortLabel"><value>database.readonly.port</value></property>
 
-		<property name="defaultReadOnly">
-            <value>false</value>
-        </property>
-       <property name="maxTotal">
-			<value>20</value>
-		</property>
-		<property name="maxIdle">
-			<value>3</value>
-		</property>
-		<property name="minIdle">
-			<value>2</value>
-		</property>
-		<property name="maxWaitMillis">
-			<value>10000</value>
-		</property>
-		<property name="validationQuery">
-			<value>select count(*) from seed_container</value>
-		</property>
-		<property name="testOnBorrow">
-			<value>true</value>
-		</property>
-		<property name="testOnReturn">
-			<value>false</value>
-		</property>
-		<property name="testWhileIdle">
-			<value>true</value>
-		</property>
-		<property name="driverClassName">
-			<value>org.postgresql.Driver</value>
-		</property>
-		<!-- <property name="removeAbandonedOnMaintenance">
-			<value>false</value>
-		</property> -->
-		<property name="removeAbandonedTimeout">
-			<value>60</value>
-		</property>
-		<property name="logAbandoned">
-			<value>true</value>
-		</property>
-		<property name="username">
-			<value></value>
-		</property>
-		<property name="password">
-			<value></value>
-		</property>
-		<property name="url">
-			<value>
-				jdbc:postgresql://databaseIP:databasePort/databaseName?defaultAutoCommit=false
-			</value>
-		</property>
+		<property name="defaultReadOnly" value="false"/>
+       	<property name="maxTotal" value="20"/>
+		<property name="maxIdle" value="3"/>
+		<property name="minIdle" value="2"/>
+		<property name="maxWaitMillis" value="10000"/>
+		<property name="validationQuery" value="select count(*) from seed_container"/>
+		<property name="testOnBorrow" value="true"/>
+		<property name="testOnReturn" value="false"/>
+		<property name="testWhileIdle" value="true"/>
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="removeAbandonedTimeout" value="60"/>
+		<property name="logAbandoned" value="true"/>
+		<property name="username" value=""/>
+		<property name="password" value=""/>
+		<property name="url" value="jdbc:mysql://databaseIP:databasePort/databaseName?defaultAutoCommit=false"/>
 	</bean>
 	
 	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<property name="dataSource" ref="readWriteDataSource"/>
 		<property name="hibernateProperties">
 			<props>
-				<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
 				<prop key="hibernate.cache.provider_class">org.hibernate.cache.NoCacheProvider</prop>
 				<prop key="hibernate.cache.use_second_level_cache">false</prop>		
      			<prop key="hibernate.jdbc.batch_size">30</prop>
@@ -147,7 +79,7 @@
 		<property name="dataSource" ref="readOnlyDataSource"/>
 		<property name="hibernateProperties">
 			<props>
-				<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
 				<prop key="hibernate.cache.provider_class">org.hibernate.cache.NoCacheProvider</prop>
 				<prop key="hibernate.cache.use_second_level_cache">false</prop>			
      			<prop key="hibernate.jdbc.batch_size">30</prop>

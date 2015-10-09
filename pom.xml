@@ -119,10 +119,11 @@
 			</exclusions>
 		</dependency>
 		<dependency>
-			<groupId>postgresql</groupId>
-			<artifactId>postgresql</artifactId>
-			<version>9.1-901-1.jdbc4</version>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.36</version>
 		</dependency>
+
 
 		<!-- JSR 303 with Hibernate Validator -->
 		<dependency>
