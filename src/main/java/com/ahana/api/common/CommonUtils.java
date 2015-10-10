@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.ahana.api.domain.user.UserProfile;
 import com.ahana.api.system.security.exception.AhanaBusinessException;
@@ -88,23 +87,5 @@ public class CommonUtils {
 		String branchCode = branchName.substring(0, Math.min(branchName.length(), 3));
 		branchCode=branchCode+Calendar.DAY_OF_MONTH+Calendar.SECOND;
 		return branchCode;
-	}
-
-	public static String getInstitutionOid() {
-		String institutionOid=null;
-		Authentication authentication=SecurityContextHolder.getContext().getAuthentication();
-		if(authentication !=null && authentication.getPrincipal() instanceof UserProfile){
-			UserProfile userProfile=(UserProfile) authentication.getPrincipal();
-		}
-		return institutionOid;
-	}
-
-	public static String getInstitutionType() {
-		String institutionType=null;
-		Authentication authentication=SecurityContextHolder.getContext().getAuthentication();
-		if(authentication !=null && authentication.getPrincipal() instanceof UserProfile){
-			UserProfile userProfile=(UserProfile) authentication.getPrincipal();
-		}
-		return institutionType;
 	}
 }

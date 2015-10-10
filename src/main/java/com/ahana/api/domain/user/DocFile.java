@@ -1,7 +1,5 @@
 package com.ahana.api.domain.user;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,7 +18,7 @@ import com.ahana.api.common.AhanaVO;
 @Table(name = "doc_files")
 @NamedQueries({
 		@NamedQuery(name = "getUserPhotoByUserOid", query = "from DocFile docFile where docFile.userOid= :userOid")})
-public class DocFile implements Serializable, AhanaVO {
+public class DocFile implements AhanaVO {
 
 	@Id
 	@GeneratedValue(generator = "IdGenerator")

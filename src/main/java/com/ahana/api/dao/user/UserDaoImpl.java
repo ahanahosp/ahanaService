@@ -4,11 +4,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
+import org.hibernate.Query;
+import org.hibernate.transform.Transformers;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -17,8 +20,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ahana.api.common.Constants;
 import com.ahana.api.common.ErrorConstants;
 import com.ahana.api.dao.common.AhanaDaoSupport;
+import com.ahana.api.domain.user.RoleRights;
 import com.ahana.api.domain.user.Roles;
 import com.ahana.api.domain.user.UserProfile;
 import com.ahana.api.domain.user.UserRole;
@@ -114,5 +119,60 @@ public class UserDaoImpl extends AhanaDaoSupport implements UserDao {
 			return userVOs.get(0);
 		}
 		return null;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Roles getRoleByOid(String roleOid) {
+		List<Roles> roles = findByNamedQuery("getRoleByOid", "roleOid", roleOid);
+		if(CollectionUtils.isNotEmpty(roles)){
+			return roles.get(0);
+		}
+		return null;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Map<String, String>> getActiveRoles() {
+		Query sqlQuery=null;
+		List<Map<String, String>> list=null;
+		String query=null;
+		try{
+			query="select oid as oid,role_name as name from roles where status='"+Constants.ACT+"'";
+			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
+					.addScalar("oid")
+					.addScalar("name")
+					.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+			list = sqlQuery.list();
+		}finally{
+			sqlQuery=null;
+			query=null;
+		}
+		return list;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public UserProfile getUserProfileByUserOid(String userOid) {
+		List<UserProfile> userVOs = new ArrayList<UserProfile>();
+		userVOs = findByNamedQuery(UserProfile.GET_USER_PROFILE_BY_USER_OID, "userOid", userOid);
+		if(CollectionUtils.isEmpty(userVOs)){
+			return new UserProfile();
+		}else{
+			return userVOs.get(0);
+		}
+	}
+
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
+	public UserProfile updateUser(UserProfile userProfile) {
+		saveOrUpdate(userProfile);
+		return userProfile;
+	}
+
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
+	public void saveRoleRights(List<RoleRights> roleRights) {
+		saveOrUpdate(roleRights);
 	}
 }

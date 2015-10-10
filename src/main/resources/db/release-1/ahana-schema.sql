@@ -110,7 +110,6 @@ CREATE TABLE `user_roles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-
 CREATE TABLE `user_profile` (
   `oid` varchar(20) NOT NULL,
   `salutation` varchar(10) NOT NULL,
@@ -132,5 +131,48 @@ CREATE TABLE `user_profile` (
   `designation` varchar(100) DEFAULT NULL,
   `speciality` varchar(100) DEFAULT NULL,
   `care_provider` varchar(100) DEFAULT "FALSE",
+  PRIMARY KEY (`oid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+--
+-- Table structure for table `role_rights`
+--
+DROP TABLE IF EXISTS `role_rights`;
+CREATE TABLE `role_rights` (
+  `oid` varchar(20) NOT NULL,
+  `role_oid` varchar(20) NOT NULL,
+  `module_oid` varchar(20) NOT NULL,
+  `organization_oid` varchar(20) NOT NULL,
+  PRIMARY KEY (`oid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+DROP TABLE IF EXISTS `organization`;
+CREATE TABLE `organization` (
+  `oid` varchar(20) NOT NULL,
+  `organization_name` varchar(10) NOT NULL,
+  `first_name` varchar(50) NOT NULL,
+  `address` varchar(100) DEFAULT NULL,
+  `country` varchar(50) DEFAULT NULL,
+  `state` varchar(50) DEFAULT NULL,
+  `city` varchar(50) DEFAULT NULL,
+  `fax` varchar(15) DEFAULT NULL,
+  `email_id` varchar(100) NOT NULL,
+  `mobile_no` varchar(12) NOT NULL,
+  `primary_contact` varchar(12) DEFAULT NULL,
+  `secondary_contact` varchar(12) DEFAULT NULL,
+  PRIMARY KEY (`oid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `organization_module`
+--
+
+DROP TABLE IF EXISTS `organization_module`;
+CREATE TABLE `organization_module` (
+  `oid` varchar(20) NOT NULL,
+  `module_name` varchar(100) NOT NULL,
+  `status` varchar(10) NOT NULL,
   PRIMARY KEY (`oid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

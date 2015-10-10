@@ -74,7 +74,7 @@ public class UserProfile implements UserDetails, AhanaVO {
 	@Column(name = "last_name", nullable = false)
 	private String lastName;
 
-	@Column(name = "password", nullable = false, length = 100)
+	@Column(name = "password", nullable = false, length = 100,updatable=false)
 	private String password = "cc03e747a6afbbcbf8be7668acfebee5";// By default test123
 
 	@NotBlank(message = ErrorConstants.USER_ID_IS_REQUIRED)
@@ -95,10 +95,10 @@ public class UserProfile implements UserDetails, AhanaVO {
 	@Column(name = "mobile_no", nullable = false, length = 12)
 	private String mobileNo;
 
-	@Column(name = "user_status", nullable = false, length = 5)
+	@Column(name = "user_status", nullable = false, length = 5,updatable=false)
 	private String userStatus;
 
-	@Column(name = "password_exp_date", nullable = false)
+	@Column(name = "password_exp_date", nullable = false,updatable=false)
 	private Timestamp passwordExpDate;
 
 	@Column(name = "designation")
