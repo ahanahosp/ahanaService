@@ -7,11 +7,17 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.validation.Valid;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import com.ahana.api.common.AhanaVO;
+import com.ahana.api.common.ErrorConstants;
 
 @SuppressWarnings("serial")
 @Entity
@@ -28,6 +34,8 @@ public class RoleRights implements AhanaVO {
 	@Column(name = "oid")
 	private String oid;
 
+	@NotBlank(message = ErrorConstants.ROLE_OID_IS_REQUIRED)
+	@Length(min = 20, max = 20, message = ErrorConstants.ROLE_OID_LENGTH_IS_INVALID)
 	@Column(name = "role_oid")
 	private String roleOid;
 
@@ -37,6 +45,9 @@ public class RoleRights implements AhanaVO {
 	@Column(name = "organization_oid")
 	private String organizationOid;
 
+	@Transient
+	@Valid
+	@NotEmpty(message = ErrorConstants.MODULE_IS_REQUIRED)
 	private List<String> moduleOids;
 
 	public String getOid() {

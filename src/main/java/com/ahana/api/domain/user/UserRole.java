@@ -10,15 +10,17 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
+
 import com.ahana.api.common.AhanaVO;
+import com.ahana.api.common.ErrorConstants;
 
 @Entity
 @Table(name = "user_roles")
 @IdClass(UserRolePK.class)
-@NamedQueries({
-    @NamedQuery(name = "getUserRolesOidByUserOid", query = "select userRole.roleOid from UserRole userRole where userRole.userOid= :userOid")
-})
-public class UserRole implements Serializable,AhanaVO{
+@NamedQueries({ @NamedQuery(name = "getUserRolesOidByUserOid", query = "select userRole.roleOid from UserRole userRole where userRole.userOid= :userOid") })
+public class UserRole implements Serializable, AhanaVO {
 
 	private static final long serialVersionUID = 78018374285740564L;
 
@@ -33,41 +35,31 @@ public class UserRole implements Serializable,AhanaVO{
 	}
 
 	@Id
-	@Column(name = "user_oid",insertable=true,updatable=true)
+	@NotBlank(message = ErrorConstants.USER_OID_IS_REQUIRED)
+	@Length(min = 20, max = 20, message = ErrorConstants.USER_OID_IS_INVALID_LENGTH)
+	@Column(name = "user_oid", insertable = true, updatable = true)
 	private String userOid;
 
 	@Id
-	@Column(name = "role_oid",insertable=true,updatable=true)
+	@NotBlank(message = ErrorConstants.ROLE_OID_IS_REQUIRED)
+	@Length(min = 20, max = 20, message = ErrorConstants.ROLE_OID_LENGTH_IS_INVALID)
+	@Column(name = "role_oid", insertable = true, updatable = true)
 	private String roleOid;
 
-	/**
-	 * @return the userOid
-	 */
 	public String getUserOid() {
 		return userOid;
 	}
 
-	/**
-	 * @param userOid
-	 */
 	public void setUserOid(String userOid) {
 		this.userOid = userOid;
 	}
 
-	/**
-	 * @return the roleOid
-	 */
 	public String getRoleOid() {
 		return roleOid;
 	}
 
-	/**
-	 * @param roleOid the roleOid to set
-	 */
 	public void setRoleOid(String roleOid) {
 		this.roleOid = roleOid;
 	}
-
-
 
 }

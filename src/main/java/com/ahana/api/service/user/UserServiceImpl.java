@@ -197,7 +197,7 @@ public class UserServiceImpl extends BaseService implements UserService {
 				logger.debug("saveRoleRights----start--->"	+ System.currentTimeMillis());
 			}
 			RoleRights roleRights2 = userManager.saveRoleRights(roleRights);
-			jsonResponse=handleSuccess("userRole",roleRights2);
+			jsonResponse=handleSuccess("roleRights",roleRights2);
 			if (logger.isDebugEnabled()) {
 				logger.debug("saveRoleRights: Success");
 			}
@@ -207,6 +207,5 @@ public class UserServiceImpl extends BaseService implements UserService {
 		}
 		return jsonResponse;
 	}
-	
 	
 }
