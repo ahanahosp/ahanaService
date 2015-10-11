@@ -42,4 +42,18 @@
 		    	<bean class="com.ahana.api.manager.common.registration.PatientRegistrationManagerImpl"/>
 		 	</property>
 		</bean>
+		
+		<bean id="commonDao" parent="txProxyTemplate">
+			<property name="target">
+		    	<bean class="com.ahana.api.dao.CommonDaoImpl">
+			    	<property name="sessionFactory" ref="sessionFactory"/>
+				</bean>
+		    </property>
+		</bean>
+		
+		<bean id="commonManager" parent="managerProxy">
+			<property name="target">
+		    	<bean class="com.ahana.api.manager.common.CommonManagerImpl"/>
+		 	</property>
+		</bean>
 </beans>
