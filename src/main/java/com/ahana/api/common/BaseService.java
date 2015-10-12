@@ -1,18 +1,14 @@
 package com.ahana.api.common;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
 
 import com.ahana.api.system.security.error.AhanaErrorHandlerUtil;
 import com.ahana.api.system.security.error.AhanaResponse;
 import com.ahana.api.system.security.error.ErrorContext;
-import com.ahana.api.system.security.exception.AhanaValidationException;
 import com.google.gson.Gson;
 
 public abstract class BaseService  {
@@ -20,10 +16,11 @@ public abstract class BaseService  {
 	@Autowired
 	private AhanaErrorHandlerUtil ahanaErrorHandlerUtil;
 	
-	protected final String handleSuccess(String rootName,final List<?> nameValuePair) {
-		Gson gson=new Gson();
-		String responseJson=gson.toJson(nameValuePair);
-		return "{\"Status\":\"Ok\",\""+rootName+"\":"+responseJson+"}";
+	protected final Map<String, Object> handleSuccess(String rootName,final List<?> nameValuePair) {
+		Map<String,Object> response=new HashMap<String,Object>();
+		response.put(Constants.STATUS, Constants.OK);
+		response.put(rootName, nameValuePair);
+		return response;
 	}
 	
 	protected final String handleError(Throwable ex) {
@@ -32,26 +29,11 @@ public abstract class BaseService  {
 		return gson.toJson(ahanaResponse);
 	}
 	
-	protected String handleError(List<ObjectError> allErrors) {
-		AhanaValidationException ahanaValidationException=null;
-		List<FieldError> fieldErrors=new ArrayList<FieldError>();
-		if(CollectionUtils.isNotEmpty(allErrors)){
-			for(ObjectError objectError:allErrors){
-				objectError.getDefaultMessage();
-				FieldError fieldError=(FieldError)objectError;
-				fieldErrors.add(fieldError);
-			}
-			ahanaValidationException =new AhanaValidationException(fieldErrors,"");
-		}
-		Gson gson=new Gson();
-		AhanaResponse ahanaResponse=ahanaErrorHandlerUtil.handleError(populateErrorContext(ahanaValidationException));
-		return gson.toJson(ahanaResponse);
-	}
-	
-	protected final String handleSuccess(String rootName,final Map<String, List<?>> obj) {
-		Gson gson=new Gson();
-		String responseJson=gson.toJson(obj);
-		return "{\"Status\":\"Ok\",\""+rootName+"\":"+responseJson+"}";
+	protected final Map<String, Object> handleSuccess(String rootName,final Map<String, List<?>> obj) {
+		Map<String,Object> response=new HashMap<String,Object>();
+		response.put(Constants.STATUS, Constants.OK);
+		response.put(rootName, obj);
+		return response;
 	}
 	
 	protected final String handleSuccess(final AhanaVO nameValuePair) {
@@ -67,10 +49,11 @@ public abstract class BaseService  {
 		}
 	}
 	
-	protected final String handleSuccess(String rootName,final AhanaVO ahanaVO) {
-		Gson gson=new Gson();
-		String responseJson=gson.toJson(ahanaVO);
-		return "{\"Status\":\"Ok\",\""+rootName+"\":"+responseJson+"}";
+	protected final Map<String,Object> handleSuccess(String rootName,final AhanaVO ahanaVO) {
+		Map<String,Object> response=new HashMap<String,Object>();
+		response.put(Constants.STATUS, Constants.OK);
+		response.put(rootName, ahanaVO);
+		return response;
 	}
 	
 	protected String handleSuccess(Map<String, String> permissions) {

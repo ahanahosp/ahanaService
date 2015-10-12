@@ -1,4 +1,4 @@
-package com.ahana.api.dao;
+package com.ahana.api.dao.common;
 
 import java.util.List;
 import java.util.Map;

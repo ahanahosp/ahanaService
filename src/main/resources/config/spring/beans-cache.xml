@@ -10,11 +10,11 @@
 	http://www.springframework.org/schema/util  http://www.springframework.org/schema/util/spring-util-3.2.xsd
 	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 	
-	<bean id="lookupDao" class="com.ahana.api.dao.common.lookup.LookupDaoImpl">
+	<bean id="lookupDao" class="com.ahana.api.dao.lookup.LookupDaoImpl">
 		<property name="sessionFactory" ref="readOnlySessionFactory" />
 	</bean>
 
-	<bean id="lookupManager" class="com.ahana.api.manager.common.lookup.LookupManagerImpl">
+	<bean id="lookupManager" class="com.ahana.api.manager.lookup.LookupManagerImpl">
 		<property name="lookupDao" ref="lookupDao" />
 	</bean>
 

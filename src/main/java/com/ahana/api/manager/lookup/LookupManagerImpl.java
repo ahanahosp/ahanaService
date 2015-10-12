@@ -1,4 +1,4 @@
-package com.ahana.api.manager.common.lookup;
+package com.ahana.api.manager.lookup;
 
 import java.util.List;
 import java.util.Map;
@@ -6,9 +6,9 @@ import java.util.Map;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ahana.api.dao.common.lookup.LookupDao;
-import com.ahana.api.domain.common.NameValue;
+import com.ahana.api.dao.lookup.LookupDao;
 import com.ahana.api.domain.common.AhanaLookupVO;
+import com.ahana.api.domain.common.NameValue;
 
 @Transactional(propagation = Propagation.REQUIRED)
 public class LookupManagerImpl implements LookupManager {

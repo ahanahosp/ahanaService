@@ -13,12 +13,12 @@
 	
 	<bean id="filterChainProxy" class="org.springframework.security.web.FilterChainProxy">
 		<sec:filter-chain-map request-matcher="ant">
- 			<sec:filter-chain pattern="/services/rest/**" filters="httpSessionContextIntegrationFilterWithASCFalse,
+ 			<sec:filter-chain pattern="/services/rest/secure/**" filters="httpSessionContextIntegrationFilterWithASCFalse,
  					exceptionTranslationFilter"/>
- 			<sec:filter-chain pattern="/services/secure/**" filters="httpSessionContextIntegrationFilterWithASCFalse,
+ 			<!-- <sec:filter-chain pattern="/services/secure/**" filters="httpSessionContextIntegrationFilterWithASCFalse,
  					exceptionTranslationFilter,
  					ahanaSecurityFilter,
- 					filterInvocationInterceptor"/>
+ 					filterInvocationInterceptor"/> -->
 		</sec:filter-chain-map>
 	</bean>
 	

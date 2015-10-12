@@ -1,6 +1,6 @@
 package com.ahana.api.service.common;
 
-import org.springframework.validation.BindingResult;
+import java.util.Map;
 
 import com.ahana.api.domain.common.Floor;
 import com.ahana.api.domain.common.Room;
@@ -9,18 +9,18 @@ import com.ahana.api.system.security.exception.AhanaBusinessException;
 
 public interface CommonService {
 
-	String createFloor(Floor floor, BindingResult errorResult)throws AhanaBusinessException;
+	Map<String, Object> createFloor(Floor floor)throws AhanaBusinessException;
 
-	String createWard(Ward ward, BindingResult errorResult)	throws AhanaBusinessException;
+	Map<String, Object> createWard(Ward ward)throws AhanaBusinessException;
 
-	String getFloorByOid(String floorOid) throws AhanaBusinessException;
+	Map<String, Object> getFloorByOid(String floorOid) throws AhanaBusinessException;
 
-	String getWardByOid(String wardOid) throws AhanaBusinessException;
+	Map<String, Object> getWardByOid(String wardOid) throws AhanaBusinessException;
 
-	String getAllActiveFloord() throws AhanaBusinessException;
+	Map<String, Object> getAllActiveFloor() throws AhanaBusinessException;
 
-	String createRoom(Room room, BindingResult errorResult)	throws AhanaBusinessException;
+	Map<String, Object> getRoomByOid(String roomOid) throws AhanaBusinessException;
 
-	String getRoomByOid(String roomOid) throws AhanaBusinessException;
+	Map<String, Object> createRoom(Room room) throws AhanaBusinessException;
 
 }

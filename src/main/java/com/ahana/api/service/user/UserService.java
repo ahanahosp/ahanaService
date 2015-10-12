@@ -1,5 +1,7 @@
 package com.ahana.api.service.user;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.validation.BindingResult;
@@ -12,20 +14,21 @@ import com.ahana.api.system.security.exception.AhanaBusinessException;
 
 public interface UserService {
 
-	String createUser(UserProfile userProfile, BindingResult result)throws AhanaBusinessException;
 
-	String getActiveRoles(HttpServletRequest request) throws AhanaBusinessException;
+	Map<String, Object> saveRoleRights(RoleRights roleRights) throws AhanaBusinessException;
 
-	String createRole(Roles roles, BindingResult errorResult)throws AhanaBusinessException;
+	Map<String, Object> updateUser(UserProfile user) throws AhanaBusinessException;
 
-	String getRoleByOid(String roleOid) throws AhanaBusinessException;
+	Map<String, Object> createUserRole(UserRole userRole) throws AhanaBusinessException;
 
-	String getUserByOid(String userOid) throws AhanaBusinessException;
+	Map<String, Object> createUser(UserProfile userProfile) throws AhanaBusinessException;
 
-	String createUserRole(UserRole userRole, BindingResult errorResult)throws AhanaBusinessException;
+	Map<String, Object> getRoleByOid(String roleOid) throws AhanaBusinessException;
 
-	String updateUser(UserProfile user, BindingResult errorResult)throws AhanaBusinessException;
+	Map<String, Object> createRole(Roles roles, BindingResult errorResult) throws AhanaBusinessException;
 
-	String saveRoleRights(RoleRights roleRights, BindingResult errorResult)	throws AhanaBusinessException;
+	Map<String, Object> getActiveRoles(HttpServletRequest request) throws AhanaBusinessException;
+
+	Map<String, Object> getUserByOid(String userOid) throws AhanaBusinessException;
 
 }

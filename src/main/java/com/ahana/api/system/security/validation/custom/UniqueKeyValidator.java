@@ -9,7 +9,7 @@ import javax.validation.ConstraintValidatorContext;
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.ahana.api.dao.common.ValidationDao;
+import com.ahana.api.dao.validation.ValidationDao;
 
 public class UniqueKeyValidator implements ConstraintValidator<UniqueKey, Serializable> {
 

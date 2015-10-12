@@ -1,8 +1,10 @@
-package com.ahana.api.dao.common;
+package com.ahana.api.dao.validation;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.hibernate.Query;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.ahana.api.dao.common.AhanaDaoSupport;
 
 @Transactional(readOnly = false)
 public class ValidationDaoImpl extends AhanaDaoSupport implements ValidationDao {

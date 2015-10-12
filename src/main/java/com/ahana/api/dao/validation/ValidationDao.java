@@ -1,4 +1,4 @@
-package com.ahana.api.dao.common;
+package com.ahana.api.dao.validation;
 
 public interface ValidationDao {
 

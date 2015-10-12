@@ -1,9 +1,7 @@
 package com.ahana.api.system.security.error;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class AhanaResponse {
 
@@ -14,8 +12,6 @@ public class AhanaResponse {
 	private String status;
 
 	private List<ResponseError> errors;
-
-	private Map<String, Object> paramObjectsMap = new HashMap<String, Object>();
 
 	public String getStatus() {
 		return status;
@@ -36,15 +32,4 @@ public class AhanaResponse {
 		return errors;
 	}
 
-	public final Map<String, Object> getParamObjectsMap() {
-		return paramObjectsMap;
-	}
-
-	public final void setParamObjectsMap(Map<String, Object> paramObjectsMap) {
-		this.paramObjectsMap = paramObjectsMap;
-	}
-
-	public final void clearParamMap(final String key) {
-		paramObjectsMap.remove(key);
-	}
 }

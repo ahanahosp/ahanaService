@@ -8,13 +8,13 @@ import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.ahana.api.common.BaseService;
 import com.ahana.api.domain.user.RoleRights;
@@ -24,8 +24,8 @@ import com.ahana.api.domain.user.UserRole;
 import com.ahana.api.manager.user.UserManager;
 import com.ahana.api.system.security.exception.AhanaBusinessException;
 
-@Controller
-@RequestMapping("/services/rest/user")
+@RestController
+@RequestMapping("/services/rest/secure/user")
 public class UserServiceImpl extends BaseService implements UserService {
 	
 	private static Logger logger = Logger.getLogger(UserServiceImpl.class);
@@ -35,177 +35,114 @@ public class UserServiceImpl extends BaseService implements UserService {
 	
 	@Override
 	@RequestMapping(value = "/createUser",method=RequestMethod.POST)
-	public @ResponseBody String createUser(@Valid @RequestBody UserProfile userProfile, BindingResult errorResult) throws AhanaBusinessException {
-		String jsonResponse=null;
-		if (errorResult.hasErrors()) {
-			return handleError(errorResult.getAllErrors());
+	@ResponseBody
+	public Map<String,Object> createUser(@Valid @RequestBody UserProfile userProfile) throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("createUser----start--->"	+ System.currentTimeMillis());
 		}
-		try {
-			if (logger.isDebugEnabled()) {
-				logger.debug("createUser----start--->"	+ System.currentTimeMillis());
-			}
-			userProfile=userManager.createUser(userProfile);
-			jsonResponse = handleSuccess("userProfile",userProfile);
-			if (logger.isDebugEnabled()) {
-				logger.debug("createUser: Success");
-			}
-		} catch (Throwable exc) {
-			jsonResponse = handleError(exc);
-			logger.error("createUser::: Error:::", exc);
+		userProfile=userManager.createUser(userProfile);
+		if (logger.isDebugEnabled()) {
+			logger.debug("createUser: Success");
 		}
-		return jsonResponse;
+		return handleSuccess("userProfile",userProfile);
 	}
 	
 	@Override
 	@RequestMapping(value = "/createRole",method=RequestMethod.POST)
-	public @ResponseBody String createRole(@Valid @RequestBody Roles roles, BindingResult errorResult) throws AhanaBusinessException {
-		String jsonResponse=null;
-		if(errorResult.hasErrors()){
-			return handleError(errorResult.getAllErrors());
+	@ResponseBody
+	public Map<String,Object> createRole(@Valid @RequestBody Roles roles, BindingResult errorResult) throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("createRole----start--->"	+ System.currentTimeMillis());
 		}
-		try {
-			if (logger.isDebugEnabled()) {
-				logger.debug("createRole----start--->"	+ System.currentTimeMillis());
-			}
-			roles=userManager.createRole(roles);
-			jsonResponse = handleSuccess("roles",roles);
-			if (logger.isDebugEnabled()) {
-				logger.debug("createRole: Success");
-			}
-		} catch (Throwable exc) {
-			jsonResponse = handleError(exc);
-			logger.error("createRole::: Error:::", exc);
+		roles=userManager.createRole(roles);
+		if (logger.isDebugEnabled()) {
+			logger.debug("createRole: Success");
 		}
-		return jsonResponse;
+		return handleSuccess("roles",roles);
 	}
 
 	@Override
 	@RequestMapping(value = "/getRoleByOid",method=RequestMethod.GET)
-	public @ResponseBody String getRoleByOid(@RequestParam("oid") String roleOid) throws AhanaBusinessException {
-		String jsonResponse=null;
-		try {
-			if (logger.isDebugEnabled()) {
-				logger.debug("getRoleByOid----start--->"	+ System.currentTimeMillis());
-			}
-			Roles roles=userManager.getRoleByOid(roleOid);
-			jsonResponse = handleSuccess("roles",roles);
-			if (logger.isDebugEnabled()) {
-				logger.debug("getRoleByOid: Success");
-			}
-		} catch (Throwable exc) {
-			jsonResponse = handleError(exc);
-			logger.error("getRoleByOid::: Error:::", exc);
+	@ResponseBody
+	public Map<String,Object> getRoleByOid(@RequestParam("oid") String roleOid) throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("getRoleByOid----start--->"	+ System.currentTimeMillis());
 		}
-		return jsonResponse;
+		Roles roles=userManager.getRoleByOid(roleOid);
+		if (logger.isDebugEnabled()) {
+			logger.debug("getRoleByOid: Success");
+		}
+		return handleSuccess("roles",roles);
 	}
 	
 	@Override
 	@RequestMapping(value = "/getActiveRoles",method=RequestMethod.GET)
-	public @ResponseBody String getActiveRoles(HttpServletRequest request) throws AhanaBusinessException {
-		String jsonResponse=null;
-		try {
-			if (logger.isDebugEnabled()) {
-				logger.debug("getActiveRoles----start--->"	+ System.currentTimeMillis());
-			}
-			List<Map<String,String>> roles=userManager.getActiveRoles();
-			jsonResponse=handleSuccess("roleDetails",roles);
-			if (logger.isDebugEnabled()) {
-				logger.debug("getActiveRoles: Success");
-			}
-		} catch (Throwable exc) {
-			jsonResponse = handleError(exc);
-			logger.error("getActiveRoles::: Error:::", exc);
+	@ResponseBody
+	public Map<String,Object> getActiveRoles(HttpServletRequest request) throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("getActiveRoles----start--->"	+ System.currentTimeMillis());
 		}
-		return jsonResponse;
+		List<Map<String,String>> roles=userManager.getActiveRoles();
+		if (logger.isDebugEnabled()) {
+			logger.debug("getActiveRoles: Success");
+		}
+		return handleSuccess("roleDetails",roles);
 	}
 	
 	@Override
 	@RequestMapping(value = "/getUserByOid",method=RequestMethod.GET)
-	public @ResponseBody String getUserByOid(@RequestParam("oid") String userOid) throws AhanaBusinessException {
-		String jsonResponse=null;
-		try {
-			if (logger.isDebugEnabled()) {
-				logger.debug("getUserByOid----start--->"	+ System.currentTimeMillis());
-			}
-			UserProfile userProfile=userManager.getUserProfileByUserOid(userOid);
-			jsonResponse = handleSuccess("userProfile",userProfile);
-			if (logger.isDebugEnabled()) {
-				logger.debug("getUserByOid: Success");
-			}
-		} catch (Throwable exc) {
-			jsonResponse = handleError(exc);
-			logger.error("getUserByOid::: Error:::", exc);
+	@ResponseBody
+	public Map<String,Object> getUserByOid(@RequestParam("oid") String userOid) throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("getUserByOid----start--->"	+ System.currentTimeMillis());
 		}
-		return jsonResponse;
+		UserProfile userProfile=userManager.getUserProfileByUserOid(userOid);
+		if (logger.isDebugEnabled()) {
+			logger.debug("getUserByOid: Success");
+		}
+		return handleSuccess("userProfile",userProfile);
 	}
 	
 	@Override
 	@RequestMapping(value = "/updateUser",method=RequestMethod.POST)
-	public String updateUser(@Valid @RequestBody UserProfile user, BindingResult errorResult) throws AhanaBusinessException {
-		String jsonResponse=null;
-		if(errorResult.hasErrors()){
-			return handleError(errorResult.getAllErrors());
+	@ResponseBody
+	public Map<String,Object> updateUser(@Valid @RequestBody UserProfile user) throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("editUser----start--->"	+ System.currentTimeMillis());
 		}
-		try {
-			if (logger.isDebugEnabled()) {
-				logger.debug("editUser----start--->"	+ System.currentTimeMillis());
-			}
-			UserProfile userProfile = userManager.updateUser(user);
-			jsonResponse=handleSuccess("userProfile",userProfile);
-			if (logger.isDebugEnabled()) {
-				logger.debug("editUser: Success");
-			}
-		} catch (Throwable exc) {
-			jsonResponse = handleError(exc);
-			logger.error("editUser::: Error:::", exc);
+		UserProfile userProfile = userManager.updateUser(user);
+		if (logger.isDebugEnabled()) {
+			logger.debug("editUser: Success");
 		}
-		return jsonResponse;
+		return handleSuccess("userProfile",userProfile);
 	}
 	
 	@Override
 	@RequestMapping(value = "/createUserRole",method=RequestMethod.POST)
-	public String createUserRole(@Valid @RequestBody UserRole userRole, BindingResult errorResult) throws AhanaBusinessException {
-		String jsonResponse=null;
-		if(errorResult.hasErrors()){
-			return handleError(errorResult.getAllErrors());
+	@ResponseBody
+	public Map<String,Object> createUserRole(@Valid @RequestBody UserRole userRole) throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("createUserRole----start--->"	+ System.currentTimeMillis());
 		}
-		try {
-			if (logger.isDebugEnabled()) {
-				logger.debug("createUserRole----start--->"	+ System.currentTimeMillis());
-			}
-			UserRole userRoles = userManager.createUserRole(userRole);
-			jsonResponse=handleSuccess("userRole",userRoles);
-			if (logger.isDebugEnabled()) {
-				logger.debug("createUserRole: Success");
-			}
-		} catch (Throwable exc) {
-			jsonResponse = handleError(exc);
-			logger.error("createUserRole::: Error:::", exc);
+		UserRole userRoles = userManager.createUserRole(userRole);
+		if (logger.isDebugEnabled()) {
+			logger.debug("createUserRole: Success");
 		}
-		return jsonResponse;
+		return handleSuccess("userRole",userRoles);
 	}
 	
 	@Override
 	@RequestMapping(value = "/saveRoleRights",method=RequestMethod.POST)
-	public String saveRoleRights(@Valid @RequestBody RoleRights roleRights, BindingResult errorResult) throws AhanaBusinessException {
-		String jsonResponse=null;
-		if(errorResult.hasErrors()){
-			return handleError(errorResult.getAllErrors());
+	@ResponseBody
+	public Map<String,Object> saveRoleRights(@Valid @RequestBody RoleRights roleRights) throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("saveRoleRights----start--->"	+ System.currentTimeMillis());
 		}
-		try {
-			if (logger.isDebugEnabled()) {
-				logger.debug("saveRoleRights----start--->"	+ System.currentTimeMillis());
-			}
-			RoleRights roleRights2 = userManager.saveRoleRights(roleRights);
-			jsonResponse=handleSuccess("roleRights",roleRights2);
-			if (logger.isDebugEnabled()) {
-				logger.debug("saveRoleRights: Success");
-			}
-		} catch (Throwable exc) {
-			jsonResponse = handleError(exc);
-			logger.error("saveRoleRights::: Error:::", exc);
+		RoleRights roleRights2 = userManager.saveRoleRights(roleRights);
+		if (logger.isDebugEnabled()) {
+			logger.debug("saveRoleRights: Success");
 		}
-		return jsonResponse;
+		return handleSuccess("roleRights",roleRights2);
 	}
 	
 }

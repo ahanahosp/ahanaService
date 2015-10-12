@@ -37,7 +37,7 @@ public class Roles implements AhanaVO {
 
 	@NotBlank(message=ErrorConstants.ROLE_NAME_REQUIRED)
 	@Size(message=ErrorConstants.ROLE_NAME_INVALID_LENGTH,min=2,max=50)
-	@Pattern(regexp=RegConstants.ALPHAPET_SPACE_UNDERSCORE,message=ErrorConstants.ROLE_MUST_BE_ALPHABETICAL)
+	@Pattern(regexp=RegConstants.ALPHAPET_SPACE_HYPEN,message=ErrorConstants.ROLE_MUST_BE_ALPHABETICAL)
 	@Column(name = "role_name",unique=true,nullable=false,length=50)
 	private String roleName;
 

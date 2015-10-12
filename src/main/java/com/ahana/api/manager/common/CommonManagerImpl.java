@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ahana.api.common.ErrorConstants;
-import com.ahana.api.dao.CommonDao;
+import com.ahana.api.dao.common.CommonDao;
 import com.ahana.api.domain.common.Floor;
 import com.ahana.api.domain.common.Room;
 import com.ahana.api.domain.common.Ward;

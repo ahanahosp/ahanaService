@@ -12,25 +12,14 @@ public class Constants {
 
 	public final static String URL = "url";
 
-	public static final String LOGIN_PAGE = "/ahanaLogin";
-
-	public static final String SHOW_LOGIN_PAGE = "/ahanaShowLoginPage";
-
-	public static final String DASH_BOARD_HOME = "/ahanaHome";
-
 	public static final String ERROR_SERVICE_NOT_AVAILABLE = "error.service.not.available";
 
-	public static final String LOCALE = "locale";
-
 	public static final String SPRING_LOCALE_KEY = "org.springframework.web.servlet.i18n.SessionLocaleResolver.LOCALE";
-
-	public static final String LOGOUT = "LOGOUT";
 
 	public static final String TRUE = "TRUE";
 
 	public static final String CONTENT_TYPE_JSON = "application/json";
 
-	// Security
 	public static final String REMEMBER_USERNAME = "remember_username";
 
 	public static final String REMEMBER_USERNAME_KEY = "REMEMBER_USERNAME";
@@ -38,11 +27,6 @@ public class Constants {
 	public static final String USER_ACCOUNT_LOCKED = "USER ACCOUNT LOCKED";
 
 	public static final String ENCRYPTION_ERROR = "ENCRYPTION ERROR";
-
-	public static final String SUCCESS = "{\"Status\":\"Ok\"}";
-	public static final String ERROR = "{\"Status\":\"Error\"}";
-
-	public static final String LOGIN_SUCCESS = "Login Success";
 
 	public static final String LOGIN_AUDIT = "enable.login.audit";
 
@@ -86,18 +70,10 @@ public class Constants {
 
 	public static final String INSTITUTION_INFO = "institutionInfo";
 
-	public static final String ID_STAFF = "STAFF";
-
 	public static final String ID_REST = "REST";
 
 	public static final String ID_PATIENT = "PAT";
 
-	public static final String MONGO_ID = "_ID";
-
-	public static final String FILE_NAME = "fileName";
-
-	public static final String CSRF = "_csrf";
-	
 	public static final String FORCEHTTPS = "force.https";
 	
 	public static final String LOGIN_FAILURE_COUNT = "loginFailureCount";
@@ -110,5 +86,13 @@ public class Constants {
 	public static final String STAGING = "Staging";
 	
 	public static final String PRODUCTION = "Production";
+	
+	public static final String OK = "Ok";
+	
+	public static final String ERROR = "Error";
+	
+	public static final String STATUS = "Status";
+	
+	
 	
 }

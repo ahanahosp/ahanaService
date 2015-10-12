@@ -1,4 +1,4 @@
-package com.ahana.api.dao.common.lookup;
+package com.ahana.api.dao.lookup;
 
 import java.util.ArrayList;
 import java.util.HashMap;
