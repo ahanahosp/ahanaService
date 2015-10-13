@@ -29,4 +29,8 @@ public interface CommonDao {
 
 	List<Map<String, String>> getAllWards();
 
+	List<Map<String, String>> getAllRooms();
+
+	void deleteRoom(String roomOid);
+
 }

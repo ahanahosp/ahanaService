@@ -123,4 +123,33 @@ public class CommonDaoImpl extends AhanaDaoSupport implements CommonDao {
 		return list;
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Map<String, String>> getAllRooms() {
+		Query sqlQuery=null;
+		List<Map<String, String>> list=null;
+		String query=null;
+		try{
+			query="select r.oid as roomOid,r.bed_name as bedName,r.occupancy_status as occupancy,r.maintenance_status as maintenance,"
+					+ "r.status as status from room r join ward w on r.ward_oid=w.oid where w.status='"+Constants.ACT+"'";
+			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
+					.addScalar("roomOid")
+					.addScalar("bedName")
+					.addScalar("occupancy")
+					.addScalar("maintenance")
+					.addScalar("status")
+					.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+			list = sqlQuery.list();
+		}finally{
+			sqlQuery=null;
+			query=null;
+		}
+		return list;
+	}
+
+	@Override
+	public void deleteRoom(String roomOid) {
+		Query q = getSessionFactory().getCurrentSession().createQuery("delete Room where oid ='"+roomOid);
+		q.executeUpdate();
+	}
 }

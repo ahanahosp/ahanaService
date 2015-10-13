@@ -127,4 +127,14 @@ public class UserManagerImpl implements UserManager {
 		}
 		return users;
 	}
+
+	@Override
+	public void deleteRole(String roleOid) {
+		userDao.deleteRole(roleOid);
+	}
+
+	@Override
+	public void deleteUser(String userOid) {
+		userDao.deleteUser(userOid);
+	}
 }

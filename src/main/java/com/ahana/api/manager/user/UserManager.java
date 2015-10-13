@@ -29,4 +29,8 @@ public interface UserManager {
 
 	List<Map<String, String>> getUser(int intex, int noOfRecords) throws AhanaBusinessException;
 
+	void deleteRole(String roleOid);
+
+	void deleteUser(String userOid);
+
 }

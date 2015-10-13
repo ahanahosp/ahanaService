@@ -36,4 +36,8 @@ public interface UserDao extends UserDetailsService {
 
 	List<Map<String, String>> getUser(int intex, int noOfRecords);
 
+	void deleteRole(String roleOid);
+
+	void deleteUser(String userOid);
+
 } 

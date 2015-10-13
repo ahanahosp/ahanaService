@@ -169,4 +169,32 @@ public class CommonServiceImpl extends BaseService implements CommonService {
 		}
 		return handleSuccess("room",room);
 	}
+	
+	@Override
+	@RequestMapping(value = "/getAllRooms",method=RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> getAllRooms() throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("getAllRooms----start--->"	+ System.currentTimeMillis());
+		}
+		List<Map<String, String>> wardDetails=commonManager.getAllRooms();
+		if (logger.isDebugEnabled()) {
+			logger.debug("getAllRooms: Success");
+		}
+		return handleSuccess("roomDetails",wardDetails);
+	}
+	
+	@Override
+	@RequestMapping(value = "/deleteRoom",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> deleteRoom(@RequestParam("oid") String roomOid) throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("deleteRoom----start--->"	+ System.currentTimeMillis());
+		}
+		commonManager.deleteRoom(roomOid);
+		if (logger.isDebugEnabled()) {
+			logger.debug("deleteRoom: Success");
+		}
+		return handleStatus();
+	}
 }

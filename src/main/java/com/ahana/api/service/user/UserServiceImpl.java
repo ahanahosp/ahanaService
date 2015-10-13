@@ -61,6 +61,20 @@ public class UserServiceImpl extends BaseService implements UserService {
 	}
 	
 	@Override
+	@RequestMapping(value = "/deleteUser",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> deleteUser(@RequestParam("oid") String userOid) throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("deleteUser----start--->"	+ System.currentTimeMillis());
+		}
+		userManager.deleteUser(userOid);
+		if (logger.isDebugEnabled()) {
+			logger.debug("deleteUser: Success");
+		}
+		return handleStatus();
+	}
+	
+	@Override
 	@RequestMapping(value = "/createRole",method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String,Object> createRole(@Valid @RequestBody Roles roles) throws AhanaBusinessException {
@@ -100,6 +114,20 @@ public class UserServiceImpl extends BaseService implements UserService {
 			logger.debug("getActiveRoles: Success");
 		}
 		return handleSuccess("roleDetails",roles);
+	}
+	
+	@Override
+	@RequestMapping(value = "/deleteRole",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> deleteRole(@RequestParam("oid") String roleOid) throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("deleteRole----start--->"	+ System.currentTimeMillis());
+		}
+		userManager.deleteRole(roleOid);
+		if (logger.isDebugEnabled()) {
+			logger.debug("deleteRole: Success");
+		}
+		return handleStatus();
 	}
 	
 	@Override

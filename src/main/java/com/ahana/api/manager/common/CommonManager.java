@@ -30,4 +30,8 @@ public interface CommonManager {
 
 	List<Map<String, String>> getAllWards() throws AhanaBusinessException;
 
+	List<Map<String, String>> getAllRooms() throws AhanaBusinessException;
+
+	void deleteRoom(String roomOid);
+
 }
