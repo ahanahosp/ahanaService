@@ -84,4 +84,23 @@ public class CommonManagerImpl implements CommonManager {
 		return room;
 	}
 
+	@Override
+	public void deleteFloor(String floorOid) {
+		commonDao.deleteFloor(floorOid);
+	}
+
+	@Override
+	public void deleteWard(String wardOid) {
+		commonDao.deleteWard(wardOid);
+	}
+
+	@Override
+	public List<Map<String, String>> getAllWards() throws AhanaBusinessException {
+		List<Map<String,String>> wards=commonDao.getAllWards();
+		if(CollectionUtils.isEmpty(wards)){
+			throw new AhanaBusinessException(ErrorConstants.NO_RECORDS_FOUND);
+		}
+		return wards;
+	}
+
 }

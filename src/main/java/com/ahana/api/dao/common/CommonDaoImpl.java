@@ -88,4 +88,39 @@ public class CommonDaoImpl extends AhanaDaoSupport implements CommonDao {
 		return null;
 	}
 
+	@Override
+	public void deleteFloor(String floorOid) {
+		Query q = getSessionFactory().getCurrentSession().createQuery("delete Floor where oid ='"+floorOid);
+		q.executeUpdate();
+	}
+
+	@Override
+	public void deleteWard(String wardOid) {
+		Query q = getSessionFactory().getCurrentSession().createQuery("delete Ward where oid ='"+wardOid);
+		q.executeUpdate();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Map<String, String>> getAllWards() {
+		Query sqlQuery=null;
+		List<Map<String, String>> list=null;
+		String query=null;
+		try{
+			query="select w.oid as wardOid,w.ward_name as wardName,w.status as status,f.floor_name as floorName from ward w"
+					+ " join floor f on w.floor_oid=f.oid where f.status='"+Constants.ACT+"'";
+			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
+					.addScalar("wardOid")
+					.addScalar("wardName")
+					.addScalar("status")
+					.addScalar("floorName")
+					.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+			list = sqlQuery.list();
+		}finally{
+			sqlQuery=null;
+			query=null;
+		}
+		return list;
+	}
+
 }

@@ -23,4 +23,10 @@ public interface CommonDao {
 
 	Room getRoomByOid(String roomOid);
 
+	void deleteFloor(String floorOid);
+
+	void deleteWard(String wardOid);
+
+	List<Map<String, String>> getAllWards();
+
 }

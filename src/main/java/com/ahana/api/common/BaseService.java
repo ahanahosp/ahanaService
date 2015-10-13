@@ -23,6 +23,12 @@ public abstract class BaseService  {
 		return response;
 	}
 	
+	protected final Map<String, Object> handleStatus() {
+		Map<String,Object> response=new HashMap<String,Object>();
+		response.put(Constants.STATUS, Constants.OK);
+		return response;
+	}
+	
 	protected final String handleError(Throwable ex) {
 		Gson gson=new Gson();
 		AhanaResponse ahanaResponse=ahanaErrorHandlerUtil.handleError(populateErrorContext(ex));

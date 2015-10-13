@@ -59,18 +59,31 @@ public class CommonServiceImpl extends BaseService implements CommonService {
 	}
 	
 	@Override
-	@RequestMapping(value = "/getAllActiveFloord",method=RequestMethod.GET)
+	@RequestMapping(value = "/getAllActiveFloor",method=RequestMethod.GET)
 	@ResponseBody
 	public Map<String, Object> getAllActiveFloor() throws AhanaBusinessException {
 		if (logger.isDebugEnabled()) {
-			logger.debug("getAllActiveFloord----start--->"	+ System.currentTimeMillis());
+			logger.debug("getAllActiveFloor----start--->"	+ System.currentTimeMillis());
 		}
 		List<Map<String,String>> floors=commonManager.getAllActiveFloord();
 		if (logger.isDebugEnabled()) {
-			logger.debug("getAllActiveFloord: Success");
+			logger.debug("getAllActiveFloor: Success");
 		}
 		return handleSuccess("floorDetails",floors);
-		
+	}
+	
+	@Override
+	@RequestMapping(value = "/deleteFloor",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> deleteFloor(@RequestParam("oid") String floorOid) throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("deleteFloor----start--->"	+ System.currentTimeMillis());
+		}
+		commonManager.deleteFloor(floorOid);
+		if (logger.isDebugEnabled()) {
+			logger.debug("deleteFloor: Success");
+		}
+		return handleStatus();
 	}
 	
 	@Override
@@ -99,6 +112,34 @@ public class CommonServiceImpl extends BaseService implements CommonService {
 			logger.debug("getWardByOid: Success");
 		}
 		return handleSuccess("ward",ward);
+	}
+	
+	@Override
+	@RequestMapping(value = "/deleteWard",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> deleteWard(@RequestParam("oid") String wardOid) throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("deleteWard----start--->"	+ System.currentTimeMillis());
+		}
+		commonManager.deleteWard(wardOid);
+		if (logger.isDebugEnabled()) {
+			logger.debug("deleteWard: Success");
+		}
+		return handleStatus();
+	}
+	
+	@Override
+	@RequestMapping(value = "/getAllWards",method=RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> getAllWards() throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("getAllWards----start--->"	+ System.currentTimeMillis());
+		}
+		List<Map<String, String>> wardDetails=commonManager.getAllWards();
+		if (logger.isDebugEnabled()) {
+			logger.debug("getAllWards: Success");
+		}
+		return handleSuccess("wardDetails",wardDetails);
 	}
 	
 	@Override

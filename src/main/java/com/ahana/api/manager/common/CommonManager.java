@@ -24,4 +24,10 @@ public interface CommonManager {
 
 	Room getRoomByOid(String roomOid) throws AhanaBusinessException;
 
+	void deleteFloor(String floorOid);
+
+	void deleteWard(String wardOid);
+
+	List<Map<String, String>> getAllWards() throws AhanaBusinessException;
+
 }

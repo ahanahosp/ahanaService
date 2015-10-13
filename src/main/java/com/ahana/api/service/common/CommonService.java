@@ -23,4 +23,10 @@ public interface CommonService {
 
 	Map<String, Object> createRoom(Room room) throws AhanaBusinessException;
 
+	Map<String, Object> deleteFloor(String floorOid) throws AhanaBusinessException;
+
+	Map<String, Object> deleteWard(String wardOid) throws AhanaBusinessException;
+
+	Map<String, Object> getAllWards() throws AhanaBusinessException;
+
 }
