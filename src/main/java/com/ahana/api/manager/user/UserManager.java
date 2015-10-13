@@ -27,4 +27,6 @@ public interface UserManager {
 
 	RoleRights saveRoleRights(RoleRights roleRights) throws AhanaBusinessException;
 
+	List<Map<String, String>> getUser(int intex, int noOfRecords) throws AhanaBusinessException;
+
 }

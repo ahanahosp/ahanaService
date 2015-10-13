@@ -34,4 +34,6 @@ public interface UserDao extends UserDetailsService {
 
 	void saveRoleRights(List<RoleRights> roleRights);
 
+	List<Map<String, String>> getUser(int intex, int noOfRecords);
+
 } 

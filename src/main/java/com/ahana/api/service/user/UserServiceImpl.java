@@ -8,7 +8,6 @@ import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -48,9 +47,23 @@ public class UserServiceImpl extends BaseService implements UserService {
 	}
 	
 	@Override
+	@RequestMapping(value = "/getUser",method=RequestMethod.GET)
+	@ResponseBody
+	public Map<String,Object> getUser(@RequestParam("index") int intex,@RequestParam("noOfRecords") int noOfRecords) throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("getUser----start--->"	+ System.currentTimeMillis());
+		}
+		List<Map<String, String>> userDetails=userManager.getUser(intex,noOfRecords);
+		if (logger.isDebugEnabled()) {
+			logger.debug("getUser: Success");
+		}
+		return handleSuccess("userProfile",userDetails);
+	}
+	
+	@Override
 	@RequestMapping(value = "/createRole",method=RequestMethod.POST)
 	@ResponseBody
-	public Map<String,Object> createRole(@Valid @RequestBody Roles roles, BindingResult errorResult) throws AhanaBusinessException {
+	public Map<String,Object> createRole(@Valid @RequestBody Roles roles) throws AhanaBusinessException {
 		if (logger.isDebugEnabled()) {
 			logger.debug("createRole----start--->"	+ System.currentTimeMillis());
 		}

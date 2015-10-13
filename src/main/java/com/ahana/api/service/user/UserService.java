@@ -4,8 +4,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.validation.BindingResult;
-
 import com.ahana.api.domain.user.RoleRights;
 import com.ahana.api.domain.user.Roles;
 import com.ahana.api.domain.user.UserProfile;
@@ -25,10 +23,12 @@ public interface UserService {
 
 	Map<String, Object> getRoleByOid(String roleOid) throws AhanaBusinessException;
 
-	Map<String, Object> createRole(Roles roles, BindingResult errorResult) throws AhanaBusinessException;
+	Map<String, Object> createRole(Roles roles) throws AhanaBusinessException;
 
 	Map<String, Object> getActiveRoles(HttpServletRequest request) throws AhanaBusinessException;
 
 	Map<String, Object> getUserByOid(String userOid) throws AhanaBusinessException;
+
+	Map<String, Object> getUser(int intex,int noOfRecords) throws AhanaBusinessException;
 
 }

@@ -66,7 +66,7 @@ public class UserManagerImpl implements UserManager {
 	@Override
 	public List<Map<String, String>> getActiveRoles() throws AhanaBusinessException {
 		List<Map<String, String>> roles=userDao.getActiveRoles();
-		if(roles==null){
+		if(CollectionUtils.isEmpty(roles)){
 			throw new AhanaBusinessException(ErrorConstants.NO_RECORDS_FOUND);
 		}
 		return roles;
@@ -117,5 +117,14 @@ public class UserManagerImpl implements UserManager {
 		}
 		return roleRight;
 		
+	}
+
+	@Override
+	public List<Map<String, String>> getUser(int intex, int noOfRecords) throws AhanaBusinessException {
+		List<Map<String, String>> users=userDao.getUser(intex,noOfRecords);
+		if(CollectionUtils.isEmpty(users)){
+			throw new AhanaBusinessException(ErrorConstants.NO_RECORDS_FOUND);
+		}
+		return users;
 	}
 }

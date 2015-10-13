@@ -175,4 +175,33 @@ public class UserDaoImpl extends AhanaDaoSupport implements UserDao {
 	public void saveRoleRights(List<RoleRights> roleRights) {
 		saveOrUpdate(roleRights);
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Map<String, String>> getUser(int intex, int noOfRecords) {
+		Query sqlQuery=null;
+		List<Map<String, String>> list=null;
+		String query=null;
+		try{
+			query="select oid as oid,salutation as salutation,first_name as firstName,last_name as lastName,designation as designation"
+					+ ",email_id as emailId,mobile_no as mobileNo,speciality as speciality,care_provider as careProvider from user_profile"
+					+ " where user_status='"+Constants.ACT+"'";
+			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
+					.addScalar("oid")
+					.addScalar("salutation")
+					.addScalar("firstName")
+					.addScalar("lastName")
+					.addScalar("designation")
+					.addScalar("emailId")
+					.addScalar("mobileNo")
+					.addScalar("speciality")
+					.addScalar("careProvider")
+					.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP).setFirstResult(intex*noOfRecords).setMaxResults(noOfRecords);
+			list = sqlQuery.list();
+		}finally{
+			sqlQuery=null;
+			query=null;
+		}
+		return list;
+	}
 }
