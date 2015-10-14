@@ -73,6 +73,16 @@
 				<value>com.ahana.api.domain.common.Organization</value>
 				<value>com.ahana.api.domain.common.OrganizationModule</value>
 				<value>com.ahana.api.domain.user.RoleRights</value>
+				<value>com.ahana.api.domain.common.AccountHead</value>
+				<value>com.ahana.api.domain.common.Floor</value>
+				<value>com.ahana.api.domain.common.Procedures</value>
+				<value>com.ahana.api.domain.common.Room</value>
+				<value>com.ahana.api.domain.common.RoomChargeItem</value>
+				<value>com.ahana.api.domain.common.RoomCharges</value>
+				<value>com.ahana.api.domain.common.RoomMaintenanceDetails</value>
+				<value>com.ahana.api.domain.common.RoomType</value>
+				<value>com.ahana.api.domain.common.SpecialityDetails</value>
+				<value>com.ahana.api.domain.common.Ward</value>
 			</list>
 		</property>
 	</bean>
@@ -101,6 +111,16 @@
 				<value>com.ahana.api.domain.common.Organization</value>
 				<value>com.ahana.api.domain.common.OrganizationModule</value>
 				<value>com.ahana.api.domain.user.RoleRights</value>
+				<value>com.ahana.api.domain.common.AccountHead</value>
+				<value>com.ahana.api.domain.common.Floor</value>
+				<value>com.ahana.api.domain.common.Procedures</value>
+				<value>com.ahana.api.domain.common.Room</value>
+				<value>com.ahana.api.domain.common.RoomChargeItem</value>
+				<value>com.ahana.api.domain.common.RoomCharges</value>
+				<value>com.ahana.api.domain.common.RoomMaintenanceDetails</value>
+				<value>com.ahana.api.domain.common.RoomType</value>
+				<value>com.ahana.api.domain.common.SpecialityDetails</value>
+				<value>com.ahana.api.domain.common.Ward</value>
 			</list>
 		</property>
 	</bean>

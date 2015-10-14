@@ -8,22 +8,24 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
-import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
 import com.ahana.api.common.AhanaVO;
+import com.ahana.api.common.Constants;
 import com.ahana.api.common.ErrorConstants;
 import com.ahana.api.common.RegConstants;
 
 @Entity
-@Table(name = "procedures")
-@NamedQueries({ @NamedQuery(name = "getProceduresByOid", query = "from Procedures p where p.oid= :proceduresOid") })
-public class Procedures implements AhanaVO {
+@Table(name = "speciality_details")
+@NamedQueries({
+		@NamedQuery(name = "getSpecialityDetailsByOid", query = "from SpecialityDetails sd where sd.oid= :specialityDetailOid") })
+public class SpecialityDetails implements AhanaVO {
 
-	private static final long serialVersionUID = -4312732317411968917L;
+	private static final long serialVersionUID = 5031522286203851395L;
 
 	@Id
 	@GeneratedValue(generator = "IdGenerator")
@@ -33,14 +35,18 @@ public class Procedures implements AhanaVO {
 	@Column(name = "oid")
 	private String oid;
 
-	@NotBlank(message = ErrorConstants.PROCEDURES_IS_REQUIRED)
-	@Length(min = 3, max = 100, message = ErrorConstants.PROCEDURES_LENGTH_IS_INVALID)
-	@Pattern(regexp = RegConstants.ALPHA_NUMERIC, message = ErrorConstants.PROCEDURES_IS_INVALID_FORMAT)
-	@Column(name = "procedures_name",nullable=false,length=100)
-	private String proceduresName;
+	@NotBlank(message = ErrorConstants.ROLE_NAME_REQUIRED)
+	@Size(message = ErrorConstants.ROLE_NAME_INVALID_LENGTH, min = 2, max = 100)
+	@Pattern(regexp = RegConstants.ALPHAPET_SPACE_HYPEN, message = ErrorConstants.ROLE_MUST_BE_ALPHABETICAL)
+	@Column(name = "speciality_name", unique = true, nullable = false, length = 100)
+	private String specialityName;
 
-	@Column(name = "status")
+	@Column(name = "status", length = 5)
 	private String status;
+
+	public SpecialityDetails() {
+		this.status = Constants.ACT;
+	}
 
 	public String getOid() {
 		return oid;
@@ -50,12 +56,12 @@ public class Procedures implements AhanaVO {
 		this.oid = oid;
 	}
 
-	public String getProceduresName() {
-		return proceduresName;
+	public String getSpecialityName() {
+		return specialityName;
 	}
 
-	public void setProceduresName(String proceduresName) {
-		this.proceduresName = proceduresName;
+	public void setSpecialityName(String specialityName) {
+		this.specialityName = specialityName;
 	}
 
 	public String getStatus() {

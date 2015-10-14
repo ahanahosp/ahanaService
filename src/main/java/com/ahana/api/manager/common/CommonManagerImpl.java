@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ahana.api.common.AhanaVO;
 import com.ahana.api.common.ErrorConstants;
 import com.ahana.api.dao.common.CommonDao;
 import com.ahana.api.domain.common.AccountHead;
@@ -214,6 +215,65 @@ public class CommonManagerImpl implements CommonManager {
 		}
 		commonDao.createRoomChargeItem(roomChargeItem);
 		return roomChargeItem;
+	}
+
+	@Override
+	public AhanaVO createOrUpdateConfigs(AhanaVO ahanaVO) throws AhanaBusinessException {
+		if(ahanaVO==null){
+			throw new AhanaBusinessException(ErrorConstants.NO_RECORDS_FOUND);
+		}
+		commonDao.createOrUpdateConfigs(ahanaVO);
+		return ahanaVO;
+	}
+
+	@Override
+	public void deleteConfigs(String entiryName, String oid) {
+		commonDao.deleteConfigs(entiryName,oid);
+	}
+
+	@Override
+	public AhanaVO getConfigDetailsItemByOid(String queryName, String columnName, String oid) throws AhanaBusinessException {
+		AhanaVO ahanaVO=commonDao.getConfigDetailsItemByOid(queryName,columnName,oid);
+		if(ahanaVO==null){
+			throw new AhanaBusinessException(ErrorConstants.NO_RECORDS_FOUND);
+		}
+		return ahanaVO;
+	}
+
+	@Override
+	public List<Map<String, String>> getAllSpeciality() throws AhanaBusinessException {
+		List<Map<String,String>> specialityDetails=commonDao.getAllSpeciality();
+		if(CollectionUtils.isEmpty(specialityDetails)){
+			throw new AhanaBusinessException(ErrorConstants.NO_RECORDS_FOUND);
+		}
+		return specialityDetails;
+	}
+
+	@Override
+	public List<Map<String, String>> getAllRoomType() throws AhanaBusinessException {
+		List<Map<String,String>> roomTypeDetails=commonDao.getAllRoomType();
+		if(CollectionUtils.isEmpty(roomTypeDetails)){
+			throw new AhanaBusinessException(ErrorConstants.NO_RECORDS_FOUND);
+		}
+		return roomTypeDetails;
+	}
+
+	@Override
+	public List<Map<String, String>> getAllRoomMaintenance() throws AhanaBusinessException {
+		List<Map<String,String>> roomMaintenanceDetails=commonDao.getAllRoomMaintenance();
+		if(CollectionUtils.isEmpty(roomMaintenanceDetails)){
+			throw new AhanaBusinessException(ErrorConstants.NO_RECORDS_FOUND);
+		}
+		return roomMaintenanceDetails;
+	}
+
+	@Override
+	public List<Map<String, Object>> getAllRoomCharges() throws AhanaBusinessException {
+		List<Map<String,Object>> roomChargesDetails=commonDao.getAllRoomCharges();
+		if(CollectionUtils.isEmpty(roomChargesDetails)){
+			throw new AhanaBusinessException(ErrorConstants.NO_RECORDS_FOUND);
+		}
+		return roomChargesDetails;
 	}
 
 }

@@ -9,6 +9,7 @@ import org.hibernate.transform.Transformers;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ahana.api.common.AhanaVO;
 import com.ahana.api.common.Constants;
 import com.ahana.api.domain.common.AccountHead;
 import com.ahana.api.domain.common.Floor;
@@ -289,5 +290,114 @@ public class CommonDaoImpl extends AhanaDaoSupport implements CommonDao {
 	public RoomChargeItem createRoomChargeItem(RoomChargeItem roomChargeItem) {
 		saveOrUpdate(roomChargeItem);
 		return roomChargeItem;
+	}
+
+	@Override
+	public AhanaVO createOrUpdateConfigs(AhanaVO ahanaVO) {
+		saveOrUpdate(ahanaVO);
+		return ahanaVO;
+	}
+
+	@Override
+	public void deleteConfigs(String entiryName, String oid) {
+		Query q = getSessionFactory().getCurrentSession().createQuery("delete '"+entiryName+"' where oid ='"+oid);
+		q.executeUpdate();			
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public AhanaVO getConfigDetailsItemByOid(String queryName, String columnName, String oid) {
+		List<AhanaVO> configDetails = findByNamedQuery(queryName, columnName, oid);
+		if(CollectionUtils.isNotEmpty(configDetails)){
+			return configDetails.get(0);
+		}
+		return null;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Map<String, String>> getAllSpeciality() {
+		Query sqlQuery=null;
+		List<Map<String, String>> list=null;
+		String query=null;
+		try{
+			query="select s.oid as oid,s.speciality_name as specialityName,s.status as status from speciality_details s where s.status='"+Constants.ACT+"'";
+			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
+					.addScalar("oid")
+					.addScalar("specialityName")
+					.addScalar("status")
+					.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+			list = sqlQuery.list();
+		}finally{
+			sqlQuery=null;
+			query=null;
+		}
+		return list;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Map<String, String>> getAllRoomType() {
+		Query sqlQuery=null;
+		List<Map<String, String>> list=null;
+		String query=null;
+		try{
+			query="select r.oid as oid,r.room_name as roomName,r.status as status from room_type r where r.status='"+Constants.ACT+"'";
+			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
+					.addScalar("oid")
+					.addScalar("roomName")
+					.addScalar("status")
+					.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+			list = sqlQuery.list();
+		}finally{
+			sqlQuery=null;
+			query=null;
+		}
+		return list;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Map<String, String>> getAllRoomMaintenance() {
+		Query sqlQuery=null;
+		List<Map<String, String>> list=null;
+		String query=null;
+		try{
+			query="select r.oid as oid,r.maintenance_name as maintenanceName,r.status as status from room_maintance_details m where m.status='"+Constants.ACT+"'";
+			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
+					.addScalar("oid")
+					.addScalar("maintenanceName")
+					.addScalar("status")
+					.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+			list = sqlQuery.list();
+		}finally{
+			sqlQuery=null;
+			query=null;
+		}
+		return list;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Map<String, Object>> getAllRoomCharges() {
+		Query sqlQuery=null;
+		List<Map<String, Object>> list=null;
+		String query=null;
+		try{
+			query="select r.oid as oid,r.charge as charge,r.status as status,r.bed_type as bedType,rc.item as item "
+					+ "from room_charges r join room_charges_item rc on r.room_charge_item_oid=rc.oid where r.status='"+Constants.ACT+"'";
+			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
+					.addScalar("oid")
+					.addScalar("charge")
+					.addScalar("status")
+					.addScalar("bedType")
+					.addScalar("status")
+					.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+			list = sqlQuery.list();
+		}finally{
+			sqlQuery=null;
+			query=null;
+		}
+		return list;
 	}
 }

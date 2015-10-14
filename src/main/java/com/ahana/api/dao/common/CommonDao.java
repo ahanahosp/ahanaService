@@ -3,6 +3,7 @@ package com.ahana.api.dao.common;
 import java.util.List;
 import java.util.Map;
 
+import com.ahana.api.common.AhanaVO;
 import com.ahana.api.domain.common.AccountHead;
 import com.ahana.api.domain.common.Floor;
 import com.ahana.api.domain.common.Procedures;
@@ -59,5 +60,19 @@ public interface CommonDao {
 	void deleteRoomChargeItem(String roomChargeItemOid);
 
 	RoomChargeItem createRoomChargeItem(RoomChargeItem roomChargeItem);
+
+	AhanaVO createOrUpdateConfigs(AhanaVO ahanaVO);
+
+	void deleteConfigs(String entiryName, String oid);
+
+	AhanaVO getConfigDetailsItemByOid(String queryName, String columnName, String oid);
+
+	List<Map<String, String>> getAllSpeciality();
+
+	List<Map<String, String>> getAllRoomType();
+
+	List<Map<String, String>> getAllRoomMaintenance();
+
+	List<Map<String, Object>> getAllRoomCharges();
 
 }

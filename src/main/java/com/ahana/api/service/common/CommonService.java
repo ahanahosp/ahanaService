@@ -7,6 +7,10 @@ import com.ahana.api.domain.common.Floor;
 import com.ahana.api.domain.common.Procedures;
 import com.ahana.api.domain.common.Room;
 import com.ahana.api.domain.common.RoomChargeItem;
+import com.ahana.api.domain.common.RoomCharges;
+import com.ahana.api.domain.common.RoomMaintenanceDetails;
+import com.ahana.api.domain.common.RoomType;
+import com.ahana.api.domain.common.SpecialityDetails;
 import com.ahana.api.domain.common.Ward;
 import com.ahana.api.system.security.exception.AhanaBusinessException;
 
@@ -59,5 +63,37 @@ public interface CommonService {
 	Map<String, Object> getAllRoomChargeItem() throws AhanaBusinessException;
 
 	Map<String, Object> createRoomChargeItem(RoomChargeItem roomChargeItem) throws AhanaBusinessException;
+
+	Map<String, Object> createSpeciality(SpecialityDetails specialityDetails) throws AhanaBusinessException;
+
+	Map<String, Object> deleteSpeciality(String specialityDetailsOid) throws AhanaBusinessException;
+
+	Map<String, Object> getSpecialityByOid(String specialityOid) throws AhanaBusinessException;
+
+	Map<String, Object> getAllSpeciality() throws AhanaBusinessException;
+
+	Map<String, Object> createRoomType(RoomType roomType) throws AhanaBusinessException;
+
+	Map<String, Object> deleteRoomType(String roomTypeOid) throws AhanaBusinessException;
+
+	Map<String, Object> getRoomTypeByOid(String roomTypeOid) throws AhanaBusinessException;
+
+	Map<String, Object> getAllRoomType() throws AhanaBusinessException;
+
+	Map<String, Object> createRoomMaintenance(RoomMaintenanceDetails roomMaintenanceDetails)throws AhanaBusinessException;
+
+	Map<String, Object> deleteRoomMaintenance(String roomMaintenanceDetailOid) throws AhanaBusinessException;
+
+	Map<String, Object> getRoomMaintenanceByOid(String roomMaintenanceDetails) throws AhanaBusinessException;
+
+	Map<String, Object> getAllRoomMaintenance() throws AhanaBusinessException;
+
+	Map<String, Object> createRoomCharge(RoomCharges roomCharges) throws AhanaBusinessException;
+
+	Map<String, Object> getRoomChargesByOid(String roomChargeOid) throws AhanaBusinessException;
+
+	Map<String, Object> deleteRoomCharges(String roomChargeOid) throws AhanaBusinessException;
+
+	Map<String, Object> getAllRoomCharges() throws AhanaBusinessException;
 
 }

@@ -14,12 +14,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ahana.api.common.AhanaVO;
 import com.ahana.api.common.BaseService;
 import com.ahana.api.domain.common.AccountHead;
 import com.ahana.api.domain.common.Floor;
 import com.ahana.api.domain.common.Procedures;
 import com.ahana.api.domain.common.Room;
 import com.ahana.api.domain.common.RoomChargeItem;
+import com.ahana.api.domain.common.RoomCharges;
+import com.ahana.api.domain.common.RoomMaintenanceDetails;
+import com.ahana.api.domain.common.RoomType;
+import com.ahana.api.domain.common.SpecialityDetails;
 import com.ahana.api.domain.common.Ward;
 import com.ahana.api.manager.common.CommonManager;
 import com.ahana.api.system.security.exception.AhanaBusinessException;
@@ -368,4 +373,231 @@ public class CommonServiceImpl extends BaseService implements CommonService {
 		}
 		return handleSuccess("roomChargeItemDetails",roomChargeItemDetails);
 	}
+	
+	@Override
+	@RequestMapping(value = "/createSpeciality",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> createSpeciality(@Valid @RequestBody SpecialityDetails specialityDetails) throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("createSpeciality----start--->"+ System.currentTimeMillis());
+		}
+		AhanaVO specialityDetails2 =commonManager.createOrUpdateConfigs(specialityDetails);
+		if (logger.isDebugEnabled()) {
+			logger.debug("createSpeciality: Success");
+		}
+		return handleSuccess("specialityDetails",(SpecialityDetails)specialityDetails2);
+	}
+	
+	@Override
+	@RequestMapping(value = "/deleteSpeciality",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> deleteSpeciality(@RequestParam("oid") String specialityDetailsOid) throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("deleteSpeciality----start--->"	+ System.currentTimeMillis());
+		}
+			commonManager.deleteConfigs("SpecialityDetails",specialityDetailsOid);
+		if (logger.isDebugEnabled()) {
+			logger.debug("deleteSpeciality: Success");
+		}
+		return handleStatus();
+	}
+	
+	@Override
+	@RequestMapping(value = "/getSpecialityByOid",method=RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> getSpecialityByOid(@RequestParam("oid") String specialityOid) throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("getSpecialityByOid----start--->"	+ System.currentTimeMillis());
+		}
+		AhanaVO ahanaVO=commonManager.getConfigDetailsItemByOid("getSpecialityDetailsByOid","specialityDetailOid",specialityOid);
+		if (logger.isDebugEnabled()) {
+			logger.debug("getSpecialityByOid: Success");
+		}
+		return handleSuccess("roomChargeItem",(SpecialityDetails)ahanaVO);
+	}
+	
+	@Override
+	@RequestMapping(value = "/getAllSpeciality",method=RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> getAllSpeciality() throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("getAllSpeciality----start--->"	+ System.currentTimeMillis());
+		}
+		List<Map<String, String>> specialityDetails=commonManager.getAllSpeciality();
+		if (logger.isDebugEnabled()) {
+			logger.debug("getAllSpeciality: Success");
+		}
+		return handleSuccess("specialityDetails",specialityDetails);
+	}
+	
+	
+	
+	@Override
+	@RequestMapping(value = "/createRoomType",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> createRoomType(@Valid @RequestBody RoomType roomType) throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("createRoomType----start--->"+ System.currentTimeMillis());
+		}
+		AhanaVO ahanaVO =commonManager.createOrUpdateConfigs(roomType);
+		if (logger.isDebugEnabled()) {
+			logger.debug("createRoomType: Success");
+		}
+		return handleSuccess("roomType",(RoomType)ahanaVO);
+	}
+	
+	@Override
+	@RequestMapping(value = "/deleteRoomType",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> deleteRoomType(@RequestParam("oid") String roomTypeOid) throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("deleteRoomType----start--->"	+ System.currentTimeMillis());
+		}
+			commonManager.deleteConfigs("RoomType",roomTypeOid);
+		if (logger.isDebugEnabled()) {
+			logger.debug("deleteRoomType: Success");
+		}
+		return handleStatus();
+	}
+	
+	@Override
+	@RequestMapping(value = "/getRoomTypeByOid",method=RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> getRoomTypeByOid(@RequestParam("oid") String roomTypeOid) throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("getRoomTypeByOid----start--->"	+ System.currentTimeMillis());
+		}
+		AhanaVO ahanaVO=commonManager.getConfigDetailsItemByOid("getRoomTypeByOid","roomTypeOid",roomTypeOid);
+		if (logger.isDebugEnabled()) {
+			logger.debug("getRoomTypeByOid: Success");
+		}
+		return handleSuccess("roomType",(RoomType)ahanaVO);
+	}
+	
+	@Override
+	@RequestMapping(value = "/getAllRoomType",method=RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> getAllRoomType() throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("getAllRoomType----start--->"	+ System.currentTimeMillis());
+		}
+		List<Map<String, String>> roomTypeDetails=commonManager.getAllRoomType();
+		if (logger.isDebugEnabled()) {
+			logger.debug("getAllRoomType: Success");
+		}
+		return handleSuccess("roomTypeDetails",roomTypeDetails);
+	}
+	
+	@Override
+	@RequestMapping(value = "/createRoomMaintenance",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> createRoomMaintenance(@Valid @RequestBody RoomMaintenanceDetails roomMaintenanceDetails) throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("createRoomMaintenance----start--->"+ System.currentTimeMillis());
+		}
+		AhanaVO ahanaVO =commonManager.createOrUpdateConfigs(roomMaintenanceDetails);
+		if (logger.isDebugEnabled()) {
+			logger.debug("createRoomMaintenance: Success");
+		}
+		return handleSuccess("roomMaintenance",(RoomMaintenanceDetails)ahanaVO);
+	}
+	
+	@Override
+	@RequestMapping(value = "/deleteRoomMaintenance",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> deleteRoomMaintenance(@RequestParam("oid") String roomMaintenanceDetailOid) throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("deleteRoomMaintenance----start--->"	+ System.currentTimeMillis());
+		}
+			commonManager.deleteConfigs("RoomMaintenanceDetails",roomMaintenanceDetailOid);
+		if (logger.isDebugEnabled()) {
+			logger.debug("deleteRoomMaintenance: Success");
+		}
+		return handleStatus();
+	}
+	
+	@Override
+	@RequestMapping(value = "/getRoomMaintenanceByOid",method=RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> getRoomMaintenanceByOid(@RequestParam("oid") String roomMaintenanceDetails) throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("getRoomMaintenanceByOid----start--->"	+ System.currentTimeMillis());
+		}
+		AhanaVO ahanaVO=commonManager.getConfigDetailsItemByOid("getRoomMaintenanceDetailsByOid","roomMaintenanceDetailsOid",roomMaintenanceDetails);
+		if (logger.isDebugEnabled()) {
+			logger.debug("getRoomMaintenanceByOid: Success");
+		}
+		return handleSuccess("roomMaintenance",(RoomMaintenanceDetails)ahanaVO);
+	}
+	
+	@Override
+	@RequestMapping(value = "/getAllRoomMaintenance",method=RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> getAllRoomMaintenance() throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("getAllRoomMaintenance----start--->"	+ System.currentTimeMillis());
+		}
+		List<Map<String, String>> roomMaintenanceDetails=commonManager.getAllRoomMaintenance();
+		if (logger.isDebugEnabled()) {
+			logger.debug("getAllRoomMaintenance: Success");
+		}
+		return handleSuccess("roomMaintenanceDetails",roomMaintenanceDetails);
+	}
+	
+	@Override
+	@RequestMapping(value = "/createRoomCharge",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> createRoomCharge(@Valid @RequestBody RoomCharges roomCharges) throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("createRoomCharge----start--->"+ System.currentTimeMillis());
+		}
+		AhanaVO ahanaVO =commonManager.createOrUpdateConfigs(roomCharges);
+		if (logger.isDebugEnabled()) {
+			logger.debug("createRoomCharge: Success");
+		}
+		return handleSuccess("roomCharge",(RoomCharges)ahanaVO);
+	}
+	
+	@Override
+	@RequestMapping(value = "/deleteRoomCharges",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> deleteRoomCharges(@RequestParam("oid") String roomChargeOid) throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("deleteRoomCharges----start--->"	+ System.currentTimeMillis());
+		}
+			commonManager.deleteConfigs("RoomCharges",roomChargeOid);
+		if (logger.isDebugEnabled()) {
+			logger.debug("deleteRoomCharges: Success");
+		}
+		return handleStatus();
+	}
+	
+	@Override
+	@RequestMapping(value = "/getRoomChargesByOid",method=RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> getRoomChargesByOid(@RequestParam("oid") String roomChargeOid) throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("getRoomChargesByOid----start--->"	+ System.currentTimeMillis());
+		}
+		AhanaVO ahanaVO=commonManager.getConfigDetailsItemByOid("getRoomChargesByOid","roomChargeOid",roomChargeOid);
+		if (logger.isDebugEnabled()) {
+			logger.debug("getRoomChargesByOid: Success");
+		}
+		return handleSuccess("roomCharges",(RoomCharges)ahanaVO);
+	}
+	
+	@Override
+	@RequestMapping(value = "/getAllRoomCharges",method=RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> getAllRoomCharges() throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("getAllRoomCharges----start--->"	+ System.currentTimeMillis());
+		}
+		List<Map<String, Object>> roomChargeDetails=commonManager.getAllRoomCharges();
+		if (logger.isDebugEnabled()) {
+			logger.debug("getAllRoomCharges: Success");
+		}
+		return handleSuccess("roomChargesDetails",roomChargeDetails);
+	}
+
 }

@@ -3,6 +3,7 @@ package com.ahana.api.manager.common;
 import java.util.List;
 import java.util.Map;
 
+import com.ahana.api.common.AhanaVO;
 import com.ahana.api.domain.common.AccountHead;
 import com.ahana.api.domain.common.Floor;
 import com.ahana.api.domain.common.Procedures;
@@ -60,5 +61,19 @@ public interface CommonManager {
 	List<Map<String, String>> getAllRoomChargeItem() throws AhanaBusinessException;
 
 	RoomChargeItem createRoomChargeItem(RoomChargeItem roomChargeItem) throws AhanaBusinessException;
+
+	AhanaVO createOrUpdateConfigs(AhanaVO ahanaVO) throws AhanaBusinessException;
+
+	void deleteConfigs(String string, String specialityDetailsOid);
+
+	AhanaVO getConfigDetailsItemByOid(String queryName, String columnName, String oid) throws AhanaBusinessException;
+
+	List<Map<String, String>> getAllSpeciality() throws AhanaBusinessException;
+
+	List<Map<String, String>> getAllRoomType()throws AhanaBusinessException;
+
+	List<Map<String, String>> getAllRoomMaintenance() throws AhanaBusinessException;
+
+	List<Map<String, Object>> getAllRoomCharges() throws AhanaBusinessException;
 
 }
