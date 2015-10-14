@@ -15,8 +15,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ahana.api.common.BaseService;
+import com.ahana.api.domain.common.AccountHead;
 import com.ahana.api.domain.common.Floor;
+import com.ahana.api.domain.common.Procedures;
 import com.ahana.api.domain.common.Room;
+import com.ahana.api.domain.common.RoomChargeItem;
 import com.ahana.api.domain.common.Ward;
 import com.ahana.api.manager.common.CommonManager;
 import com.ahana.api.system.security.exception.AhanaBusinessException;
@@ -196,5 +199,173 @@ public class CommonServiceImpl extends BaseService implements CommonService {
 			logger.debug("deleteRoom: Success");
 		}
 		return handleStatus();
+	}
+	
+	@Override
+	@RequestMapping(value = "/createAccountHead",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> createAccountHead(@Valid @RequestBody AccountHead accountHead) throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("createAccountHead----start--->"	+ System.currentTimeMillis());
+		}
+		AccountHead accountHead2 = commonManager.createAccountHead(accountHead);
+		if (logger.isDebugEnabled()) {
+			logger.debug("createAccountHead: Success");
+		}
+		return handleSuccess("accountHead",accountHead2);
+	}
+	
+	@Override
+	@RequestMapping(value = "/deleteAccountHead",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> deleteAccountHead(@RequestParam("oid") String accountHeadOid) throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("deleteAccountHead----start--->"	+ System.currentTimeMillis());
+		}
+		commonManager.deleteAccountHead(accountHeadOid);
+		if (logger.isDebugEnabled()) {
+			logger.debug("deleteAccountHead: Success");
+		}
+		return handleStatus();
+	}
+	
+	@Override
+	@RequestMapping(value = "/getAccountHeadByOid",method=RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> getAccountHeadByOid(@RequestParam("oid") String accountHeadOid) throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("getAccountHeadByOid----start--->"	+ System.currentTimeMillis());
+		}
+		AccountHead accountHead=commonManager.getAccountHeadByOid(accountHeadOid);
+		if (logger.isDebugEnabled()) {
+			logger.debug("getAccountHeadByOid: Success");
+		}
+		return handleSuccess("accountHead",accountHead);
+	}
+	
+	@Override
+	@RequestMapping(value = "/getAllAccountHead",method=RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> getAllAccountHead() throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("getAllAccountHead----start--->"	+ System.currentTimeMillis());
+		}
+		List<Map<String, String>> accountHeadDetails=commonManager.getAllAccountHead();
+		if (logger.isDebugEnabled()) {
+			logger.debug("getAllAccountHead: Success");
+		}
+		return handleSuccess("accountHeadDetails",accountHeadDetails);
+	}
+	
+	@Override
+	@RequestMapping(value = "/createProcedures",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> createProcedures(@Valid @RequestBody Procedures procedures) throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("createProcedures----start--->"	+ System.currentTimeMillis());
+		}
+		Procedures procedures2 = commonManager.createProcedures(procedures);
+		if (logger.isDebugEnabled()) {
+			logger.debug("createProcedures: Success");
+		}
+		return handleSuccess("procedures",procedures2);
+	}
+	
+	@Override
+	@RequestMapping(value = "/deleteProcedures",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> deleteProcedures(@RequestParam("oid") String proceduresOid) throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("deleteProcedures----start--->"	+ System.currentTimeMillis());
+		}
+		commonManager.deleteProcedures(proceduresOid);
+		if (logger.isDebugEnabled()) {
+			logger.debug("deleteProcedures: Success");
+		}
+		return handleStatus();
+	}
+	
+	@Override
+	@RequestMapping(value = "/getProceduresByOid",method=RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> getProceduresByOid(@RequestParam("oid") String proceduresOid) throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("getProceduresByOid----start--->"	+ System.currentTimeMillis());
+		}
+		Procedures procedures=commonManager.getProceduresByOid(proceduresOid);
+		if (logger.isDebugEnabled()) {
+			logger.debug("getProceduresByOid: Success");
+		}
+		return handleSuccess("procedures",procedures);
+	}
+	
+	@Override
+	@RequestMapping(value = "/getAllProcedures",method=RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> getAllProcedures() throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("getAllProcedures----start--->"	+ System.currentTimeMillis());
+		}
+		List<Map<String, String>> proceduresDetails=commonManager.getAllProcedures();
+		if (logger.isDebugEnabled()) {
+			logger.debug("getAllProcedures: Success");
+		}
+		return handleSuccess("proceduresDetails",proceduresDetails);
+	}
+	
+	@Override
+	@RequestMapping(value = "/createRoomChargeItem",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> createRoomChargeItem(@Valid @RequestBody RoomChargeItem roomChargeItem) throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("createRoomChargeItem----start--->"	+ System.currentTimeMillis());
+		}
+		RoomChargeItem roomChargeItem2 = commonManager.createRoomChargeItem(roomChargeItem);
+		if (logger.isDebugEnabled()) {
+			logger.debug("createRoomChargeItem: Success");
+		}
+		return handleSuccess("procedures",roomChargeItem2);
+	}
+	
+	@Override
+	@RequestMapping(value = "/deleteRoomChargeItem",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> deleteRoomChargeItem(@RequestParam("oid") String roomChargeItemOid) throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("deleteRoomChargeItem----start--->"	+ System.currentTimeMillis());
+		}
+		commonManager.deleteRoomChargeItem(roomChargeItemOid);
+		if (logger.isDebugEnabled()) {
+			logger.debug("deleteRoomChargeItem: Success");
+		}
+		return handleStatus();
+	}
+	
+	@Override
+	@RequestMapping(value = "/getRoomChargeItemByOid",method=RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> getRoomChargeItemByOid(@RequestParam("oid") String roomChargeItemOid) throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("getRoomChargeItemByOid----start--->"	+ System.currentTimeMillis());
+		}
+		RoomChargeItem roomChargeItem=commonManager.getRoomChargeItemByOid(roomChargeItemOid);
+		if (logger.isDebugEnabled()) {
+			logger.debug("getRoomChargeItemByOid: Success");
+		}
+		return handleSuccess("roomChargeItem",roomChargeItem);
+	}
+	
+	@Override
+	@RequestMapping(value = "/getAllRoomChargeItem",method=RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> getAllRoomChargeItem() throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("getAllRoomChargeItem----start--->"	+ System.currentTimeMillis());
+		}
+		List<Map<String, String>> roomChargeItemDetails=commonManager.getAllRoomChargeItem();
+		if (logger.isDebugEnabled()) {
+			logger.debug("getAllRoomChargeItem: Success");
+		}
+		return handleSuccess("roomChargeItemDetails",roomChargeItemDetails);
 	}
 }

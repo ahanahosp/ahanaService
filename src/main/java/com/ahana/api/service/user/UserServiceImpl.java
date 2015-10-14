@@ -186,4 +186,6 @@ public class UserServiceImpl extends BaseService implements UserService {
 		return handleSuccess("roleRights",roleRights2);
 	}
 	
+	
+	
 }

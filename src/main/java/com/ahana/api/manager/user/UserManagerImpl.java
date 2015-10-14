@@ -137,4 +137,6 @@ public class UserManagerImpl implements UserManager {
 	public void deleteUser(String userOid) {
 		userDao.deleteUser(userOid);
 	}
+	
+	
 }

@@ -3,8 +3,11 @@ package com.ahana.api.manager.common;
 import java.util.List;
 import java.util.Map;
 
+import com.ahana.api.domain.common.AccountHead;
 import com.ahana.api.domain.common.Floor;
+import com.ahana.api.domain.common.Procedures;
 import com.ahana.api.domain.common.Room;
+import com.ahana.api.domain.common.RoomChargeItem;
 import com.ahana.api.domain.common.Ward;
 import com.ahana.api.system.security.exception.AhanaBusinessException;
 
@@ -33,5 +36,29 @@ public interface CommonManager {
 	List<Map<String, String>> getAllRooms() throws AhanaBusinessException;
 
 	void deleteRoom(String roomOid);
+
+	AccountHead createAccountHead(AccountHead accountHead) throws AhanaBusinessException;
+
+	void deleteAccountHead(String accountHeadOid);
+
+	AccountHead getAccountHeadByOid(String accountHeadOid) throws AhanaBusinessException;
+
+	List<Map<String, String>> getAllAccountHead() throws AhanaBusinessException;
+
+	Procedures createProcedures(Procedures procedures) throws AhanaBusinessException;
+
+	void deleteProcedures(String proceduresOid);
+
+	Procedures getProceduresByOid(String proceduresOid) throws AhanaBusinessException;
+
+	List<Map<String, String>> getAllProcedures() throws AhanaBusinessException;
+
+	void deleteRoomChargeItem(String roomChargeItemOid);
+
+	RoomChargeItem getRoomChargeItemByOid(String roomChargeItemOid) throws AhanaBusinessException;
+
+	List<Map<String, String>> getAllRoomChargeItem() throws AhanaBusinessException;
+
+	RoomChargeItem createRoomChargeItem(RoomChargeItem roomChargeItem) throws AhanaBusinessException;
 
 }

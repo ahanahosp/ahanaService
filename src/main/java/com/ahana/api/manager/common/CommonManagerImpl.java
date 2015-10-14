@@ -10,8 +10,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ahana.api.common.ErrorConstants;
 import com.ahana.api.dao.common.CommonDao;
+import com.ahana.api.domain.common.AccountHead;
 import com.ahana.api.domain.common.Floor;
+import com.ahana.api.domain.common.Procedures;
 import com.ahana.api.domain.common.Room;
+import com.ahana.api.domain.common.RoomChargeItem;
 import com.ahana.api.domain.common.Ward;
 import com.ahana.api.system.security.exception.AhanaBusinessException;
 
@@ -115,6 +118,102 @@ public class CommonManagerImpl implements CommonManager {
 	@Override
 	public void deleteRoom(String roomOid) {
 		commonDao.deleteRoom(roomOid);
+	}
+
+	@Override
+	public AccountHead createAccountHead(AccountHead accountHead) throws AhanaBusinessException {
+		if(accountHead==null){
+			throw new AhanaBusinessException(ErrorConstants.NO_RECORDS_FOUND);
+		}
+		commonDao.createAccountHead(accountHead);
+		return accountHead;
+	}
+
+	@Override
+	public void deleteAccountHead(String accountHeadOid) {
+		commonDao.deleteAccountHead(accountHeadOid);
+	}
+
+	@Override
+	public AccountHead getAccountHeadByOid(String accountHeadOid) throws AhanaBusinessException {
+		AccountHead accountHead=commonDao.getAccountHeadByOid(accountHeadOid);
+		if(accountHead==null){
+			throw new AhanaBusinessException(ErrorConstants.NO_RECORDS_FOUND);
+		}
+		return accountHead;
+	}
+
+	@Override
+	public List<Map<String, String>> getAllAccountHead() throws AhanaBusinessException {
+		List<Map<String,String>> accountHead=commonDao.getAllAccountHead();
+		if(CollectionUtils.isEmpty(accountHead)){
+			throw new AhanaBusinessException(ErrorConstants.NO_RECORDS_FOUND);
+		}
+		return accountHead;
+	}
+
+	@Override
+	public Procedures createProcedures(Procedures procedures) throws AhanaBusinessException {
+		if(procedures==null){
+			throw new AhanaBusinessException(ErrorConstants.NO_RECORDS_FOUND);
+		}
+		commonDao.createProcedures(procedures);
+		return procedures;
+	}
+
+	@Override
+	public void deleteProcedures(String proceduresOid) {
+		commonDao.deleteProcedures(proceduresOid);
+	}
+
+	@Override
+	public Procedures getProceduresByOid(String proceduresOid) throws AhanaBusinessException {
+		Procedures procedures=commonDao.getProceduresByOid(proceduresOid);
+		if(procedures==null){
+			throw new AhanaBusinessException(ErrorConstants.NO_RECORDS_FOUND);
+		}
+		return procedures;
+	}
+
+	@Override
+	public List<Map<String, String>> getAllProcedures() throws AhanaBusinessException {
+		List<Map<String,String>> procedures=commonDao.getAllProcedures();
+		if(CollectionUtils.isEmpty(procedures)){
+			throw new AhanaBusinessException(ErrorConstants.NO_RECORDS_FOUND);
+		}
+		return procedures;
+	}
+
+	@Override
+	public void deleteRoomChargeItem(String roomChargeItemOid) {
+		commonDao.deleteRoomChargeItem(roomChargeItemOid);
+	}
+
+	@Override
+	public RoomChargeItem getRoomChargeItemByOid(String roomChargeItemOid) throws AhanaBusinessException {
+		RoomChargeItem roomChargeItem=commonDao.getRoomChargeItemByOid(roomChargeItemOid);
+		if(roomChargeItem==null){
+			throw new AhanaBusinessException(ErrorConstants.NO_RECORDS_FOUND);
+		}
+		return roomChargeItem;
+	}
+
+	@Override
+	public List<Map<String, String>> getAllRoomChargeItem() throws AhanaBusinessException {
+		List<Map<String,String>> roomChargeItem=commonDao.getAllRoomChargeItem();
+		if(CollectionUtils.isEmpty(roomChargeItem)){
+			throw new AhanaBusinessException(ErrorConstants.NO_RECORDS_FOUND);
+		}
+		return roomChargeItem;
+	}
+
+	@Override
+	public RoomChargeItem createRoomChargeItem(RoomChargeItem roomChargeItem) throws AhanaBusinessException {
+		if(roomChargeItem==null){
+			throw new AhanaBusinessException(ErrorConstants.NO_RECORDS_FOUND);
+		}
+		commonDao.createRoomChargeItem(roomChargeItem);
+		return roomChargeItem;
 	}
 
 }

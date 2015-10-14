@@ -2,8 +2,11 @@ package com.ahana.api.service.common;
 
 import java.util.Map;
 
+import com.ahana.api.domain.common.AccountHead;
 import com.ahana.api.domain.common.Floor;
+import com.ahana.api.domain.common.Procedures;
 import com.ahana.api.domain.common.Room;
+import com.ahana.api.domain.common.RoomChargeItem;
 import com.ahana.api.domain.common.Ward;
 import com.ahana.api.system.security.exception.AhanaBusinessException;
 
@@ -32,5 +35,29 @@ public interface CommonService {
 	Map<String, Object> getAllRooms() throws AhanaBusinessException;
 
 	Map<String, Object> deleteRoom(String roomOid) throws AhanaBusinessException;
+
+	Map<String, Object> createAccountHead(AccountHead accountHead) throws AhanaBusinessException;
+
+	Map<String, Object> deleteAccountHead(String accountHeadOid) throws AhanaBusinessException;
+
+	Map<String, Object> getAccountHeadByOid(String accountHeadOid) throws AhanaBusinessException;
+
+	Map<String, Object> getAllAccountHead() throws AhanaBusinessException;
+
+	Map<String, Object> createProcedures(Procedures procedures) throws AhanaBusinessException;
+
+	Map<String, Object> deleteProcedures(String proceduresOid) throws AhanaBusinessException;
+
+	Map<String, Object> getProceduresByOid(String proceduresOid) throws AhanaBusinessException;
+
+	Map<String, Object> getAllProcedures() throws AhanaBusinessException;
+
+	Map<String, Object> deleteRoomChargeItem(String roomChargeItemOid) throws AhanaBusinessException;
+
+	Map<String, Object> getRoomChargeItemByOid(String roomChargeItemOid) throws AhanaBusinessException;
+
+	Map<String, Object> getAllRoomChargeItem() throws AhanaBusinessException;
+
+	Map<String, Object> createRoomChargeItem(RoomChargeItem roomChargeItem) throws AhanaBusinessException;
 
 }

@@ -10,9 +10,11 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ahana.api.common.Constants;
-import com.ahana.api.dao.common.AhanaDaoSupport;
+import com.ahana.api.domain.common.AccountHead;
 import com.ahana.api.domain.common.Floor;
+import com.ahana.api.domain.common.Procedures;
 import com.ahana.api.domain.common.Room;
+import com.ahana.api.domain.common.RoomChargeItem;
 import com.ahana.api.domain.common.Ward;
 
 @Transactional(readOnly = false)
@@ -151,5 +153,141 @@ public class CommonDaoImpl extends AhanaDaoSupport implements CommonDao {
 	public void deleteRoom(String roomOid) {
 		Query q = getSessionFactory().getCurrentSession().createQuery("delete Room where oid ='"+roomOid);
 		q.executeUpdate();
+	}
+
+	@Override
+	public void deleteAccountHead(String accountHeadOid) {
+		Query q = getSessionFactory().getCurrentSession().createQuery("delete AccountHead where oid ='"+accountHeadOid);
+		q.executeUpdate();		
+	}
+
+	@Override
+	public AccountHead createAccountHead(AccountHead accountHead) {
+		saveOrUpdate(accountHead);
+		return accountHead;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public AccountHead getAccountHeadByOid(String accountHeadOid) {
+		List<AccountHead> accountHeads = findByNamedQuery("getAccountHeadByOid", "accountHeadOid", accountHeadOid);
+		if(CollectionUtils.isNotEmpty(accountHeads)){
+			return accountHeads.get(0);
+		}
+		return null;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Map<String, String>> getAllAccountHead() {
+		Query sqlQuery=null;
+		List<Map<String, String>> list=null;
+		String query=null;
+		try{
+			query="select ci.oid as oid,ci.category as category,ci.description as description,ci.status as status "
+					+ "from category_item ci  where ci.status='"+Constants.ACT+"'";
+			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
+					.addScalar("oid")
+					.addScalar("category")
+					.addScalar("description")
+					.addScalar("status")
+					.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+			list = sqlQuery.list();
+		}finally{
+			sqlQuery=null;
+			query=null;
+		}
+		return list;
+	}
+
+	@Override
+	public Procedures createProcedures(Procedures procedures) {
+		saveOrUpdate(procedures);
+		return procedures;
+	}
+
+	@Override
+	public void deleteProcedures(String proceduresOid) {
+		Query q = getSessionFactory().getCurrentSession().createQuery("delete Procedures where oid ='"+proceduresOid);
+		q.executeUpdate();		
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Procedures getProceduresByOid(String proceduresOid) {
+		List<Procedures> procedures = findByNamedQuery("getProceduresByOid", "proceduresOid", proceduresOid);
+		if(CollectionUtils.isNotEmpty(procedures)){
+			return procedures.get(0);
+		}
+		return null;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Map<String, String>> getAllProcedures() {
+		Query sqlQuery=null;
+		List<Map<String, String>> list=null;
+		String query=null;
+		try{
+			query="select p.oid as oid,p.procedures_name as proceduresName,p.status as status "
+					+ "from procedures p where p.status='"+Constants.ACT+"'";
+			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
+					.addScalar("oid")
+					.addScalar("proceduresName")
+					.addScalar("status")
+					.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+			list = sqlQuery.list();
+		}finally{
+			sqlQuery=null;
+			query=null;
+		}
+		return list;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public RoomChargeItem getRoomChargeItemByOid(String roomChargeItemOid) {
+		List<RoomChargeItem> roomChargeItems = findByNamedQuery("getRoomChargeItemByOid", "roomChargeItemOid", roomChargeItemOid);
+		if(CollectionUtils.isNotEmpty(roomChargeItems)){
+			return roomChargeItems.get(0);
+		}
+		return null;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Map<String, String>> getAllRoomChargeItem() {
+		Query sqlQuery=null;
+		List<Map<String, String>> list=null;
+		String query=null;
+		try{
+			query="select r.oid as oid,r.item as item,r.code as code,r.description as description,r.status as status, "
+					+ "c.category as category from room_charges_item r join category_item c on r.category_oid=c.oid where c.status='"+Constants.ACT+"'";
+			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
+					.addScalar("oid")
+					.addScalar("item")
+					.addScalar("code")
+					.addScalar("description")
+					.addScalar("status")
+					.addScalar("category")
+					.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+			list = sqlQuery.list();
+		}finally{
+			sqlQuery=null;
+			query=null;
+		}
+		return list;
+	}
+
+	@Override
+	public void deleteRoomChargeItem(String roomChargeItemOid) {
+		Query q = getSessionFactory().getCurrentSession().createQuery("delete RoomChargeItem where oid ='"+roomChargeItemOid);
+		q.executeUpdate();	
+	}
+
+	@Override
+	public RoomChargeItem createRoomChargeItem(RoomChargeItem roomChargeItem) {
+		saveOrUpdate(roomChargeItem);
+		return roomChargeItem;
 	}
 }
