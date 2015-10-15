@@ -15,14 +15,16 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
 import com.ahana.api.common.AhanaVO;
+import com.ahana.api.common.Constants;
 import com.ahana.api.common.ErrorConstants;
 import com.ahana.api.common.RegConstants;
 
-@SuppressWarnings("serial")
 @Entity
 @Table(name = "floor")
 @NamedQueries({ @NamedQuery(name = "getFloorByOid", query = "from Floor f where f.oid= :floorOid") })
 public class Floor implements AhanaVO {
+
+	private static final long serialVersionUID = 7619309774719642928L;
 
 	@Id
 	@GeneratedValue(generator = "IdGenerator")
@@ -36,18 +38,22 @@ public class Floor implements AhanaVO {
 
 	@NotBlank(message=ErrorConstants.FLOOR_NAME_IS_REQUIRED)
 	@Length(min=3,max=100,message=ErrorConstants.FLOOR_NAME_LENGTH_IS_INVALID)
-	@Pattern(regexp=RegConstants.ALPHA_NUMERIC,message=ErrorConstants.FLOOR_NAME_INVALID_FORMAT)
+	@Pattern(regexp=RegConstants.ALPHA_NUMERIC_SPACE_HYPEN,message=ErrorConstants.FLOOR_NAME_INVALID_FORMAT)
 	@Column(name = "floor_name")
 	private String floorName;
 
 	@NotBlank(message=ErrorConstants.FLOOR_CODE_IS_REQUIRED)
-	@Length(min=3,max=10,message=ErrorConstants.FLOOR_CODE_LENGTH_IS_INVALID)
-	@Pattern(regexp=RegConstants.ALPHA_NUMERIC,message=ErrorConstants.FLOOR_CODE_INVALID_FORMAT)
+	@Length(min=2,max=10,message=ErrorConstants.FLOOR_CODE_LENGTH_IS_INVALID)
+	@Pattern(regexp=RegConstants.ALPHA_NUMERIC_SPACE_HYPEN,message=ErrorConstants.FLOOR_CODE_INVALID_FORMAT)
 	@Column(name = "floor_code")
 	private String floorCode;
 
 	@Column(name = "status")
 	private String status;
+	
+	public Floor(){
+		this.status=Constants.ACT;
+	}
 
 	public String getOid() {
 		return oid;

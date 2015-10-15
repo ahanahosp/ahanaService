@@ -13,6 +13,7 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
 import com.ahana.api.common.AhanaVO;
+import com.ahana.api.common.Constants;
 import com.ahana.api.common.ErrorConstants;
 import com.ahana.api.common.RegConstants;
 
@@ -33,7 +34,7 @@ public class Room implements AhanaVO {
 
 	@NotBlank(message = ErrorConstants.BED_NAME_IS_REQUIRED)
 	@Length(min = 3, max = 100, message = ErrorConstants.BED_NAME_LENGTH_IS_INVALID)
-	@Pattern(regexp = RegConstants.ALPHA_NUMERIC, message = ErrorConstants.BED_NAME_IS_INVALID_FORMAT)
+	@Pattern(regexp = RegConstants.ALPHA_NUMERIC_SPACE_HYPEN, message = ErrorConstants.BED_NAME_IS_INVALID_FORMAT)
 	@Column(name = "bed_name")
 	private String bedName;
 
@@ -49,6 +50,10 @@ public class Room implements AhanaVO {
 
 	@Column(name = "status")
 	private String status;
+	
+	public Room(){
+		this.status=Constants.ACT;
+	}
 
 	public String getOid() {
 		return oid;

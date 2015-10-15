@@ -18,6 +18,31 @@ USE `ahana`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `category_item`
+--
+
+DROP TABLE IF EXISTS `category_item`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `category_item` (
+  `oid` varchar(20) NOT NULL,
+  `category` varchar(100) NOT NULL,
+  `description` varchar(100) DEFAULT NULL,
+  `status` varchar(5) DEFAULT NULL,
+  PRIMARY KEY (`oid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `category_item`
+--
+
+LOCK TABLES `category_item` WRITE;
+/*!40000 ALTER TABLE `category_item` DISABLE KEYS */;
+/*!40000 ALTER TABLE `category_item` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `floor`
 --
 
@@ -28,7 +53,7 @@ CREATE TABLE `floor` (
   `oid` varchar(20) NOT NULL,
   `floor_name` varchar(100) NOT NULL,
   `floor_code` varchar(20) NOT NULL,
-  `status` varchar(20) NOT NULL,
+  `status` varchar(5) NOT NULL,
   PRIMARY KEY (`oid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -165,6 +190,30 @@ INSERT INTO `patient` VALUES ('PAT10','test','test','Male','9898989899',53,'tes1
 UNLOCK TABLES;
 
 --
+-- Table structure for table `procedures`
+--
+
+DROP TABLE IF EXISTS `procedures`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `procedures` (
+  `oid` varchar(20) NOT NULL,
+  `procedures_name` varchar(100) NOT NULL,
+  `status` varchar(5) DEFAULT NULL,
+  PRIMARY KEY (`oid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `procedures`
+--
+
+LOCK TABLES `procedures` WRITE;
+/*!40000 ALTER TABLE `procedures` DISABLE KEYS */;
+/*!40000 ALTER TABLE `procedures` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `role_rights`
 --
 
@@ -242,6 +291,108 @@ LOCK TABLES `room` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `room_charges`
+--
+
+DROP TABLE IF EXISTS `room_charges`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `room_charges` (
+  `oid` varchar(20) NOT NULL,
+  `room_charge_item_oid` varchar(20) NOT NULL,
+  `charge` int(10) DEFAULT NULL,
+  `description` varchar(100) DEFAULT NULL,
+  `categoryOid` varchar(20) NOT NULL,
+  `status` varchar(5) DEFAULT NULL,
+  PRIMARY KEY (`oid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `room_charges`
+--
+
+LOCK TABLES `room_charges` WRITE;
+/*!40000 ALTER TABLE `room_charges` DISABLE KEYS */;
+/*!40000 ALTER TABLE `room_charges` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `room_charges_item`
+--
+
+DROP TABLE IF EXISTS `room_charges_item`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `room_charges_item` (
+  `oid` varchar(20) NOT NULL,
+  `item` varchar(100) NOT NULL,
+  `code` varchar(10) NOT NULL,
+  `description` varchar(100) DEFAULT NULL,
+  `categoryOid` varchar(20) NOT NULL,
+  `status` varchar(5) DEFAULT NULL,
+  PRIMARY KEY (`oid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `room_charges_item`
+--
+
+LOCK TABLES `room_charges_item` WRITE;
+/*!40000 ALTER TABLE `room_charges_item` DISABLE KEYS */;
+/*!40000 ALTER TABLE `room_charges_item` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `room_maintance_details`
+--
+
+DROP TABLE IF EXISTS `room_maintance_details`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `room_maintance_details` (
+  `oid` varchar(20) NOT NULL,
+  `maintenance_name` varchar(100) NOT NULL,
+  `status` varchar(5) DEFAULT NULL,
+  PRIMARY KEY (`oid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `room_maintance_details`
+--
+
+LOCK TABLES `room_maintance_details` WRITE;
+/*!40000 ALTER TABLE `room_maintance_details` DISABLE KEYS */;
+/*!40000 ALTER TABLE `room_maintance_details` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `room_type`
+--
+
+DROP TABLE IF EXISTS `room_type`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `room_type` (
+  `oid` varchar(20) NOT NULL,
+  `room_name` varchar(100) NOT NULL,
+  `status` varchar(5) DEFAULT NULL,
+  PRIMARY KEY (`oid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `room_type`
+--
+
+LOCK TABLES `room_type` WRITE;
+/*!40000 ALTER TABLE `room_type` DISABLE KEYS */;
+/*!40000 ALTER TABLE `room_type` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `seed_container`
 --
 
@@ -264,8 +415,32 @@ CREATE TABLE `seed_container` (
 
 LOCK TABLES `seed_container` WRITE;
 /*!40000 ALTER TABLE `seed_container` DISABLE KEYS */;
-INSERT INTO `seed_container` VALUES (5,'a01',1,'REST'),(3,'PAT',2,'PAT');
+INSERT INTO `seed_container` VALUES (8,'a01',1,'REST'),(3,'PAT',2,'PAT');
 /*!40000 ALTER TABLE `seed_container` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `speciality_details`
+--
+
+DROP TABLE IF EXISTS `speciality_details`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `speciality_details` (
+  `oid` varchar(20) NOT NULL,
+  `speciality_name` varchar(100) NOT NULL,
+  `status` varchar(5) DEFAULT NULL,
+  PRIMARY KEY (`oid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `speciality_details`
+--
+
+LOCK TABLES `speciality_details` WRITE;
+/*!40000 ALTER TABLE `speciality_details` DISABLE KEYS */;
+/*!40000 ALTER TABLE `speciality_details` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -357,6 +532,7 @@ CREATE TABLE `ward` (
 
 LOCK TABLES `ward` WRITE;
 /*!40000 ALTER TABLE `ward` DISABLE KEYS */;
+INSERT INTO `ward` VALUES ('a0100000007000000009','Sugery Ward1','a0100000006000000008','ACT'),('a010000000700000000a','Sugery Ward','a0100000006000000008','ACT'),('a010000000700000000b','Sugery Ward 2','a0100000006000000008','ACT'),('a010000000700000000c','Sugery Ward 3','a0100000006000000008','ACT'),('dd44effd','Test Ward','3232dwdsdsd','ACT');
 /*!40000 ALTER TABLE `ward` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -369,4 +545,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-10-13 14:35:44
+-- Dump completed on 2015-10-15 23:15:07

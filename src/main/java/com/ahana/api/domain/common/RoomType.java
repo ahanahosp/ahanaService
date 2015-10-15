@@ -34,9 +34,9 @@ public class RoomType implements AhanaVO {
 	@Column(name = "oid")
 	private String oid;
 
-	@NotBlank(message = ErrorConstants.ROLE_NAME_REQUIRED)
-	@Size(message = ErrorConstants.ROLE_NAME_INVALID_LENGTH, min = 2, max = 100)
-	@Pattern(regexp = RegConstants.ALPHAPET_SPACE_HYPEN, message = ErrorConstants.ROLE_MUST_BE_ALPHABETICAL)
+	@NotBlank(message = ErrorConstants.ROOM_NAME_IS_REQUIRED)
+	@Size(message = ErrorConstants.ROOM_NAME_LENGTH_IS_INVALID, min = 2, max = 100)
+	@Pattern(regexp = RegConstants.ALPHA_NUMERIC_SPACE_HYPEN, message = ErrorConstants.ROOM_NAME_IS_INVALID_FORMAT)
 	@Column(name = "room_name", unique = true, nullable = false, length = 100)
 	private String roomName;
 

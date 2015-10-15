@@ -15,6 +15,7 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
 import com.ahana.api.common.AhanaVO;
+import com.ahana.api.common.Constants;
 import com.ahana.api.common.ErrorConstants;
 import com.ahana.api.common.RegConstants;
 
@@ -36,7 +37,7 @@ public class Ward implements AhanaVO {
 
 	@NotBlank(message=ErrorConstants.WARD_NAME_IS_REQUIRED)
 	@Length(min=3,max=100,message=ErrorConstants.WARD_NAME_LENGTH_IS_INVALID)
-	@Pattern(regexp=RegConstants.ALPHA_NUMERIC,message=ErrorConstants.WARD_NAME_INVALID_FORMAT)
+	@Pattern(regexp=RegConstants.ALPHA_NUMERIC_SPACE_HYPEN,message=ErrorConstants.WARD_NAME_INVALID_FORMAT)
 	@Column(name = "ward_name")
 	private String wardName;
 
@@ -46,6 +47,10 @@ public class Ward implements AhanaVO {
 
 	@Column(name = "status")
 	private String status;
+
+	public Ward(){
+		this.status=Constants.ACT;
+	}
 
 	public String getOid() {
 		return oid;

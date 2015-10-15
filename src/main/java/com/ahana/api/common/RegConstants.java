@@ -14,6 +14,8 @@ public class RegConstants {
 	
 	public static final String ALPHA_NUMERIC="[a-zA-Z0-9]*";
 	
+	public static final String ALPHA_NUMERIC_SPACE_HYPEN="[a-zA-Z0-9\\- ]*";
+	
 	public static final String NUMERIC="[0-9]*";
 	
 }

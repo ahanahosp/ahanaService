@@ -35,21 +35,19 @@ public class RoomCharges implements AhanaVO {
 	@Column(name = "oid")
 	private String oid;
 
-	@NotBlank(message = ErrorConstants.ROLE_NAME_REQUIRED)
-	@Size(message = ErrorConstants.ROLE_NAME_INVALID_LENGTH, min = 2, max = 100)
-	@Pattern(regexp = RegConstants.ALPHAPET_SPACE_HYPEN, message = ErrorConstants.ROLE_MUST_BE_ALPHABETICAL)
+	@NotBlank(message = ErrorConstants.ROOM_CHARGE_ITEM_IS_REQUIRED)
 	@Column(name = "room_charge_item_oid")
 	private String roomChargeItemOid;
 
-	@NotBlank(message = ErrorConstants.ROLE_NAME_REQUIRED)
-	@Size(message = ErrorConstants.ROLE_NAME_INVALID_LENGTH, min = 2, max = 100)
-	@Pattern(regexp = RegConstants.ALPHAPET_SPACE_HYPEN, message = ErrorConstants.ROLE_MUST_BE_ALPHABETICAL)
+	@NotBlank(message = ErrorConstants.CHARGE_IS_REQUIRED)
+	@Size(message = ErrorConstants.CHARGE_LENGTH_IS_INVALID, min = 2, max = 10)
+	@Pattern(regexp = RegConstants.NUMERIC, message = ErrorConstants.CHARGE_MUST_BE_NUMERIC)
 	@Column(name = "charge")
 	private int charge;
 
-	@NotBlank(message = ErrorConstants.ROLE_NAME_REQUIRED)
-	@Size(message = ErrorConstants.ROLE_NAME_INVALID_LENGTH, min = 2, max = 100)
-	@Pattern(regexp = RegConstants.ALPHAPET_SPACE_HYPEN, message = ErrorConstants.ROLE_MUST_BE_ALPHABETICAL)
+	@NotBlank(message = ErrorConstants.BED_TYPE_IS_REQUIRED)
+	@Size(message = ErrorConstants.BED_TYPE_LENGTH_IS_REQUIRED, min = 2, max = 100)
+	@Pattern(regexp = RegConstants.ALPHA_NUMERIC_SPACE_HYPEN, message = ErrorConstants.BED_TYPE_IS_INVALID_FORMAT)
 	@Column(name = "bed_type")
 	private String bedType;
 

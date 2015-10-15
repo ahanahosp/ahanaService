@@ -93,13 +93,13 @@ public class CommonDaoImpl extends AhanaDaoSupport implements CommonDao {
 
 	@Override
 	public void deleteFloor(String floorOid) {
-		Query q = getSessionFactory().getCurrentSession().createQuery("delete Floor where oid ='"+floorOid);
+		Query q = getSessionFactory().getCurrentSession().createQuery("delete Floor where oid ='"+floorOid+"'");
 		q.executeUpdate();
 	}
 
 	@Override
 	public void deleteWard(String wardOid) {
-		Query q = getSessionFactory().getCurrentSession().createQuery("delete Ward where oid ='"+wardOid);
+		Query q = getSessionFactory().getCurrentSession().createQuery("delete Ward where oid ='"+wardOid+"'");
 		q.executeUpdate();
 	}
 
@@ -152,13 +152,13 @@ public class CommonDaoImpl extends AhanaDaoSupport implements CommonDao {
 
 	@Override
 	public void deleteRoom(String roomOid) {
-		Query q = getSessionFactory().getCurrentSession().createQuery("delete Room where oid ='"+roomOid);
+		Query q = getSessionFactory().getCurrentSession().createQuery("delete Room where oid ='"+roomOid+"'");
 		q.executeUpdate();
 	}
 
 	@Override
 	public void deleteAccountHead(String accountHeadOid) {
-		Query q = getSessionFactory().getCurrentSession().createQuery("delete AccountHead where oid ='"+accountHeadOid);
+		Query q = getSessionFactory().getCurrentSession().createQuery("delete AccountHead where oid ='"+accountHeadOid+"'");
 		q.executeUpdate();		
 	}
 
@@ -209,7 +209,7 @@ public class CommonDaoImpl extends AhanaDaoSupport implements CommonDao {
 
 	@Override
 	public void deleteProcedures(String proceduresOid) {
-		Query q = getSessionFactory().getCurrentSession().createQuery("delete Procedures where oid ='"+proceduresOid);
+		Query q = getSessionFactory().getCurrentSession().createQuery("delete Procedures where oid ='"+proceduresOid+"'");
 		q.executeUpdate();		
 	}
 
@@ -282,7 +282,7 @@ public class CommonDaoImpl extends AhanaDaoSupport implements CommonDao {
 
 	@Override
 	public void deleteRoomChargeItem(String roomChargeItemOid) {
-		Query q = getSessionFactory().getCurrentSession().createQuery("delete RoomChargeItem where oid ='"+roomChargeItemOid);
+		Query q = getSessionFactory().getCurrentSession().createQuery("delete RoomChargeItem where oid ='"+roomChargeItemOid+"'");
 		q.executeUpdate();	
 	}
 
@@ -300,7 +300,7 @@ public class CommonDaoImpl extends AhanaDaoSupport implements CommonDao {
 
 	@Override
 	public void deleteConfigs(String entiryName, String oid) {
-		Query q = getSessionFactory().getCurrentSession().createQuery("delete '"+entiryName+"' where oid ='"+oid);
+		Query q = getSessionFactory().getCurrentSession().createQuery("delete '"+entiryName+"' where oid ='"+oid+"'");
 		q.executeUpdate();			
 	}
 

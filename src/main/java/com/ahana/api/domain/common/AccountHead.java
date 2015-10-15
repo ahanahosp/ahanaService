@@ -15,6 +15,7 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
 import com.ahana.api.common.AhanaVO;
+import com.ahana.api.common.Constants;
 import com.ahana.api.common.ErrorConstants;
 import com.ahana.api.common.RegConstants;
 
@@ -35,7 +36,7 @@ public class AccountHead implements AhanaVO {
 
 	@NotBlank(message = ErrorConstants.CATEGORY_IS_REQUIRED)
 	@Length(min = 3, max = 100, message = ErrorConstants.CATEGORY_LENGTH_IS_INVALID)
-	@Pattern(regexp = RegConstants.ALPHA_NUMERIC, message = ErrorConstants.CATEGORY_FORMAT_IS_INVALID)
+	@Pattern(regexp = RegConstants.ALPHA_NUMERIC_SPACE_HYPEN, message = ErrorConstants.CATEGORY_FORMAT_IS_INVALID)
 	@Column(name = "category")
 	private String category;
 
@@ -44,6 +45,10 @@ public class AccountHead implements AhanaVO {
 
 	@Column(name = "status")
 	private String status;
+	
+	public AccountHead(){
+		this.status=Constants.ACT;
+	}
 
 	public String getOid() {
 		return oid;

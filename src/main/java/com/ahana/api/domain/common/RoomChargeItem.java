@@ -15,6 +15,7 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
 import com.ahana.api.common.AhanaVO;
+import com.ahana.api.common.Constants;
 import com.ahana.api.common.ErrorConstants;
 import com.ahana.api.common.RegConstants;
 
@@ -33,26 +34,31 @@ public class RoomChargeItem implements AhanaVO {
 	@Column(name = "oid")
 	private String oid;
 
-	@NotBlank(message = ErrorConstants.WARD_NAME_IS_REQUIRED)
-	@Length(min = 3, max = 100, message = ErrorConstants.WARD_NAME_LENGTH_IS_INVALID)
-	@Pattern(regexp = RegConstants.ALPHA_NUMERIC, message = ErrorConstants.WARD_NAME_INVALID_FORMAT)
+	@NotBlank(message = ErrorConstants.ITEM_IS_REQUIRED)
+	@Length(min = 3, max = 100, message = ErrorConstants.ITEM_LENGTH_IS_INVALID)
+	@Pattern(regexp = RegConstants.ALPHA_NUMERIC_SPACE_HYPEN, message = ErrorConstants.ITEM_IS_INVALID_FORMAT)
 	@Column(name = "item")
 	private String item;
 
-	@NotBlank(message = ErrorConstants.FLOOR_NAME_IS_REQUIRED)
+	@NotBlank(message = ErrorConstants.CODE_IS_REQUIRED)
+	@Length(min = 3, max = 10, message = ErrorConstants.CODE_LENGTH_IS_INVALID)
+	@Pattern(regexp = RegConstants.ALPHA_NUMERIC_SPACE_HYPEN, message = ErrorConstants.CODE_IS_INVALID_FORMAT)
 	@Column(name = "code")
 	private String code;
 
-	@NotBlank(message = ErrorConstants.FLOOR_NAME_IS_REQUIRED)
 	@Column(name = "description")
 	private String description;
 
-	@NotBlank(message = ErrorConstants.FLOOR_NAME_IS_REQUIRED)
+	@NotBlank(message = ErrorConstants.CATEGORY_IS_REQUIRED)
 	@Column(name = "category_oid")
 	private String categoryOid;
 
 	@Column(name = "status")
 	private String status;
+	
+	public RoomChargeItem(){
+		this.status=Constants.ACT;
+	}
 
 	public String getOid() {
 		return oid;

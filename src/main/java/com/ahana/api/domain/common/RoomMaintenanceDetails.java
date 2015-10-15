@@ -35,9 +35,9 @@ public class RoomMaintenanceDetails implements AhanaVO {
 	@Column(name = "oid")
 	private String oid;
 
-	@NotBlank(message = ErrorConstants.ROLE_NAME_REQUIRED)
-	@Size(message = ErrorConstants.ROLE_NAME_INVALID_LENGTH, min = 2, max = 100)
-	@Pattern(regexp = RegConstants.ALPHAPET_SPACE_HYPEN, message = ErrorConstants.ROLE_MUST_BE_ALPHABETICAL)
+	@NotBlank(message = ErrorConstants.MAINTENANCE_NAME_IS_REQUIRED)
+	@Size(message = ErrorConstants.MAINTENANCE_NAME_LENGTH_IS_INVALID, min = 2, max = 100)
+	@Pattern(regexp = RegConstants.ALPHA_NUMERIC_SPACE_HYPEN, message = ErrorConstants.MAINTENANCE_NAME_IS_INVALID_FORMAT)
 	@Column(name = "maintenance_name", unique = true, nullable = false, length = 100)
 	private String maintenanceName;
 
