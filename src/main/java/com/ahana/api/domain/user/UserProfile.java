@@ -74,6 +74,8 @@ public class UserProfile implements UserDetails, AhanaVO {
 	@Column(name = "last_name", nullable = false)
 	private String lastName;
 
+	@NotBlank(message = ErrorConstants.PASSWORD_IS_REQUIRED)
+	@Length(max = 50, min = 3, message = ErrorConstants.PASSWORD_LENGTH_IS_INVALID)
 	@Column(name = "password", nullable = false, length = 100,updatable=false)
 	private String password = "cc03e747a6afbbcbf8be7668acfebee5";// By default test123
 

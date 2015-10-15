@@ -19,6 +19,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import com.ahana.api.common.AhanaVO;
 import com.ahana.api.common.Constants;
 import com.ahana.api.common.ErrorConstants;
+import com.ahana.api.common.RegConstants;
 
 @SuppressWarnings("serial")
 @Entity
@@ -56,6 +57,9 @@ public class PatientRegistration implements AhanaVO {
 	@Column(name = "gender", nullable = false, length = 6)
 	private String gender;
 
+	@NotBlank(message = ErrorConstants.AGE_IS_REQUIRED)
+	@Length(max = 3, min = 1, message = ErrorConstants.AGE_LENGTH_IS_INVALID)
+	@Pattern(regexp = RegConstants.NUMERIC, message = ErrorConstants.AGE_MUST_BE_NUMERIC)
 	@Column(name = "age")
 	private int age;
 

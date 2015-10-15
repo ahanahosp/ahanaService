@@ -20,7 +20,7 @@ public class AhanaSecurityFilter extends GenericFilterBean implements Initializi
 				|| SecurityContextHolder.getContext().getAuthentication()==null 
 				|| SecurityContextHolder.getContext().getAuthentication()==null 
 				|| SecurityContextHolder.getContext().getAuthentication().getPrincipal() instanceof String){
-			throw new AccessDeniedException(ErrorConstants.SERVICE_DENIED);
+			throw new AccessDeniedException(ErrorConstants.SERVICE_IS_DENIED);
 		}
 		chain.doFilter(request, response);
 	}
