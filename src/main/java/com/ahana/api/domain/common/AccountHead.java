@@ -21,7 +21,8 @@ import com.ahana.api.common.RegConstants;
 
 @Entity
 @Table(name = "category_item")
-@NamedQueries({ @NamedQuery(name = "getAccountHeadByOid", query = "from AccountHead ah where ah.oid= :accountHeadOid") })
+@NamedQueries({
+		@NamedQuery(name = "getAccountHeadByOid", query = "from AccountHead ah where ah.oid= :accountHeadOid") })
 public class AccountHead implements AhanaVO {
 
 	private static final long serialVersionUID = 1586160714854378399L;
@@ -40,14 +41,14 @@ public class AccountHead implements AhanaVO {
 	@Column(name = "category")
 	private String category;
 
-	@Column(name = "desciption")
-	private String desciption;
+	@Column(name = "description")
+	private String description;
 
 	@Column(name = "status")
 	private String status;
-	
-	public AccountHead(){
-		this.status=Constants.ACT;
+
+	public AccountHead() {
+		this.status = Constants.ACT;
 	}
 
 	public String getOid() {
@@ -66,14 +67,6 @@ public class AccountHead implements AhanaVO {
 		this.category = category;
 	}
 
-	public String getDesciption() {
-		return desciption;
-	}
-
-	public void setDesciption(String desciption) {
-		this.desciption = desciption;
-	}
-
 	public String getStatus() {
 		return status;
 	}
@@ -82,4 +75,11 @@ public class AccountHead implements AhanaVO {
 		this.status = status;
 	}
 
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
 }

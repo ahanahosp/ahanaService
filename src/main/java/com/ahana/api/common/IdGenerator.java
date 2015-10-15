@@ -54,7 +54,7 @@ public class IdGenerator implements PersistentIdentifierGenerator,
 
 	public void configure(Type type, Properties params, Dialect dialect) {
 		
-		this.seedContainerTableName = ConfigurationHelper.getString(TABLE, params,"ahana.seed_container");
+		this.seedContainerTableName = ConfigurationHelper.getString(TABLE, params,"seed_container");
 		this.highOidColName = ConfigurationHelper.getString(COLUMN, params, "high_oid");
 		this.installIdColName = ConfigurationHelper.getString(INSTALL_ID, params,"seed_id");
 		this.idType=ConfigurationHelper.getString(ID_TYPE, params,Constants.ID_REST);
