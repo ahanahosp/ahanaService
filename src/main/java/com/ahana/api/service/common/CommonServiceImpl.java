@@ -151,6 +151,20 @@ public class CommonServiceImpl extends BaseService implements CommonService {
 	}
 	
 	@Override
+	@RequestMapping(value = "/getFloorValues",method=RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> getFloorValues() throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("getFloorValues----start--->"	+ System.currentTimeMillis());
+		}
+		List<Map<String, String>> floorDetails=commonManager.getFloorValues();
+		if (logger.isDebugEnabled()) {
+			logger.debug("getFloorValues: Success");
+		}
+		return handleSuccess("floorDetails",floorDetails);
+	}
+	
+	@Override
 	@RequestMapping(value = "/createRoom",method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> createRoom(@Valid @RequestBody Room room) throws AhanaBusinessException {

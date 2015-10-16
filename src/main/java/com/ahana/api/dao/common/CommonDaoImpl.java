@@ -115,7 +115,7 @@ public class CommonDaoImpl extends AhanaDaoSupport implements CommonDao {
 			query="select w.oid as wardOid,w.ward_name as wardName,w.status as status,f.floor_name as floorName from ward w"
 					+ " join floor f on w.floor_oid=f.oid where f.status='"+Constants.ACT+"'";
 			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
-					.addScalar("wardOid")
+					.addScalar("oid")
 					.addScalar("wardName")
 					.addScalar("status")
 					.addScalar("floorName")
@@ -138,7 +138,7 @@ public class CommonDaoImpl extends AhanaDaoSupport implements CommonDao {
 			query="select r.oid as roomOid,r.bed_name as bedName,r.occupancy_status as occupancy,r.maintenance_status as maintenance,"
 					+ "r.status as status from room r join ward w on r.ward_oid=w.oid where w.status='"+Constants.ACT+"'";
 			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
-					.addScalar("roomOid")
+					.addScalar("oid")
 					.addScalar("bedName")
 					.addScalar("occupancy")
 					.addScalar("maintenance")
@@ -394,6 +394,26 @@ public class CommonDaoImpl extends AhanaDaoSupport implements CommonDao {
 					.addScalar("status")
 					.addScalar("bedType")
 					.addScalar("status")
+					.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+			list = sqlQuery.list();
+		}finally{
+			sqlQuery=null;
+			query=null;
+		}
+		return list;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Map<String, String>> getFloorValues() {
+		Query sqlQuery=null;
+		List<Map<String, String>> list=null;
+		String query=null;
+		try{
+			query="select f.oid as value,f.floor_name as label from floor f where f.status='"+Constants.ACT+"'";
+			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
+					.addScalar("value")
+					.addScalar("label")
 					.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
 			list = sqlQuery.list();
 		}finally{

@@ -96,4 +96,6 @@ public interface CommonService {
 
 	Map<String, Object> getAllRoomCharges() throws AhanaBusinessException;
 
+	Map<String, Object> getFloorValues() throws AhanaBusinessException;
+
 }

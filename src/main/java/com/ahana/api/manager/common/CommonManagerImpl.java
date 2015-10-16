@@ -276,4 +276,13 @@ public class CommonManagerImpl implements CommonManager {
 		return roomChargesDetails;
 	}
 
+	@Override
+	public List<Map<String, String>> getFloorValues() throws AhanaBusinessException {
+		List<Map<String,String>> floorDetails=commonDao.getFloorValues();
+		if(CollectionUtils.isEmpty(floorDetails)){
+			throw new AhanaBusinessException(ErrorConstants.NO_RECORDS_FOUND);
+		}
+		return floorDetails;
+	}
+
 }

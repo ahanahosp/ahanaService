@@ -75,4 +75,6 @@ public interface CommonDao {
 
 	List<Map<String, Object>> getAllRoomCharges();
 
+	List<Map<String, String>> getFloorValues();
+
 }
