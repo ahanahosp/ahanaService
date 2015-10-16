@@ -427,7 +427,7 @@ public class CommonServiceImpl extends BaseService implements CommonService {
 		if (logger.isDebugEnabled()) {
 			logger.debug("getSpecialityByOid: Success");
 		}
-		return handleSuccess("roomChargeItem",(SpecialityDetails)ahanaVO);
+		return handleSuccess("speciality",(SpecialityDetails)ahanaVO);
 	}
 	
 	@Override
