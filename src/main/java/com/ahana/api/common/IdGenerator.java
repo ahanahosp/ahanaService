@@ -18,8 +18,8 @@ import org.hibernate.id.PersistentIdentifierGenerator;
 import org.hibernate.internal.util.config.ConfigurationHelper;
 import org.hibernate.type.Type;
 
-public class IdGenerator implements PersistentIdentifierGenerator,
-		Configurable {
+public class IdGenerator implements PersistentIdentifierGenerator,Configurable {
+	
 	private static final Log log = LogFactory.getLog(IdGenerator.class);
 	
 	public static final String COLUMN = "column";
@@ -29,8 +29,6 @@ public class IdGenerator implements PersistentIdentifierGenerator,
 	public static final String INSTALL_ID = "install_id";
 	
 	public static final String MAX_LO = "max_lo";
-	
-	public static final String ID_TYPE = "type";
 
 	private String seedContainerTableName;
 
@@ -49,23 +47,16 @@ public class IdGenerator implements PersistentIdentifierGenerator,
 	private int maxLo;
 
 	private String installId = null;
-	
-	private String idType = null;
 
 	public void configure(Type type, Properties params, Dialect dialect) {
-		
 		this.seedContainerTableName = ConfigurationHelper.getString(TABLE, params,"seed_container");
 		this.highOidColName = ConfigurationHelper.getString(COLUMN, params, "high_oid");
 		this.installIdColName = ConfigurationHelper.getString(INSTALL_ID, params,"seed_id");
-		this.idType=ConfigurationHelper.getString(ID_TYPE, params,Constants.ID_REST);
-		
 		String schemaName = params.getProperty(SCHEMA);
 		if (schemaName != null && seedContainerTableName.indexOf('.') < 0)
 			seedContainerTableName = schemaName + '.' + seedContainerTableName;
-
-		query = "select " + highOidColName + "," + installIdColName + " from " + seedContainerTableName + " where type='"+this.idType+"'";
-		update = "update " + seedContainerTableName + " set " + highOidColName + " = ? where " + installIdColName + " = ? and type = ?";
-
+		query = "select " + highOidColName + "," + installIdColName + " from " + seedContainerTableName;
+		update = "update " + seedContainerTableName + " set " + highOidColName + " = ? where " + installIdColName + " = ?";
 		maxLo = ConfigurationHelper.getInt(MAX_LO, params, Short.MAX_VALUE);
 		lo = maxLo + 1; // so we "clock over" on the first invocation
 	}
@@ -76,7 +67,6 @@ public class IdGenerator implements PersistentIdentifierGenerator,
 				hi = ((Integer) realGenerate(session, obj)).intValue();
 				lo = 1;
 			} catch (Exception e1) {
-
 				if(!retryRealGenerate(session, obj)) {
 						e1.printStackTrace();
 						throw new HibernateException(e1);
@@ -84,12 +74,7 @@ public class IdGenerator implements PersistentIdentifierGenerator,
 			}
 			log.debug("new hi value: " + hi);
 		}
-		String nextOid=null;
-		if(idType.equalsIgnoreCase(Constants.ID_PATIENT)){
-			nextOid= installId+(hi+lo++);
-		}else{
-			nextOid= IdGenerator.getNextOid(installId,hi,(hi + lo++));
-		}
+		String nextOid = IdGenerator.getNextOid(installId,hi,(hi + lo++));
 		return nextOid;
 	}
 
@@ -126,12 +111,10 @@ public class IdGenerator implements PersistentIdentifierGenerator,
 				} finally {
 					qps.close();
 				}
-
 				PreparedStatement ups = conn.prepareStatement(update);
 				try {
 					ups.setInt(1,(currentHiVal + 1));
 					ups.setString(2, installId);
-					ups.setString(3, idType);
 					rows = ups.executeUpdate();
 				} catch (Exception sqle) {
 					log.error("could not update hi value in: " + seedContainerTableName,sqle);
@@ -146,7 +129,7 @@ public class IdGenerator implements PersistentIdentifierGenerator,
 				conn.commit();
 				conn.setAutoCommit(autoCommit);
 				conn.setTransactionIsolation(tx);
-				conn.close();	
+				//session.getBatcher().closeConnection(conn);	
 			}
 		}
 		return new Integer(currentHiVal);
@@ -168,18 +151,14 @@ public class IdGenerator implements PersistentIdentifierGenerator,
 	}
 
 	public String[] sqlCreateStrings(Dialect dialect) throws HibernateException {
-		return new String[] {
-				"create table " + seedContainerTableName + " ( " + highOidColName + " "
-						+ dialect.getTypeName(Types.INTEGER) + " )",
-				"insert into " + seedContainerTableName + " values ( 0 )" };
+		return new String[] {"create table " + seedContainerTableName + " ( " + highOidColName + " "+ dialect.getTypeName(Types.INTEGER) + " )","insert into " + seedContainerTableName + " values ( 0 )" };
 	}
 
 	public String sqlDropString(Dialect dialect) {
 		StringBuffer sqlDropString = new StringBuffer().append("drop table ");
 		if (dialect.supportsIfExistsBeforeTableName())
 			sqlDropString.append("if exists ");
-		sqlDropString.append(seedContainerTableName).append(
-				dialect.getCascadeConstraintsString());
+		sqlDropString.append(seedContainerTableName).append(dialect.getCascadeConstraintsString());
 		if (dialect.supportsIfExistsAfterTableName())
 			sqlDropString.append(" if exists");
 		return sqlDropString.toString();

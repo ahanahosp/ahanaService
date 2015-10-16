@@ -15,6 +15,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.Range;
 
 import com.ahana.api.common.AhanaVO;
 import com.ahana.api.common.Constants;
@@ -30,8 +31,9 @@ public class PatientRegistration implements AhanaVO {
 	@GeneratedValue(generator = "IdGenerator")
 	@GenericGenerator(name = "IdGenerator", strategy = "com.ahana.api.common.IdGenerator", parameters = {
 			@Parameter(name = "table", value = "seed_container"), @Parameter(name = "column", value = "high_oid"),
-			@Parameter(name = "install_id", value = "seed_id"), @Parameter(name = "max_lo", value = "100000"),
-			@Parameter(name = "type", value = Constants.ID_PATIENT) })
+			@Parameter(name = "install_id", value = "seed_id"), @Parameter(name = "max_lo", value = "100000")
+			//,@Parameter(name = "type", value = Constants.ID_PATIENT) 
+			})
 	@Column(name = "oid")
 	private String oid;
 
@@ -57,9 +59,9 @@ public class PatientRegistration implements AhanaVO {
 	@Column(name = "gender", nullable = false, length = 6)
 	private String gender;
 
-	@NotBlank(message = ErrorConstants.AGE_IS_REQUIRED)
-	@Length(max = 3, min = 1, message = ErrorConstants.AGE_LENGTH_IS_INVALID)
-	@Pattern(regexp = RegConstants.NUMERIC, message = ErrorConstants.AGE_MUST_BE_NUMERIC)
+	//@Range(max=100,min=1,message = ErrorConstants.AGE_IS_REQUIRED)
+	//@Range(max=100,min=1, message = ErrorConstants.AGE_LENGTH_IS_INVALID)
+	//@Pattern(regexp = RegConstants.NUMERIC, message = ErrorConstants.AGE_MUST_BE_NUMERIC)
 	@Column(name = "age")
 	private int age;
 
