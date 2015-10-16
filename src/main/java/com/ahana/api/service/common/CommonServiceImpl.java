@@ -613,5 +613,19 @@ public class CommonServiceImpl extends BaseService implements CommonService {
 		}
 		return handleSuccess("roomChargesDetails",roomChargeDetails);
 	}
+	
+	@Override
+	@RequestMapping(value = "/getAllOrganizationModule",method=RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> getAllOrganizationModule() throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("getAllOrganizationModule----start--->"	+ System.currentTimeMillis());
+		}
+		List<Map<String, String>> organizationModuleDetails=commonManager.getAllOrganizationModule();
+		if (logger.isDebugEnabled()) {
+			logger.debug("getAllOrganizationModule: Success");
+		}
+		return handleSuccess("organizationModuleDetails",organizationModuleDetails);
+	}
 
 }

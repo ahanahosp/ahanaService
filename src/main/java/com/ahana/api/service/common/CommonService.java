@@ -98,4 +98,6 @@ public interface CommonService {
 
 	Map<String, Object> getFloorValues() throws AhanaBusinessException;
 
+	Map<String, Object> getAllOrganizationModule() throws AhanaBusinessException;
+
 }

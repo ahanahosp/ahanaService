@@ -285,4 +285,13 @@ public class CommonManagerImpl implements CommonManager {
 		return floorDetails;
 	}
 
+	@Override
+	public List<Map<String, String>> getAllOrganizationModule() throws AhanaBusinessException {
+		List<Map<String,String>> organizationModules=commonDao.getAllOrganizationModule();
+		if(CollectionUtils.isEmpty(organizationModules)){
+			throw new AhanaBusinessException(ErrorConstants.NO_RECORDS_FOUND);
+		}
+		return organizationModules;
+	}
+
 }

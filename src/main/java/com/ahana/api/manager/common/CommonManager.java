@@ -78,4 +78,6 @@ public interface CommonManager {
 
 	List<Map<String, String>> getFloorValues() throws AhanaBusinessException;
 
+	List<Map<String, String>> getAllOrganizationModule() throws AhanaBusinessException;
+
 }

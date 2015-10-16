@@ -77,4 +77,6 @@ public interface CommonDao {
 
 	Ward createWard(Ward ward);
 
+	List<Map<String, String>> getAllOrganizationModule();
+
 }

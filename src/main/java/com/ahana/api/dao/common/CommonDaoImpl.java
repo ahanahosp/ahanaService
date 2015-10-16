@@ -78,6 +78,7 @@ public class CommonDaoImpl extends AhanaDaoSupport implements CommonDao {
 	}
 
 	@Override
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	public Room createRoom(Room room) {
 		saveOrUpdate(room);
 		return room;
@@ -94,12 +95,14 @@ public class CommonDaoImpl extends AhanaDaoSupport implements CommonDao {
 	}
 
 	@Override
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	public void deleteFloor(String floorOid) {
 		Query q = getSessionFactory().getCurrentSession().createQuery("delete Floor where oid ='"+floorOid+"'");
 		q.executeUpdate();
 	}
 
 	@Override
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	public void deleteWard(String wardOid) {
 		Query q = getSessionFactory().getCurrentSession().createQuery("delete Ward where oid ='"+wardOid+"'");
 		q.executeUpdate();
@@ -153,18 +156,21 @@ public class CommonDaoImpl extends AhanaDaoSupport implements CommonDao {
 	}
 
 	@Override
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	public void deleteRoom(String roomOid) {
 		Query q = getSessionFactory().getCurrentSession().createQuery("delete Room where oid ='"+roomOid+"'");
 		q.executeUpdate();
 	}
 
 	@Override
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	public void deleteAccountHead(String accountHeadOid) {
 		Query q = getSessionFactory().getCurrentSession().createQuery("delete AccountHead where oid ='"+accountHeadOid+"'");
 		q.executeUpdate();		
 	}
 
 	@Override
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	public AccountHead createAccountHead(AccountHead accountHead) {
 		saveOrUpdate(accountHead);
 		return accountHead;
@@ -204,12 +210,14 @@ public class CommonDaoImpl extends AhanaDaoSupport implements CommonDao {
 	}
 
 	@Override
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	public Procedures createProcedures(Procedures procedures) {
 		saveOrUpdate(procedures);
 		return procedures;
 	}
 
 	@Override
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	public void deleteProcedures(String proceduresOid) {
 		Query q = getSessionFactory().getCurrentSession().createQuery("delete Procedures where oid ='"+proceduresOid+"'");
 		q.executeUpdate();		
@@ -283,24 +291,28 @@ public class CommonDaoImpl extends AhanaDaoSupport implements CommonDao {
 	}
 
 	@Override
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	public void deleteRoomChargeItem(String roomChargeItemOid) {
 		Query q = getSessionFactory().getCurrentSession().createQuery("delete RoomChargeItem where oid ='"+roomChargeItemOid+"'");
 		q.executeUpdate();	
 	}
 
 	@Override
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	public RoomChargeItem createRoomChargeItem(RoomChargeItem roomChargeItem) {
 		saveOrUpdate(roomChargeItem);
 		return roomChargeItem;
 	}
 
 	@Override
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	public AhanaVO createOrUpdateConfigs(AhanaVO ahanaVO) {
 		saveOrUpdate(ahanaVO);
 		return ahanaVO;
 	}
 
 	@Override
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	public void deleteConfigs(String entiryName, String oid) {
 		Query q = getSessionFactory().getCurrentSession().createQuery("delete '"+entiryName+"' where oid ='"+oid+"'");
 		q.executeUpdate();			
@@ -414,6 +426,27 @@ public class CommonDaoImpl extends AhanaDaoSupport implements CommonDao {
 			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
 					.addScalar("value")
 					.addScalar("label")
+					.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+			list = sqlQuery.list();
+		}finally{
+			sqlQuery=null;
+			query=null;
+		}
+		return list;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Map<String, String>> getAllOrganizationModule() {
+		Query sqlQuery=null;
+		List<Map<String, String>> list=null;
+		String query=null;
+		try{
+			query="select o.oid as oid,o.module_name as moduleName,o.status as status from organization_module o where o.status='"+Constants.ACT+"'";
+			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
+					.addScalar("oid")
+					.addScalar("moduleName")
+					.addScalar("status")
 					.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
 			list = sqlQuery.list();
 		}finally{
