@@ -39,7 +39,7 @@ public class CommonManagerImpl implements CommonManager {
 		if(ward==null){
 			throw new AhanaBusinessException(ErrorConstants.NO_RECORDS_FOUND);
 		}
-		commonDao.createFloor(ward);
+		commonDao.createWard(ward);
 		return ward;
 	}
 

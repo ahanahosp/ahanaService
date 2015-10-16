@@ -30,7 +30,7 @@ public class CommonDaoImpl extends AhanaDaoSupport implements CommonDao {
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
-	public Ward createFloor(Ward ward) {
+	public Ward createWard(Ward ward) {
 		saveOrUpdate(ward);
 		return ward;
 	}
@@ -112,7 +112,7 @@ public class CommonDaoImpl extends AhanaDaoSupport implements CommonDao {
 		List<Map<String, String>> list=null;
 		String query=null;
 		try{
-			query="select w.oid as wardOid,w.ward_name as wardName,w.status as status,f.floor_name as floorName from ward w"
+			query="select w.oid as oid,w.ward_name as wardName,w.status as status,f.floor_name as floorName from ward w"
 					+ " join floor f on w.floor_oid=f.oid where f.status='"+Constants.ACT+"'";
 			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
 					.addScalar("oid")
@@ -135,7 +135,7 @@ public class CommonDaoImpl extends AhanaDaoSupport implements CommonDao {
 		List<Map<String, String>> list=null;
 		String query=null;
 		try{
-			query="select r.oid as roomOid,r.bed_name as bedName,r.occupancy_status as occupancy,r.maintenance_status as maintenance,"
+			query="select r.oid as oid,r.bed_name as bedName,r.occupancy_status as occupancy,r.maintenance_status as maintenance,"
 					+ "r.status as status from room r join ward w on r.ward_oid=w.oid where w.status='"+Constants.ACT+"'";
 			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
 					.addScalar("oid")

@@ -15,8 +15,6 @@ public interface CommonDao {
 
 	Floor createFloor(Floor floor);
 
-	Ward createFloor(Ward ward);
-
 	Floor getFloorByOid(String floorOid);
 
 	Ward getWardByOid(String wardOid);
@@ -76,5 +74,7 @@ public interface CommonDao {
 	List<Map<String, Object>> getAllRoomCharges();
 
 	List<Map<String, String>> getFloorValues();
+
+	Ward createWard(Ward ward);
 
 }
