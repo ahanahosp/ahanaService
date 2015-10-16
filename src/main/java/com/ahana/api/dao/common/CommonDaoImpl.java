@@ -62,10 +62,12 @@ public class CommonDaoImpl extends AhanaDaoSupport implements CommonDao {
 		List<Map<String, String>> list=null;
 		String query=null;
 		try{
-			query="select oid as oid,floor_name as name from floor where status='"+Constants.ACT+"'";
+			query="select oid as oid,floor_name as floorName,floor_code as floorCode,status as status from floor where status='"+Constants.ACT+"'";
 			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
 					.addScalar("oid")
-					.addScalar("name")
+					.addScalar("floorName")
+					.addScalar("floorCode")
+					.addScalar("status")
 					.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
 			list = sqlQuery.list();
 		}finally{
