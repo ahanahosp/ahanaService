@@ -15,12 +15,9 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.Range;
 
 import com.ahana.api.common.AhanaVO;
-import com.ahana.api.common.Constants;
 import com.ahana.api.common.ErrorConstants;
-import com.ahana.api.common.RegConstants;
 
 @SuppressWarnings("serial")
 @Entity

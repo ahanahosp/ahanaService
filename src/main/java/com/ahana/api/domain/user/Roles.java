@@ -28,24 +28,22 @@ public class Roles implements AhanaVO {
 	@Id
 	@GeneratedValue(generator = "IdGenerator")
 	@GenericGenerator(name = "IdGenerator", strategy = "com.ahana.api.common.IdGenerator", parameters = {
-			@Parameter(name = "table", value = "seed_container"),
-			@Parameter(name = "column", value = "high_oid"),
-			@Parameter(name = "install_id", value = "seed_id"),
-			@Parameter(name = "max_lo", value = "100000") })
+			@Parameter(name = "table", value = "seed_container"), @Parameter(name = "column", value = "high_oid"),
+			@Parameter(name = "install_id", value = "seed_id"), @Parameter(name = "max_lo", value = "100000") })
 	@Column(name = "oid")
 	private String oid;
 
-	@NotBlank(message=ErrorConstants.ROLE_NAME_REQUIRED)
-	@Size(message=ErrorConstants.ROLE_NAME_INVALID_LENGTH,min=2,max=50)
-	@Pattern(regexp=RegConstants.ALPHAPET_SPACE_HYPEN,message=ErrorConstants.ROLE_MUST_BE_ALPHABETICAL)
-	@Column(name = "role_name",unique=true,nullable=false,length=50)
+	@NotBlank(message = ErrorConstants.ROLE_NAME_REQUIRED)
+	@Size(message = ErrorConstants.ROLE_NAME_INVALID_LENGTH, min = 2, max = 50)
+	@Pattern(regexp = RegConstants.ALPHAPET_SPACE_HYPEN, message = ErrorConstants.ROLE_MUST_BE_ALPHABETICAL)
+	@Column(name = "role_name", unique = true, nullable = false, length = 50)
 	private String roleName;
 
-	@Column(name="status",length=5)
-	private String roleStatus;
-	
-	public Roles(){
-		this.roleStatus=Constants.ACT;
+	@Column(name = "status", length = 5)
+	private String status;
+
+	public Roles() {
+		this.status = Constants.ACT;
 	}
 
 	public String getOid() {
@@ -64,11 +62,11 @@ public class Roles implements AhanaVO {
 		this.roleName = roleName;
 	}
 
-	public String getRoleStatus() {
-		return roleStatus;
+	public String getStatus() {
+		return status;
 	}
 
-	public void setRoleStatus(String roleStatus) {
-		this.roleStatus = roleStatus;
+	public void setStatus(String status) {
+		this.status = status;
 	}
 }

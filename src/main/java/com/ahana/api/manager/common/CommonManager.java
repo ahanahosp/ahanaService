@@ -80,4 +80,6 @@ public interface CommonManager {
 
 	List<Map<String, String>> getAllOrganizationModule() throws AhanaBusinessException;
 
+	List<Map<String, String>> getSpecialityValues() throws AhanaBusinessException;
+
 }

@@ -294,4 +294,13 @@ public class CommonManagerImpl implements CommonManager {
 		return organizationModules;
 	}
 
+	@Override
+	public List<Map<String, String>> getSpecialityValues() throws AhanaBusinessException {
+		List<Map<String,String>> specialityDetails=commonDao.getSpecialityValues();
+		if(CollectionUtils.isEmpty(specialityDetails)){
+			throw new AhanaBusinessException(ErrorConstants.NO_RECORDS_FOUND);
+		}
+		return specialityDetails;
+	}
+
 }

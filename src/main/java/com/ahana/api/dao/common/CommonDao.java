@@ -79,4 +79,6 @@ public interface CommonDao {
 
 	List<Map<String, String>> getAllOrganizationModule();
 
+	List<Map<String, String>> getSpecialityValues();
+
 }

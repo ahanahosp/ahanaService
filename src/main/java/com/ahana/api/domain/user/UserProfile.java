@@ -1,6 +1,7 @@
 package com.ahana.api.domain.user;
 
 import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -49,10 +50,8 @@ public class UserProfile implements UserDetails, AhanaVO {
 	@Id
 	@GeneratedValue(generator = "IdGenerator")
 	@GenericGenerator(name = "IdGenerator", strategy = "com.ahana.api.common.IdGenerator", parameters = {
-			@Parameter(name = "table", value = "seed_container"),
-			@Parameter(name = "column", value = "high_oid"),
-			@Parameter(name = "install_id", value = "seed_id"),
-			@Parameter(name = "max_lo", value = "100000") })
+			@Parameter(name = "table", value = "seed_container"), @Parameter(name = "column", value = "high_oid"),
+			@Parameter(name = "install_id", value = "seed_id"), @Parameter(name = "max_lo", value = "100000") })
 	@Column(name = "oid")
 	private String oid;
 
@@ -76,8 +75,9 @@ public class UserProfile implements UserDetails, AhanaVO {
 
 	@NotBlank(message = ErrorConstants.PASSWORD_IS_REQUIRED)
 	@Length(max = 50, min = 3, message = ErrorConstants.PASSWORD_LENGTH_IS_INVALID)
-	@Column(name = "password", nullable = false, length = 100,updatable=false)
-	private String password = "cc03e747a6afbbcbf8be7668acfebee5";// By default test123
+	@Column(name = "password", nullable = false, length = 100, updatable = false)
+	private String password = "cc03e747a6afbbcbf8be7668acfebee5";// By default
+																	// test123
 
 	@NotBlank(message = ErrorConstants.USER_ID_IS_REQUIRED)
 	@Length(max = 100, min = 5, message = ErrorConstants.USER_ID_LENGTH_IS_INVALID)
@@ -97,11 +97,11 @@ public class UserProfile implements UserDetails, AhanaVO {
 	@Column(name = "mobile_no", nullable = false, length = 12)
 	private String mobileNo;
 
-	@Column(name = "user_status", nullable = false, length = 5,updatable=false)
+	@Column(name = "user_status", nullable = false, length = 5, updatable = false)
 	private String userStatus;
 
-	@Column(name = "password_exp_date", nullable = false,updatable=false)
-	private Timestamp passwordExpDate;
+	@Column(name = "password_exp_date", nullable = false, updatable = false)
+	private Timestamp inactivationDate;
 
 	@Column(name = "designation")
 	private String designation;
@@ -111,12 +111,6 @@ public class UserProfile implements UserDetails, AhanaVO {
 
 	@Column(name = "care_provider")
 	private String careProvider;
-
-	@Column(name = "primary_contact")
-	private String primaryContact;
-
-	@Column(name = "secondary_contact")
-	private String secondaryContact;
 
 	@Column(name = "address")
 	private String address;
@@ -133,8 +127,12 @@ public class UserProfile implements UserDetails, AhanaVO {
 	@Column(name = "zip")
 	private String zip;
 
+	@Column(name = "activation_date", nullable = false, updatable = false)
+	private Timestamp activationDate;
+
 	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "user_roles", joinColumns = { @JoinColumn(name = "user_oid") }, inverseJoinColumns = { @JoinColumn(name = "role_oid") })
+	@JoinTable(name = "user_roles", joinColumns = { @JoinColumn(name = "user_oid") }, inverseJoinColumns = {
+			@JoinColumn(name = "role_oid") })
 	private Set<Roles> roles = new HashSet<Roles>();
 
 	@Transient
@@ -156,16 +154,17 @@ public class UserProfile implements UserDetails, AhanaVO {
 	private String roleOid;
 
 	public UserProfile() {
-		this.passwordExpDate = new Timestamp(System.currentTimeMillis()	+ (86666666 * 180));// Adding 90 days from current
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.YEAR, 1); // to get previous year add -1
+		this.inactivationDate = new Timestamp(cal.getTimeInMillis());
+		this.activationDate = new Timestamp(System.currentTimeMillis());
 		this.userStatus = STATUS_USER_ACTIVE;
-		this.careProvider="FALSE";
+		this.careProvider = "FALSE";
 	}
 
-	public UserProfile(String id, String username, String password,
-			boolean enabled, boolean accountNonExpired,
-			boolean accountNonLocked, boolean credentialsNonExpired,
-			Collection<GrantedAuthority> authorities, String roleOid)
-			throws IllegalArgumentException {
+	public UserProfile(String id, String username, String password, boolean enabled, boolean accountNonExpired,
+			boolean accountNonLocked, boolean credentialsNonExpired, Collection<GrantedAuthority> authorities,
+			String roleOid) throws IllegalArgumentException {
 		this.oid = id;
 		this.userId = username;
 		this.password = password;
@@ -234,14 +233,6 @@ public class UserProfile implements UserDetails, AhanaVO {
 
 	public void setUserStatus(String userStatus) {
 		this.userStatus = userStatus;
-	}
-
-	public Timestamp getPasswordExpDate() {
-		return passwordExpDate;
-	}
-
-	public void setPasswordExpDate(Timestamp passwordExpDate) {
-		this.passwordExpDate = passwordExpDate;
 	}
 
 	public Set<Roles> getRoles() {
@@ -359,29 +350,13 @@ public class UserProfile implements UserDetails, AhanaVO {
 	public void setSpeciality(String speciality) {
 		this.speciality = speciality;
 	}
-	
+
 	public String getCareProvider() {
 		return careProvider;
 	}
 
 	public void setCareProvider(String careProvider) {
 		this.careProvider = careProvider;
-	}
-
-	public String getPrimaryContact() {
-		return primaryContact;
-	}
-
-	public void setPrimaryContact(String primaryContact) {
-		this.primaryContact = primaryContact;
-	}
-
-	public String getSecondaryContact() {
-		return secondaryContact;
-	}
-
-	public void setSecondaryContact(String secondaryContact) {
-		this.secondaryContact = secondaryContact;
 	}
 
 	public String getAddress() {
@@ -422,6 +397,22 @@ public class UserProfile implements UserDetails, AhanaVO {
 
 	public void setZip(String zip) {
 		this.zip = zip;
+	}
+
+	public Timestamp getInactivationDate() {
+		return inactivationDate;
+	}
+
+	public void setInactivationDate(Timestamp inactivationDate) {
+		this.inactivationDate = inactivationDate;
+	}
+
+	public Timestamp getActivationDate() {
+		return activationDate;
+	}
+
+	public void setActivationDate(Timestamp activationDate) {
+		this.activationDate = activationDate;
 	}
 
 }

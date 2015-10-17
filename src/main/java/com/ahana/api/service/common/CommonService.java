@@ -100,4 +100,6 @@ public interface CommonService {
 
 	Map<String, Object> getAllOrganizationModule() throws AhanaBusinessException;
 
+	Map<String, Object> getSpecialityValues() throws AhanaBusinessException;
+
 }

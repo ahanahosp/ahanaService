@@ -63,7 +63,7 @@ public class UserDaoImpl extends AhanaDaoSupport implements UserDao {
 			boolean credentialsNonExpired = true;
 			Date today = new Date();
 			// Check if password has expired
-			if (userProfile.getPasswordExpDate().before(today)) {
+			if (userProfile.getInactivationDate().before(today)) {
 				credentialsNonExpired = false;
 			}
 			boolean enabled = false;
@@ -138,10 +138,11 @@ public class UserDaoImpl extends AhanaDaoSupport implements UserDao {
 		List<Map<String, String>> list=null;
 		String query=null;
 		try{
-			query="select oid as oid,role_name as name from roles where status='"+Constants.ACT+"'";
+			query="select oid as oid,role_name as name,status as status from roles where status='"+Constants.ACT+"'";
 			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
 					.addScalar("oid")
 					.addScalar("name")
+					.addScalar("status")
 					.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
 			list = sqlQuery.list();
 		}finally{
