@@ -106,4 +106,6 @@ public interface CommonService {
 
 	Map<String, Object> getWardValues() throws AhanaBusinessException;
 
+	Map<String, Object> getCategoryValues() throws AhanaBusinessException;
+
 }

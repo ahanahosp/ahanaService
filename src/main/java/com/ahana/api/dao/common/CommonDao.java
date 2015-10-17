@@ -83,4 +83,6 @@ public interface CommonDao {
 
 	List<Map<String, String>> getWardValues();
 
+	List<Map<String, String>> getCategoryValues();
+
 }
