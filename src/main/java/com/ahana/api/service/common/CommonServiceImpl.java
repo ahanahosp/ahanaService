@@ -18,6 +18,7 @@ import com.ahana.api.common.AhanaVO;
 import com.ahana.api.common.BaseService;
 import com.ahana.api.domain.common.AccountHead;
 import com.ahana.api.domain.common.Floor;
+import com.ahana.api.domain.common.Organization;
 import com.ahana.api.domain.common.Procedures;
 import com.ahana.api.domain.common.Room;
 import com.ahana.api.domain.common.RoomChargeItem;
@@ -640,6 +641,34 @@ public class CommonServiceImpl extends BaseService implements CommonService {
 			logger.debug("getSpecialityValues: Success");
 		}
 		return handleSuccess("specialityDetails",specialityDetails);
+	}
+	
+	@Override
+	@RequestMapping(value = "/getDefaultOrganization",method=RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> getDefaultOrganization() throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("getDefaultOrganization----start--->"	+ System.currentTimeMillis());
+		}
+		AhanaVO ahanaVO=commonManager.getConfigDetailsItemByOid("getDefaultOrganizationByOid", "organizationOid", "ahanahospital");
+		if (logger.isDebugEnabled()) {
+			logger.debug("getDefaultOrganization: Success");
+		}
+		return handleSuccess("organizationDetails",(Organization)ahanaVO);
+	}
+	
+	@Override
+	@RequestMapping(value = "/getWardValues",method=RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> getWardValues() throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("getWardValues----start--->"	+ System.currentTimeMillis());
+		}
+		List<Map<String, String>> specialityDetails=commonManager.getWardValues();
+		if (logger.isDebugEnabled()) {
+			logger.debug("getWardValues: Success");
+		}
+		return handleSuccess("wardDetails",specialityDetails);
 	}
 
 }

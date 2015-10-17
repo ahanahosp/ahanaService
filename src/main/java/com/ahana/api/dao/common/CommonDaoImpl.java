@@ -139,13 +139,14 @@ public class CommonDaoImpl extends AhanaDaoSupport implements CommonDao {
 		String query=null;
 		try{
 			query="select r.oid as oid,r.bed_name as bedName,r.occupancy_status as occupancy,r.maintenance_status as maintenance,"
-					+ "r.status as status from room r join ward w on r.ward_oid=w.oid where w.status='"+Constants.ACT+"'";
+					+ "r.status as status,w.ward_name as wardName from room r join ward w on r.ward_oid=w.oid where w.status='"+Constants.ACT+"'";
 			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
 					.addScalar("oid")
 					.addScalar("bedName")
 					.addScalar("occupancy")
 					.addScalar("maintenance")
 					.addScalar("status")
+					.addScalar("wardName")
 					.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
 			list = sqlQuery.list();
 		}finally{
@@ -467,6 +468,26 @@ public class CommonDaoImpl extends AhanaDaoSupport implements CommonDao {
 					.addScalar("oid")
 					.addScalar("moduleName")
 					.addScalar("status")
+					.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+			list = sqlQuery.list();
+		}finally{
+			sqlQuery=null;
+			query=null;
+		}
+		return list;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Map<String, String>> getWardValues() {
+		Query sqlQuery=null;
+		List<Map<String, String>> list=null;
+		String query=null;
+		try{
+			query="select r.oid as value,r.ward_name as label from ward w where w.status='"+Constants.ACT+"'";
+			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
+					.addScalar("value")
+					.addScalar("label")
 					.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
 			list = sqlQuery.list();
 		}finally{

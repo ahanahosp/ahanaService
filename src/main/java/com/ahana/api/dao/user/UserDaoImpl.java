@@ -184,8 +184,9 @@ public class UserDaoImpl extends AhanaDaoSupport implements UserDao {
 		List<Map<String, String>> list=null;
 		String query=null;
 		try{
-			query="select oid as oid,salutation as salutation,first_name as firstName,last_name as lastName,designation as designation"
-					+ ",email_id as emailId,mobile_no as mobileNo,speciality as speciality,care_provider as careProvider from user_profile"
+			query="select oid as oid,salutation as salutation,first_name as firstName,last_name as lastName,designation as designation,"
+					+ "user_id as userName,password_exp_date as inActivationDate,activation_date as activationDate,"
+					+ "email_id as emailId,mobile_no as mobileNo,speciality as speciality,care_provider as careProvider from user_profile"
 					+ " where user_status='"+Constants.ACT+"'";
 			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
 					.addScalar("oid")
@@ -193,6 +194,9 @@ public class UserDaoImpl extends AhanaDaoSupport implements UserDao {
 					.addScalar("firstName")
 					.addScalar("lastName")
 					.addScalar("designation")
+					.addScalar("userName")
+					.addScalar("inActivationDate")
+					.addScalar("activationDate")
 					.addScalar("emailId")
 					.addScalar("mobileNo")
 					.addScalar("speciality")

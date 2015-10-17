@@ -102,4 +102,8 @@ public interface CommonService {
 
 	Map<String, Object> getSpecialityValues() throws AhanaBusinessException;
 
+	Map<String, Object> getDefaultOrganization() throws AhanaBusinessException;
+
+	Map<String, Object> getWardValues() throws AhanaBusinessException;
+
 }

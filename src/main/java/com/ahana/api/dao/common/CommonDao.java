@@ -81,4 +81,6 @@ public interface CommonDao {
 
 	List<Map<String, String>> getSpecialityValues();
 
+	List<Map<String, String>> getWardValues();
+
 }

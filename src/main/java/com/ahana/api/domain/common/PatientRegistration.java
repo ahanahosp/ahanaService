@@ -59,7 +59,6 @@ public class PatientRegistration implements AhanaVO {
 	private String gender;
 
 	@Range(max=100,min=1,message = ErrorConstants.AGE_IS_REQUIRED)
-	//@Pattern(regexp = RegConstants.NUMERIC, message = ErrorConstants.AGE_MUST_BE_NUMERIC)
 	@Column(name = "age")
 	private int age;
 

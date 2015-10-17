@@ -4,6 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -14,6 +16,7 @@ import com.ahana.api.common.AhanaVO;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "organization")
+@NamedQueries({ @NamedQuery(name = "getDefaultOrganizationByOid", query = "from Organization org where org.oid=:organizationOid") })
 public class Organization implements AhanaVO {
 
 	@Id

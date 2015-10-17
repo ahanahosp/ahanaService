@@ -303,4 +303,13 @@ public class CommonManagerImpl implements CommonManager {
 		return specialityDetails;
 	}
 
+	@Override
+	public List<Map<String, String>> getWardValues() throws AhanaBusinessException {
+		List<Map<String,String>> roomDetails=commonDao.getWardValues();
+		if(CollectionUtils.isEmpty(roomDetails)){
+			throw new AhanaBusinessException(ErrorConstants.NO_RECORDS_FOUND);
+		}
+		return roomDetails;
+	}
+
 }

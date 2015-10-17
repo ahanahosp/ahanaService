@@ -57,7 +57,7 @@ public class UserServiceImpl extends BaseService implements UserService {
 		if (logger.isDebugEnabled()) {
 			logger.debug("getUser: Success");
 		}
-		return handleSuccess("userProfile",userDetails);
+		return handleSuccess("userDetails",userDetails);
 	}
 	
 	@Override
