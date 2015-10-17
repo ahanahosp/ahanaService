@@ -32,6 +32,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.ahana.api.common.AhanaVO;
 import com.ahana.api.common.ErrorConstants;
+import com.ahana.api.common.mail.LookupConstants;
 
 @SuppressWarnings("serial")
 @Entity
@@ -160,6 +161,9 @@ public class UserProfile implements UserDetails, AhanaVO {
 		this.activationDate = new Timestamp(System.currentTimeMillis());
 		this.userStatus = STATUS_USER_ACTIVE;
 		this.careProvider = "FALSE";
+		this.country=LookupConstants.DEFAULT_COUNTRY;
+		this.state=LookupConstants.DEFAULT_STATE;
+		this.city=LookupConstants.DEFAULT_CITY;
 	}
 
 	public UserProfile(String id, String username, String password, boolean enabled, boolean accountNonExpired,

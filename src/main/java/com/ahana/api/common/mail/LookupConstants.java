@@ -14,4 +14,10 @@ public class LookupConstants {
 	
 	public static final String LOOKUP_PATIENTTYPE="PATIENTTYPE";
 	
+	public static final String DEFAULT_COUNTRY="India";
+	
+	public static final String DEFAULT_STATE="Tamil Nadu";
+	
+	public static final String DEFAULT_CITY="Madurai";
+	
 }

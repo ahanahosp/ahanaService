@@ -15,9 +15,11 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.Range;
 
 import com.ahana.api.common.AhanaVO;
 import com.ahana.api.common.ErrorConstants;
+import com.ahana.api.common.mail.LookupConstants;
 
 @SuppressWarnings("serial")
 @Entity
@@ -56,8 +58,7 @@ public class PatientRegistration implements AhanaVO {
 	@Column(name = "gender", nullable = false, length = 6)
 	private String gender;
 
-	//@Range(max=100,min=1,message = ErrorConstants.AGE_IS_REQUIRED)
-	//@Range(max=100,min=1, message = ErrorConstants.AGE_LENGTH_IS_INVALID)
+	@Range(max=100,min=1,message = ErrorConstants.AGE_IS_REQUIRED)
 	//@Pattern(regexp = RegConstants.NUMERIC, message = ErrorConstants.AGE_MUST_BE_NUMERIC)
 	@Column(name = "age")
 	private int age;
@@ -88,6 +89,13 @@ public class PatientRegistration implements AhanaVO {
 
 	@Column(name = "billing", length = 50)
 	private String billing;
+	
+	public PatientRegistration(){
+		this.registrationDate=new Timestamp(System.currentTimeMillis());
+		this.country=LookupConstants.DEFAULT_COUNTRY;
+		this.state=LookupConstants.DEFAULT_STATE;
+		this.city=LookupConstants.DEFAULT_CITY;
+	}
 
 	public String getOid() {
 		return oid;
