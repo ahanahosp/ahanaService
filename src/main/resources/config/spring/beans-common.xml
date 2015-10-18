@@ -40,4 +40,18 @@
 		    	<bean class="com.ahana.api.manager.common.CommonManagerImpl"/>
 		 	</property>
 		</bean>
+		
+		<bean id="configDao" parent="txProxyTemplate">
+			<property name="target">
+		    	<bean class="com.ahana.api.dao.config.ConfigurationDaoImpl">
+			    	<property name="sessionFactory" ref="sessionFactory"/>
+				</bean>
+		    </property>
+		</bean>
+		
+		<bean id="configManager" parent="managerProxy">
+			<property name="target">
+		    	<bean class="com.ahana.api.manager.config.ConfigurationManagerImpl"/>
+		 	</property>
+		</bean>
 </beans>

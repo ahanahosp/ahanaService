@@ -18,6 +18,31 @@ USE `ahana`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `alert_type`
+--
+
+DROP TABLE IF EXISTS `alert_type`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `alert_type` (
+  `oid` varchar(20) NOT NULL,
+  `alert_name` varchar(30) NOT NULL,
+  `status` varchar(5) DEFAULT NULL,
+  PRIMARY KEY (`oid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `alert_type`
+--
+
+LOCK TABLES `alert_type` WRITE;
+/*!40000 ALTER TABLE `alert_type` DISABLE KEYS */;
+INSERT INTO `alert_type` VALUES ('a010000001900000001a','New','ACT'),('a010000001900000001b','Alert','ACT'),('a010000001900000001c','Warning','ACT');
+/*!40000 ALTER TABLE `alert_type` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `category_item`
 --
 
@@ -369,6 +394,7 @@ CREATE TABLE `room_maintance_details` (
 
 LOCK TABLES `room_maintance_details` WRITE;
 /*!40000 ALTER TABLE `room_maintance_details` DISABLE KEYS */;
+INSERT INTO `room_maintance_details` VALUES ('a0100000018000000019','Not Available Update','ACT');
 /*!40000 ALTER TABLE `room_maintance_details` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -420,7 +446,7 @@ CREATE TABLE `seed_container` (
 
 LOCK TABLES `seed_container` WRITE;
 /*!40000 ALTER TABLE `seed_container` DISABLE KEYS */;
-INSERT INTO `seed_container` VALUES (24,'a01',1,'REST'),(4,'PAT',2,'PAT');
+INSERT INTO `seed_container` VALUES (26,'a01',1,'REST'),(4,'PAT',2,'PAT');
 /*!40000 ALTER TABLE `seed_container` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -549,4 +575,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-10-18  9:38:22
+-- Dump completed on 2015-10-18 21:28:21
