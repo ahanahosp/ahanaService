@@ -13,6 +13,7 @@ import javax.validation.constraints.Size;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.Range;
 
 import com.ahana.api.common.AhanaVO;
 import com.ahana.api.common.Constants;
@@ -39,9 +40,7 @@ public class RoomCharges implements AhanaVO {
 	@Column(name = "room_type_oid")
 	private String roomTypeOid;
 
-	@NotBlank(message = ErrorConstants.CHARGE_IS_REQUIRED)
-	@Size(message = ErrorConstants.CHARGE_LENGTH_IS_INVALID, min = 2, max = 10)
-	@Pattern(regexp = RegConstants.NUMERIC, message = ErrorConstants.CHARGE_MUST_BE_NUMERIC)
+	@Range(max=1000000,min=1,message = ErrorConstants.CHARGE_IS_REQUIRED)
 	@Column(name = "charge")
 	private int charge;
 

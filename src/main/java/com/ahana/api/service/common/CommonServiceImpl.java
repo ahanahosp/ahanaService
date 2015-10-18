@@ -594,7 +594,7 @@ public class CommonServiceImpl extends BaseService implements CommonService {
 		if (logger.isDebugEnabled()) {
 			logger.debug("getRoomChargesByOid----start--->"	+ System.currentTimeMillis());
 		}
-		AhanaVO ahanaVO=commonManager.getConfigDetailsItemByOid("getRoomChargesByOid","roomChargeOid",roomChargeOid);
+		AhanaVO ahanaVO=commonManager.getConfigDetailsItemByOid("getRoomChargesByOid","roomChargesOid",roomChargeOid);
 		if (logger.isDebugEnabled()) {
 			logger.debug("getRoomChargesByOid: Success");
 		}

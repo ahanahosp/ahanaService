@@ -38,3 +38,20 @@ INSERT INTO seed_container(high_oid, seed_id, seq_id,type) VALUES(1,'PAT',2,'PAT
 INSERT INTO lookup(code, category, description, seq, deprecated) VALUES ('Standard-Default', 'CATEGORY', 'Standard-Default', 1, false),
 ('Free', 'CATEGORY', 'Free', 2, false),('Priority', 'CATEGORY', 'Priority', 3, false),('Priority-Free', 'CATEGORY', 'Priority-Free', 4, false),
 ('VIP', 'CATEGORY', 'VIP', 5, false);
+
+ INSERT INTO lookup(code, category, description, seq, deprecated) VALUES ('Madurai', 'CITY_TAMIL NADU', 'Madurai', 1, false),
+ ('Chennai', 'CITY_TAMIL NADU', 'Chennai', 30, false), ('Coimbatore', 'CITY_TAMIL NADU', 'Coimbatore', 2, false),
+ ('Cuddalore', 'CITY_TAMIL NADU', 'Cuddalore', 3, false), ('Dharmapuri', 'CITY_TAMIL NADU', 'Dharmapuri', 4, false),
+ ('Dindigul', 'CITY_TAMIL NADU', 'Dindigul', 5, false), ('Erode', 'CITY_TAMIL NADU', 'Erode', 6, false),
+ ('Kanchipuram', 'CITY_TAMIL NADU', 'Kanchipuram', 7, false), ('Kanyakumari', 'CITY_TAMIL NADU', 'Kanyakumari', 8, false), 
+ ('Karur', 'CITY_TAMIL NADU', 'Karur', 9, false), ('Krishnagiri', 'CITY_TAMIL NADU', 'Krishnagiri', 10, false), 
+ ('Nagapattinam', 'CITY_TAMIL NADU', 'Nagapattinam', 11, false), ('Namakkal', 'CITY_TAMIL NADU', 'Namakkal', 12, false),
+ ('Perambalur', 'CITY_TAMIL NADU', 'Perambalur', 13, false), ('Pudukkottai', 'CITY_TAMIL NADU', 'Pudukkottai', 14, false),
+ ('Ramanathapuram', 'CITY_TAMIL NADU', 'Ramanathapuram', 15, false), ('Salem', 'CITY_TAMIL NADU', 'Salem', 16, false),
+ ('Sivaganga', 'CITY_TAMIL NADU', 'Sivaganga', 17, false), ('Thanjavur', 'CITY_TAMIL NADU', 'Thanjavur', 18, false),
+ ('The Nilgiris', 'CITY_TAMIL NADU', 'The Nilgiris', 19, false), ('Theni', 'CITY_TAMIL NADU', 'Theni', 20, false),
+ ('Thoothukudi', 'CITY_TAMIL NADU', 'Thoothukudi', 21, false), ('Tiruchirapalli', 'CITY_TAMIL NADU', 'Tiruchirapalli', 22, false),
+ ('Tirunelveli', 'CITY_TAMIL NADU', 'Tirunelveli', 23, false), ('Tiruvallur', 'CITY_TAMIL NADU', 'Tiruvallur', 24, false),
+ ('Tiruvannamalai', 'CITY_TAMIL NADU', 'Tiruvannamalai', 25, false), ('Tiruvarur', 'CITY_TAMIL NADU', 'Tiruvarur', 26, false),
+ ('Vellore', 'CITY_TAMIL NADU', 'Vellore', 27, false), ('Viluppuram', 'CITY_TAMIL NADU', 'Viluppuram', 28, false),
+ ('Virudhunagar', 'CITY_TAMIL NADU', 'Virudhunagar', 29, false);
