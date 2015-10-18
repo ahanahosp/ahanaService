@@ -36,8 +36,8 @@ public class RoomCharges implements AhanaVO {
 	private String oid;
 
 	@NotBlank(message = ErrorConstants.ROOM_CHARGE_ITEM_IS_REQUIRED)
-	@Column(name = "room_charge_item_oid")
-	private String roomChargeItemOid;
+	@Column(name = "room_type_oid")
+	private String roomTypeOid;
 
 	@NotBlank(message = ErrorConstants.CHARGE_IS_REQUIRED)
 	@Size(message = ErrorConstants.CHARGE_LENGTH_IS_INVALID, min = 2, max = 10)
@@ -48,8 +48,8 @@ public class RoomCharges implements AhanaVO {
 	@NotBlank(message = ErrorConstants.BED_TYPE_IS_REQUIRED)
 	@Size(message = ErrorConstants.BED_TYPE_LENGTH_IS_REQUIRED, min = 2, max = 100)
 	@Pattern(regexp = RegConstants.ALPHA_NUMERIC_SPACE_HYPEN, message = ErrorConstants.BED_TYPE_IS_INVALID_FORMAT)
-	@Column(name = "bed_type")
-	private String bedType;
+	@Column(name = "room_charge_items_oid")
+	private String roomChargeItemsOid;
 
 	@Column(name = "status", length = 5)
 	private String status;
@@ -66,12 +66,12 @@ public class RoomCharges implements AhanaVO {
 		this.oid = oid;
 	}
 
-	public String getRoomChargeItemOid() {
-		return roomChargeItemOid;
+	public String getRoomTypeOid() {
+		return roomTypeOid;
 	}
 
-	public void setRoomChargeItemOid(String roomChargeItemOid) {
-		this.roomChargeItemOid = roomChargeItemOid;
+	public void setRoomTypeOid(String roomTypeOid) {
+		this.roomTypeOid = roomTypeOid;
 	}
 
 	public int getCharge() {
@@ -82,14 +82,6 @@ public class RoomCharges implements AhanaVO {
 		this.charge = charge;
 	}
 
-	public String getBedType() {
-		return bedType;
-	}
-
-	public void setBedType(String bedType) {
-		this.bedType = bedType;
-	}
-
 	public String getStatus() {
 		return status;
 	}
@@ -97,4 +89,13 @@ public class RoomCharges implements AhanaVO {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
+	public String getRoomChargeItemsOid() {
+		return roomChargeItemsOid;
+	}
+
+	public void setRoomChargeItemsOid(String roomChargeItemsOid) {
+		this.roomChargeItemsOid = roomChargeItemsOid;
+	}
+
 }

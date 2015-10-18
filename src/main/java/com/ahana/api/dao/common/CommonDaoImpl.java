@@ -399,14 +399,15 @@ public class CommonDaoImpl extends AhanaDaoSupport implements CommonDao {
 		List<Map<String, Object>> list=null;
 		String query=null;
 		try{
-			query="select r.oid as oid,r.charge as charge,r.status as status,r.bed_type as bedType,rc.item as item "
-					+ "from room_charges r join room_charges_item rc on r.room_charge_item_oid=rc.oid where r.status='"+Constants.ACT+"'";
+			query="select r.oid as oid,r.charge as charge,r.status as status,rc.item as item,rt.room_name as roomName "
+					+ "from room_charges r join room_charges_item rc on r.room_charge_items_oid=rc.oid join room_type rt on "
+					+ "r.room_type_oid=rt.oid where r.status='"+Constants.ACT+"'";
 			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
 					.addScalar("oid")
 					.addScalar("charge")
 					.addScalar("status")
-					.addScalar("bedType")
-					.addScalar("status")
+					.addScalar("item")
+					.addScalar("roomName")
 					.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
 			list = sqlQuery.list();
 		}finally{
@@ -505,6 +506,46 @@ public class CommonDaoImpl extends AhanaDaoSupport implements CommonDao {
 		String query=null;
 		try{
 			query="select c.oid as value,c.category as label from category_item c where c.status='"+Constants.ACT+"'";
+			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
+					.addScalar("value")
+					.addScalar("label")
+					.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+			list = sqlQuery.list();
+		}finally{
+			sqlQuery=null;
+			query=null;
+		}
+		return list;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Map<String, String>> getRoomTypesValues() {
+		Query sqlQuery=null;
+		List<Map<String, String>> list=null;
+		String query=null;
+		try{
+			query="select r.oid as value,r.room_name as label from room_type r where r.status='"+Constants.ACT+"'";
+			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
+					.addScalar("value")
+					.addScalar("label")
+					.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+			list = sqlQuery.list();
+		}finally{
+			sqlQuery=null;
+			query=null;
+		}
+		return list;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Map<String, String>> getRoomChargeItemValues() {
+		Query sqlQuery=null;
+		List<Map<String, String>> list=null;
+		String query=null;
+		try{
+			query="select r.oid as value,r.item as label from room_charges_item r where r.status='"+Constants.ACT+"'";
 			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
 					.addScalar("value")
 					.addScalar("label")

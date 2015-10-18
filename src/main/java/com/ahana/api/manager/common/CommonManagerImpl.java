@@ -321,4 +321,22 @@ public class CommonManagerImpl implements CommonManager {
 		return categoryDetails;
 	}
 
+	@Override
+	public List<Map<String, String>> getRoomTypesValues() throws AhanaBusinessException {
+		List<Map<String,String>> roomTypeDetails=commonDao.getRoomTypesValues();
+		if(CollectionUtils.isEmpty(roomTypeDetails)){
+			throw new AhanaBusinessException(ErrorConstants.NO_RECORDS_FOUND);
+		}
+		return roomTypeDetails;
+	}
+
+	@Override
+	public List<Map<String, String>> getRoomChargeItemValues() throws AhanaBusinessException {
+		List<Map<String,String>> roomChargeItemDetails=commonDao.getRoomChargeItemValues();
+		if(CollectionUtils.isEmpty(roomChargeItemDetails)){
+			throw new AhanaBusinessException(ErrorConstants.NO_RECORDS_FOUND);
+		}
+		return roomChargeItemDetails;
+	}
+
 }

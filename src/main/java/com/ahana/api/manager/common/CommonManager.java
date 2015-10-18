@@ -86,4 +86,8 @@ public interface CommonManager {
 
 	List<Map<String, String>> getCategoryValues() throws AhanaBusinessException;
 
+	List<Map<String, String>> getRoomTypesValues() throws AhanaBusinessException;
+
+	List<Map<String, String>> getRoomChargeItemValues() throws AhanaBusinessException;
+
 }

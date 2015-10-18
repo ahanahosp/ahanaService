@@ -684,5 +684,33 @@ public class CommonServiceImpl extends BaseService implements CommonService {
 		}
 		return handleSuccess("categoryDetails",categoryDetails);
 	}
+	
+	@Override
+	@RequestMapping(value = "/getRoomTypesValues",method=RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> getRoomTypesValues() throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("getRoomTypesValues----start--->"	+ System.currentTimeMillis());
+		}
+		List<Map<String, String>> roomTypesDetails=commonManager.getRoomTypesValues();
+		if (logger.isDebugEnabled()) {
+			logger.debug("getRoomTypesValues: Success");
+		}
+		return handleSuccess("roomTypesDetails",roomTypesDetails);
+	}
+	
+	@Override
+	@RequestMapping(value = "/getRoomChargeItemValues",method=RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> getRoomChargeItemValues() throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("getRoomChargeItemValues----start--->"	+ System.currentTimeMillis());
+		}
+		List<Map<String, String>> roomChargeItemDetails=commonManager.getRoomChargeItemValues();
+		if (logger.isDebugEnabled()) {
+			logger.debug("getRoomChargeItemValues: Success");
+		}
+		return handleSuccess("roomChargeItemDetails",roomChargeItemDetails);
+	}
 
 }

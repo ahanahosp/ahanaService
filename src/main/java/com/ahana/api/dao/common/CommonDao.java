@@ -85,4 +85,8 @@ public interface CommonDao {
 
 	List<Map<String, String>> getCategoryValues();
 
+	List<Map<String, String>> getRoomTypesValues();
+
+	List<Map<String, String>> getRoomChargeItemValues();
+
 }

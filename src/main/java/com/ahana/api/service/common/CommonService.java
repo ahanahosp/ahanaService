@@ -108,4 +108,8 @@ public interface CommonService {
 
 	Map<String, Object> getCategoryValues() throws AhanaBusinessException;
 
+	Map<String, Object> getRoomTypesValues() throws AhanaBusinessException;
+
+	Map<String, Object> getRoomChargeItemValues() throws AhanaBusinessException;
+
 }
