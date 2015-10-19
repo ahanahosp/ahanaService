@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.transaction.annotation.Propagation;
@@ -34,14 +33,6 @@ public class UserManagerImpl implements UserManager {
 		Md5PasswordEncoder ms = new Md5PasswordEncoder();
 		userProfile.setPassword(ms.encodePassword(userProfile.getPassword(), null));
 		userDao.saveUser(userProfile);
-		
-		//Saving User Role
-		if(StringUtils.isNotBlank(userProfile.getRoleOid())){
-			UserRole userRole=new UserRole();
-			userRole.setRoleOid(userProfile.getRoleOid());
-			userRole.setUserOid(userProfile.getOid());
-			userDao.createUserRole(userRole);
-		}
 		return userProfile;
 	}
 
@@ -92,10 +83,18 @@ public class UserManagerImpl implements UserManager {
 
 	@Override
 	public UserRole createUserRole(UserRole userRole) throws AhanaBusinessException {
-		if(userRole==null){
+		List<UserRole> userRoles=null;
+		if(userRole==null || CollectionUtils.isEmpty(userRole.getRoleOids())){
 			throw new AhanaBusinessException(ErrorConstants.NO_RECORDS_FOUND);
 		}
-		userRole=userDao.createUserRole(userRole);
+		userRoles=new ArrayList<UserRole>();
+		for(String roleOid:userRole.getRoleOids()){
+			UserRole userRole2=new UserRole();
+			userRole2.setRoleOid(roleOid);
+			userRole2.setUserOid(userRole.getUserOid());
+			userRoles.add(userRole2);
+		}
+		userDao.createUserRole(userRoles);
 		return userRole;
 	}
 
@@ -137,6 +136,13 @@ public class UserManagerImpl implements UserManager {
 	public void deleteUser(String userOid) {
 		userDao.deleteUser(userOid);
 	}
-	
-	
+
+	@Override
+	public List<Map<String, String>> getAllUserOidAndName() throws AhanaBusinessException {
+		List<Map<String, String>> users=userDao.getAllUserOidAndName();
+		if(CollectionUtils.isEmpty(users)){
+			throw new AhanaBusinessException(ErrorConstants.NO_RECORDS_FOUND);
+		}
+		return users;
+	}	
 }

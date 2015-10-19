@@ -18,7 +18,7 @@ public interface UserDao extends UserDetailsService {
 
     UserProfile saveUser(UserProfile userVO);
     
-    UserRole createUserRole(UserRole userRoleVO);
+    void createUserRole(List<UserRole> userRoles);
     
     Roles createRole(Roles roles);
 
@@ -39,5 +39,7 @@ public interface UserDao extends UserDetailsService {
 	void deleteRole(String roleOid);
 
 	void deleteUser(String userOid);
+
+	List<Map<String, String>> getAllUserOidAndName();
 
 } 

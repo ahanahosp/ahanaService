@@ -90,7 +90,7 @@ public class UserDaoImpl extends AhanaDaoSupport implements UserDao {
 			roleList=null;
 		}
 	}
-
+	
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	public UserProfile saveUser(UserProfile userProfile) {
@@ -107,9 +107,8 @@ public class UserDaoImpl extends AhanaDaoSupport implements UserDao {
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
-	public UserRole createUserRole(UserRole userRoleVO) {
+	public void createUserRole(List<UserRole> userRoleVO) {
 		saveOrUpdate(userRoleVO);
-		return userRoleVO;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -184,10 +183,10 @@ public class UserDaoImpl extends AhanaDaoSupport implements UserDao {
 		List<Map<String, String>> list=null;
 		String query=null;
 		try{
-			query="select oid as oid,salutation as salutation,first_name as firstName,last_name as lastName,designation as designation,"
-					+ "user_id as userName,password_exp_date as inActivationDate,activation_date as activationDate,"
-					+ "email_id as emailId,mobile_no as mobileNo,speciality as speciality,care_provider as careProvider from user_profile"
-					+ " where user_status='"+Constants.ACT+"'";
+			query="select up.oid as oid,up.salutation as salutation,up.first_name as firstName,up.last_name as lastName,up.designation as designation,"
+					+ "up.user_id as userName,up.password_exp_date as inActivationDate,up.activation_date as activationDate,"
+					+ "up.email_id as emailId,up.mobile_no as mobileNo,sp.speciality_name as speciality,up.care_provider as careProvider from user_profile up"
+					+ " join speciality_details sp on up.speciality=sp.oid where user_status='"+Constants.ACT+"'";
 			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
 					.addScalar("oid")
 					.addScalar("salutation")
@@ -212,13 +211,33 @@ public class UserDaoImpl extends AhanaDaoSupport implements UserDao {
 
 	@Override
 	public void deleteRole(String roleOid) {
-		Query q = getSessionFactory().getCurrentSession().createQuery("delete Role where oid ='"+roleOid);
+		Query q = getSessionFactory().getCurrentSession().createQuery("delete Role where oid ='"+roleOid+"'");
 		q.executeUpdate();		
 	}
 
 	@Override
 	public void deleteUser(String userOid) {
-		Query q = getSessionFactory().getCurrentSession().createQuery("delete UserProfile where oid ='"+userOid);
+		Query q = getSessionFactory().getCurrentSession().createQuery("delete UserProfile where oid ='"+userOid+"'");
 		q.executeUpdate();		
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Map<String, String>> getAllUserOidAndName() {
+		Query sqlQuery=null;
+		List<Map<String, String>> list=null;
+		String query=null;
+		try{
+			query="select oid as value,user_id as label from user_profile where user_status='"+Constants.ACT+"'";
+			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
+					.addScalar("value")
+					.addScalar("label")
+					.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+			list = sqlQuery.list();
+		}finally{
+			sqlQuery=null;
+			query=null;
+		}
+		return list;
 	}
 }

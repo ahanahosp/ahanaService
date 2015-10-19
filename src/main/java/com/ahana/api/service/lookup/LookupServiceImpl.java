@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ahana.api.common.BaseService;
+import com.ahana.api.common.mail.LookupConstants;
 import com.ahana.api.domain.common.NameValue;
 import com.ahana.api.manager.lookup.LookupManager;
 import com.ahana.api.system.security.exception.AhanaBusinessException;
@@ -49,7 +50,14 @@ public class LookupServiceImpl extends BaseService implements LookupService {
 	@Override
 	@RequestMapping(value = "/populateState",method=RequestMethod.GET)
 	public @ResponseBody Map<String,Object> populateState(@RequestParam("countryId") String countryId) throws AhanaBusinessException {
-		List<NameValue> stateDetails= lookupCacheManager.getLookupsByCategory("STATE_"+countryId.toUpperCase());
+		List<NameValue> stateDetails= lookupCacheManager.getLookupsByCategory(LookupConstants.LOOKUP_STATE+countryId.toUpperCase());
 		return handleSuccess("stateDetails", stateDetails);
+	}
+	
+	@Override
+	@RequestMapping(value = "/populateCity",method=RequestMethod.GET)
+	public @ResponseBody Map<String,Object> populateCity(@RequestParam("stateId") String stateId) throws AhanaBusinessException {
+		List<NameValue> cityDetails= lookupCacheManager.getLookupsByCategory(LookupConstants.LOOKUP_CITY+stateId.toUpperCase());
+		return handleSuccess("cityDetails", cityDetails);
 	}
 }

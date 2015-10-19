@@ -1,6 +1,7 @@
 package com.ahana.api.domain.user;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,9 +10,12 @@ import javax.persistence.IdClass;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import com.ahana.api.common.AhanaVO;
 import com.ahana.api.common.ErrorConstants;
@@ -41,10 +45,13 @@ public class UserRole implements Serializable, AhanaVO {
 	private String userOid;
 
 	@Id
-	@NotBlank(message = ErrorConstants.ROLE_OID_IS_REQUIRED)
-	@Length(min = 20, max = 20, message = ErrorConstants.ROLE_OID_LENGTH_IS_INVALID)
 	@Column(name = "role_oid", insertable = true, updatable = true)
 	private String roleOid;
+	
+	@Transient
+	@Valid
+	@NotEmpty(message = ErrorConstants.ROLE_NAME_REQUIRED)
+	private List<String> roleOids;
 
 	public String getUserOid() {
 		return userOid;
@@ -62,4 +69,11 @@ public class UserRole implements Serializable, AhanaVO {
 		this.roleOid = roleOid;
 	}
 
+	public List<String> getRoleOids() {
+		return roleOids;
+	}
+
+	public void setRoleOids(List<String> roleOids) {
+		this.roleOids = roleOids;
+	}
 }

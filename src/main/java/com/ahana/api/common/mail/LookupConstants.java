@@ -20,4 +20,8 @@ public class LookupConstants {
 	
 	public static final String DEFAULT_CITY="Madurai";
 	
+	public static final String LOOKUP_STATE="STATE_";
+	
+	public static final String LOOKUP_CITY="CITY_";
+	
 }

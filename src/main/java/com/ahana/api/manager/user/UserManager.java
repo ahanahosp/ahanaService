@@ -33,4 +33,6 @@ public interface UserManager {
 
 	void deleteUser(String userOid);
 
+	List<Map<String, String>> getAllUserOidAndName() throws AhanaBusinessException;
+
 }

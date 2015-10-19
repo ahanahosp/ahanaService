@@ -186,6 +186,17 @@ public class UserServiceImpl extends BaseService implements UserService {
 		return handleSuccess("roleRights",roleRights2);
 	}
 	
-	
-	
+	@Override
+	@RequestMapping(value = "/getAllUserOidAndName",method=RequestMethod.GET)
+	@ResponseBody
+	public Map<String,Object> getAllUserOidAndName() throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("getAllUserOidAndName----start--->"	+ System.currentTimeMillis());
+		}
+		List<Map<String,String>> userDetails = userManager.getAllUserOidAndName();
+		if (logger.isDebugEnabled()) {
+			logger.debug("getAllUserOidAndName: Success");
+		}
+		return handleSuccess("userDetails",userDetails);
+	}
 }

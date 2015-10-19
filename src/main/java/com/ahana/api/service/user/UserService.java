@@ -35,4 +35,6 @@ public interface UserService {
 
 	Map<String, Object> deleteUser(String userOid) throws AhanaBusinessException;
 
+	Map<String, Object> getAllUserOidAndName() throws AhanaBusinessException;
+
 }
