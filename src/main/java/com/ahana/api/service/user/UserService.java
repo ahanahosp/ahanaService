@@ -37,4 +37,6 @@ public interface UserService {
 
 	Map<String, Object> getAllUserOidAndName() throws AhanaBusinessException;
 
+	Map<String, Object> getSavedRolesByUserOid(String userOid) throws AhanaBusinessException;
+
 }

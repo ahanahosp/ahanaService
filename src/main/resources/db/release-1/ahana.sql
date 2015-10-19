@@ -90,7 +90,7 @@ CREATE TABLE `floor` (
 
 LOCK TABLES `floor` WRITE;
 /*!40000 ALTER TABLE `floor` DISABLE KEYS */;
-INSERT INTO `floor` VALUES ('a010000000800000000a','First Floor','FF','ACT');
+INSERT INTO `floor` VALUES ('a010000000800000000a','First Floor','FF','ACT'),('a010000001c00000001d','Second Floor','SEF','ACT');
 /*!40000 ALTER TABLE `floor` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -118,7 +118,7 @@ CREATE TABLE `lookup` (
 
 LOCK TABLES `lookup` WRITE;
 /*!40000 ALTER TABLE `lookup` DISABLE KEYS */;
-INSERT INTO `lookup` VALUES ('A+','BLOODGROUP','A+',1,0),('A-','BLOODGROUP','A-',2,0),('AB+','BLOODGROUP','AB+',5,0),('AB-','BLOODGROUP','AB-',6,0),('Andaman & Nicobar Islands','STATE_INDIA','Andaman & Nicobar Islands',29,0),('Andhra Pradesh','STATE_INDIA','Andhra Pradesh',2,0),('Arunachal Pradesh','STATE_INDIA','Arunachal Pradesh',3,0),('Assam','STATE_INDIA','Assam',4,0),('B+','BLOODGROUP','B+',3,0),('B-','BLOODGROUP','B-',4,0),('Bangladesh','COUNTRY','Bangladesh',3,0),('Bihar','STATE_INDIA','Bihar',5,0),('Chandigarh','STATE_INDIA','Chandigarh',30,0),('Chhattisgarh','STATE_INDIA','Chhattisgarh',6,0),('Dadra & Nagar Haveli','STATE_INDIA','Dadra & Nagar Haveli',31,0),('Daman & Diu','STATE_INDIA','Daman & Diu',32,0),('Delhi','STATE_INDIA','Delhi',33,0),('Dr','SALUTATION','Dr',3,0),('Free','CATEGORY','Free',2,0),('Goa','STATE_INDIA','Goa',7,0),('Gujarat','STATE_INDIA','Gujarat',8,0),('Haryana','STATE_INDIA','Haryana',9,0),('Himachal Pradesh','STATE_INDIA','Himachal Pradesh',10,0),('India','COUNTRY','India',1,0),('Indonesia','COUNTRY','Indonesia',4,0),('Jammu & kashmir','STATE_INDIA','Jammu & kashmir',11,0),('Jharkhand','STATE_INDIA','Jharkhand',12,0),('Karnataka','STATE_INDIA','Karnataka',13,0),('Kerala','STATE_INDIA','Kerala',14,0),('Lakshadweep','STATE_INDIA','Lakshadweep',34,0),('Madhya Pradesh','STATE_INDIA','Madhya Pradesh',15,0),('Maharashtra','STATE_INDIA','Maharashtra',16,0),('Malaysia','COUNTRY','Malaysia',2,0),('Manipur','STATE_INDIA','Manipur',17,0),('Meghalaya','STATE_INDIA','Meghalaya',18,0),('Miss','SALUTATION','Miss',2,0),('Mizoram','STATE_INDIA','Mizoram',19,0),('Mr','SALUTATION','Mr',1,0),('Ms','SALUTATION','Ms',4,0),('Nagaland','STATE_INDIA','Nagaland',20,0),('Nepal','COUNTRY','Nepal',8,0),('O+','BLOODGROUP','O+',7,0),('O-','BLOODGROUP','O-',8,0),('Orissa','STATE_INDIA','Orissa',21,0),('Pakistan','COUNTRY','Pakistan',5,0),('Philippines','COUNTRY','Philippines',11,0),('Priority','CATEGORY','Priority',3,0),('Priority-Free','CATEGORY','Priority-Free',4,0),('Prof','SALUTATION','Prof',5,0),('Puducherry','STATE_INDIA','Puducherry',35,0),('Punjab','STATE_INDIA','Punjab',22,0),('Rajasthan','STATE_INDIA','Rajasthan',23,0),('Rev','SALUTATION','Rev',6,0),('Sikkim','STATE_INDIA','Sikkim',24,0),('Singapore','COUNTRY','Singapore',6,0),('Sri Lanka','COUNTRY','Sri Lanka',7,0),('Standard-Default','CATEGORY','Standard-Default',1,0),('Tamil Nadu','STATE_INDIA','Tamil Nadu',1,0),('Thailand','COUNTRY','Thailand',9,0),('Tripura','STATE_INDIA','Tripura',25,0),('Uttar Pradesh','STATE_INDIA','Uttar Pradesh',26,0),('Uttarakhand','STATE_INDIA','Uttarakhand',27,0),('Vietnam','COUNTRY','Vietnam',10,0),('VIP','CATEGORY','VIP',5,0),('West Bengal','STATE_INDIA','West Bengal',28,0);
+INSERT INTO `lookup` VALUES ('A+','BLOODGROUP','A+',1,0),('A-','BLOODGROUP','A-',2,0),('AB+','BLOODGROUP','AB+',5,0),('AB-','BLOODGROUP','AB-',6,0),('Andaman & Nicobar Islands','STATE_INDIA','Andaman & Nicobar Islands',29,0),('Andhra Pradesh','STATE_INDIA','Andhra Pradesh',2,0),('Arunachal Pradesh','STATE_INDIA','Arunachal Pradesh',3,0),('Assam','STATE_INDIA','Assam',4,0),('B+','BLOODGROUP','B+',3,0),('B-','BLOODGROUP','B-',4,0),('Bangladesh','COUNTRY','Bangladesh',3,0),('Bihar','STATE_INDIA','Bihar',5,0),('Chandigarh','STATE_INDIA','Chandigarh',30,0),('Chennai','CITY_TAMIL NADU','Chennai',30,0),('Chhattisgarh','STATE_INDIA','Chhattisgarh',6,0),('Coimbatore','CITY_TAMIL NADU','Coimbatore',2,0),('Cuddalore','CITY_TAMIL NADU','Cuddalore',3,0),('Dadra & Nagar Haveli','STATE_INDIA','Dadra & Nagar Haveli',31,0),('Daman & Diu','STATE_INDIA','Daman & Diu',32,0),('Delhi','STATE_INDIA','Delhi',33,0),('Dharmapuri','CITY_TAMIL NADU','Dharmapuri',4,0),('Dindigul','CITY_TAMIL NADU','Dindigul',5,0),('Dr','SALUTATION','Dr',3,0),('Erode','CITY_TAMIL NADU','Erode',6,0),('Free','CATEGORY','Free',2,0),('Goa','STATE_INDIA','Goa',7,0),('Gujarat','STATE_INDIA','Gujarat',8,0),('Haryana','STATE_INDIA','Haryana',9,0),('Himachal Pradesh','STATE_INDIA','Himachal Pradesh',10,0),('India','COUNTRY','India',1,0),('Indonesia','COUNTRY','Indonesia',4,0),('Jammu & kashmir','STATE_INDIA','Jammu & kashmir',11,0),('Jharkhand','STATE_INDIA','Jharkhand',12,0),('Kanchipuram','CITY_TAMIL NADU','Kanchipuram',7,0),('Kanyakumari','CITY_TAMIL NADU','Kanyakumari',8,0),('Karnataka','STATE_INDIA','Karnataka',13,0),('Karur','CITY_TAMIL NADU','Karur',9,0),('Kerala','STATE_INDIA','Kerala',14,0),('Krishnagiri','CITY_TAMIL NADU','Krishnagiri',10,0),('Lakshadweep','STATE_INDIA','Lakshadweep',34,0),('Madhya Pradesh','STATE_INDIA','Madhya Pradesh',15,0),('Madurai','CITY_TAMIL NADU','Madurai',1,0),('Maharashtra','STATE_INDIA','Maharashtra',16,0),('Malaysia','COUNTRY','Malaysia',2,0),('Manipur','STATE_INDIA','Manipur',17,0),('Meghalaya','STATE_INDIA','Meghalaya',18,0),('Miss','SALUTATION','Miss',2,0),('Mizoram','STATE_INDIA','Mizoram',19,0),('Mr','SALUTATION','Mr',1,0),('Ms','SALUTATION','Ms',4,0),('Nagaland','STATE_INDIA','Nagaland',20,0),('Nagapattinam','CITY_TAMIL NADU','Nagapattinam',11,0),('Namakkal','CITY_TAMIL NADU','Namakkal',12,0),('Nepal','COUNTRY','Nepal',8,0),('O+','BLOODGROUP','O+',7,0),('O-','BLOODGROUP','O-',8,0),('Orissa','STATE_INDIA','Orissa',21,0),('Pakistan','COUNTRY','Pakistan',5,0),('Perambalur','CITY_TAMIL NADU','Perambalur',13,0),('Philippines','COUNTRY','Philippines',11,0),('Priority','CATEGORY','Priority',3,0),('Priority-Free','CATEGORY','Priority-Free',4,0),('Prof','SALUTATION','Prof',5,0),('Puducherry','STATE_INDIA','Puducherry',35,0),('Pudukkottai','CITY_TAMIL NADU','Pudukkottai',14,0),('Punjab','STATE_INDIA','Punjab',22,0),('Rajasthan','STATE_INDIA','Rajasthan',23,0),('Ramanathapuram','CITY_TAMIL NADU','Ramanathapuram',15,0),('Rev','SALUTATION','Rev',6,0),('Salem','CITY_TAMIL NADU','Salem',16,0),('Sikkim','STATE_INDIA','Sikkim',24,0),('Singapore','COUNTRY','Singapore',6,0),('Sivaganga','CITY_TAMIL NADU','Sivaganga',17,0),('Sri Lanka','COUNTRY','Sri Lanka',7,0),('Standard-Default','CATEGORY','Standard-Default',1,0),('Tamil Nadu','STATE_INDIA','Tamil Nadu',1,0),('Thailand','COUNTRY','Thailand',9,0),('Thanjavur','CITY_TAMIL NADU','Thanjavur',18,0),('The Nilgiris','CITY_TAMIL NADU','The Nilgiris',19,0),('Theni','CITY_TAMIL NADU','Theni',20,0),('Thoothukudi','CITY_TAMIL NADU','Thoothukudi',21,0),('Tiruchirapalli','CITY_TAMIL NADU','Tiruchirapalli',22,0),('Tirunelveli','CITY_TAMIL NADU','Tirunelveli',23,0),('Tiruvallur','CITY_TAMIL NADU','Tiruvallur',24,0),('Tiruvannamalai','CITY_TAMIL NADU','Tiruvannamalai',25,0),('Tiruvarur','CITY_TAMIL NADU','Tiruvarur',26,0),('Tripura','STATE_INDIA','Tripura',25,0),('Uttar Pradesh','STATE_INDIA','Uttar Pradesh',26,0),('Uttarakhand','STATE_INDIA','Uttarakhand',27,0),('Vellore','CITY_TAMIL NADU','Vellore',27,0),('Vietnam','COUNTRY','Vietnam',10,0),('Viluppuram','CITY_TAMIL NADU','Viluppuram',28,0),('VIP','CATEGORY','VIP',5,0),('Virudhunagar','CITY_TAMIL NADU','Virudhunagar',29,0),('West Bengal','STATE_INDIA','West Bengal',28,0);
 /*!40000 ALTER TABLE `lookup` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -315,7 +315,7 @@ CREATE TABLE `room` (
 
 LOCK TABLES `room` WRITE;
 /*!40000 ALTER TABLE `room` DISABLE KEYS */;
-INSERT INTO `room` VALUES ('a010000000900000000b','Sugery Ward','a0100000007000000009','vacant','Not Available','ACT');
+INSERT INTO `room` VALUES ('a010000000900000000b','Sugery Ward','a0100000007000000009','vacant','Not Available','ACT'),('a010000001b00000001c','Test','a010000000700000000b','Free','Free','ACT');
 /*!40000 ALTER TABLE `room` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -342,6 +342,7 @@ CREATE TABLE `room_charges` (
 
 LOCK TABLES `room_charges` WRITE;
 /*!40000 ALTER TABLE `room_charges` DISABLE KEYS */;
+INSERT INTO `room_charges` VALUES ('a010000001d00000001e','a0100000017000000018',10000,'a0100000013000000015','ACT');
 /*!40000 ALTER TABLE `room_charges` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -394,7 +395,7 @@ CREATE TABLE `room_maintance_details` (
 
 LOCK TABLES `room_maintance_details` WRITE;
 /*!40000 ALTER TABLE `room_maintance_details` DISABLE KEYS */;
-INSERT INTO `room_maintance_details` VALUES ('a0100000018000000019','Not Available Update','ACT');
+INSERT INTO `room_maintance_details` VALUES ('a0100000018000000019','Not Available Update','ACT'),('a010000001a00000001b','Under Maintenance','ACT');
 /*!40000 ALTER TABLE `room_maintance_details` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -446,7 +447,7 @@ CREATE TABLE `seed_container` (
 
 LOCK TABLES `seed_container` WRITE;
 /*!40000 ALTER TABLE `seed_container` DISABLE KEYS */;
-INSERT INTO `seed_container` VALUES (26,'a01',1,'REST'),(4,'PAT',2,'PAT');
+INSERT INTO `seed_container` VALUES (32,'a01',1,'REST'),(4,'PAT',2,'PAT');
 /*!40000 ALTER TABLE `seed_container` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -512,6 +513,7 @@ CREATE TABLE `user_profile` (
 
 LOCK TABLES `user_profile` WRITE;
 /*!40000 ALTER TABLE `user_profile` DISABLE KEYS */;
+INSERT INTO `user_profile` VALUES ('a010000001e00000001f','Mr','Selva','Raj','e08a7c49d96c2b475656cc8fe18cee8e','2015-10-24 18:30:00','selva','ACT','Test','India','Tamil Nadu','Madurai','625014','selva@gmail.com','9898989898','2015-10-17 18:30:00','Test','a0100000012000000013','Yes');
 /*!40000 ALTER TABLE `user_profile` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -575,4 +577,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-10-18 21:28:21
+-- Dump completed on 2015-10-19 22:53:45

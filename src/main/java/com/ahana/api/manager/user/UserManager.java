@@ -35,4 +35,6 @@ public interface UserManager {
 
 	List<Map<String, String>> getAllUserOidAndName() throws AhanaBusinessException;
 
+	List<Map<String, String>> getSavedRolesByUserOid(String userOid) throws AhanaBusinessException;
+
 }

@@ -1,6 +1,5 @@
 package com.ahana.api.manager.user;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -83,18 +82,15 @@ public class UserManagerImpl implements UserManager {
 
 	@Override
 	public UserRole createUserRole(UserRole userRole) throws AhanaBusinessException {
-		List<UserRole> userRoles=null;
 		if(userRole==null || CollectionUtils.isEmpty(userRole.getRoleOids())){
 			throw new AhanaBusinessException(ErrorConstants.NO_RECORDS_FOUND);
 		}
-		userRoles=new ArrayList<UserRole>();
 		for(String roleOid:userRole.getRoleOids()){
 			UserRole userRole2=new UserRole();
 			userRole2.setRoleOid(roleOid);
 			userRole2.setUserOid(userRole.getUserOid());
-			userRoles.add(userRole2);
+			userDao.createUserRole(userRole2);
 		}
-		userDao.createUserRole(userRoles);
 		return userRole;
 	}
 
@@ -104,15 +100,13 @@ public class UserManagerImpl implements UserManager {
 			throw new AhanaBusinessException(ErrorConstants.NO_RECORDS_FOUND);
 		}
 		if(CollectionUtils.isNotEmpty(roleRight.getModuleOids())){
-			List<RoleRights> roleRights=new ArrayList<RoleRights>();
 			for(String moduleOid:roleRight.getModuleOids()){
 				RoleRights roleRights2=new RoleRights();
 				roleRights2.setModuleOid(moduleOid);
 				roleRights2.setOrganizationOid(roleRight.getOrganizationOid());
 				roleRights2.setRoleOid(roleRight.getRoleOid());
-				roleRights.add(roleRights2);
+				userDao.saveRoleRights(roleRights2);
 			}
-			userDao.saveRoleRights(roleRights);
 		}
 		return roleRight;
 		
@@ -144,5 +138,14 @@ public class UserManagerImpl implements UserManager {
 			throw new AhanaBusinessException(ErrorConstants.NO_RECORDS_FOUND);
 		}
 		return users;
+	}
+
+	@Override
+	public List<Map<String, String>> getSavedRolesByUserOid(String userOid) throws AhanaBusinessException {
+		List<Map<String, String>> userRoles=userDao.getSavedRolesByUserOid(userOid);
+		if(CollectionUtils.isEmpty(userRoles)){
+			throw new AhanaBusinessException(ErrorConstants.NO_RECORDS_FOUND);
+		}
+		return userRoles;
 	}	
 }

@@ -107,7 +107,7 @@ public class UserDaoImpl extends AhanaDaoSupport implements UserDao {
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
-	public void createUserRole(List<UserRole> userRoleVO) {
+	public void createUserRole(UserRole userRoleVO) {
 		saveOrUpdate(userRoleVO);
 	}
 
@@ -172,7 +172,7 @@ public class UserDaoImpl extends AhanaDaoSupport implements UserDao {
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
-	public void saveRoleRights(List<RoleRights> roleRights) {
+	public void saveRoleRights(RoleRights roleRights) {
 		saveOrUpdate(roleRights);
 	}
 
@@ -232,6 +232,25 @@ public class UserDaoImpl extends AhanaDaoSupport implements UserDao {
 			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
 					.addScalar("value")
 					.addScalar("label")
+					.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+			list = sqlQuery.list();
+		}finally{
+			sqlQuery=null;
+			query=null;
+		}
+		return list;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Map<String, String>> getSavedRolesByUserOid(String userOid) {
+		Query sqlQuery=null;
+		List<Map<String, String>> list=null;
+		String query=null;
+		try{
+			query="select role_oid as roleOid from user_roles where user_oid='"+userOid+"'";
+			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
+					.addScalar("roleOid")
 					.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
 			list = sqlQuery.list();
 		}finally{
