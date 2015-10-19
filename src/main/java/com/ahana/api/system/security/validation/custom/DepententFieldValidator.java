@@ -29,10 +29,12 @@ public class DepententFieldValidator implements ConstraintValidator<DepententFie
         try {
             final String fieldValue= BeanUtils.getProperty(value, fieldName);
             final String dependFieldValue= BeanUtils.getProperty(value, dependFieldName);
-            if (StringUtils.isNoneBlank(expectedFieldValue) 
-            		&& StringUtils.isNoneBlank(fieldValue) 
-            		&& expectedFieldValue.equalsIgnoreCase(fieldValue) 
-            		&& dependFieldValue == null) {
+            if(StringUtils.isBlank(fieldValue) || fieldValue.equalsIgnoreCase("null") || fieldValue.equalsIgnoreCase("")){
+            	ctx.disableDefaultConstraintViolation();
+                ctx.buildConstraintViolationWithTemplate(ctx.getDefaultConstraintMessageTemplate()).addNode(dependFieldName).addConstraintViolation();
+                return false;
+            }else if (StringUtils.isNoneBlank(expectedFieldValue) && StringUtils.isNotBlank(fieldValue) 
+            		&& expectedFieldValue.equalsIgnoreCase(fieldValue) && dependFieldValue == null) {
                 ctx.disableDefaultConstraintViolation();
                 ctx.buildConstraintViolationWithTemplate(ctx.getDefaultConstraintMessageTemplate()).addNode(dependFieldName).addConstraintViolation();
                 return false;

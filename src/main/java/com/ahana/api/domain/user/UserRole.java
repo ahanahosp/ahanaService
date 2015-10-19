@@ -15,7 +15,6 @@ import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.NotEmpty;
 
 import com.ahana.api.common.AhanaVO;
 import com.ahana.api.common.ErrorConstants;
@@ -24,6 +23,7 @@ import com.ahana.api.common.ErrorConstants;
 @Table(name = "user_roles")
 @IdClass(UserRolePK.class)
 @NamedQueries({ @NamedQuery(name = "getUserRolesOidByUserOid", query = "select userRole.roleOid from UserRole userRole where userRole.userOid= :userOid") })
+//@DepententField.List({@DepententField(fieldName = "roleOid",fieldValue = "null",dependFieldName = "roleOids")})
 public class UserRole implements Serializable, AhanaVO {
 
 	private static final long serialVersionUID = 78018374285740564L;
@@ -50,7 +50,7 @@ public class UserRole implements Serializable, AhanaVO {
 	
 	@Transient
 	@Valid
-	@NotEmpty(message = ErrorConstants.ROLE_NAME_REQUIRED)
+	//@NotEmpty(message = ErrorConstants.ROLE_NAME_REQUIRED)
 	private List<String> roleOids;
 
 	public String getUserOid() {

@@ -14,7 +14,6 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.NotEmpty;
 
 import com.ahana.api.common.AhanaVO;
 import com.ahana.api.common.ErrorConstants;
@@ -22,6 +21,7 @@ import com.ahana.api.common.ErrorConstants;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "role_rights")
+//@DepententField.List({@DepententField(fieldName = "moduleOid",fieldValue = "null",dependFieldName = "moduleOids")})
 public class RoleRights implements AhanaVO {
 
 	@Id
@@ -47,7 +47,7 @@ public class RoleRights implements AhanaVO {
 
 	@Transient
 	@Valid
-	@NotEmpty(message = ErrorConstants.MODULE_IS_REQUIRED)
+	//@NotEmpty(message = ErrorConstants.MODULE_IS_REQUIRED)
 	private List<String> moduleOids;
 
 	public String getOid() {
