@@ -9,4 +9,6 @@ public interface PatientRegistrationService {
 
 	Map<String, Object> savePatient(PatientRegistration patientRegistration) throws AhanaBusinessException;
 
+	Map<String, Object> searchPatientByName(String name) throws AhanaBusinessException;
+
 }

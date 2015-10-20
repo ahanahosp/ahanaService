@@ -147,5 +147,14 @@ public class UserManagerImpl implements UserManager {
 			throw new AhanaBusinessException(ErrorConstants.NO_RECORDS_FOUND);
 		}
 		return userRoles;
+	}
+
+	@Override
+	public List<Map<String, String>> getSavedRightsByRoleOid(String roleOid) throws AhanaBusinessException {
+		List<Map<String, String>> roleRights=userDao.getSavedRightsByRoleOid(roleOid);
+		if(CollectionUtils.isEmpty(roleRights)){
+			throw new AhanaBusinessException(ErrorConstants.NO_RECORDS_FOUND);
+		}
+		return roleRights;
 	}	
 }

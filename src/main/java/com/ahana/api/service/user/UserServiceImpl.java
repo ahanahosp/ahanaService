@@ -213,4 +213,18 @@ public class UserServiceImpl extends BaseService implements UserService {
 		}
 		return handleSuccess("roleDetails",roleDetails);
 	}
+	
+	@Override
+	@RequestMapping(value = "/getSavedRightsByRoleOid",method=RequestMethod.GET)
+	@ResponseBody
+	public Map<String,Object> getSavedRightsByRoleOid(@RequestParam("roleOid") String roleOid) throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("getSavedRightsByRoleOid----start--->"	+ System.currentTimeMillis());
+		}
+		List<Map<String,String>> roleDetails = userManager.getSavedRightsByRoleOid(roleOid);
+		if (logger.isDebugEnabled()) {
+			logger.debug("getSavedRightsByRoleOid: Success");
+		}
+		return handleSuccess("rightsDetails",roleDetails);
+	}
 }

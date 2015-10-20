@@ -1,5 +1,6 @@
 package com.ahana.api.service.registration;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.validation.Valid;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ahana.api.common.BaseService;
@@ -37,5 +39,19 @@ public class PatientRegistrationServiceImpl extends BaseService implements Patie
 			logger.debug("savePatient: Success");
 		}
 		return handleSuccess("patientRegistration",patientRegistration);
+	}
+	
+	@Override
+	@RequestMapping(value = "/searchPatientByName",method=RequestMethod.GET)
+	@ResponseBody
+	public Map<String,Object> searchPatientByName(@RequestParam("name") String name) throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("searchPatientByName----start--->"	+ System.currentTimeMillis());
+		}
+		List<Map<String,String>> roleDetails = patientRegistrationManager.searchPatientByName(name);
+		if (logger.isDebugEnabled()) {
+			logger.debug("searchPatientByName: Success");
+		}
+		return handleSuccess("rightsDetails",roleDetails);
 	}
 }

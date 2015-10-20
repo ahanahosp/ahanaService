@@ -259,4 +259,23 @@ public class UserDaoImpl extends AhanaDaoSupport implements UserDao {
 		}
 		return list;
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Map<String, String>> getSavedRightsByRoleOid(String roleOid) {
+		Query sqlQuery=null;
+		List<Map<String, String>> list=null;
+		String query=null;
+		try{
+			query="select module_oid as moduleOid from role_rights where role_oid='"+roleOid+"'";
+			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
+					.addScalar("moduleOid")
+					.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+			list = sqlQuery.list();
+		}finally{
+			sqlQuery=null;
+			query=null;
+		}
+		return list;
+	}
 }
