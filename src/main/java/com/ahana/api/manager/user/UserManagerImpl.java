@@ -9,12 +9,14 @@ import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ahana.api.common.Constants;
 import com.ahana.api.common.ErrorConstants;
 import com.ahana.api.dao.user.UserDao;
 import com.ahana.api.domain.user.RoleRights;
 import com.ahana.api.domain.user.Roles;
 import com.ahana.api.domain.user.UserProfile;
 import com.ahana.api.domain.user.UserRole;
+import com.ahana.api.manager.common.CommonManager;
 import com.ahana.api.system.security.exception.AhanaBusinessException;
 
 @Transactional(propagation = Propagation.REQUIRED)
@@ -23,12 +25,15 @@ public class UserManagerImpl implements UserManager {
 	@Autowired
 	private UserDao userDao;
 	
+	@Autowired
+	private CommonManager commonManager;
+	
 	@Override
 	public UserProfile createUser(UserProfile userProfile) throws AhanaBusinessException {
 		if(userProfile==null){
 			throw new AhanaBusinessException(ErrorConstants.USER_NOT_FOUND);
 		}
-		userProfile.setPassword("cc03e747a6afbbcbf8be7668acfebee5");
+		userProfile.setPassword(UserProfile.DEFAULT_PASSWORD);
 		Md5PasswordEncoder ms = new Md5PasswordEncoder();
 		userProfile.setPassword(ms.encodePassword(userProfile.getPassword(), null));
 		userDao.saveUser(userProfile);
@@ -142,19 +147,36 @@ public class UserManagerImpl implements UserManager {
 
 	@Override
 	public List<Map<String, String>> getSavedRolesByUserOid(String userOid) throws AhanaBusinessException {
-		List<Map<String, String>> userRoles=userDao.getSavedRolesByUserOid(userOid);
+		List<String> userRoles=userDao.getSavedRolesByUserOid(userOid);
 		if(CollectionUtils.isEmpty(userRoles)){
 			throw new AhanaBusinessException(ErrorConstants.NO_RECORDS_FOUND);
 		}
-		return userRoles;
+		List<Map<String, String>> roles=userDao.getActiveRoles();
+		if(CollectionUtils.isNotEmpty(roles)){
+			for(Map<String, String> role:roles){
+				role.put(Constants.STATUS.toLowerCase(),null);
+				if(userRoles.contains(role.get(Constants.OID))){
+					role.put(Constants.STATUS.toLowerCase(),Constants.ACT);
+				}
+			}
+		}
+		return roles;
 	}
 
 	@Override
 	public List<Map<String, String>> getSavedRightsByRoleOid(String roleOid) throws AhanaBusinessException {
-		List<Map<String, String>> roleRights=userDao.getSavedRightsByRoleOid(roleOid);
+		List<String> roleRights=userDao.getSavedRightsByRoleOid(roleOid);
 		if(CollectionUtils.isEmpty(roleRights)){
 			throw new AhanaBusinessException(ErrorConstants.NO_RECORDS_FOUND);
 		}
-		return roleRights;
+		List<Map<String, String>> modules =commonManager.getAllOrganizationModule();
+		if(CollectionUtils.isNotEmpty(modules)){
+			for(Map<String, String> mods:modules){
+				if(roleRights.contains(mods.get(Constants.OID))){
+					mods.put(Constants.STATUS.toLowerCase(),Constants.ACT);
+				}
+			}
+		}
+		return modules;
 	}	
 }

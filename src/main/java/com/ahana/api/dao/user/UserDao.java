@@ -42,8 +42,8 @@ public interface UserDao extends UserDetailsService {
 
 	List<Map<String, String>> getAllUserOidAndName();
 
-	List<Map<String, String>> getSavedRolesByUserOid(String userOid);
+	List<String> getSavedRolesByUserOid(String userOid);
 
-	List<Map<String, String>> getSavedRightsByRoleOid(String roleOid);
+	List<String> getSavedRightsByRoleOid(String roleOid);
 
 } 

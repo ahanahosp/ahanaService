@@ -47,6 +47,8 @@ public class UserProfile implements UserDetails, AhanaVO {
 	public static final String GET_USER_PROFILE_BY_USER_ID = "getUserProfileByUserId";
 	public static final String GET_USER_PROFILE_BY_USER_OID = "getUserProfileByUserOid";
 	public static final String GET_OLD_PASSWORD = "getOldPassword";
+	
+	public static final String DEFAULT_PASSWORD="cc03e747a6afbbcbf8be7668acfebee5";
 
 	@Id
 	@GeneratedValue(generator = "IdGenerator")
@@ -77,7 +79,7 @@ public class UserProfile implements UserDetails, AhanaVO {
 	@NotBlank(message = ErrorConstants.PASSWORD_IS_REQUIRED)
 	@Length(max = 50, min = 3, message = ErrorConstants.PASSWORD_LENGTH_IS_INVALID)
 	@Column(name = "password", nullable = false, length = 100, updatable = false)
-	private String password = "cc03e747a6afbbcbf8be7668acfebee5";// By default
+	private String password = DEFAULT_PASSWORD;// By default
 																	// test123
 
 	@NotBlank(message = ErrorConstants.USER_ID_IS_REQUIRED)

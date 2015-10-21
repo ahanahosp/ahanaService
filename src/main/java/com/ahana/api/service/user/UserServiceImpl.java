@@ -207,11 +207,11 @@ public class UserServiceImpl extends BaseService implements UserService {
 		if (logger.isDebugEnabled()) {
 			logger.debug("getSavedRolesByUserOid----start--->"	+ System.currentTimeMillis());
 		}
-		List<Map<String,String>> roleDetails = userManager.getSavedRolesByUserOid(userOid);
+		List<Map<String,String>> userRoleDetails = userManager.getSavedRolesByUserOid(userOid);
 		if (logger.isDebugEnabled()) {
 			logger.debug("getSavedRolesByUserOid: Success");
 		}
-		return handleSuccess("roleDetails",roleDetails);
+		return handleSuccess("userRoleDetails",userRoleDetails);
 	}
 	
 	@Override
@@ -221,10 +221,10 @@ public class UserServiceImpl extends BaseService implements UserService {
 		if (logger.isDebugEnabled()) {
 			logger.debug("getSavedRightsByRoleOid----start--->"	+ System.currentTimeMillis());
 		}
-		List<Map<String,String>> roleDetails = userManager.getSavedRightsByRoleOid(roleOid);
+		List<Map<String,String>> rights = userManager.getSavedRightsByRoleOid(roleOid);
 		if (logger.isDebugEnabled()) {
 			logger.debug("getSavedRightsByRoleOid: Success");
 		}
-		return handleSuccess("rightsDetails",roleDetails);
+		return handleSuccess("rightsDetails",rights);
 	}
 }
