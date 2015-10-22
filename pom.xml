@@ -12,33 +12,68 @@
 		<org.springframework-version>4.2.1.RELEASE</org.springframework-version>
 		<org.springframework.security-version>4.0.2.RELEASE</org.springframework.security-version>
 		<org.aspectj-version>1.8.1</org.aspectj-version>
-		<org.slf4j-version>1.6.1</org.slf4j-version>
+		<log4j-version>1.2.17</log4j-version>
+		<org.slf4j-version>1.7.12</org.slf4j-version>
+		<jackson-version>2.6.2</jackson-version>
+		<ehcache-version>2.10.0</ehcache-version>
+		<ant-version>1.9.6</ant-version>
+		<jstl-version>1.2</jstl-version>
+		<servlet-api-version>3.1.0</servlet-api-version>
+		<mysql-version>5.1.36</mysql-version>
+		<javax-validation-version>1.0.0.GA</javax-validation-version>
+		<hib-validator-version>4.3.1.Final</hib-validator-version>
+		<hibernate-version>4.3.6.Final</hibernate-version>
+		<javassist-version>3.19.0-GA</javassist-version>
+		<antltr-version>2.7.7</antltr-version>
+		<org.antltr-version>3.5.2</org.antltr-version>
+		<dom4j-version>1.6.1</dom4j-version>
+		<jta-version>1.1</jta-version>
+		<classmate-version>1.3.0</classmate-version>
+		<aop-version>1.0</aop-version>
+		<jboss-logging-version>3.3.0.Final</jboss-logging-version>
+		<hibernate-jps-version>1.0.0.Final</hibernate-jps-version>
+		<commons-logging-version>1.2</commons-logging-version>
+		<commons-bean-utils-version>1.9.2</commons-bean-utils-version>
+		<commons-io-version>2.4</commons-io-version>
+		<commons-fileupload-version>1.3.1</commons-fileupload-version>
+		<commons-collection-version>3.2.1</commons-collection-version>
+		<commons-validator-version>1.4.1</commons-validator-version>
+		<commons-jexl-version>2.1.1</commons-jexl-version>
+		<commons-codec-version>1.10</commons-codec-version>
+		<commons-dbcp2-version>2.1.1</commons-dbcp2-version>
+		<commons-pool2-version>2.4.2</commons-pool2-version>
+		<commons-lang3-version>3.4</commons-lang3-version>
+		<commons-gson-version>2.3.1</commons-gson-version>
+		<standard-version>1.1.2</standard-version>
+		<xstream-version>1.4.8</xstream-version>
+		<jxls-reader-version>1.0.6</jxls-reader-version>
+		<javax.el-api-version>3.0.1-b04</javax.el-api-version>
+		<mail-version>1.4.7</mail-version>
+		<poi-version>3.13-beta1</poi-version>
+		<el-impl-version>2.2.1-b05</el-impl-version>
+		<junit-version>4.11</junit-version>
+		<xmlunit-version>1.2</xmlunit-version>
 	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-core</artifactId>
-			<version>2.6.2</version>
+			<version>${jackson-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			<version>2.6.2</version>
+			<version>${jackson-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.module</groupId>
 			<artifactId>jackson-module-jaxb-annotations</artifactId>
-			<version>2.6.2</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
-			<version>3.4</version>
+			<version>${jackson-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>net.sf.ehcache</groupId>
 			<artifactId>ehcache</artifactId>
-			<version>2.10.0</version>
+			<version>${ehcache-version}</version>
 		</dependency>
 
 		<!-- Spring -->
@@ -54,6 +89,7 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
@@ -65,17 +101,38 @@
 			<artifactId>spring-context-support</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
+		
+		<!-- Security -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${org.springframework.security-version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${org.springframework.security-version}</version>
+		</dependency>
+		
 		<!-- Logging -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>${log4j-version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 			<version>${org.slf4j-version}</version>
-		</dependency>
+			<scope>runtime</scope>
+		</dependency>      
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>jcl-over-slf4j</artifactId>
@@ -88,10 +145,11 @@
 			<version>${org.slf4j-version}</version>
 			<scope>runtime</scope>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.apache.ant</groupId>
 			<artifactId>ant</artifactId>
-			<version>1.9.6</version>
+			<version>${ant-version}</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>ant-launcher</artifactId>
@@ -101,16 +159,9 @@
 		</dependency>
 
 		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.16</version>
-			<scope>runtime</scope>
-		</dependency>
-
-		<dependency>
 			<groupId>javax.servlet.jsp.jstl</groupId>
 			<artifactId>jstl-api</artifactId>
-			<version>1.2</version>
+			<version>${jstl-version}</version>
 			<exclusions>
 				<exclusion>
 					<groupId>javax.servlet</groupId>
@@ -118,10 +169,17 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>${servlet-api-version}</version>
+		</dependency>
+		
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.36</version>
+			<version>${mysql-version}</version>
 		</dependency>
 
 
@@ -129,41 +187,41 @@
 		<dependency>
 			<groupId>javax.validation</groupId>
 			<artifactId>validation-api</artifactId>
-			<version>1.0.0.GA</version>
+			<version>${javax-validation-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
-			<version>4.3.1.Final</version>
+			<version>${hib-validator-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<version>4.3.6.Final</version>
+			<version>${hibernate-version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
-			<version>4.3.6.Final</version>
+			<version>${hibernate-version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.javassist</groupId>
 			<artifactId>javassist</artifactId>
-			<version>3.19.0-GA</version>
+			<version>${javassist-version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>antlr</groupId>
 			<artifactId>antlr</artifactId>
-			<version>2.7.7</version>
+			<version>${antltr-version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.antlr</groupId>
 			<artifactId>antlr</artifactId>
-			<version>3.5.2</version>
+			<version>${org.antltr-version}</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>ST4</artifactId>
@@ -179,61 +237,50 @@
 		<dependency>
 			<groupId>dom4j</groupId>
 			<artifactId>dom4j</artifactId>
-			<version>1.6.1</version>
+			<version>${dom4j-version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>javax.transaction</groupId>
 			<artifactId>jta</artifactId>
-			<version>1.1</version>
+			<version>${jta-version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>com.fasterxml</groupId>
 			<artifactId>classmate</artifactId>
-			<version>1.3.0</version>
+			<version>${classmate-version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>aopalliance</groupId>
 			<artifactId>aopalliance</artifactId>
-			<version>1.0</version>
-		</dependency>
-
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.17</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>1.7.12</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>1.7.12</version>
+			<version>${aop-version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jboss.logging</groupId>
 			<artifactId>jboss-logging</artifactId>
-			<version>3.3.0.Final</version>
+			<version>${jboss-logging-version}</version>
 		</dependency>
-
+		
+		<dependency>
+			<groupId>org.hibernate.javax.persistence</groupId>
+			<artifactId>hibernate-jpa-2.1-api</artifactId>
+			<version>${hibernate-jps-version}</version>
+		</dependency>
+		
+		<!-- Commons -->
 		<dependency>
 			<groupId>commons-logging</groupId>
 			<artifactId>commons-logging</artifactId>
-			<version>1.2</version>
+			<version>${commons-logging-version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>commons-beanutils</groupId>
 			<artifactId>commons-beanutils</artifactId>
-			<version>1.9.2</version>
+			<version>${commons-bean-utils-version}</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>commons-collections</artifactId>
@@ -241,28 +288,30 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-
+		
+		<!-- File Upload -->
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
-			<version>2.4</version>
+			<version>${commons-io-version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>
-			<version>1.3.1</version>
+			<version>${commons-fileupload-version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>commons-collections</groupId>
 			<artifactId>commons-collections</artifactId>
-			<version>3.2.1</version>
+			<version>${commons-collection-version}</version>
 		</dependency>
+		
 		<dependency>
 			<groupId>commons-validator</groupId>
 			<artifactId>commons-validator</artifactId>
-			<version>1.4.1</version>
+			<version>${commons-validator-version}</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>commons-collections</artifactId>
@@ -274,55 +323,55 @@
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-jexl</artifactId>
-			<version>2.1.1</version>
+			<version>${commons-jexl-version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>commons-codec</groupId>
 			<artifactId>commons-codec</artifactId>
-			<version>1.10</version>
+			<version>${commons-codec-version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-dbcp2</artifactId>
-			<version>2.1.1</version>
+			<version>${commons-dbcp2-version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-pool2</artifactId>
-			<version>2.4.2</version>
+			<version>${commons-pool2-version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
-			<version>3.4</version>
+			<version>${commons-lang3-version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
-			<version>2.3.1</version>
+			<version>${commons-gson-version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>taglibs</groupId>
 			<artifactId>standard</artifactId>
-			<version>1.1.2</version>
+			<version>${standard-version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>com.thoughtworks.xstream</groupId>
 			<artifactId>xstream</artifactId>
-			<version>1.4.8</version>
+			<version>${xstream-version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>net.sf.jxls</groupId>
 			<artifactId>jxls-reader</artifactId>
-			<version>1.0.6</version>
+			<version>${jxls-reader-version}</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>commons-collections</artifactId>
@@ -334,37 +383,25 @@
 		<dependency>
 			<groupId>javax.el</groupId>
 			<artifactId>javax.el-api</artifactId>
-			<version>3.0.1-b04</version>
+			<version>${javax.el-api-version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>javax.mail</groupId>
 			<artifactId>mail</artifactId>
-			<version>1.4.7</version>
+			<version>${mail-version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi</artifactId>
-			<version>3.13-beta1</version>
+			<version>${poi-version}</version>
 		</dependency>
-
-		<dependency>
-			<groupId>org.mongodb</groupId>
-			<artifactId>mongo-java-driver</artifactId>
-			<version>3.1.0-rc0</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.glassfish.web</groupId>
-			<artifactId>el-impl</artifactId>
-			<version>2.2.1-b05</version>
-		</dependency>
-
+		
 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi-ooxml</artifactId>
-			<version>3.13-beta1</version>
+			<version>${poi-version}</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>stax-api</artifactId>
@@ -374,52 +411,10 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.springframework.data</groupId>
-			<artifactId>spring-data-mongodb</artifactId>
-			<version>1.8.0.RELEASE</version>
+			<groupId>org.glassfish.web</groupId>
+			<artifactId>el-impl</artifactId>
+			<version>${el-impl-version}</version>
 		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.data</groupId>
-			<artifactId>spring-data-commons</artifactId>
-			<version>1.11.0.RELEASE</version>
-		</dependency>
-
-		<!-- File Upload -->
-		<dependency>
-			<groupId>commons-fileupload</groupId>
-			<artifactId>commons-fileupload</artifactId>
-			<version>1.2.2</version>
-		</dependency>
-		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-			<version>2.0.1</version>
-		</dependency>
-
-		<!-- Security (used for CSRF protection only) -->
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-web</artifactId>
-			<version>${org.springframework.security-version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-config</artifactId>
-			<version>${org.springframework.security-version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.hibernate.javax.persistence</groupId>
-			<artifactId>hibernate-jpa-2.1-api</artifactId>
-			<version>1.0.0.Final</version>
-		</dependency>
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-			<version>3.1.0</version>
-		</dependency>
-
 
 		<!-- Test -->
 		<dependency>
@@ -431,13 +426,13 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.11</version>
+			<version>${junit-version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>xmlunit</groupId>
 			<artifactId>xmlunit</artifactId>
-			<version>1.2</version>
+			<version>${xmlunit-version}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
