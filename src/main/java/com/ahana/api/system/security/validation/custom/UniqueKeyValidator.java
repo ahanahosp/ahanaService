@@ -44,7 +44,7 @@ public class UniqueKeyValidator implements ConstraintValidator<UniqueKey, Serial
 		}
 		boolean isAvailable=validationDao.checkUnique(target.getClass().getName(), propertyName, propertyValue, null);
 		if (!isAvailable) {
-			context.buildConstraintViolationWithTemplate(constraintAnnotation.message()).addNode(propertyName).addConstraintViolation().disableDefaultConstraintViolation();
+			context.buildConstraintViolationWithTemplate(constraintAnnotation.message()).addPropertyNode(propertyName).addConstraintViolation().disableDefaultConstraintViolation();
 			return false;
 		}
 		return true;

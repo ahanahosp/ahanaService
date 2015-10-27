@@ -31,12 +31,12 @@ public class DepententFieldValidator implements ConstraintValidator<DepententFie
             final String dependFieldValue= BeanUtils.getProperty(value, dependFieldName);
             if(StringUtils.isBlank(fieldValue) || fieldValue.equalsIgnoreCase("null") || fieldValue.equalsIgnoreCase("")){
             	ctx.disableDefaultConstraintViolation();
-                ctx.buildConstraintViolationWithTemplate(ctx.getDefaultConstraintMessageTemplate()).addNode(dependFieldName).addConstraintViolation();
+                ctx.buildConstraintViolationWithTemplate(ctx.getDefaultConstraintMessageTemplate()).addPropertyNode(dependFieldName).addConstraintViolation();
                 return false;
             }else if (StringUtils.isNoneBlank(expectedFieldValue) && StringUtils.isNotBlank(fieldValue) 
             		&& expectedFieldValue.equalsIgnoreCase(fieldValue) && dependFieldValue == null) {
                 ctx.disableDefaultConstraintViolation();
-                ctx.buildConstraintViolationWithTemplate(ctx.getDefaultConstraintMessageTemplate()).addNode(dependFieldName).addConstraintViolation();
+                ctx.buildConstraintViolationWithTemplate(ctx.getDefaultConstraintMessageTemplate()).addPropertyNode(dependFieldName).addConstraintViolation();
                 return false;
             }
         } catch (final NoSuchMethodException ex) {
