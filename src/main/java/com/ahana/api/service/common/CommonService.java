@@ -12,7 +12,7 @@ import com.ahana.api.domain.common.RoomMaintenanceDetails;
 import com.ahana.api.domain.common.RoomType;
 import com.ahana.api.domain.common.SpecialityDetails;
 import com.ahana.api.domain.common.Ward;
-import com.ahana.api.system.security.exception.AhanaBusinessException;
+import com.ahana.commons.system.security.exception.AhanaBusinessException;
 
 public interface CommonService {
 

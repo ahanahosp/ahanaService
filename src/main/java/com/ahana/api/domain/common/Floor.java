@@ -14,10 +14,10 @@ import org.hibernate.annotations.Parameter;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
-import com.ahana.api.common.AhanaVO;
-import com.ahana.api.common.Constants;
-import com.ahana.api.common.ErrorConstants;
-import com.ahana.api.common.RegConstants;
+import com.ahana.commons.system.domain.common.AhanaVO;
+import com.ahana.commons.system.security.error.CommonErrorConstants;
+import com.ahana.commons.system.security.util.Constants;
+import com.ahana.commons.system.security.util.RegConstants;
 
 @Entity
 @Table(name = "floor")
@@ -28,7 +28,7 @@ public class Floor implements AhanaVO {
 
 	@Id
 	@GeneratedValue(generator = "IdGenerator")
-	@GenericGenerator(name = "IdGenerator", strategy = "com.ahana.api.common.IdGenerator", parameters = {
+	@GenericGenerator(name = "IdGenerator", strategy = "com.ahana.commons.system.security.util.IdGenerator", parameters = {
 			@Parameter(name = "table", value = "seed_container"),
 			@Parameter(name = "column", value = "high_oid"),
 			@Parameter(name = "install_id", value = "seed_id"),
@@ -36,15 +36,15 @@ public class Floor implements AhanaVO {
 	@Column(name = "oid")
 	private String oid;
 
-	@NotBlank(message=ErrorConstants.FLOOR_NAME_IS_REQUIRED)
-	@Length(min=3,max=100,message=ErrorConstants.FLOOR_NAME_LENGTH_IS_INVALID)
-	@Pattern(regexp=RegConstants.ALPHA_NUMERIC_SPACE_HYPEN,message=ErrorConstants.FLOOR_NAME_INVALID_FORMAT)
+	@NotBlank(message=CommonErrorConstants.FLOOR_NAME_IS_REQUIRED)
+	@Length(min=3,max=100,message=CommonErrorConstants.FLOOR_NAME_LENGTH_IS_INVALID)
+	@Pattern(regexp=RegConstants.ALPHA_NUMERIC_SPACE_HYPEN,message=CommonErrorConstants.FLOOR_NAME_INVALID_FORMAT)
 	@Column(name = "floor_name")
 	private String floorName;
 
-	@NotBlank(message=ErrorConstants.FLOOR_CODE_IS_REQUIRED)
-	@Length(min=2,max=10,message=ErrorConstants.FLOOR_CODE_LENGTH_IS_INVALID)
-	@Pattern(regexp=RegConstants.ALPHA_NUMERIC_SPACE_HYPEN,message=ErrorConstants.FLOOR_CODE_INVALID_FORMAT)
+	@NotBlank(message=CommonErrorConstants.FLOOR_CODE_IS_REQUIRED)
+	@Length(min=2,max=10,message=CommonErrorConstants.FLOOR_CODE_LENGTH_IS_INVALID)
+	@Pattern(regexp=RegConstants.ALPHA_NUMERIC_SPACE_HYPEN,message=CommonErrorConstants.FLOOR_CODE_INVALID_FORMAT)
 	@Column(name = "floor_code")
 	private String floorCode;
 

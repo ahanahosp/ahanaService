@@ -22,9 +22,9 @@
 		</sec:filter-chain-map>
 	</bean>
 	
-	<bean id="ahanaSecurityFilter" class="com.ahana.api.system.security.filters.AhanaSecurityFilter"/>
+	<bean id="ahanaSecurityFilter" class="com.ahana.commons.system.security.filters.AhanaSecurityFilter"/>
 	
-	<bean id="filterInvocationInterceptor" class="com.ahana.api.system.security.filters.AhanaFilterSecurityInterceptor">
+	<bean id="filterInvocationInterceptor" class="com.ahana.commons.system.security.filters.AhanaFilterSecurityInterceptor">
 		<property name="authenticationManager" ref="authenticationManager" />
 		<property name="accessDecisionManager" ref="accessDecisionManager" />
 	</bean>
@@ -47,13 +47,13 @@
 		</constructor-arg>
    	</bean>
    	
-   	<bean id="daoAuthenticationProvider" class="com.ahana.api.system.security.filters.AhanaDaoAuthenticationProvider">
+   	<bean id="daoAuthenticationProvider" class="com.ahana.commons.system.security.filters.AhanaDaoAuthenticationProvider">
 		<property name="userDetailsService" ref="userDao"/>
 		<property name="hideUserNotFoundExceptions" value="true"/>
 		<property name="passwordEncoder" ref="passwordEncoder"/>
 	</bean>
 	
-	<bean id="passwordEncoder" class="com.ahana.api.system.security.util.StringEncoder"/>
+	<bean id="passwordEncoder" class="com.ahana.commons.system.security.util.StringEncoder"/>
    	
    	<bean id="rememberMeAuthenticationProvider" class="org.springframework.security.authentication.RememberMeAuthenticationProvider">
    		<constructor-arg name="key" value="ahana" index="0" type="java.lang.String"/>

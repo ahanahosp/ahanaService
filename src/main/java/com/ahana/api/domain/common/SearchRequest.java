@@ -3,7 +3,7 @@ package com.ahana.api.domain.common;
 import java.util.List;
 import java.util.Map;
 
-import com.ahana.api.common.AhanaVO;
+import com.ahana.commons.system.domain.common.AhanaVO;
 
 @SuppressWarnings("serial")
 public class SearchRequest implements AhanaVO {

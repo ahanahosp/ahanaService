@@ -8,8 +8,8 @@ import org.hibernate.transform.Transformers;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ahana.api.dao.common.AhanaDaoSupport;
 import com.ahana.api.domain.common.PatientRegistration;
+import com.ahana.commons.system.dao.common.AhanaDaoSupport;
 
 @Transactional(readOnly = false)
 public class PatientRegistrationDaoImpl extends AhanaDaoSupport implements PatientRegistrationDao{

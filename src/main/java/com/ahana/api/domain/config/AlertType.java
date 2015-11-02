@@ -14,10 +14,10 @@ import org.hibernate.annotations.Parameter;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
-import com.ahana.api.common.AhanaVO;
-import com.ahana.api.common.Constants;
-import com.ahana.api.common.ErrorConstants;
-import com.ahana.api.common.RegConstants;
+import com.ahana.commons.system.domain.common.AhanaVO;
+import com.ahana.commons.system.security.error.CommonErrorConstants;
+import com.ahana.commons.system.security.util.Constants;
+import com.ahana.commons.system.security.util.RegConstants;
 
 @Entity
 @Table(name = "alert_type")
@@ -28,15 +28,15 @@ public class AlertType implements AhanaVO {
 
 	@Id
 	@GeneratedValue(generator = "IdGenerator")
-	@GenericGenerator(name = "IdGenerator", strategy = "com.ahana.api.common.IdGenerator", parameters = {
+	@GenericGenerator(name = "IdGenerator", strategy = "com.ahana.commons.system.security.util.IdGenerator", parameters = {
 			@Parameter(name = "table", value = "seed_container"), @Parameter(name = "column", value = "high_oid"),
 			@Parameter(name = "install_id", value = "seed_id"), @Parameter(name = "max_lo", value = "100000") })
 	@Column(name = "oid")
 	private String oid;
 
-	@NotBlank(message = ErrorConstants.ALERT_NAME_IS_REQUIRED)
-	@Length(min = 3, max = 100, message = ErrorConstants.ALERT_NAME_LENGTH_IS_INVALID)
-	@Pattern(regexp = RegConstants.ALPHA_NUMERIC_SPACE_HYPEN, message = ErrorConstants.ALERT_NAME_IS_INVALID_FORMAT)
+	@NotBlank(message = CommonErrorConstants.ALERT_NAME_IS_REQUIRED)
+	@Length(min = 3, max = 100, message = CommonErrorConstants.ALERT_NAME_LENGTH_IS_INVALID)
+	@Pattern(regexp = RegConstants.ALPHA_NUMERIC_SPACE_HYPEN, message = CommonErrorConstants.ALERT_NAME_IS_INVALID_FORMAT)
 	@Column(name = "alert_name")
 	private String alertName;
 

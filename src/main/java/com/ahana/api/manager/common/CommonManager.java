@@ -3,14 +3,14 @@ package com.ahana.api.manager.common;
 import java.util.List;
 import java.util.Map;
 
-import com.ahana.api.common.AhanaVO;
 import com.ahana.api.domain.common.AccountHead;
 import com.ahana.api.domain.common.Floor;
 import com.ahana.api.domain.common.Procedures;
 import com.ahana.api.domain.common.Room;
 import com.ahana.api.domain.common.RoomChargeItem;
 import com.ahana.api.domain.common.Ward;
-import com.ahana.api.system.security.exception.AhanaBusinessException;
+import com.ahana.commons.system.domain.common.AhanaVO;
+import com.ahana.commons.system.security.exception.AhanaBusinessException;
 
 public interface CommonManager {
 

@@ -3,7 +3,7 @@ package com.ahana.api.dao.config;
 import java.util.List;
 import java.util.Map;
 
-import com.ahana.api.common.AhanaVO;
+import com.ahana.commons.system.domain.common.AhanaVO;
 
 public interface ConfigurationDao {
 

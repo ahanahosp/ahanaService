@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ahana.api.common.BaseService;
 import com.ahana.api.domain.common.PatientRegistration;
 import com.ahana.api.manager.registration.PatientRegistrationManager;
-import com.ahana.api.system.security.exception.AhanaBusinessException;
+import com.ahana.commons.system.security.exception.AhanaBusinessException;
+import com.ahana.commons.system.service.BaseService;
 
 @Controller
 @RequestMapping("/services/rest/secure/registration")

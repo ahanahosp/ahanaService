@@ -17,9 +17,9 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
 
-import com.ahana.api.common.AhanaVO;
-import com.ahana.api.common.ErrorConstants;
-import com.ahana.api.common.mail.LookupConstants;
+import com.ahana.commons.system.domain.common.AhanaVO;
+import com.ahana.commons.system.security.error.CommonErrorConstants;
+import com.ahana.commons.system.security.util.LookupConstants;
 
 @SuppressWarnings("serial")
 @Entity
@@ -28,7 +28,7 @@ public class PatientRegistration implements AhanaVO {
 
 	@Id
 	@GeneratedValue(generator = "IdGenerator")
-	@GenericGenerator(name = "IdGenerator", strategy = "com.ahana.api.common.IdGenerator", parameters = {
+	@GenericGenerator(name = "IdGenerator", strategy = "com.ahana.commons.system.security.util.IdGenerator", parameters = {
 			@Parameter(name = "table", value = "seed_container"), @Parameter(name = "column", value = "high_oid"),
 			@Parameter(name = "install_id", value = "seed_id"), @Parameter(name = "max_lo", value = "100000")
 			//,@Parameter(name = "type", value = Constants.ID_PATIENT) 
@@ -36,35 +36,35 @@ public class PatientRegistration implements AhanaVO {
 	@Column(name = "oid")
 	private String oid;
 
-	@NotNull(message = ErrorConstants.REGISTRATION_DATE_IS_REQUIRED)
+	@NotNull(message = CommonErrorConstants.REGISTRATION_DATE_IS_REQUIRED)
 	@Column(name = "registration_date", nullable = false)
 	private Timestamp registrationDate;
 
-	@NotBlank(message = ErrorConstants.FIRST_NAME_IS_REQUIRED)
-	@Size(max = 50, min = 3, message = ErrorConstants.FIRST_NAME_IS_INVALID_LENGTH)
-	@Pattern(regexp = "[a-z-A-Z]*", message = ErrorConstants.FIRST_NAME_MUST_BE_ALPHABETICAL)
+	@NotBlank(message = CommonErrorConstants.FIRST_NAME_IS_REQUIRED)
+	@Size(max = 50, min = 3, message = CommonErrorConstants.FIRST_NAME_IS_INVALID_LENGTH)
+	@Pattern(regexp = "[a-z-A-Z]*", message = CommonErrorConstants.FIRST_NAME_MUST_BE_ALPHABETICAL)
 	@Column(name = "first_name", nullable = false, length = 50)
 	private String firstName;
 
-	@NotBlank(message = ErrorConstants.FIRST_NAME_IS_REQUIRED)
-	@Length(max = 50, min = 3, message = ErrorConstants.FIRST_NAME_IS_INVALID_LENGTH)
-	@Pattern(regexp = "[a-z-A-Z]*", message = ErrorConstants.FIRST_NAME_MUST_BE_ALPHABETICAL)
+	@NotBlank(message = CommonErrorConstants.FIRST_NAME_IS_REQUIRED)
+	@Length(max = 50, min = 3, message = CommonErrorConstants.FIRST_NAME_IS_INVALID_LENGTH)
+	@Pattern(regexp = "[a-z-A-Z]*", message = CommonErrorConstants.FIRST_NAME_MUST_BE_ALPHABETICAL)
 	@Column(name = "last_name", length = 50)
 	private String lastName;
 
-	@NotBlank(message = ErrorConstants.GENDER_IS_REQUIRED)
-	@Length(max = 6, min = 1, message = ErrorConstants.GENDER_IS_INVALID_LENGTH)
-	@Pattern(regexp = "[a-z-A-Z]*", message = ErrorConstants.GENDER_MUST_BE_ALPHABETICAL)
+	@NotBlank(message = CommonErrorConstants.GENDER_IS_REQUIRED)
+	@Length(max = 6, min = 1, message = CommonErrorConstants.GENDER_IS_INVALID_LENGTH)
+	@Pattern(regexp = "[a-z-A-Z]*", message = CommonErrorConstants.GENDER_MUST_BE_ALPHABETICAL)
 	@Column(name = "gender", nullable = false, length = 6)
 	private String gender;
 
-	@Range(max=100,min=1,message = ErrorConstants.AGE_IS_REQUIRED)
+	@Range(max=100,min=1,message = CommonErrorConstants.AGE_IS_REQUIRED)
 	@Column(name = "age")
 	private int age;
 
-	@NotBlank(message = ErrorConstants.MOBILE_NUMBER_IS_REQUIRED)
-	@Length(max = 12, min = 5, message = ErrorConstants.MOBILE_NUMBER_IS_INVALID_LENGTH)
-	@Pattern(regexp = "[0-9]*", message = ErrorConstants.MOBILE_NUMBER_MUST_BE_NUMBER)
+	@NotBlank(message = CommonErrorConstants.MOBILE_NUMBER_IS_REQUIRED)
+	@Length(max = 12, min = 5, message = CommonErrorConstants.MOBILE_NUMBER_IS_INVALID_LENGTH)
+	@Pattern(regexp = "[0-9]*", message = CommonErrorConstants.MOBILE_NUMBER_MUST_BE_NUMBER)
 	@Column(name = "mobile")
 	private String mobile;
 

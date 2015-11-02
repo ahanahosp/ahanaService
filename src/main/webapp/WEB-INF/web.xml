@@ -40,7 +40,7 @@
     </filter-mapping>
     
     <listener>
-		<listener-class>com.ahana.api.system.listener.AhanaApplicationInitializer</listener-class>
+		<listener-class>com.ahana.commons.system.listener.AhanaApplicationInitializer</listener-class>
 	</listener>
 	
 	<servlet>

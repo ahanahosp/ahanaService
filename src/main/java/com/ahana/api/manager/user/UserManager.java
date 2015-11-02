@@ -4,10 +4,10 @@ import java.util.List;
 import java.util.Map;
 
 import com.ahana.api.domain.user.RoleRights;
-import com.ahana.api.domain.user.Roles;
-import com.ahana.api.domain.user.UserProfile;
-import com.ahana.api.domain.user.UserRole;
-import com.ahana.api.system.security.exception.AhanaBusinessException;
+import com.ahana.commons.system.domain.user.Roles;
+import com.ahana.commons.system.domain.user.UserProfile;
+import com.ahana.commons.system.domain.user.UserRole;
+import com.ahana.commons.system.security.exception.AhanaBusinessException;
 
 public interface UserManager {
 

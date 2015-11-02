@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ahana.api.common.BaseService;
-import com.ahana.api.common.mail.LookupConstants;
-import com.ahana.api.domain.common.NameValue;
-import com.ahana.api.manager.lookup.LookupManager;
-import com.ahana.api.system.security.exception.AhanaBusinessException;
+import com.ahana.commons.system.domain.common.NameValue;
+import com.ahana.commons.system.manager.lookup.LookupManager;
+import com.ahana.commons.system.security.exception.AhanaBusinessException;
+import com.ahana.commons.system.security.util.LookupConstants;
+import com.ahana.commons.system.service.BaseService;
 
 @RestController
 @RequestMapping("/services/rest/secure/lookup")

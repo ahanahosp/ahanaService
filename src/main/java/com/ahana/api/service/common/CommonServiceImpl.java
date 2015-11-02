@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ahana.api.common.AhanaVO;
-import com.ahana.api.common.BaseService;
 import com.ahana.api.domain.common.AccountHead;
 import com.ahana.api.domain.common.Floor;
 import com.ahana.api.domain.common.Organization;
@@ -28,7 +26,9 @@ import com.ahana.api.domain.common.RoomType;
 import com.ahana.api.domain.common.SpecialityDetails;
 import com.ahana.api.domain.common.Ward;
 import com.ahana.api.manager.common.CommonManager;
-import com.ahana.api.system.security.exception.AhanaBusinessException;
+import com.ahana.commons.system.domain.common.AhanaVO;
+import com.ahana.commons.system.security.exception.AhanaBusinessException;
+import com.ahana.commons.system.service.BaseService;
 
 @RestController
 @RequestMapping("/services/rest/secure/common")

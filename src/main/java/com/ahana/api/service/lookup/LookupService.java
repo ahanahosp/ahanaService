@@ -2,7 +2,7 @@ package com.ahana.api.service.lookup;
 
 import java.util.Map;
 
-import com.ahana.api.system.security.exception.AhanaBusinessException;
+import com.ahana.commons.system.security.exception.AhanaBusinessException;
 
 public interface LookupService {
 

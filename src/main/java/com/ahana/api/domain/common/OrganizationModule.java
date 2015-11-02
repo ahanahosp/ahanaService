@@ -9,7 +9,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
-import com.ahana.api.common.AhanaVO;
+import com.ahana.commons.system.domain.common.AhanaVO;
 
 @SuppressWarnings("serial")
 @Entity
@@ -18,7 +18,7 @@ public class OrganizationModule implements AhanaVO {
 
 	@Id
 	@GeneratedValue(generator = "IdGenerator")
-	@GenericGenerator(name = "IdGenerator", strategy = "com.ahana.api.common.IdGenerator", parameters = {
+	@GenericGenerator(name = "IdGenerator", strategy = "com.ahana.commons.system.security.util.IdGenerator", parameters = {
 			@Parameter(name = "table", value = "seed_container"),
 			@Parameter(name = "column", value = "high_oid"),
 			@Parameter(name = "install_id", value = "seed_id"),

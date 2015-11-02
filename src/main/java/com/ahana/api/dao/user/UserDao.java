@@ -8,9 +8,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import com.ahana.api.domain.user.RoleRights;
-import com.ahana.api.domain.user.Roles;
-import com.ahana.api.domain.user.UserProfile;
-import com.ahana.api.domain.user.UserRole;
+import com.ahana.commons.system.domain.user.Roles;
+import com.ahana.commons.system.domain.user.UserProfile;
+import com.ahana.commons.system.domain.user.UserRole;
 
 public interface UserDao extends UserDetailsService {
 

@@ -4,7 +4,7 @@
      	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd 
     	http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
-	<bean id="readWriteDataSource" class="com.ahana.api.system.security.common.ManagedDataSource">
+	<bean id="readWriteDataSource" class="com.ahana.commons.system.security.common.ManagedDataSource">
 		<property name="lookupDBUsernameLabel"><value>database.user</value></property>
 		<property name="lookupDBPasswordLabel"><value>database.password</value></property>
 		<property name="lookupDBNameLabel"><value>database.name</value></property>
@@ -27,7 +27,7 @@
 		<property name="url" value="jdbc:mysql://databaseIP:databasePort/databaseName?defaultAutoCommit=false"/>
 	</bean>
 	
-	<bean id="readOnlyDataSource" class="com.ahana.api.system.security.common.ManagedDataSource">
+	<bean id="readOnlyDataSource" class="com.ahana.commons.system.security.common.ManagedDataSource">
 		<property name="lookupDBUsernameLabel"><value>database.readonly.user</value></property>
 		<property name="lookupDBPasswordLabel"><value>database.readonly.password</value></property>
 		<property name="lookupDBNameLabel"><value>database.readonly.name</value></property>
@@ -66,9 +66,9 @@
 		</property>
 		<property name="annotatedClasses">
 			<list>
-				<value>com.ahana.api.domain.user.Roles</value>
-				<value>com.ahana.api.domain.user.UserProfile</value>
-				<value>com.ahana.api.domain.user.UserRole</value>
+				<value>com.ahana.commons.system.domain.user.Roles</value>
+				<value>com.ahana.commons.system.domain.user.UserProfile</value>
+				<value>com.ahana.commons.system.domain.user.UserRole</value>
 				<value>com.ahana.api.domain.common.PatientRegistration</value>
 				<value>com.ahana.api.domain.common.Organization</value>
 				<value>com.ahana.api.domain.common.OrganizationModule</value>
@@ -103,11 +103,11 @@
 		</property>
 		<property name="annotatedClasses">
 			<list>
-				<value>com.ahana.api.domain.user.Roles</value>
-				<value>com.ahana.api.domain.user.UserProfile</value>
-				<value>com.ahana.api.domain.user.UserRole</value>
-				<value>com.ahana.api.domain.common.AhanaLookupVO</value>
-				<value>com.ahana.api.domain.common.LookupPK</value>	
+				<value>com.ahana.commons.system.domain.user.Roles</value>
+				<value>com.ahana.commons.system.domain.user.UserProfile</value>
+				<value>com.ahana.commons.system.domain.user.UserRole</value>
+				<value>com.ahana.commons.system.domain.common.AhanaLookupVO</value>
+				<value>com.ahana.commons.system.domain.common.LookupPK</value>	
 				<value>com.ahana.api.domain.common.PatientRegistration</value>
 				<value>com.ahana.api.domain.common.Organization</value>
 				<value>com.ahana.api.domain.common.OrganizationModule</value>

@@ -51,8 +51,16 @@
 		<el-impl-version>2.2.1-b05</el-impl-version>
 		<junit-version>4.11</junit-version>
 		<xmlunit-version>1.2</xmlunit-version>
+		<commons-version>1.0</commons-version>
 	</properties>
 	<dependencies>
+		<dependency>
+			<groupId>com.ahana.commons</groupId>
+			<artifactId>commons-ahana</artifactId>
+			<version>${commons-version}</version>
+			<scope>system</scope>
+			<systemPath>${basedir}\src\main\resources\lib\commons-ahana-1.0.jar</systemPath>
+		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-core</artifactId>
@@ -87,7 +95,7 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
@@ -99,26 +107,26 @@
 			<artifactId>spring-context-support</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
-		
+
 		<!-- Security -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-web</artifactId>
 			<version>${org.springframework.security-version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-config</artifactId>
 			<version>${org.springframework.security-version}</version>
 		</dependency>
-		
+
 		<!-- Logging -->
 		<dependency>
 			<groupId>log4j</groupId>
@@ -130,7 +138,7 @@
 			<artifactId>slf4j-api</artifactId>
 			<version>${org.slf4j-version}</version>
 			<scope>runtime</scope>
-		</dependency>      
+		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>jcl-over-slf4j</artifactId>
@@ -143,7 +151,7 @@
 			<version>${org.slf4j-version}</version>
 			<scope>runtime</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.apache.ant</groupId>
 			<artifactId>ant</artifactId>
@@ -161,7 +169,7 @@
 			<artifactId>javax.servlet-api</artifactId>
 			<version>${servlet-api-version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -249,13 +257,13 @@
 			<artifactId>jboss-logging</artifactId>
 			<version>${jboss-logging-version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.hibernate.javax.persistence</groupId>
 			<artifactId>hibernate-jpa-2.1-api</artifactId>
 			<version>${hibernate-jps-version}</version>
 		</dependency>
-		
+
 		<!-- Commons -->
 		<dependency>
 			<groupId>commons-logging</groupId>
@@ -274,7 +282,7 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		
+
 		<!-- File Upload -->
 		<dependency>
 			<groupId>commons-io</groupId>
@@ -293,7 +301,7 @@
 			<artifactId>commons-collections</artifactId>
 			<version>${commons-collection-version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>commons-validator</groupId>
 			<artifactId>commons-validator</artifactId>
@@ -383,7 +391,7 @@
 			<artifactId>poi</artifactId>
 			<version>${poi-version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi-ooxml</artifactId>
@@ -459,34 +467,15 @@
 					<target>1.7</target>
 				</configuration>
 			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-antrun-plugin</artifactId>
-				<version>1.8</version>
-				<executions>
-					<execution>
-						<phase>compile</phase>
-						<configuration>
-							<target name="populateAhanaErrorConstant">
-								<taskdef name="readXLS"
-									classname="com.ahana.api.system.security.error.ErrorConstantsGenerator"
-									classpathref="maven.runtime.classpath"></taskdef>
-								<fileset dir="${basedir}/" id="errorConstantJavaFile">
-									<include
-										name="src/main/java/com/ahana/api/common/ErrorConstants.java" />
-								</fileset>
-								<readXLS xmltemplatepath="src/main/resources/config/error_constants_mapping.xml"
-									xlstemplatepath="src/main/resources/config/AhanaErrordictionary.xls">
-									<errorConstantFile refid="errorConstantJavaFile" />
-								</readXLS>
-							</target>
-						</configuration>
-						<goals>
-							<goal>run</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
+			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-antrun-plugin</artifactId> 
+				<version>1.8</version> <executions> <execution> <phase>compile</phase> <configuration> 
+				<target name="populateAhanaErrorConstant"> <taskdef name="readXLS" classname="com.ahana.api.system.security.error.ErrorConstantsGenerator" 
+				classpathref="maven.runtime.classpath"></taskdef> <fileset dir="${basedir}/" 
+				id="errorConstantJavaFile"> <include name="src/main/java/com/ahana/api/common/ErrorConstants.java" 
+				/> </fileset> <readXLS xmltemplatepath="src/main/resources/config/error_constants_mapping.xml" 
+				xlstemplatepath="src/main/resources/config/AhanaErrordictionary.xls"> <errorConstantFile 
+				refid="errorConstantJavaFile" /> </readXLS> </target> </configuration> <goals> 
+				<goal>run</goal> </goals> </execution> </executions> </plugin> -->
 		</plugins>
 		<pluginManagement>
 			<plugins>

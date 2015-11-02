@@ -3,8 +3,8 @@ package com.ahana.api.manager.config;
 import java.util.List;
 import java.util.Map;
 
-import com.ahana.api.common.AhanaVO;
-import com.ahana.api.system.security.exception.AhanaBusinessException;
+import com.ahana.commons.system.domain.common.AhanaVO;
+import com.ahana.commons.system.security.exception.AhanaBusinessException;
 
 public interface ConfigurationManager {
 

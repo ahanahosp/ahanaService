@@ -20,13 +20,13 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ahana.api.common.Constants;
-import com.ahana.api.common.ErrorConstants;
-import com.ahana.api.dao.common.AhanaDaoSupport;
 import com.ahana.api.domain.user.RoleRights;
-import com.ahana.api.domain.user.Roles;
-import com.ahana.api.domain.user.UserProfile;
-import com.ahana.api.domain.user.UserRole;
+import com.ahana.commons.system.dao.common.AhanaDaoSupport;
+import com.ahana.commons.system.domain.user.Roles;
+import com.ahana.commons.system.domain.user.UserProfile;
+import com.ahana.commons.system.domain.user.UserRole;
+import com.ahana.commons.system.security.error.CommonErrorConstants;
+import com.ahana.commons.system.security.util.Constants;
 
 @Transactional(readOnly = false)
 public class UserDaoImpl extends AhanaDaoSupport implements UserDao {
@@ -58,7 +58,7 @@ public class UserDaoImpl extends AhanaDaoSupport implements UserDao {
 					}
 				}
 			} else {
-				throw new UsernameNotFoundException(ErrorConstants.USERNAME_OR_PASSWORD_IS_INVALID);
+				throw new UsernameNotFoundException(CommonErrorConstants.USERNAME_OR_PASSWORD_IS_INVALID);
 			}
 			boolean credentialsNonExpired = true;
 			Date today = new Date();
@@ -83,7 +83,7 @@ public class UserDaoImpl extends AhanaDaoSupport implements UserDao {
 			}
 			return userDetails;
 		} catch (Throwable e) {
-			throw new UsernameNotFoundException(ErrorConstants.USERNAME_OR_PASSWORD_IS_INVALID);
+			throw new UsernameNotFoundException(CommonErrorConstants.USERNAME_OR_PASSWORD_IS_INVALID);
 		}finally{
 			userProfile=null;
 			users=null;

@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ahana.api.common.BaseService;
 import com.ahana.api.domain.user.RoleRights;
-import com.ahana.api.domain.user.Roles;
-import com.ahana.api.domain.user.UserProfile;
-import com.ahana.api.domain.user.UserRole;
 import com.ahana.api.manager.user.UserManager;
-import com.ahana.api.system.security.exception.AhanaBusinessException;
+import com.ahana.commons.system.domain.user.Roles;
+import com.ahana.commons.system.domain.user.UserProfile;
+import com.ahana.commons.system.domain.user.UserRole;
+import com.ahana.commons.system.security.exception.AhanaBusinessException;
+import com.ahana.commons.system.service.BaseService;
 
 @RestController
 @RequestMapping("/services/rest/secure/user")

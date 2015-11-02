@@ -8,10 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ahana.api.common.AhanaVO;
-import com.ahana.api.common.ErrorConstants;
 import com.ahana.api.dao.config.ConfigurationDao;
-import com.ahana.api.system.security.exception.AhanaBusinessException;
+import com.ahana.commons.system.domain.common.AhanaVO;
+import com.ahana.commons.system.security.error.CommonErrorConstants;
+import com.ahana.commons.system.security.exception.AhanaBusinessException;
 
 @Transactional(propagation = Propagation.REQUIRED)
 public class ConfigurationManagerImpl implements ConfigurationManager {
@@ -22,7 +22,7 @@ public class ConfigurationManagerImpl implements ConfigurationManager {
 	@Override
 	public void createOrUpdateConfigData(AhanaVO ahanaVO) throws AhanaBusinessException {
 		if(ahanaVO==null){
-			throw new AhanaBusinessException(ErrorConstants.NO_RECORDS_FOUND);
+			throw new AhanaBusinessException(CommonErrorConstants.NO_RECORDS_FOUND);
 		}
 		configurationDao.createOrUpdateConfigData(ahanaVO);
 	}	
@@ -36,7 +36,7 @@ public class ConfigurationManagerImpl implements ConfigurationManager {
 	public AhanaVO getConfigDataByOid(String queryName, String columnName, String oid) throws AhanaBusinessException {
 		AhanaVO ahanaVO=configurationDao.getConfigDetailsItemByOid(queryName,columnName,oid);
 		if(ahanaVO==null){
-			throw new AhanaBusinessException(ErrorConstants.NO_RECORDS_FOUND);
+			throw new AhanaBusinessException(CommonErrorConstants.NO_RECORDS_FOUND);
 		}
 		return ahanaVO;
 	}
@@ -45,7 +45,7 @@ public class ConfigurationManagerImpl implements ConfigurationManager {
 	public List<Map<String, String>> getAllAlertType() throws AhanaBusinessException {
 		List<Map<String,String>> alertTypeDetails=configurationDao.getAllAlertType();
 		if(CollectionUtils.isEmpty(alertTypeDetails)){
-			throw new AhanaBusinessException(ErrorConstants.NO_RECORDS_FOUND);
+			throw new AhanaBusinessException(CommonErrorConstants.NO_RECORDS_FOUND);
 		}
 		return alertTypeDetails;
 	}

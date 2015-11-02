@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ahana.api.common.AhanaVO;
-import com.ahana.api.common.BaseService;
 import com.ahana.api.domain.config.AlertType;
 import com.ahana.api.manager.config.ConfigurationManager;
-import com.ahana.api.system.security.exception.AhanaBusinessException;
+import com.ahana.commons.system.domain.common.AhanaVO;
+import com.ahana.commons.system.security.exception.AhanaBusinessException;
+import com.ahana.commons.system.service.BaseService;
 
 @RestController
 @RequestMapping("/services/rest/secure/config/")

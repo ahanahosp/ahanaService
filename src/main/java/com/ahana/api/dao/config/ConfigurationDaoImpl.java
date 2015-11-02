@@ -9,9 +9,9 @@ import org.hibernate.transform.Transformers;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ahana.api.common.AhanaVO;
-import com.ahana.api.common.Constants;
-import com.ahana.api.dao.common.AhanaDaoSupport;
+import com.ahana.commons.system.dao.common.AhanaDaoSupport;
+import com.ahana.commons.system.domain.common.AhanaVO;
+import com.ahana.commons.system.security.util.Constants;
 
 @Transactional(readOnly = false)
 public class ConfigurationDaoImpl extends AhanaDaoSupport implements ConfigurationDao {

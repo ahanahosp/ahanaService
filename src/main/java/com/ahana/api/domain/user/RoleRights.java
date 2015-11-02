@@ -15,8 +15,8 @@ import org.hibernate.annotations.Parameter;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
-import com.ahana.api.common.AhanaVO;
-import com.ahana.api.common.ErrorConstants;
+import com.ahana.commons.system.domain.common.AhanaVO;
+import com.ahana.commons.system.security.error.CommonErrorConstants;
 
 @SuppressWarnings("serial")
 @Entity
@@ -26,7 +26,7 @@ public class RoleRights implements AhanaVO {
 
 	@Id
 	@GeneratedValue(generator = "IdGenerator")
-	@GenericGenerator(name = "IdGenerator", strategy = "com.ahana.api.common.IdGenerator", parameters = {
+	@GenericGenerator(name = "IdGenerator", strategy = "com.ahana.commons.system.security.util.IdGenerator", parameters = {
 			@Parameter(name = "table", value = "seed_container"),
 			@Parameter(name = "column", value = "high_oid"),
 			@Parameter(name = "install_id", value = "seed_id"),
@@ -34,8 +34,8 @@ public class RoleRights implements AhanaVO {
 	@Column(name = "oid")
 	private String oid;
 
-	@NotBlank(message = ErrorConstants.ROLE_OID_IS_REQUIRED)
-	@Length(min = 20, max = 20, message = ErrorConstants.ROLE_OID_LENGTH_IS_INVALID)
+	@NotBlank(message = CommonErrorConstants.ROLE_OID_IS_REQUIRED)
+	@Length(min = 20, max = 20, message = CommonErrorConstants.ROLE_OID_LENGTH_IS_INVALID)
 	@Column(name = "role_oid")
 	private String roleOid;
 
@@ -47,7 +47,7 @@ public class RoleRights implements AhanaVO {
 
 	@Transient
 	@Valid
-	//@NotEmpty(message = ErrorConstants.MODULE_IS_REQUIRED)
+	//@NotEmpty(message = CommonErrorConstants.MODULE_IS_REQUIRED)
 	private List<String> moduleOids;
 
 	public String getOid() {

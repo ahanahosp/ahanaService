@@ -7,7 +7,7 @@
     	
 		<bean id="validationDao" parent="txProxyTemplate">
 			<property name="target">
-		    	<bean class="com.ahana.api.dao.validation.ValidationDaoImpl">
+		    	<bean class="com.ahana.commons.system.dao.validation.ValidationDaoImpl">
 			    	<property name="sessionFactory" ref="readOnlySessionFactory"/>
 				</bean>
 		    </property>
