@@ -58,8 +58,6 @@
 			<groupId>com.ahana.commons</groupId>
 			<artifactId>commons-ahana</artifactId>
 			<version>${commons-version}</version>
-			<scope>system</scope>
-			<systemPath>${basedir}\src\main\resources\lib\commons-ahana-1.0.jar</systemPath>
 		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
@@ -467,15 +465,6 @@
 					<target>1.7</target>
 				</configuration>
 			</plugin>
-			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-antrun-plugin</artifactId> 
-				<version>1.8</version> <executions> <execution> <phase>compile</phase> <configuration> 
-				<target name="populateAhanaErrorConstant"> <taskdef name="readXLS" classname="com.ahana.api.system.security.error.ErrorConstantsGenerator" 
-				classpathref="maven.runtime.classpath"></taskdef> <fileset dir="${basedir}/" 
-				id="errorConstantJavaFile"> <include name="src/main/java/com/ahana/api/common/ErrorConstants.java" 
-				/> </fileset> <readXLS xmltemplatepath="src/main/resources/config/error_constants_mapping.xml" 
-				xlstemplatepath="src/main/resources/config/AhanaErrordictionary.xls"> <errorConstantFile 
-				refid="errorConstantJavaFile" /> </readXLS> </target> </configuration> <goals> 
-				<goal>run</goal> </goals> </execution> </executions> </plugin> -->
 		</plugins>
 		<pluginManagement>
 			<plugins>
