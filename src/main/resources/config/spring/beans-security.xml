@@ -13,16 +13,35 @@
 	
 	<bean id="filterChainProxy" class="org.springframework.security.web.FilterChainProxy">
 		<sec:filter-chain-map request-matcher="ant">
- 			<sec:filter-chain pattern="/services/rest/secure/**" filters="httpSessionContextIntegrationFilterWithASCFalse,
- 					exceptionTranslationFilter"/>
- 			<!-- <sec:filter-chain pattern="/services/secure/**" filters="httpSessionContextIntegrationFilterWithASCFalse,
- 					exceptionTranslationFilter,
- 					ahanaSecurityFilter,
- 					filterInvocationInterceptor"/> -->
+ 			<sec:filter-chain pattern="/services/rest/secure/**" filters="customFilter,httpSessionContextIntegrationFilterWithASCFalse,
+ 			exceptionTranslationWithASCFilter,
+ 			ahanaSecurityFilter,
+ 			filterInvocationInterceptor"/>
 		</sec:filter-chain-map>
 	</bean>
 	
-	<bean id="ahanaSecurityFilter" class="com.ahana.commons.system.security.filters.AhanaSecurityFilter"/>
+	<bean id="customFilter" class="com.ahana.commons.system.security.filters.AhanaFilterChainProxy"/>
+	
+	<bean id="ahanaSecurityFilter"	class="com.ahana.commons.system.security.filters.AhanaSecurityFilter">
+		<property name="authenticationProcessingHandlers">
+			<list>
+				<ref bean="basicAuthenticationProcessingHandler"/>
+				<ref bean="tokenAuthenticationProcessingHandler"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="basicAuthenticationProcessingHandler"	class="com.ahana.commons.system.security.filters.BasicAuthenticationProcessingHandler">
+		<property name="authenticationManager" ref="authenticationManager"/>
+		<property name="authenticationEntryPoint" ref="basicAuthenticationEntryPoint"/>
+	</bean>
+
+	<bean id="tokenAuthenticationProcessingHandler" class="com.ahana.commons.system.security.filters.TokenAuthenticationProcessingHandler">
+		<property name="authenticationManager" ref="authenticationManager"/>
+		<property name="authenticationEntryPoint" ref="tokenAuthenticationEntryPoint"/>
+	</bean>
+	
+	<bean id="tokenAuthenticationEntryPoint" class="com.ahana.commons.system.security.filters.TokenAuthenticationEntryPoint"/>
 	
 	<bean id="filterInvocationInterceptor" class="com.ahana.commons.system.security.filters.AhanaFilterSecurityInterceptor">
 		<property name="authenticationManager" ref="authenticationManager" />
@@ -63,14 +82,13 @@
 		<constructor-arg name="key" value="anonymous" index="0" type="java.lang.String"/>
 	</bean>
 	
-	<bean id="exceptionTranslationFilter" class="org.springframework.security.web.access.ExceptionTranslationFilter">
-		<constructor-arg name="authenticationEntryPoint" ref="authenticationEntryPoint" index="0"/>
-		<property name="accessDeniedHandler">
-		    <bean class="org.springframework.security.web.access.AccessDeniedHandlerImpl"/>
-	    </property>
+	<bean id="exceptionTranslationWithASCFilter" class="com.ahana.commons.system.security.filters.AhanaExceptionTranslationFilter">
+		<constructor-arg name="authenticationEntryPoint" ref="basicAuthenticationEntryPoint"/>
+		<property name="createSessionAllowed" value="false" />
+		<property name="ahanaErrorHandlerUtil" ref="ahanaErrorHandlerUtil"/>
 	</bean>
 	
-	<bean id="authenticationEntryPoint"	class="org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint">
+	<bean id="basicAuthenticationEntryPoint" class="org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint">
 		<property name="realmName">
 			<value>Restricted resources</value>
 		</property>
