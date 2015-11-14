@@ -66,7 +66,7 @@
 		</constructor-arg>
    	</bean>
    	
-   	<bean id="daoAuthenticationProvider" class="com.ahana.commons.system.security.filters.AhanaDaoAuthenticationProvider">
+   	<bean id="daoAuthenticationProvider" class="com.ahana.commons.system.security.filters.AhanaTokenBasedDaoAuthenticationProvider">
 		<property name="userDetailsService" ref="userDao"/>
 		<property name="hideUserNotFoundExceptions" value="true"/>
 		<property name="passwordEncoder" ref="passwordEncoder"/>

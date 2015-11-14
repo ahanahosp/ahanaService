@@ -84,6 +84,8 @@
 				<value>com.ahana.api.domain.common.SpecialityDetails</value>
 				<value>com.ahana.api.domain.common.Ward</value>
 				<value>com.ahana.api.domain.config.AlertType</value>
+				<value>com.ahana.commons.system.domain.user.Client</value>
+				<value>com.ahana.commons.system.domain.user.Token</value>
 			</list>
 		</property>
 	</bean>
@@ -123,6 +125,8 @@
 				<value>com.ahana.api.domain.common.SpecialityDetails</value>
 				<value>com.ahana.api.domain.common.Ward</value>
 				<value>com.ahana.api.domain.config.AlertType</value>
+				<value>com.ahana.commons.system.domain.user.Client</value>
+				<value>com.ahana.commons.system.domain.user.Token</value>
 			</list>
 		</property>
 	</bean>
