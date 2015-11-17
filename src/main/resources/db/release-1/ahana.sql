@@ -38,7 +38,7 @@ CREATE TABLE `alert_type` (
 
 LOCK TABLES `alert_type` WRITE;
 /*!40000 ALTER TABLE `alert_type` DISABLE KEYS */;
-INSERT INTO `alert_type` VALUES ('a010000001900000001a','New','ACT'),('a010000001900000001b','Alert','ACT'),('a010000001900000001c','Warning','ACT');
+INSERT INTO `alert_type` VALUES ('a010000001900000001a','New','ACT'),('a010000001900000001b','Alert','ACT'),('a010000001900000001c','Warning','ACT'),('a0100000022000000023','Test','ACT');
 /*!40000 ALTER TABLE `alert_type` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -66,6 +66,41 @@ LOCK TABLES `category_item` WRITE;
 /*!40000 ALTER TABLE `category_item` DISABLE KEYS */;
 INSERT INTO `category_item` VALUES ('a010000000a00000000c','General','Test General','ACT'),('a0100000010000000011','Test Category','Test Description','ACT');
 /*!40000 ALTER TABLE `category_item` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `client`
+--
+
+DROP TABLE IF EXISTS `client`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `client` (
+  `oid` varchar(20) NOT NULL,
+  `client_id` varchar(100) NOT NULL,
+  `api_key` varchar(20) DEFAULT NULL,
+  `authorized_services` varchar(1024) DEFAULT NULL,
+  `auth_ip_addresses` varchar(255) DEFAULT NULL,
+  `client_type` varchar(20) NOT NULL,
+  `contract_started_on` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `contract_ends_on` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `api_key_expiration_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `created_on` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_on` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `created_by` varchar(100) DEFAULT NULL,
+  `updated_by` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`oid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `client`
+--
+
+LOCK TABLES `client` WRITE;
+/*!40000 ALTER TABLE `client` DISABLE KEYS */;
+INSERT INTO `client` VALUES ('o0100000402000000501','ahana','574EBDD5B9D10563','*','*','Internal','2010-11-01 14:34:04','2020-12-30 18:30:00','2020-12-30 18:30:00','2010-11-01 14:34:04','2010-11-01 14:34:04','selva','selva');
+/*!40000 ALTER TABLE `client` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -263,6 +298,7 @@ CREATE TABLE `role_rights` (
 
 LOCK TABLES `role_rights` WRITE;
 /*!40000 ALTER TABLE `role_rights` DISABLE KEYS */;
+INSERT INTO `role_rights` VALUES ('a0100000020000000021','a0100000004000000007','a0100000003000000005','ahanahospital'),('a0100000020000000022','a0100000004000000007','a0100000003000000006','ahanahospital');
 /*!40000 ALTER TABLE `role_rights` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -287,7 +323,7 @@ CREATE TABLE `roles` (
 
 LOCK TABLES `roles` WRITE;
 /*!40000 ALTER TABLE `roles` DISABLE KEYS */;
-INSERT INTO `roles` VALUES ('a0100000004000000006','Admin-Module','InACT'),('a0100000004000000007','Role-User','ACT'),('a0100000004000000008','Super_Admin','ACT'),('a0100000015000000016','test sdfdsfdsf','ACT');
+INSERT INTO `roles` VALUES ('a0100000004000000006','Admin-Module','InACT'),('a0100000004000000007','Role-User','ACT'),('a0100000004000000008','Super_Admin','ACT'),('a0100000015000000016','Role-Billing','ACT'),('a0100000021000000022','ROLE-DOCTOR','ACT'),('a0100000023000000024','test','ACT');
 /*!40000 ALTER TABLE `roles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -447,7 +483,7 @@ CREATE TABLE `seed_container` (
 
 LOCK TABLES `seed_container` WRITE;
 /*!40000 ALTER TABLE `seed_container` DISABLE KEYS */;
-INSERT INTO `seed_container` VALUES (32,'a01',1,'REST'),(4,'PAT',2,'PAT');
+INSERT INTO `seed_container` VALUES (43,'a01',1,'REST'),(4,'PAT',2,'PAT');
 /*!40000 ALTER TABLE `seed_container` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -474,6 +510,35 @@ LOCK TABLES `speciality_details` WRITE;
 /*!40000 ALTER TABLE `speciality_details` DISABLE KEYS */;
 INSERT INTO `speciality_details` VALUES ('a0100000012000000013','Test Speciality 1','ACT');
 /*!40000 ALTER TABLE `speciality_details` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `token`
+--
+
+DROP TABLE IF EXISTS `token`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `token` (
+  `oid` varchar(20) NOT NULL,
+  `user_id` varchar(100) NOT NULL,
+  `creator_client_id` varchar(100) DEFAULT NULL,
+  `created_on` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_on` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `created_by` varchar(100) DEFAULT NULL,
+  `updated_by` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`oid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `token`
+--
+
+LOCK TABLES `token` WRITE;
+/*!40000 ALTER TABLE `token` DISABLE KEYS */;
+INSERT INTO `token` VALUES ('a010000002a00000002b','selva','ahana','2015-11-15 17:09:01','2015-11-15 17:09:01','selva','selva');
+/*!40000 ALTER TABLE `token` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -513,7 +578,7 @@ CREATE TABLE `user_profile` (
 
 LOCK TABLES `user_profile` WRITE;
 /*!40000 ALTER TABLE `user_profile` DISABLE KEYS */;
-INSERT INTO `user_profile` VALUES ('a010000001e00000001f','Mr','Selva','Raj','e08a7c49d96c2b475656cc8fe18cee8e','2015-10-24 18:30:00','selva','ACT','Test','India','Tamil Nadu','Madurai','625014','selva@gmail.com','9898989898','2015-10-17 18:30:00','Test','a0100000012000000013','Yes');
+INSERT INTO `user_profile` VALUES ('a010000001e00000001f','Mr','Selva','Raj','cc03e747a6afbbcbf8be7668acfebee5','2015-11-24 18:30:00','selva','ACT','Test','India','Tamil Nadu','Madurai','625014','selva@gmail.com','9898989898','2015-10-17 18:30:00','Test','a0100000012000000013','Yes');
 /*!40000 ALTER TABLE `user_profile` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -539,6 +604,7 @@ CREATE TABLE `user_roles` (
 
 LOCK TABLES `user_roles` WRITE;
 /*!40000 ALTER TABLE `user_roles` DISABLE KEYS */;
+INSERT INTO `user_roles` VALUES ('a010000001e00000001f','a0100000004000000007'),('a010000001e00000001f','a0100000004000000008'),('a010000001e00000001f','a0100000015000000016');
 /*!40000 ALTER TABLE `user_roles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -577,4 +643,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-10-19 22:53:45
+-- Dump completed on 2015-11-17 15:20:19
