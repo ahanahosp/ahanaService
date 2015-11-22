@@ -76,7 +76,7 @@ public class UserDaoImpl extends AhanaDaoSupport implements UserDao {
 			
 			//Setting Constructor
 			UserDetails userDetails = new UserProfile(userProfile.getOid(),userProfile.getUserId(), userProfile.getPassword(),
-					enabled, false, false,credentialsNonExpired, array,userProfile.getRoleOid());
+					enabled, true, true,credentialsNonExpired, array,userProfile.getRoleOid());
 
 			if (CollectionUtils.isEmpty(userDetails.getAuthorities())) {
 				throw new UsernameNotFoundException("Authorities not found");
