@@ -19,4 +19,5 @@
 	<import resource="classpath:config/spring/beans-mail.xml"/>
 	<import resource="classpath:config/spring/beans-error.xml"/>
 	<import resource="classpath:config/spring/beans-cache.xml"/>
+	<import resource="classpath:config/spring/beans-task.xml"/>
   </beans>
