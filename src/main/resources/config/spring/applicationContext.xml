@@ -13,6 +13,7 @@
 	<bean id="placeholderConfig" class="com.ahana.commons.system.security.common.AhanaPropertyPlaceholderConfigurer"/>
 	
 	<import resource="classpath:config/spring/beans-resources.xml"/> 
+	<import resource="classpath:config/spring/beans-auth.xml"/>
 	<import resource="classpath:config/spring/beans-security.xml"/>
 	<import resource="classpath:config/spring/beans-user.xml"/>
 	<import resource="classpath:config/spring/beans-common.xml"/>

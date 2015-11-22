@@ -32,12 +32,10 @@
 	</bean>
 	
 	<bean id="basicAuthenticationProcessingHandler"	class="com.ahana.commons.system.security.filters.BasicAuthenticationProcessingHandler">
-		<property name="authenticationManager" ref="authenticationManager"/>
 		<property name="authenticationEntryPoint" ref="basicAuthenticationEntryPoint"/>
 	</bean>
 
 	<bean id="tokenAuthenticationProcessingHandler" class="com.ahana.commons.system.security.filters.TokenAuthenticationProcessingHandler">
-		<property name="authenticationManager" ref="authenticationManager"/>
 		<property name="authenticationEntryPoint" ref="tokenAuthenticationEntryPoint"/>
 	</bean>
 	
@@ -85,7 +83,6 @@
 	<bean id="exceptionTranslationWithASCFilter" class="com.ahana.commons.system.security.filters.AhanaExceptionTranslationFilter">
 		<constructor-arg name="authenticationEntryPoint" ref="basicAuthenticationEntryPoint"/>
 		<property name="createSessionAllowed" value="false" />
-		<property name="ahanaErrorHandlerUtil" ref="ahanaErrorHandlerUtil"/>
 	</bean>
 	
 	<bean id="basicAuthenticationEntryPoint" class="org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint">

@@ -18,20 +18,4 @@
 		</property>
 	</bean>
 
-	<bean id="clientDao" parent="txProxyTemplate">
-		<property name="target">
-			<bean class="com.ahana.commons.system.dao.client.ClientDaoImpl">
-				<property name="sessionFactory" ref="sessionFactory" />
-			</bean>
-		</property>
-	</bean>
-
-	<bean id="tokenDao" parent="txProxyTemplate">
-		<property name="target">
-			<bean class="com.ahana.commons.system.dao.token.TokenDaoImpl">
-				<property name="sessionFactory" ref="sessionFactory" />
-			</bean>
-		</property>
-	</bean>
-
 </beans>
