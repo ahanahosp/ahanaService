@@ -3,6 +3,7 @@ package com.ahana.api.manager.user;
 import java.util.List;
 import java.util.Map;
 
+import com.ahana.api.domain.user.RoleRights;
 import com.ahana.commons.system.domain.user.Roles;
 import com.ahana.commons.system.domain.user.UserProfile;
 import com.ahana.commons.system.domain.user.UserRole;
@@ -24,8 +25,6 @@ public interface UserManager {
 
 	UserRole createUserRole(UserRole userRole) throws AhanaBusinessException;
 
-	void saveRoleRights(String roleOid,String organizationOid,String... moduleOids) throws AhanaBusinessException;
-
 	List<Map<String, String>> getUser(int intex, int noOfRecords) throws AhanaBusinessException;
 
 	void deleteRole(String roleOid);
@@ -37,5 +36,7 @@ public interface UserManager {
 	List<Map<String, String>> getSavedRolesByUserOid(String userOid) throws AhanaBusinessException;
 
 	List<Map<String, String>> getSavedRightsByRoleOid(String roleOid) throws AhanaBusinessException;
+
+	RoleRights saveRoleRights(RoleRights roleRights) throws AhanaBusinessException;
 
 }

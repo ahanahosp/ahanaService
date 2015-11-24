@@ -4,6 +4,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.ahana.api.domain.user.RoleRights;
 import com.ahana.commons.system.domain.user.Roles;
 import com.ahana.commons.system.domain.user.UserProfile;
 import com.ahana.commons.system.domain.user.UserRole;
@@ -38,7 +39,6 @@ public interface UserService {
 
 	Map<String, Object> getSavedRightsByRoleOid(String roleOid) throws AhanaBusinessException;
 
-	Map<String, Object> saveRoleRights(String roleOid, String organizationOid, String[] moduleOids)
-			throws AhanaBusinessException;
+	Map<String, Object> saveRoleRights(RoleRights roleRights) throws AhanaBusinessException;
 
 }

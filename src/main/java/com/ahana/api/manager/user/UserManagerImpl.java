@@ -1,10 +1,10 @@
 package com.ahana.api.manager.user;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
@@ -91,10 +91,11 @@ public class UserManagerImpl implements UserManager {
 
 	@Override
 	public UserRole createUserRole(UserRole userRole) throws AhanaBusinessException {
-		if(userRole==null || CollectionUtils.isEmpty(userRole.getRoleOids())){
+		if(userRole==null || StringUtils.isBlank(userRole.getRoleOids())){
 			throw new AhanaBusinessException(CommonErrorConstants.NO_RECORDS_FOUND);
 		}
-		for(String roleOid:userRole.getRoleOids()){
+		List<String> items = Arrays.asList(userRole.getRoleOids().split("\\s*,\\s*"));
+		for(String roleOid:items){
 			UserRole userRole2=new UserRole();
 			userRole2.setRoleOid(roleOid);
 			userRole2.setUserOid(userRole.getUserOid());
@@ -104,17 +105,19 @@ public class UserManagerImpl implements UserManager {
 	}
 
 	@Override
-	public void saveRoleRights(String roleOid,String organizationOid,String... moduleOids) throws AhanaBusinessException {
-		if(StringUtils.isBlank(roleOid) || ArrayUtils.isEmpty(moduleOids)){
+	public RoleRights saveRoleRights(RoleRights roleRights) throws AhanaBusinessException {
+		if(roleRights==null || StringUtils.isBlank(roleRights.getModuleOids())){
 			throw new AhanaBusinessException(CommonErrorConstants.NO_RECORDS_FOUND);
 		}
-		for(String moduleOid:moduleOids){
+		List<String> items = Arrays.asList(roleRights.getModuleOids().split("\\s*,\\s*"));
+		for(String moduleOid:items){
 			RoleRights roleRights2=new RoleRights();
 			roleRights2.setModuleOid(moduleOid);
-			roleRights2.setOrganizationOid(organizationOid);
-			roleRights2.setRoleOid(roleOid);
+			roleRights2.setOrganizationOid(roleRights.getOrganizationOid());
+			roleRights2.setRoleOid(roleRights.getRoleOid());
 			userDao.saveRoleRights(roleRights2);
 		}
+		return roleRights;
 	}
 
 	@Override
@@ -155,8 +158,8 @@ public class UserManagerImpl implements UserManager {
 		if(CollectionUtils.isNotEmpty(roles)){
 			for(Map<String, String> role:roles){
 				role.put(Constants.STATUS.toLowerCase(),null);
-				if(userRoles.contains(role.get(Constants.OID))){
-					role.put(Constants.STATUS.toLowerCase(),Constants.ACT);
+				if(!userRoles.contains(role.get(Constants.OID))){
+					role.put(Constants.STATUS.toLowerCase(),"INACT");
 				}
 			}
 		}
@@ -172,8 +175,8 @@ public class UserManagerImpl implements UserManager {
 		List<Map<String, String>> modules =commonManager.getAllOrganizationModule();
 		if(CollectionUtils.isNotEmpty(modules)){
 			for(Map<String, String> mods:modules){
-				if(roleRights.contains(mods.get(Constants.OID))){
-					mods.put(Constants.STATUS.toLowerCase(),Constants.ACT);
+				if(!roleRights.contains(mods.get(Constants.OID))){
+					mods.put(Constants.STATUS.toLowerCase(),"INACT");
 				}
 			}
 		}
