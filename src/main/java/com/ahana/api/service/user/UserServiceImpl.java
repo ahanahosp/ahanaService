@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ahana.api.domain.user.RoleRights;
 import com.ahana.api.manager.user.UserManager;
 import com.ahana.commons.system.domain.user.Roles;
 import com.ahana.commons.system.domain.user.UserProfile;
@@ -175,15 +174,15 @@ public class UserServiceImpl extends BaseService implements UserService {
 	@Override
 	@RequestMapping(value = "/saveRoleRights",method=RequestMethod.POST)
 	@ResponseBody
-	public Map<String,Object> saveRoleRights(@Valid @RequestBody RoleRights roleRights) throws AhanaBusinessException {
+	public Map<String,Object> saveRoleRights(@RequestParam("roleOid") String roleOid,@RequestParam("organizationModuleOids") String[] organizationModuleOids) throws AhanaBusinessException {
 		if (logger.isDebugEnabled()) {
 			logger.debug("saveRoleRights----start--->"	+ System.currentTimeMillis());
 		}
-		RoleRights roleRights2 = userManager.saveRoleRights(roleRights);
+		userManager.saveRoleRights(roleOid,organizationModuleOids);
 		if (logger.isDebugEnabled()) {
 			logger.debug("saveRoleRights: Success");
 		}
-		return handleSuccess("roleRights",roleRights2);
+		return handleStatus();
 	}
 	
 	@Override

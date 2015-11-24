@@ -1,14 +1,10 @@
 package com.ahana.api.domain.user;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Transient;
-import javax.validation.Valid;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
@@ -45,11 +41,6 @@ public class RoleRights implements AhanaVO {
 	@Column(name = "organization_oid")
 	private String organizationOid;
 
-	@Transient
-	@Valid
-	//@NotEmpty(message = CommonErrorConstants.MODULE_IS_REQUIRED)
-	private List<String> moduleOids;
-
 	public String getOid() {
 		return oid;
 	}
@@ -81,13 +72,4 @@ public class RoleRights implements AhanaVO {
 	public void setOrganizationOid(String organizationOid) {
 		this.organizationOid = organizationOid;
 	}
-
-	public List<String> getModuleOids() {
-		return moduleOids;
-	}
-
-	public void setModuleOids(List<String> moduleOids) {
-		this.moduleOids = moduleOids;
-	}
-
 }

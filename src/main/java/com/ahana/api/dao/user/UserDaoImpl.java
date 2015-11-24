@@ -184,10 +184,10 @@ public class UserDaoImpl extends AhanaDaoSupport implements UserDao {
 		List<Map<String, String>> list=null;
 		String query=null;
 		try{
-			query="select up.oid as oid,up.salutation as salutation,up.first_name as firstName,up.last_name as lastName,up.designation as designation,"
+			query="select distinct up.oid as oid,up.salutation as salutation,up.first_name as firstName,up.last_name as lastName,up.designation as designation,"
 					+ "up.user_id as userName,up.password_exp_date as inActivationDate,up.activation_date as activationDate,"
 					+ "up.email_id as emailId,up.mobile_no as mobileNo,sp.speciality_name as speciality,up.care_provider as careProvider from user_profile up"
-					+ " join speciality_details sp on up.speciality=sp.oid where user_status='"+Constants.ACT+"'";
+					+ " left join speciality_details sp on up.speciality=sp.oid where user_status='"+Constants.ACT+"'";
 			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
 					.addScalar("oid")
 					.addScalar("salutation")

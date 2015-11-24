@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
@@ -103,21 +104,17 @@ public class UserManagerImpl implements UserManager {
 	}
 
 	@Override
-	public RoleRights saveRoleRights(RoleRights roleRight) throws AhanaBusinessException {
-		if(roleRight==null){
+	public void saveRoleRights(String roleOid,String... organizationModuleOids) throws AhanaBusinessException {
+		if(StringUtils.isBlank(roleOid) || ArrayUtils.isEmpty(organizationModuleOids)){
 			throw new AhanaBusinessException(CommonErrorConstants.NO_RECORDS_FOUND);
 		}
-		if(CollectionUtils.isNotEmpty(roleRight.getModuleOids())){
-			for(String moduleOid:roleRight.getModuleOids()){
-				RoleRights roleRights2=new RoleRights();
-				roleRights2.setModuleOid(moduleOid);
-				roleRights2.setOrganizationOid(roleRight.getOrganizationOid());
-				roleRights2.setRoleOid(roleRight.getRoleOid());
-				userDao.saveRoleRights(roleRights2);
-			}
+		for(String moduleOid:organizationModuleOids){
+			RoleRights roleRights2=new RoleRights();
+			roleRights2.setModuleOid(moduleOid);
+			roleRights2.setOrganizationOid("");
+			roleRights2.setRoleOid(roleOid);
+			userDao.saveRoleRights(roleRights2);
 		}
-		return roleRight;
-		
 	}
 
 	@Override
