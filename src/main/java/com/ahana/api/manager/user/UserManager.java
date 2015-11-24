@@ -24,7 +24,7 @@ public interface UserManager {
 
 	UserRole createUserRole(UserRole userRole) throws AhanaBusinessException;
 
-	void saveRoleRights(String roleOid,String... organizationModuleOids) throws AhanaBusinessException;
+	void saveRoleRights(String roleOid,String organizationOid,String... moduleOids) throws AhanaBusinessException;
 
 	List<Map<String, String>> getUser(int intex, int noOfRecords) throws AhanaBusinessException;
 

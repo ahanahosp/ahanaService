@@ -174,11 +174,12 @@ public class UserServiceImpl extends BaseService implements UserService {
 	@Override
 	@RequestMapping(value = "/saveRoleRights",method=RequestMethod.POST)
 	@ResponseBody
-	public Map<String,Object> saveRoleRights(@RequestParam("roleOid") String roleOid,@RequestParam("organizationModuleOids") String[] organizationModuleOids) throws AhanaBusinessException {
+	public Map<String,Object> saveRoleRights(@RequestParam("roleOid") String roleOid,
+			@RequestParam("organizationOid") String organizationOid,@RequestParam("moduleOids") String[] moduleOids) throws AhanaBusinessException {
 		if (logger.isDebugEnabled()) {
 			logger.debug("saveRoleRights----start--->"	+ System.currentTimeMillis());
 		}
-		userManager.saveRoleRights(roleOid,organizationModuleOids);
+		userManager.saveRoleRights(roleOid,organizationOid,moduleOids);
 		if (logger.isDebugEnabled()) {
 			logger.debug("saveRoleRights: Success");
 		}

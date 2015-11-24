@@ -104,14 +104,14 @@ public class UserManagerImpl implements UserManager {
 	}
 
 	@Override
-	public void saveRoleRights(String roleOid,String... organizationModuleOids) throws AhanaBusinessException {
-		if(StringUtils.isBlank(roleOid) || ArrayUtils.isEmpty(organizationModuleOids)){
+	public void saveRoleRights(String roleOid,String organizationOid,String... moduleOids) throws AhanaBusinessException {
+		if(StringUtils.isBlank(roleOid) || ArrayUtils.isEmpty(moduleOids)){
 			throw new AhanaBusinessException(CommonErrorConstants.NO_RECORDS_FOUND);
 		}
-		for(String moduleOid:organizationModuleOids){
+		for(String moduleOid:moduleOids){
 			RoleRights roleRights2=new RoleRights();
 			roleRights2.setModuleOid(moduleOid);
-			roleRights2.setOrganizationOid("");
+			roleRights2.setOrganizationOid(organizationOid);
 			roleRights2.setRoleOid(roleOid);
 			userDao.saveRoleRights(roleRights2);
 		}

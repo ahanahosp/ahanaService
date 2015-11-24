@@ -38,6 +38,7 @@ public interface UserService {
 
 	Map<String, Object> getSavedRightsByRoleOid(String roleOid) throws AhanaBusinessException;
 
-	Map<String, Object> saveRoleRights(String roleOid, String[] organizationModuleOids) throws AhanaBusinessException;
+	Map<String, Object> saveRoleRights(String roleOid, String organizationOid, String[] moduleOids)
+			throws AhanaBusinessException;
 
 }
