@@ -90,4 +90,6 @@ public interface CommonManager {
 
 	List<Map<String, String>> getRoomChargeItemValues() throws AhanaBusinessException;
 
+	void deactivateOrganizationModule(String...organizationModuleOids) throws AhanaBusinessException;
+
 }

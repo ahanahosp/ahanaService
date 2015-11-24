@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -337,6 +338,14 @@ public class CommonManagerImpl implements CommonManager {
 			throw new AhanaBusinessException(CommonErrorConstants.NO_RECORDS_FOUND);
 		}
 		return roomChargeItemDetails;
+	}
+
+	@Override
+	public void deactivateOrganizationModule(String...organizationModuleOids) throws AhanaBusinessException {
+		if(ArrayUtils.isEmpty(organizationModuleOids)){
+			throw new AhanaBusinessException(CommonErrorConstants.NO_RECORDS_FOUND);
+		}
+		commonDao.deactivateOrganizationModule(organizationModuleOids);
 	}
 
 }

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.transaction.annotation.Propagation;
@@ -33,9 +34,11 @@ public class UserManagerImpl implements UserManager {
 		if(userProfile==null){
 			throw new AhanaBusinessException(CommonErrorConstants.USER_NOT_FOUND);
 		}
-		userProfile.setPassword(UserProfile.DEFAULT_PASSWORD);
-		Md5PasswordEncoder ms = new Md5PasswordEncoder();
-		userProfile.setPassword(ms.encodePassword(userProfile.getPassword(), null));
+		if(StringUtils.isBlank(userProfile.getPassword())){
+			userProfile.setPassword(UserProfile.DEFAULT_PASSWORD);
+			Md5PasswordEncoder ms = new Md5PasswordEncoder();
+			userProfile.setPassword(ms.encodePassword(userProfile.getPassword(), null));
+		}
 		userDao.saveUser(userProfile);
 		return userProfile;
 	}

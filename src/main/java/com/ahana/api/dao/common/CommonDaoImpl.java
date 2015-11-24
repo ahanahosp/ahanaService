@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.transform.Transformers;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +18,7 @@ import com.ahana.api.domain.common.RoomChargeItem;
 import com.ahana.api.domain.common.Ward;
 import com.ahana.commons.system.dao.common.AhanaDaoSupport;
 import com.ahana.commons.system.domain.common.AhanaVO;
+import com.ahana.commons.system.security.util.CommonUtils;
 import com.ahana.commons.system.security.util.Constants;
 
 @Transactional(readOnly = false)
@@ -557,5 +559,12 @@ public class CommonDaoImpl extends AhanaDaoSupport implements CommonDao {
 			query=null;
 		}
 		return list;
+	}
+
+	@Override
+	public void deactivateOrganizationModule(String[] organizationModuleOids) {
+		String commaSeprateOids=CommonUtils.convertCommoaSeprated(organizationModuleOids);
+		SQLQuery sqlQuery = getSessionFactory().getCurrentSession().createSQLQuery("update organization_module set status='INACT' where oid in("+commaSeprateOids+")");
+		sqlQuery.executeUpdate();
 	}
 }

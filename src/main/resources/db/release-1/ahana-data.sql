@@ -55,3 +55,5 @@ INSERT INTO lookup(code, category, description, seq, deprecated) VALUES ('Standa
  ('Tiruvannamalai', 'CITY_TAMIL NADU', 'Tiruvannamalai', 25, false), ('Tiruvarur', 'CITY_TAMIL NADU', 'Tiruvarur', 26, false),
  ('Vellore', 'CITY_TAMIL NADU', 'Vellore', 27, false), ('Viluppuram', 'CITY_TAMIL NADU', 'Viluppuram', 28, false),
  ('Virudhunagar', 'CITY_TAMIL NADU', 'Virudhunagar', 29, false);
+  
+ INSERT INTO `arkinfot_ahana`.`client` (`oid`, `client_id`, `api_key`, `authorized_services`, `auth_ip_addresses`, `client_type`, `contract_started_on`, `contract_ends_on`, `api_key_expiration_date`, `created_on`, `updated_on`, `created_by`, `updated_by`) VALUES ('o0100000402000000501', 'ahana', '574EBDD5B9D10563', '*', '*', 'Internal', '2015-11-24 00:00:00', '2020-01-01 00:00:00', '2020-01-01 00:00:00', '2015-11-24 00:00:00', '2015-11-24 00:00:00', 'ahana', 'ahana');

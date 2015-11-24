@@ -112,4 +112,6 @@ public interface CommonService {
 
 	Map<String, Object> getRoomChargeItemValues() throws AhanaBusinessException;
 
+	Map<String, Object> deactivateOrganizationModule(String... organizationModuleOids) throws AhanaBusinessException;
+
 }

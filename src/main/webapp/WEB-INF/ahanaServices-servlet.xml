@@ -13,8 +13,7 @@
 
 	<mvc:annotation-driven>
 		<mvc:message-converters register-defaults="false">
-			<bean id="jacksonMessageConverter"
-				class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+			<bean id="jacksonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
 				<property name="objectMapper" ref="jacksonObjectMapper" />
 				<property name="supportedMediaTypes">
 					<list>
@@ -26,6 +25,10 @@
 					</list>
 				</property>
 			</bean>
+			<bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter"/>
+        	<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+            	<property name="writeAcceptCharset" value="false"/>
+        	</bean>
 		</mvc:message-converters>
 	</mvc:annotation-driven>
 	
