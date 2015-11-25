@@ -1,5 +1,6 @@
 package com.ahana.api.manager.user;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -155,11 +156,12 @@ public class UserManagerImpl implements UserManager {
 			throw new AhanaBusinessException(CommonErrorConstants.NO_RECORDS_FOUND);
 		}
 		List<Map<String, String>> roles=userDao.getActiveRoles();
+		List<Map<String, String>> results=new ArrayList<Map<String, String>>();
 		if(CollectionUtils.isNotEmpty(roles)){
 			for(Map<String, String> role:roles){
 				role.put(Constants.STATUS.toLowerCase(),null);
 				if(!userRoles.contains(role.get(Constants.OID))){
-					role.put(Constants.STATUS.toLowerCase(),"INACT");
+					results.add(role);
 				}
 			}
 		}
@@ -173,13 +175,14 @@ public class UserManagerImpl implements UserManager {
 			throw new AhanaBusinessException(CommonErrorConstants.NO_RECORDS_FOUND);
 		}
 		List<Map<String, String>> modules =commonManager.getAllOrganizationModule();
+		List<Map<String, String>> results=new ArrayList<Map<String, String>>();
 		if(CollectionUtils.isNotEmpty(modules)){
 			for(Map<String, String> mods:modules){
-				if(!roleRights.contains(mods.get(Constants.OID))){
-					mods.put(Constants.STATUS.toLowerCase(),"INACT");
+				if(roleRights.contains(mods.get(Constants.OID))){
+					results.add(mods);
 				}
 			}
 		}
-		return modules;
+		return results;
 	}	
 }

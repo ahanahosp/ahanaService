@@ -10,6 +10,10 @@
 		</layout>
 	</appender>
 	
+	<logger name="com.ahana">
+		<level value="DEBUG" />
+	</logger>
+	
 	<logger name="org.springframework.samples">
 		<level value="DEBUG" />
 	</logger>
