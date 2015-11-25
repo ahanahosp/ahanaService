@@ -36,7 +36,7 @@ public class UserManagerImpl implements UserManager {
 		if(userProfile==null){
 			throw new AhanaBusinessException(CommonErrorConstants.USER_NOT_FOUND);
 		}
-		if(StringUtils.isBlank(userProfile.getPassword())){
+		if(StringUtils.isBlank(userProfile.getPassword()) && StringUtils.isBlank(userProfile.getOid())){
 			userProfile.setPassword(UserProfile.DEFAULT_PASSWORD);
 			Md5PasswordEncoder ms = new Md5PasswordEncoder();
 			userProfile.setPassword(ms.encodePassword(userProfile.getPassword(), null));
@@ -160,7 +160,7 @@ public class UserManagerImpl implements UserManager {
 		if(CollectionUtils.isNotEmpty(roles)){
 			for(Map<String, String> role:roles){
 				role.put(Constants.STATUS.toLowerCase(),null);
-				if(!userRoles.contains(role.get(Constants.OID))){
+				if(userRoles.contains(role.get(Constants.OID))){
 					results.add(role);
 				}
 			}
