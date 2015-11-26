@@ -95,6 +95,7 @@ public class UserManagerImpl implements UserManager {
 		if(userRole==null || StringUtils.isBlank(userRole.getRoleOids())){
 			throw new AhanaBusinessException(CommonErrorConstants.NO_RECORDS_FOUND);
 		}
+		userDao.deleteUserRole(userRole.getUserOid());
 		List<String> items = Arrays.asList(userRole.getRoleOids().split("\\s*,\\s*"));
 		for(String roleOid:items){
 			UserRole userRole2=new UserRole();
@@ -110,6 +111,7 @@ public class UserManagerImpl implements UserManager {
 		if(roleRights==null || StringUtils.isBlank(roleRights.getModuleOids())){
 			throw new AhanaBusinessException(CommonErrorConstants.NO_RECORDS_FOUND);
 		}
+		userDao.deleteRoleRights(roleRights.getRoleOid());
 		List<String> items = Arrays.asList(roleRights.getModuleOids().split("\\s*,\\s*"));
 		for(String moduleOid:items){
 			RoleRights roleRights2=new RoleRights();
@@ -165,7 +167,7 @@ public class UserManagerImpl implements UserManager {
 				}
 			}
 		}
-		return roles;
+		return results;
 	}
 
 	@Override

@@ -46,4 +46,8 @@ public interface UserDao extends UserDetailsService {
 
 	List<String> getSavedRightsByRoleOid(String roleOid);
 
+	void deleteRoleRights(String roleOid);
+
+	void deleteUserRole(String userOid);
+
 } 

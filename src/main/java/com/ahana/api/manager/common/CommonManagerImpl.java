@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -341,8 +341,8 @@ public class CommonManagerImpl implements CommonManager {
 	}
 
 	@Override
-	public void deactivateOrganizationModule(String...organizationModuleOids) throws AhanaBusinessException {
-		if(ArrayUtils.isEmpty(organizationModuleOids)){
+	public void deactivateOrganizationModule(String organizationModuleOids) throws AhanaBusinessException {
+		if(StringUtils.isNotBlank(organizationModuleOids)){
 			throw new AhanaBusinessException(CommonErrorConstants.NO_RECORDS_FOUND);
 		}
 		commonDao.deactivateOrganizationModule(organizationModuleOids);

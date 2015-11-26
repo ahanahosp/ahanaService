@@ -716,7 +716,7 @@ public class CommonServiceImpl extends BaseService implements CommonService {
 	@Override
 	@RequestMapping(value = "/deactivateOrganizationModule",method=RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> deactivateOrganizationModule(@RequestParam("oids") String... organizationModuleOids) throws AhanaBusinessException {
+	public Map<String, Object> deactivateOrganizationModule(@RequestParam("oids") String organizationModuleOids) throws AhanaBusinessException {
 		if (logger.isDebugEnabled()) {
 			logger.debug("deactivateOrganizationModule----start--->"	+ System.currentTimeMillis());
 		}

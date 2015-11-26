@@ -275,4 +275,18 @@ public class UserDaoImpl extends AhanaDaoSupport implements UserDao {
 		}
 		return list;
 	}
+
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
+	public void deleteRoleRights(String roleOid) {
+		Query q = getSessionFactory().getCurrentSession().createQuery("delete RoleRights where roleOid ='"+roleOid+"'");
+		q.executeUpdate();
+	}
+
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
+	public void deleteUserRole(String userOid) {
+		Query q = getSessionFactory().getCurrentSession().createQuery("delete UserRole where userOid ='"+userOid+"'");
+		q.executeUpdate();
+	}
 }
