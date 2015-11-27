@@ -726,5 +726,4 @@ public class CommonServiceImpl extends BaseService implements CommonService {
 		}
 		return handleStatus();
 	}
-
 }

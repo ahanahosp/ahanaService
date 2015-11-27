@@ -25,7 +25,7 @@ public class ConfigurationDaoImpl extends AhanaDaoSupport implements Configurati
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	public void deleteConfigs(String entiryName, String oid) {
-		Query q = getSessionFactory().getCurrentSession().createQuery("update '"+entiryName+"' set status=ACT where oid ='"+oid+"'");
+		Query q = getSessionFactory().getCurrentSession().createQuery("update '"+entiryName+"' set status=INACT where oid ='"+oid+"'");
 		q.executeUpdate();
 		
 	}
@@ -59,6 +59,16 @@ public class ConfigurationDaoImpl extends AhanaDaoSupport implements Configurati
 			query=null;
 		}
 		return list;
+	}
+
+	@Override
+	public List<Map<String, String>> getAllActiveRoomAndBedType() {
+		return null;
+	}
+
+	@Override
+	public void createOrUpdateMultipleConfig(List<AhanaVO> ahanaVOs) {
+		saveOrUpdateAll(ahanaVOs);
 	}
 	
 }

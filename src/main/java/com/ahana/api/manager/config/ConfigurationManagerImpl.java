@@ -49,4 +49,21 @@ public class ConfigurationManagerImpl implements ConfigurationManager {
 		}
 		return alertTypeDetails;
 	}
+
+	@Override
+	public List<Map<String, String>> getAllActiveRoomAndBedType() throws AhanaBusinessException {
+		List<Map<String,String>> roomAndBedType=configurationDao.getAllActiveRoomAndBedType();
+		if(CollectionUtils.isEmpty(roomAndBedType)){
+			throw new AhanaBusinessException(CommonErrorConstants.NO_RECORDS_FOUND);
+		}
+		return roomAndBedType;
+	}
+
+	@Override
+	public void createOrUpdateMultipleConfig(List<AhanaVO> ahanaVOs) throws AhanaBusinessException {
+		if(CollectionUtils.isNotEmpty(ahanaVOs)){
+			throw new AhanaBusinessException(CommonErrorConstants.NO_RECORDS_FOUND);
+		}
+		configurationDao.createOrUpdateMultipleConfig(ahanaVOs);
+	}
 }

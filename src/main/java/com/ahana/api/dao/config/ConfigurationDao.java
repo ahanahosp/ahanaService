@@ -15,4 +15,8 @@ public interface ConfigurationDao {
 
 	List<Map<String, String>> getAllAlertType();
 
+	List<Map<String, String>> getAllActiveRoomAndBedType();
+
+	void createOrUpdateMultipleConfig(List<AhanaVO> ahanaVOs);
+
 }

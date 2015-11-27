@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ahana.api.domain.common.RoomAndBedType;
 import com.ahana.api.domain.config.AlertType;
+import com.ahana.api.domain.config.ConfigWrapper;
 import com.ahana.api.manager.config.ConfigurationManager;
 import com.ahana.commons.system.domain.common.AhanaVO;
 import com.ahana.commons.system.security.exception.AhanaBusinessException;
@@ -85,5 +87,74 @@ public class ConfigurationServiceImpl extends BaseService implements Configurati
 		return handleStatus();
 	}
 	
+	@Override
+	@RequestMapping(value = "/createRoomAndBedType",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> createRoomAndBedType(@Valid @RequestBody RoomAndBedType roomAndBedType) throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("createRoomAndBedType----start--->"	+ System.currentTimeMillis());
+		}
+		configurationManager.createOrUpdateConfigData(roomAndBedType);
+		if (logger.isDebugEnabled()) {
+			logger.debug("createRoomAndBedType: Success");
+		}
+		return handleSuccess("roomAndBedType",roomAndBedType);
+	}
+	
+	@Override
+	@RequestMapping(value = "/getRoomAndBedTypeByOid",method=RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> getRoomAndBedTypeByOid(@RequestParam("oid") String roomBedTypeOid) throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("getRoomAndBedTypeByOid----start--->"	+ System.currentTimeMillis());
+		}
+		AhanaVO roomAndBedType=configurationManager.getConfigDataByOid("getvRoomAndBedTypeByOid", "roomBedTypeOid", roomBedTypeOid);
+		if (logger.isDebugEnabled()) {
+			logger.debug("getRoomAndBedTypeByOid: Success");
+		}
+		return handleSuccess("roomAndBedType",(RoomAndBedType)roomAndBedType);
+	}
+	
+	@Override
+	@RequestMapping(value = "/getAllActiveRoomAndBedType",method=RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> getAllActiveRoomAndBedType() throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("getAllActiveRoomAndBedType----start--->"	+ System.currentTimeMillis());
+		}
+		List<Map<String,String>> roomAndBedTypeDetails=configurationManager.getAllActiveRoomAndBedType();
+		if (logger.isDebugEnabled()) {
+			logger.debug("getAllActiveRoomAndBedType: Success");
+		}
+		return handleSuccess("roomAndBedTypeDetails",roomAndBedTypeDetails);
+	}
+	
+	@Override
+	@RequestMapping(value = "/deleteRoomAndBedType",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> deleteRoomAndBedType(@RequestParam("oid") String roomBedTypeOid) throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("deleteRoomAndBedType----start--->"	+ System.currentTimeMillis());
+		}
+		configurationManager.deleteConfigData("RoomAndBedType", roomBedTypeOid);
+		if (logger.isDebugEnabled()) {
+			logger.debug("deleteRoomAndBedType: Success");
+		}
+		return handleStatus();
+	}
+	
+	@Override
+	@RequestMapping(value = "/createOrUpdateMultipleConfig",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> createOrUpdateMultipleConfig(@Valid @RequestBody ConfigWrapper configWrapper) throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("createOrUpdateMultipleConfig----start--->"	+ System.currentTimeMillis());
+		}
+		configurationManager.createOrUpdateMultipleConfig(configWrapper.getAhanaVOs());
+		if (logger.isDebugEnabled()) {
+			logger.debug("createOrUpdateMultipleConfig: Success");
+		}
+		return handleSuccess("multipleConfig",configWrapper);
+	}
 	
 }

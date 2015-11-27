@@ -16,4 +16,8 @@ public interface ConfigurationManager {
 
 	List<Map<String, String>> getAllAlertType() throws AhanaBusinessException;
 
+	List<Map<String, String>> getAllActiveRoomAndBedType() throws AhanaBusinessException;
+
+	void createOrUpdateMultipleConfig(List<AhanaVO> ahanaVOs) throws AhanaBusinessException;
+
 }
