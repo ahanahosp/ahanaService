@@ -138,7 +138,7 @@ public class UserDaoImpl extends AhanaDaoSupport implements UserDao {
 		List<Map<String, String>> list=null;
 		String query=null;
 		try{
-			query="select oid as oid,role_name as name,status as status from roles where status='"+Constants.ACT+"'";
+			query="select oid as oid,role_name as name,status as status from roles";
 			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
 					.addScalar("oid")
 					.addScalar("name")
@@ -187,7 +187,7 @@ public class UserDaoImpl extends AhanaDaoSupport implements UserDao {
 			query="select distinct up.oid as oid,up.salutation as salutation,up.first_name as firstName,up.last_name as lastName,up.designation as designation,"
 					+ "up.user_id as userName,up.password_exp_date as inActivationDate,up.activation_date as activationDate,"
 					+ "up.email_id as emailId,up.mobile_no as mobileNo,sp.speciality_name as speciality,up.care_provider as careProvider from user_profile up"
-					+ " left join speciality_details sp on up.speciality=sp.oid where user_status='"+Constants.ACT+"'";
+					+ " left join speciality_details sp on up.speciality=sp.oid";
 			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
 					.addScalar("oid")
 					.addScalar("salutation")
@@ -212,13 +212,13 @@ public class UserDaoImpl extends AhanaDaoSupport implements UserDao {
 
 	@Override
 	public void deleteRole(String roleOid) {
-		Query q = getSessionFactory().getCurrentSession().createQuery("delete Role where oid ='"+roleOid+"'");
+		Query q = getSessionFactory().getCurrentSession().createQuery("update Role set status='INACT' where oid ='"+roleOid+"'");
 		q.executeUpdate();		
 	}
 
 	@Override
 	public void deleteUser(String userOid) {
-		Query q = getSessionFactory().getCurrentSession().createQuery("delete UserProfile where oid ='"+userOid+"'");
+		Query q = getSessionFactory().getCurrentSession().createQuery("update UserProfile set status='INACT' where oid ='"+userOid+"'");
 		q.executeUpdate();		
 	}
 

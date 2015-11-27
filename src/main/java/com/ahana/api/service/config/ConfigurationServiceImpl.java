@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ahana.api.domain.common.RoomAndBedType;
 import com.ahana.api.domain.config.AlertType;
+import com.ahana.api.domain.config.AlliedCharges;
 import com.ahana.api.domain.config.ConfigWrapper;
 import com.ahana.api.manager.config.ConfigurationManager;
 import com.ahana.commons.system.domain.common.AhanaVO;
@@ -156,5 +157,62 @@ public class ConfigurationServiceImpl extends BaseService implements Configurati
 		}
 		return handleSuccess("multipleConfig",configWrapper);
 	}
+	
+	@Override
+	@RequestMapping(value = "/createAlliedCharges",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> createAlliedCharges(@Valid @RequestBody AlliedCharges alliedCharges) throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("createAlliedCharges----start--->"	+ System.currentTimeMillis());
+		}
+		configurationManager.createOrUpdateConfigData(alliedCharges);
+		if (logger.isDebugEnabled()) {
+			logger.debug("createAlliedCharges: Success");
+		}
+		return handleSuccess("alliedCharges",alliedCharges);
+	}
+	
+	@Override
+	@RequestMapping(value = "/getAlliedChargesByOid",method=RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> getAlliedChargesByOid(@RequestParam("oid") String alliedChargesOid) throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("getAlliedChargesByOid----start--->"	+ System.currentTimeMillis());
+		}
+		AhanaVO alliedCharges=configurationManager.getConfigDataByOid("getAlliedChargesByOid", "alliedChargesOid", alliedChargesOid);
+		if (logger.isDebugEnabled()) {
+			logger.debug("getAlliedChargesByOid: Success");
+		}
+		return handleSuccess("alliedCharges",(AlliedCharges)alliedCharges);
+	}
+	
+	@Override
+	@RequestMapping(value = "/getAllAlliedCharges",method=RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> getAllAlliedCharges() throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("getAllActiveRoomAndBedType----start--->"	+ System.currentTimeMillis());
+		}
+		List<Map<String,String>> alliedChangesDetails=configurationManager.getAllAlliedCharges();
+		if (logger.isDebugEnabled()) {
+			logger.debug("getAllActiveRoomAndBedType: Success");
+		}
+		return handleSuccess("alliedChangesDetails",alliedChangesDetails);
+	}
+	
+	@Override
+	@RequestMapping(value = "/deleteAlliedCharges",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> deleteAlliedCharges(@RequestParam("oid") String alliedChargesOid) throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("deleteAlliedCharges----start--->"	+ System.currentTimeMillis());
+		}
+		configurationManager.deleteConfigData("AlliedCharges", alliedChargesOid);
+		if (logger.isDebugEnabled()) {
+			logger.debug("deleteAlliedCharges: Success");
+		}
+		return handleStatus();
+	}
+	
 	
 }

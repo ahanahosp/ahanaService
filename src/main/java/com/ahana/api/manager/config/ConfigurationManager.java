@@ -20,4 +20,6 @@ public interface ConfigurationManager {
 
 	void createOrUpdateMultipleConfig(List<AhanaVO> ahanaVOs) throws AhanaBusinessException;
 
+	List<Map<String, String>> getAllAlliedCharges() throws AhanaBusinessException;
+
 }

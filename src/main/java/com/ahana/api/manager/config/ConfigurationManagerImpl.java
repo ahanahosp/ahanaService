@@ -66,4 +66,13 @@ public class ConfigurationManagerImpl implements ConfigurationManager {
 		}
 		configurationDao.createOrUpdateMultipleConfig(ahanaVOs);
 	}
+
+	@Override
+	public List<Map<String, String>> getAllAlliedCharges() throws AhanaBusinessException {
+		List<Map<String,String>> alliedCharges=configurationDao.getAllAlliedCharges();
+		if(CollectionUtils.isEmpty(alliedCharges)){
+			throw new AhanaBusinessException(CommonErrorConstants.NO_RECORDS_FOUND);
+		}
+		return alliedCharges;
+	}
 }

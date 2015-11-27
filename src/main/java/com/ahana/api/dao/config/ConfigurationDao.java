@@ -19,4 +19,6 @@ public interface ConfigurationDao {
 
 	void createOrUpdateMultipleConfig(List<AhanaVO> ahanaVOs);
 
+	List<Map<String, String>> getAllAlliedCharges();
+
 }

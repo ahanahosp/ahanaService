@@ -4,6 +4,7 @@ import java.util.Map;
 
 import com.ahana.api.domain.common.RoomAndBedType;
 import com.ahana.api.domain.config.AlertType;
+import com.ahana.api.domain.config.AlliedCharges;
 import com.ahana.api.domain.config.ConfigWrapper;
 import com.ahana.commons.system.security.exception.AhanaBusinessException;
 
@@ -26,5 +27,13 @@ public interface ConfigurationService {
 	Map<String, Object> deleteRoomAndBedType(String roomBedTypeOid) throws AhanaBusinessException;
 
 	Map<String, Object> createOrUpdateMultipleConfig(ConfigWrapper configWrapper) throws AhanaBusinessException;
+
+	Map<String, Object> createAlliedCharges(AlliedCharges alliedCharges) throws AhanaBusinessException;
+
+	Map<String, Object> getAlliedChargesByOid(String alliedChargesOid) throws AhanaBusinessException;
+
+	Map<String, Object> deleteAlliedCharges(String alliedChargesOid) throws AhanaBusinessException;
+
+	Map<String, Object> getAllAlliedCharges() throws AhanaBusinessException;
 
 }
