@@ -293,7 +293,7 @@ public class ConfigurationServiceImpl extends BaseService implements Configurati
 		if (logger.isDebugEnabled()) {
 			logger.debug("getPatientCategoryByOid----start--->"	+ System.currentTimeMillis());
 		}
-		AhanaVO patientCategory=configurationManager.getConfigDataByOid("getPatientCategoryByOid", "chargesForCategoryOid", patientCategoryOid);
+		AhanaVO patientCategory=configurationManager.getConfigDataByOid("getPatientCategoryByOid", "patientCategoryOid", patientCategoryOid);
 		if (logger.isDebugEnabled()) {
 			logger.debug("getPatientCategoryByOid: Success");
 		}
