@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ahana.commons.system.dao.common.AhanaDaoSupport;
 import com.ahana.commons.system.domain.common.AhanaVO;
+import com.ahana.commons.system.security.util.Constants;
 
 @Transactional(readOnly = false)
 public class ConfigurationDaoImpl extends AhanaDaoSupport implements ConfigurationDao {
@@ -110,6 +111,46 @@ public class ConfigurationDaoImpl extends AhanaDaoSupport implements Configurati
 					.addScalar("colourPicker")
 					.addScalar("activationDate")
 					.addScalar("status")
+					.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+			list = sqlQuery.list();
+		}finally{
+			sqlQuery=null;
+			query=null;
+		}
+		return list;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Map<String, String>> getAllActiveAlliedCharges() {
+		Query sqlQuery=null;
+		List<Map<String, String>> list=null;
+		String query=null;
+		try{
+			query="select a.oid as value,a.allied_charges as label from allied_charges a where status='"+Constants.ACT+"'";
+			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
+					.addScalar("value")
+					.addScalar("label")
+					.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+			list = sqlQuery.list();
+		}finally{
+			sqlQuery=null;
+			query=null;
+		}
+		return list;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Map<String, String>> getAllActiveProcedures() {
+		Query sqlQuery=null;
+		List<Map<String, String>> list=null;
+		String query=null;
+		try{
+			query="select p.oid as value,p.procedures_name as label from procedures p where p.status='"+Constants.ACT+"'";
+			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
+					.addScalar("value")
+					.addScalar("label")
 					.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
 			list = sqlQuery.list();
 		}finally{

@@ -54,4 +54,6 @@ public interface ConfigurationService {
 
 	Map<String, Object> createPatientCategory(PatientCategory patientCategory) throws AhanaBusinessException;
 
+	Map<String, Object> getSubCategoryByCategory(String category) throws AhanaBusinessException;
+
 }

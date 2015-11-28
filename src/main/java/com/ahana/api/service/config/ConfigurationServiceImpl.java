@@ -1,5 +1,6 @@
 package com.ahana.api.service.config;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +22,7 @@ import com.ahana.api.domain.config.ChargesForCategory;
 import com.ahana.api.domain.config.ConfigWrapper;
 import com.ahana.api.domain.config.PatientCategory;
 import com.ahana.api.manager.config.ConfigurationManager;
+import com.ahana.api.util.BusinessConstants;
 import com.ahana.commons.system.domain.common.AhanaVO;
 import com.ahana.commons.system.security.exception.AhanaBusinessException;
 import com.ahana.commons.system.service.BaseService;
@@ -326,6 +328,31 @@ public class ConfigurationServiceImpl extends BaseService implements Configurati
 			logger.debug("deletePatientCategory: Success");
 		}
 		return handleStatus();
+	}
+	
+	@Override
+	@RequestMapping(value = "/getSubCategoryByCategory",method=RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> getSubCategoryByCategory(@RequestParam("category") String category) throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("getSubCategoryByCategory----start--->"	+ System.currentTimeMillis());
+		}
+		List<Map<String,String>> subCategoryDetails=new ArrayList<Map<String,String>>();
+		if(category.equalsIgnoreCase(BusinessConstants.ALLIED_CHARGES)){
+			subCategoryDetails=configurationManager.getAllActiveAlliedCharges();
+		}else if(category.equalsIgnoreCase(BusinessConstants.ROOM_CHARGES)){
+			
+		}else if(category.equalsIgnoreCase(BusinessConstants.PROFESSIONAL_CHARGES)){
+			
+		}else if(category.equalsIgnoreCase(BusinessConstants.PROCEDURES_CHARGES)){
+			subCategoryDetails=configurationManager.getAllActiveProcedures();
+		}else if(category.equalsIgnoreCase(BusinessConstants.LABORATORY_CHARGES)){
+			
+		}
+		if (logger.isDebugEnabled()) {
+			logger.debug("getSubCategoryByCategory: Success");
+		}
+		return handleSuccess("subCategoryDetails",subCategoryDetails);
 	}
 		
 }

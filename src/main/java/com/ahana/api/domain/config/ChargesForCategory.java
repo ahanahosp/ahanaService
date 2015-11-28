@@ -16,13 +16,12 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import com.ahana.commons.system.domain.common.AhanaVO;
 import com.ahana.commons.system.security.error.CommonErrorConstants;
-import com.ahana.commons.system.security.util.Constants;
 import com.ahana.commons.system.security.util.RegConstants;
 
 @Entity
-@Table(name = "allied_charges")
+@Table(name = "charges_for_category")
 @NamedQueries({
-		@NamedQuery(name = "getChargesForCategoryByOid", query = "from ChangesForCategory cc where cc.oid= :chargesForCategoryOid") })
+		@NamedQuery(name = "getChargesForCategoryByOid", query = "from ChargesForCategory cc where cc.oid= :chargesForCategoryOid") })
 public class ChargesForCategory implements AhanaVO {
 
 	private static final long serialVersionUID = 1L;
@@ -35,12 +34,13 @@ public class ChargesForCategory implements AhanaVO {
 	@Column(name = "oid")
 	private String oid;
 
-	@NotBlank(message = CommonErrorConstants.ALLIED_CHARGES_IS_REQUIRED)
-	@Length(min = 3, max = 100, message = CommonErrorConstants.ALLIED_CHARGES_LENGTH_IS_INVALID)
-	@Pattern(regexp = RegConstants.ALPHA_NUMERIC_SPACE_HYPEN, message = CommonErrorConstants.ALLIED_CHARGES_IS_INVALID_FORMAT)
+	@NotBlank(message = CommonErrorConstants.CATEGORY_IS_REQUIRED)
+	@Length(min = 3, max = 100, message = CommonErrorConstants.CATEGORY_LENGTH_IS_INVALID)
+	@Pattern(regexp = RegConstants.ALPHA_NUMERIC_SPACE_HYPEN, message = CommonErrorConstants.CATEGORY_FORMAT_IS_INVALID)
 	@Column(name = "category")
 	private String category;
-
+	
+	@NotBlank(message = CommonErrorConstants.SUBCATEGORY_IS_REQUIRED)
 	@Column(name = "sub_category_oid")
 	private String subCategoryOid;
 
@@ -91,13 +91,6 @@ public class ChargesForCategory implements AhanaVO {
 
 	@Column(name = "suite")
 	private String suite;
-
-	@Column(name = "status")
-	private String status;
-
-	public ChargesForCategory() {
-		this.status = Constants.ACT;
-	}
 
 	public String getOid() {
 		return oid;
@@ -249,13 +242,5 @@ public class ChargesForCategory implements AhanaVO {
 
 	public void setSuite(String suite) {
 		this.suite = suite;
-	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
 	}
 }

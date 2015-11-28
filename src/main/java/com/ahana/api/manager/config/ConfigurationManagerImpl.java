@@ -93,4 +93,14 @@ public class ConfigurationManagerImpl implements ConfigurationManager {
 		}
 		return patientCategory;
 	}
+
+	@Override
+	public List<Map<String, String>> getAllActiveAlliedCharges() throws AhanaBusinessException {
+		return configurationDao.getAllActiveAlliedCharges();
+	}
+
+	@Override
+	public List<Map<String, String>> getAllActiveProcedures() {
+		return configurationDao.getAllActiveProcedures();
+	}
 }
