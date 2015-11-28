@@ -24,12 +24,8 @@ public class ConfigurationDaoImpl extends AhanaDaoSupport implements Configurati
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	public void deleteConfigs(String entiryName, String oid) {
-		try{
-			Query q = getSessionFactory().getCurrentSession().createQuery("update '"+entiryName+"' set status='INACT' where oid ='"+oid+"'");
-			q.executeUpdate();
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
+		Query q = getSessionFactory().getCurrentSession().createQuery("update "+entiryName+" set status='INACT' where oid ='"+oid+"'");
+		q.executeUpdate();
 	}
 
 	@SuppressWarnings("unchecked")
