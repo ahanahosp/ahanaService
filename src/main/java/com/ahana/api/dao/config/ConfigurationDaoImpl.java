@@ -89,5 +89,34 @@ public class ConfigurationDaoImpl extends AhanaDaoSupport implements Configurati
 			query=null;
 		}
 		return list;
+	}
+
+	@Override
+	public List<Map<String, String>> getAllChargesForCategory() {
+
+		return null;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Map<String, String>> getAllPatientCategory() {
+		Query sqlQuery=null;
+		List<Map<String, String>> list=null;
+		String query=null;
+		try{
+			query="select pa.oid as oid,pa.category_name as categoryName,pa.colour_picker as colourPicker,pa.activation_date as activationDate,pa.status as status from patient_category pa";
+			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
+					.addScalar("oid")
+					.addScalar("categoryName")
+					.addScalar("colourPicker")
+					.addScalar("activationDate")
+					.addScalar("status")
+					.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+			list = sqlQuery.list();
+		}finally{
+			sqlQuery=null;
+			query=null;
+		}
+		return list;
 	}	
 }

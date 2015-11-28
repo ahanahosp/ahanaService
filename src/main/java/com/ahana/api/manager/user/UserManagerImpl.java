@@ -36,8 +36,10 @@ public class UserManagerImpl implements UserManager {
 		if(userProfile==null){
 			throw new AhanaBusinessException(CommonErrorConstants.USER_NOT_FOUND);
 		}
-		if(StringUtils.isBlank(userProfile.getPassword()) && StringUtils.isBlank(userProfile.getOid())){
-			userProfile.setPassword(UserProfile.DEFAULT_PASSWORD);
+		if(StringUtils.isBlank(userProfile.getOid())){
+			if(StringUtils.isBlank(userProfile.getPassword())){
+				userProfile.setPassword(UserProfile.DEFAULT_PASSWORD);
+			}
 			Md5PasswordEncoder ms = new Md5PasswordEncoder();
 			userProfile.setPassword(ms.encodePassword(userProfile.getPassword(), null));
 		}

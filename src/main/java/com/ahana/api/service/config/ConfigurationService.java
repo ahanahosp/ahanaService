@@ -5,7 +5,9 @@ import java.util.Map;
 import com.ahana.api.domain.common.RoomAndBedType;
 import com.ahana.api.domain.config.AlertType;
 import com.ahana.api.domain.config.AlliedCharges;
+import com.ahana.api.domain.config.ChargesForCategory;
 import com.ahana.api.domain.config.ConfigWrapper;
+import com.ahana.api.domain.config.PatientCategory;
 import com.ahana.commons.system.security.exception.AhanaBusinessException;
 
 public interface ConfigurationService {
@@ -35,5 +37,21 @@ public interface ConfigurationService {
 	Map<String, Object> deleteAlliedCharges(String alliedChargesOid) throws AhanaBusinessException;
 
 	Map<String, Object> getAllAlliedCharges() throws AhanaBusinessException;
+
+	Map<String, Object> createChargesForCategory(ChargesForCategory chargesForCategory) throws AhanaBusinessException;
+
+	Map<String, Object> getChargesForCategoryByOid(String chargesForCategoryOid) throws AhanaBusinessException;
+
+	Map<String, Object> deleteChargesForCategory(String chargesForCategoryOid) throws AhanaBusinessException;
+
+	Map<String, Object> getAllChargesForCategory() throws AhanaBusinessException;
+
+	Map<String, Object> deletePatientCategory(String patientCategoryOid) throws AhanaBusinessException;
+
+	Map<String, Object> getAllPatientCategory() throws AhanaBusinessException;
+
+	Map<String, Object> getPatientCategoryByOid(String patientCategoryOid) throws AhanaBusinessException;
+
+	Map<String, Object> createPatientCategory(PatientCategory patientCategory) throws AhanaBusinessException;
 
 }

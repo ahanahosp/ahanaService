@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ahana.api.domain.common.RoomAndBedType;
 import com.ahana.api.domain.config.AlertType;
 import com.ahana.api.domain.config.AlliedCharges;
+import com.ahana.api.domain.config.ChargesForCategory;
 import com.ahana.api.domain.config.ConfigWrapper;
+import com.ahana.api.domain.config.PatientCategory;
 import com.ahana.api.manager.config.ConfigurationManager;
 import com.ahana.commons.system.domain.common.AhanaVO;
 import com.ahana.commons.system.security.exception.AhanaBusinessException;
@@ -214,5 +216,116 @@ public class ConfigurationServiceImpl extends BaseService implements Configurati
 		return handleStatus();
 	}
 	
+	@Override
+	@RequestMapping(value = "/createChargesForCategory",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> createChargesForCategory(@Valid @RequestBody ChargesForCategory chargesForCategory) throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("createChargesForCategory----start--->"	+ System.currentTimeMillis());
+		}
+		configurationManager.createOrUpdateConfigData(chargesForCategory);
+		if (logger.isDebugEnabled()) {
+			logger.debug("createChargesForCategory: Success");
+		}
+		return handleSuccess("chargesForCategory",chargesForCategory);
+	}
 	
+	@Override
+	@RequestMapping(value = "/getChargesForCategoryByOid",method=RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> getChargesForCategoryByOid(@RequestParam("oid") String chargesForCategoryOid) throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("getChargesForCategoryByOid----start--->"	+ System.currentTimeMillis());
+		}
+		AhanaVO chargesForCategory=configurationManager.getConfigDataByOid("getChargesForCategoryByOid", "chargesForCategoryOid", chargesForCategoryOid);
+		if (logger.isDebugEnabled()) {
+			logger.debug("getChargesForCategoryByOid: Success");
+		}
+		return handleSuccess("chargesForCategory",(ChargesForCategory)chargesForCategory);
+	}
+	
+	@Override
+	@RequestMapping(value = "/getAllChargesForCategory",method=RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> getAllChargesForCategory() throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("getAllChargesForCategory----start--->"	+ System.currentTimeMillis());
+		}
+		List<Map<String,String>> chargesForCategory=configurationManager.getAllChargesForCategory();
+		if (logger.isDebugEnabled()) {
+			logger.debug("getAllChargesForCategory: Success");
+		}
+		return handleSuccess("chargesForCategory",chargesForCategory);
+	}
+	
+	@Override
+	@RequestMapping(value = "/deleteChargesForCategory",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> deleteChargesForCategory(@RequestParam("oid") String chargesForCategoryOid) throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("deleteChargesForCategory----start--->"	+ System.currentTimeMillis());
+		}
+		configurationManager.deleteConfigData("ChargesForCategory", chargesForCategoryOid);
+		if (logger.isDebugEnabled()) {
+			logger.debug("deleteChargesForCategory: Success");
+		}
+		return handleStatus();
+	}
+	
+	@Override
+	@RequestMapping(value = "/createPatientCategory",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> createPatientCategory(@Valid @RequestBody PatientCategory patientCategory) throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("createPatientCategory----start--->"	+ System.currentTimeMillis());
+		}
+		configurationManager.createOrUpdateConfigData(patientCategory);
+		if (logger.isDebugEnabled()) {
+			logger.debug("createPatientCategory: Success");
+		}
+		return handleSuccess("patientCategory",patientCategory);
+	}
+	
+	@Override
+	@RequestMapping(value = "/getPatientCategoryByOid",method=RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> getPatientCategoryByOid(@RequestParam("oid") String patientCategoryOid) throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("getPatientCategoryByOid----start--->"	+ System.currentTimeMillis());
+		}
+		AhanaVO patientCategory=configurationManager.getConfigDataByOid("getPatientCategoryByOid", "chargesForCategoryOid", patientCategoryOid);
+		if (logger.isDebugEnabled()) {
+			logger.debug("getPatientCategoryByOid: Success");
+		}
+		return handleSuccess("patientCategory",(PatientCategory)patientCategory);
+	}
+	
+	@Override
+	@RequestMapping(value = "/getAllPatientCategory",method=RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> getAllPatientCategory() throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("getAllPatientCategory----start--->"	+ System.currentTimeMillis());
+		}
+		List<Map<String,String>> patientCategoryDetails=configurationManager.getAllPatientCategory();
+		if (logger.isDebugEnabled()) {
+			logger.debug("getAllPatientCategory: Success");
+		}
+		return handleSuccess("patientCategoryDetails",patientCategoryDetails);
+	}
+	
+	@Override
+	@RequestMapping(value = "/deletePatientCategory",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> deletePatientCategory(@RequestParam("oid") String patientCategoryOid) throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("deletePatientCategory----start--->"	+ System.currentTimeMillis());
+		}
+		configurationManager.deleteConfigData("PatientCategory", patientCategoryOid);
+		if (logger.isDebugEnabled()) {
+			logger.debug("deletePatientCategory: Success");
+		}
+		return handleStatus();
+	}
+		
 }

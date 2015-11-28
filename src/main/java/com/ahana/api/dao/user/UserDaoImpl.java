@@ -212,13 +212,13 @@ public class UserDaoImpl extends AhanaDaoSupport implements UserDao {
 
 	@Override
 	public void deleteRole(String roleOid) {
-		Query q = getSessionFactory().getCurrentSession().createQuery("update Role set status='INACT' where oid ='"+roleOid+"'");
+		Query q = getSessionFactory().getCurrentSession().createQuery("update Roles set status='INACT' where oid ='"+roleOid+"'");
 		q.executeUpdate();		
 	}
 
 	@Override
 	public void deleteUser(String userOid) {
-		Query q = getSessionFactory().getCurrentSession().createQuery("update UserProfile set status='INACT' where oid ='"+userOid+"'");
+		Query q = getSessionFactory().getCurrentSession().createQuery("update UserProfile set userStatus='INACT' where oid ='"+userOid+"'");
 		q.executeUpdate();		
 	}
 

@@ -56,4 +56,10 @@ INSERT INTO lookup(code, category, description, seq, deprecated) VALUES ('Standa
  ('Vellore', 'CITY_TAMIL NADU', 'Vellore', 27, false), ('Viluppuram', 'CITY_TAMIL NADU', 'Viluppuram', 28, false),
  ('Virudhunagar', 'CITY_TAMIL NADU', 'Virudhunagar', 29, false);
   
- INSERT INTO `arkinfot_ahana`.`client` (`oid`, `client_id`, `api_key`, `authorized_services`, `auth_ip_addresses`, `client_type`, `contract_started_on`, `contract_ends_on`, `api_key_expiration_date`, `created_on`, `updated_on`, `created_by`, `updated_by`) VALUES ('o0100000402000000501', 'ahana', '574EBDD5B9D10563', '*', '*', 'Internal', '2015-11-24 00:00:00', '2020-01-01 00:00:00', '2020-01-01 00:00:00', '2015-11-24 00:00:00', '2015-11-24 00:00:00', 'ahana', 'ahana');
+ INSERT INTO lookup(code, category, description, seq, deprecated) VALUES ('Allied Charges', 'CHARGESCATEGORY', 'Allied Charges', 1, false),
+('Room Charges', 'CHARGESCATEGORY', 'Room Charges', 2, false),('Professional Charges', 'CHARGESCATEGORY', 'Professional Charges', 3, false),
+('Procedures Charges', 'CHARGESCATEGORY', 'Procedures Charges', 4, false),
+('Laboratory Charges', 'CHARGESCATEGORY', 'Laboratory Charges', 5, false);
+
+ INSERT INTO `arkinfot_ahana`.`client` (`oid`, `client_id`, `api_key`, `authorized_services`, `auth_ip_addresses`, `client_type`, `contract_started_on`, `contract_ends_on`, `api_key_expiration_date`, `created_on`, `updated_on`, `created_by`, `updated_by`) 
+ VALUES ('o0100000402000000501', 'ahana', '574EBDD5B9D10563', '*', '*', 'Internal', '2015-11-24 00:00:00', '2020-01-01 00:00:00', '2020-01-01 00:00:00', '2015-11-24 00:00:00', '2015-11-24 00:00:00', 'ahana', 'ahana');

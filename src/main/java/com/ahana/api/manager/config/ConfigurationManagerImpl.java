@@ -75,4 +75,22 @@ public class ConfigurationManagerImpl implements ConfigurationManager {
 		}
 		return alliedCharges;
 	}
+
+	@Override
+	public List<Map<String, String>> getAllChargesForCategory() throws AhanaBusinessException {
+		List<Map<String,String>> chargesForCategory=configurationDao.getAllChargesForCategory();
+		if(CollectionUtils.isEmpty(chargesForCategory)){
+			throw new AhanaBusinessException(CommonErrorConstants.NO_RECORDS_FOUND);
+		}
+		return chargesForCategory;
+	}
+
+	@Override
+	public List<Map<String, String>> getAllPatientCategory() throws AhanaBusinessException {
+		List<Map<String,String>> patientCategory=configurationDao.getAllPatientCategory();
+		if(CollectionUtils.isEmpty(patientCategory)){
+			throw new AhanaBusinessException(CommonErrorConstants.NO_RECORDS_FOUND);
+		}
+		return patientCategory;
+	}
 }
