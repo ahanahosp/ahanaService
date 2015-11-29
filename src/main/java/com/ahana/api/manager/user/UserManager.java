@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.ahana.api.domain.user.RoleRights;
+import com.ahana.commons.system.domain.user.Login;
 import com.ahana.commons.system.domain.user.Roles;
 import com.ahana.commons.system.domain.user.UserProfile;
 import com.ahana.commons.system.domain.user.UserRole;
@@ -38,5 +39,15 @@ public interface UserManager {
 	List<Map<String, String>> getSavedRightsByRoleOid(String roleOid) throws AhanaBusinessException;
 
 	RoleRights saveRoleRights(RoleRights roleRights) throws AhanaBusinessException;
+
+	Login saveLogin(Login login);
+
+	Login getLoginByOid(String loginOid) throws AhanaBusinessException;
+
+	List<Map<String, String>> getAllLogin(int index, int noOfRecords) throws AhanaBusinessException;
+
+	void deleteLogin(String loginOid);
+
+	List<Map<String, String>> getActiveUsers() throws AhanaBusinessException;
 
 }

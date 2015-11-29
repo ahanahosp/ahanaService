@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import com.ahana.api.domain.user.RoleRights;
+import com.ahana.commons.system.domain.user.Login;
 import com.ahana.commons.system.domain.user.Roles;
 import com.ahana.commons.system.domain.user.UserProfile;
 import com.ahana.commons.system.domain.user.UserRole;
@@ -49,5 +50,15 @@ public interface UserDao extends UserDetailsService {
 	void deleteRoleRights(String roleOid);
 
 	void deleteUserRole(String userOid);
+
+	Login saveLogin(Login login);
+
+	Login getLoginByOid(String loginOid);
+
+	List<Map<String, String>> getAllLogin(int index, int noOfRecords);
+
+	void deleteLogin(String loginOid);
+
+	List<Map<String, String>> getActiveUsers();
 
 } 

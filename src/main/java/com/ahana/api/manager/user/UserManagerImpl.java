@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.ahana.api.dao.user.UserDao;
 import com.ahana.api.domain.user.RoleRights;
 import com.ahana.api.manager.common.CommonManager;
+import com.ahana.commons.system.domain.user.Login;
 import com.ahana.commons.system.domain.user.Roles;
 import com.ahana.commons.system.domain.user.UserProfile;
 import com.ahana.commons.system.domain.user.UserRole;
@@ -35,13 +36,6 @@ public class UserManagerImpl implements UserManager {
 	public UserProfile createUser(UserProfile userProfile) throws AhanaBusinessException {
 		if(userProfile==null){
 			throw new AhanaBusinessException(CommonErrorConstants.USER_NOT_FOUND);
-		}
-		if(StringUtils.isBlank(userProfile.getOid())){
-			if(StringUtils.isBlank(userProfile.getPassword())){
-				userProfile.setPassword(UserProfile.DEFAULT_PASSWORD);
-			}
-			Md5PasswordEncoder ms = new Md5PasswordEncoder();
-			userProfile.setPassword(ms.encodePassword(userProfile.getPassword(), null));
 		}
 		userDao.saveUser(userProfile);
 		return userProfile;
@@ -188,5 +182,49 @@ public class UserManagerImpl implements UserManager {
 			}
 		}
 		return results;
+	}
+
+	@SuppressWarnings("static-access")
+	@Override
+	public Login saveLogin(Login login) {
+		if(StringUtils.isBlank(login.getPassword())){
+			login.setPassword(login.DEFAULT_PASSWORD);
+		}
+		Md5PasswordEncoder ms = new Md5PasswordEncoder();
+		login.setPassword(ms.encodePassword(login.getPassword(), null));
+		userDao.saveLogin(login);
+		return login;
+	}
+
+	@Override
+	public Login getLoginByOid(String loginOid) throws AhanaBusinessException {
+		Login login=userDao.getLoginByOid(loginOid);
+		if(login==null){
+			throw new AhanaBusinessException(CommonErrorConstants.NO_RECORDS_FOUND);
+		}
+		return login;
+	}
+
+	@Override
+	public List<Map<String, String>> getAllLogin(int index, int noOfRecords) throws AhanaBusinessException {
+		List<Map<String, String>> logins=userDao.getAllLogin(index,noOfRecords);
+		if(CollectionUtils.isEmpty(logins)){
+			throw new AhanaBusinessException(CommonErrorConstants.NO_RECORDS_FOUND);
+		}
+		return logins;
+	}
+
+	@Override
+	public void deleteLogin(String loginOid) {
+		userDao.deleteLogin(loginOid);
+	}
+
+	@Override
+	public List<Map<String, String>> getActiveUsers() throws AhanaBusinessException {
+		List<Map<String, String>> users=userDao.getActiveUsers();
+		if(CollectionUtils.isEmpty(users)){
+			throw new AhanaBusinessException(CommonErrorConstants.NO_RECORDS_FOUND);
+		}
+		return users;
 	}	
 }

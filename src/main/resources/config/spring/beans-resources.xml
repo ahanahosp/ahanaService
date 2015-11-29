@@ -89,6 +89,8 @@
 				<value>com.ahana.api.domain.config.AlliedCharges</value>
 				<value>com.ahana.api.domain.config.PatientCategory</value>
 				<value>com.ahana.api.domain.config.ChargesForCategory</value>
+				<value>com.ahana.commons.system.domain.user.UserProfileView</value>
+				<value>com.ahana.commons.system.domain.user.Login</value>
 			</list>
 		</property>
 	</bean>
@@ -133,6 +135,8 @@
 				<value>com.ahana.api.domain.config.AlliedCharges</value>
 				<value>com.ahana.api.domain.config.PatientCategory</value>
 				<value>com.ahana.api.domain.config.ChargesForCategory</value>
+				<value>com.ahana.commons.system.domain.user.UserProfileView</value>
+				<value>com.ahana.commons.system.domain.user.Login</value>
 			</list>
 		</property>
 	</bean>

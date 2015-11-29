@@ -247,7 +247,7 @@ public class ConfigurationServiceImpl extends BaseService implements Configurati
 	}
 	
 	@Override
-	@RequestMapping(value = "/getAllChargesForCategory",method=RequestMethod.GET)
+	@RequestMapping(value = "/getActiveChargesForCategory",method=RequestMethod.GET)
 	@ResponseBody
 	public Map<String, Object> getAllChargesForCategory() throws AhanaBusinessException {
 		if (logger.isDebugEnabled()) {

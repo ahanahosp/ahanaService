@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ahana.api.domain.user.RoleRights;
 import com.ahana.api.manager.user.UserManager;
+import com.ahana.commons.system.domain.user.Login;
 import com.ahana.commons.system.domain.user.Roles;
 import com.ahana.commons.system.domain.user.UserProfile;
 import com.ahana.commons.system.domain.user.UserRole;
@@ -227,4 +228,76 @@ public class UserServiceImpl extends BaseService implements UserService {
 		}
 		return handleSuccess("rightsDetails",rights);
 	}
+	
+	@Override
+	@RequestMapping(value = "/saveLogin",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String,Object> saveLogin(@Valid @RequestBody Login login) throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("saveLogin----start--->"	+ System.currentTimeMillis());
+		}
+		userManager.saveLogin(login);
+		if (logger.isDebugEnabled()) {
+			logger.debug("saveLogin: Success");
+		}
+		return handleSuccess("logins",login);
+	}
+	
+	@Override
+	@RequestMapping(value = "/getLoginByOid",method=RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> getLoginByOid(@RequestParam("oid") String loginOid) throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("getLoginByOid----start--->"	+ System.currentTimeMillis());
+		}
+		Login login=userManager.getLoginByOid(loginOid);
+		if (logger.isDebugEnabled()) {
+			logger.debug("getLoginByOid: Success");
+		}
+		return handleSuccess("login",login);
+	}
+	
+	@Override
+	@RequestMapping(value = "/getAllLogin",method=RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> getAllLogin(@RequestParam("index") int index,@RequestParam("noOfRecords") int noOfRecords) throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("getAllLogin----start--->"	+ System.currentTimeMillis());
+		}
+		List<Map<String,String>> logins=userManager.getAllLogin(index,noOfRecords);
+		if (logger.isDebugEnabled()) {
+			logger.debug("getAllLogin: Success");
+		}
+		return handleSuccess("loginDetails",logins);
+	}
+	
+	@Override
+	@RequestMapping(value = "/deleteLogin",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> deleteLogin(@RequestParam("oid") String loginOid) throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("deleteLogin----start--->"	+ System.currentTimeMillis());
+		}
+		userManager.deleteLogin(loginOid);
+		if (logger.isDebugEnabled()) {
+			logger.debug("deleteLogin: Success");
+		}
+		return handleStatus();
+	}
+	
+	@Override
+	@RequestMapping(value = "/getActiveUsers",method=RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> getActiveUsers() throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("getActiveUsers----start--->"	+ System.currentTimeMillis());
+		}
+		List<Map<String,String>> users=userManager.getActiveUsers();
+		if (logger.isDebugEnabled()) {
+			logger.debug("getActiveUsers: Success");
+		}
+		return handleSuccess("userDetails",users);
+	}
+	
+	
 }
