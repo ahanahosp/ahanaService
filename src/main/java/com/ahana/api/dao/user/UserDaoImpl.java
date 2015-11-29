@@ -204,7 +204,8 @@ public class UserDaoImpl extends AhanaDaoSupport implements UserDao {
 		List<Map<String, String>> list=null;
 		String query=null;
 		try{
-			query="select oid as value,user_id as label from user_profile where user_status='"+Constants.ACT+"'";
+			query="select u.oid as value,l.user_id as label from user_profile u join login l on u.oid=l.user_oid "
+					+ "where u.user_status='"+Constants.ACT+"' and l.status='"+Constants.ACT+"'";
 			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
 					.addScalar("value")
 					.addScalar("label")
