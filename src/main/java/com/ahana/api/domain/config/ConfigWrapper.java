@@ -1,21 +1,22 @@
 package com.ahana.api.domain.config;
 
+import java.io.Serializable;
 import java.util.List;
 
-import com.ahana.commons.system.domain.common.AhanaVO;
+import com.ahana.commons.system.domain.user.Roles;
 
-public class ConfigWrapper implements AhanaVO {
+public class ConfigWrapper implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	private List<AhanaVO> ahanaVOs;
+	private List<Roles> roles;
 
-	public List<AhanaVO> getAhanaVOs() {
-		return ahanaVOs;
+	public List<Roles> getRoles() {
+		return roles;
 	}
 
-	public void setAhanaVOs(List<AhanaVO> ahanaVOs) {
-		this.ahanaVOs = ahanaVOs;
+	public void setRoles(List<Roles> roles) {
+		this.roles = roles;
 	}
-
+	
 }

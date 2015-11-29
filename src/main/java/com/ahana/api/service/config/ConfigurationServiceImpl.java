@@ -155,11 +155,11 @@ public class ConfigurationServiceImpl extends BaseService implements Configurati
 		if (logger.isDebugEnabled()) {
 			logger.debug("createOrUpdateMultipleConfig----start--->"	+ System.currentTimeMillis());
 		}
-		configurationManager.createOrUpdateMultipleConfig(configWrapper.getAhanaVOs());
+		configurationManager.createOrUpdateMultipleConfig(configWrapper.getRoles());
 		if (logger.isDebugEnabled()) {
 			logger.debug("createOrUpdateMultipleConfig: Success");
 		}
-		return handleSuccess("multipleConfig",configWrapper);
+		return handleSuccess("multipleConfig",configWrapper.getRoles());
 	}
 	
 	@Override

@@ -60,8 +60,8 @@ public class ConfigurationManagerImpl implements ConfigurationManager {
 	}
 
 	@Override
-	public void createOrUpdateMultipleConfig(List<AhanaVO> ahanaVOs) throws AhanaBusinessException {
-		if(CollectionUtils.isNotEmpty(ahanaVOs)){
+	public void createOrUpdateMultipleConfig(List<?> ahanaVOs) throws AhanaBusinessException {
+		if(CollectionUtils.isEmpty(ahanaVOs)){
 			throw new AhanaBusinessException(CommonErrorConstants.NO_RECORDS_FOUND);
 		}
 		configurationDao.createOrUpdateMultipleConfig(ahanaVOs);

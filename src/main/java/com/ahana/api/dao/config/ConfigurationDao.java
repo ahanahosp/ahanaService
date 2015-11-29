@@ -17,7 +17,7 @@ public interface ConfigurationDao {
 
 	List<Map<String, String>> getAllActiveRoomAndBedType();
 
-	void createOrUpdateMultipleConfig(List<AhanaVO> ahanaVOs);
+	void createOrUpdateMultipleConfig(List<?> ahanaVOs);
 
 	List<Map<String, String>> getAllAlliedCharges();
 
