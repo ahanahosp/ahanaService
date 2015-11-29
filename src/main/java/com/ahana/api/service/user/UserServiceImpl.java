@@ -230,9 +230,9 @@ public class UserServiceImpl extends BaseService implements UserService {
 	}
 	
 	@Override
-	@RequestMapping(value = "/saveLogin",method=RequestMethod.POST)
+	@RequestMapping(value = "/createLogin",method=RequestMethod.POST)
 	@ResponseBody
-	public Map<String,Object> saveLogin(@Valid @RequestBody Login login) throws AhanaBusinessException {
+	public Map<String,Object> createLogin(@Valid @RequestBody Login login) throws AhanaBusinessException {
 		if (logger.isDebugEnabled()) {
 			logger.debug("saveLogin----start--->"	+ System.currentTimeMillis());
 		}

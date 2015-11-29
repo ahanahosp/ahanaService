@@ -226,5 +226,5 @@ public class UserManagerImpl implements UserManager {
 			throw new AhanaBusinessException(CommonErrorConstants.NO_RECORDS_FOUND);
 		}
 		return users;
-	}	
+	}
 }

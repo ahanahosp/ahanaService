@@ -42,8 +42,6 @@ public interface UserService {
 
 	Map<String, Object> saveRoleRights(RoleRights roleRights) throws AhanaBusinessException;
 
-	Map<String, Object> saveLogin(Login login) throws AhanaBusinessException;
-
 	Map<String, Object> getLoginByOid(String loginOid) throws AhanaBusinessException;
 
 	Map<String, Object> deleteLogin(String loginOid) throws AhanaBusinessException;
@@ -51,5 +49,7 @@ public interface UserService {
 	Map<String, Object> getAllLogin(int index, int noOfRecords) throws AhanaBusinessException;
 
 	Map<String, Object> getActiveUsers() throws AhanaBusinessException;
+
+	Map<String, Object> createLogin(Login login) throws AhanaBusinessException;
 
 }

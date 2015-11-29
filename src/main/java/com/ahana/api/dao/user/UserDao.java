@@ -61,4 +61,4 @@ public interface UserDao extends UserDetailsService {
 
 	List<Map<String, String>> getActiveUsers();
 
-} 
+}
