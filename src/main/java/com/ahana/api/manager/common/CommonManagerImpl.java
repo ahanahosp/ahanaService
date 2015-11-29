@@ -342,7 +342,7 @@ public class CommonManagerImpl implements CommonManager {
 
 	@Override
 	public void deactivateOrganizationModule(String organizationModuleOids) throws AhanaBusinessException {
-		if(StringUtils.isNotBlank(organizationModuleOids)){
+		if(StringUtils.isBlank(organizationModuleOids)){
 			throw new AhanaBusinessException(CommonErrorConstants.NO_RECORDS_FOUND);
 		}
 		commonDao.deactivateOrganizationModule(organizationModuleOids);
