@@ -726,4 +726,19 @@ public class CommonServiceImpl extends BaseService implements CommonService {
 		}
 		return handleStatus();
 	}
+	
+	@Override
+	@RequestMapping(value = "/getMaintenancesValues",method=RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> getMaintenancesValues() throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("getMaintenancesValues----start--->"	+ System.currentTimeMillis());
+		}
+		List<Map<String, String>> maintenanceDetails=commonManager.getMaintenancesValues();
+		if (logger.isDebugEnabled()) {
+			logger.debug("getMaintenancesValues: Success");
+		}
+		return handleSuccess("maintenanceDetails",maintenanceDetails);
+	}
+	
 }

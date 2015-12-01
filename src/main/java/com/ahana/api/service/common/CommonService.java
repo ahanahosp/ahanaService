@@ -114,4 +114,6 @@ public interface CommonService {
 
 	Map<String, Object> deactivateOrganizationModule(String organizationModuleOids) throws AhanaBusinessException;
 
+	Map<String, Object> getMaintenancesValues() throws AhanaBusinessException;
+
 }

@@ -92,4 +92,6 @@ public interface CommonManager {
 
 	void deactivateOrganizationModule(String organizationModuleOids) throws AhanaBusinessException;
 
+	List<Map<String, String>> getMaintenancesValues() throws AhanaBusinessException;
+
 }

@@ -348,4 +348,13 @@ public class CommonManagerImpl implements CommonManager {
 		commonDao.deactivateOrganizationModule(organizationModuleOids);
 	}
 
+	@Override
+	public List<Map<String, String>> getMaintenancesValues() throws AhanaBusinessException {
+		List<Map<String,String>> maintenanceDetails=commonDao.getMaintenancesValues();
+		if(CollectionUtils.isEmpty(maintenanceDetails)){
+			throw new AhanaBusinessException(CommonErrorConstants.NO_RECORDS_FOUND);
+		}
+		return maintenanceDetails;
+	}
+
 }

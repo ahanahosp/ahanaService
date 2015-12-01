@@ -91,4 +91,6 @@ public interface CommonDao {
 
 	void deactivateOrganizationModule(String organizationModuleOids);
 
+	List<Map<String, String>> getMaintenancesValues();
+
 }

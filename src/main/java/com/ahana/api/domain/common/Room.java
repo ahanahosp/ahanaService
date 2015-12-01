@@ -28,10 +28,8 @@ public class Room implements AhanaVO {
 	@Id
 	@GeneratedValue(generator = "IdGenerator")
 	@GenericGenerator(name = "IdGenerator", strategy = "com.ahana.commons.system.security.util.IdGenerator", parameters = {
-			@Parameter(name = "table", value = "seed_container"),
-			@Parameter(name = "column", value = "high_oid"),
-			@Parameter(name = "install_id", value = "seed_id"),
-			@Parameter(name = "max_lo", value = "100000") })
+			@Parameter(name = "table", value = "seed_container"), @Parameter(name = "column", value = "high_oid"),
+			@Parameter(name = "install_id", value = "seed_id"), @Parameter(name = "max_lo", value = "100000") })
 	@Column(name = "oid")
 	private String oid;
 
@@ -42,20 +40,21 @@ public class Room implements AhanaVO {
 	private String bedName;
 
 	@NotBlank(message = CommonErrorConstants.WARD_NAME_IS_REQUIRED)
-	@Column(name = "ward_oid")
+	@Column(name = "ward_oid", length = 20)
 	private String wardOid;
 
 	@Column(name = "occupancy_status")
 	private String occupancyStatus;
 
-	@Column(name = "maintenance_status")
-	private String maintenanceStatus;
+	@NotBlank(message = CommonErrorConstants.MAINTENANCE_NAME_IS_REQUIRED)
+	@Column(name = "maintenance_oid", length = 20)
+	private String maintenanceOid;
 
 	@Column(name = "status")
 	private String status;
-	
-	public Room(){
-		this.status=Constants.ACT;
+
+	public Room() {
+		this.status = Constants.ACT;
 	}
 
 	public String getOid() {
@@ -90,20 +89,20 @@ public class Room implements AhanaVO {
 		this.occupancyStatus = occupancyStatus;
 	}
 
-	public String getMaintenanceStatus() {
-		return maintenanceStatus;
-	}
-
-	public void setMaintenanceStatus(String maintenanceStatus) {
-		this.maintenanceStatus = maintenanceStatus;
-	}
-
 	public String getStatus() {
 		return status;
 	}
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public String getMaintenanceOid() {
+		return maintenanceOid;
+	}
+
+	public void setMaintenanceOid(String maintenanceOid) {
+		this.maintenanceOid = maintenanceOid;
 	}
 
 }

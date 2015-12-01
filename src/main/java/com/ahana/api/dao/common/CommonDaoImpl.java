@@ -19,6 +19,7 @@ import com.ahana.api.domain.common.Ward;
 import com.ahana.commons.system.dao.common.AhanaDaoSupport;
 import com.ahana.commons.system.domain.common.AhanaVO;
 import com.ahana.commons.system.security.util.CommonUtils;
+import com.ahana.commons.system.security.util.Constants;
 
 @Transactional(readOnly = false)
 public class CommonDaoImpl extends AhanaDaoSupport implements CommonDao {
@@ -117,13 +118,14 @@ public class CommonDaoImpl extends AhanaDaoSupport implements CommonDao {
 		List<Map<String, String>> list=null;
 		String query=null;
 		try{
-			query="select w.oid as oid,w.ward_name as wardName,w.status as status,f.floor_name as floorName from ward w"
+			query="select w.oid as oid,w.ward_name as wardName,w.status as status,f.floor_name as floorName,f.oid as floorOid from ward w"
 					+ " join floor f on w.floor_oid=f.oid ";
 			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
 					.addScalar("oid")
 					.addScalar("wardName")
 					.addScalar("status")
 					.addScalar("floorName")
+					.addScalar("floorOid")
 					.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
 			list = sqlQuery.list();
 		}finally{
@@ -140,15 +142,18 @@ public class CommonDaoImpl extends AhanaDaoSupport implements CommonDao {
 		List<Map<String, String>> list=null;
 		String query=null;
 		try{
-			query="select r.oid as oid,r.bed_name as bedName,r.occupancy_status as occupancy,r.maintenance_status as maintenance,"
-					+ "r.status as status,w.ward_name as wardName from room r join ward w on r.ward_oid=w.oid";
+			query="select r.oid as oid,r.bed_name as bedName,r.occupancy_status as occupancy,rm.maintenance_name as maintenanceName,"
+					+ "rm.oid as maintenanceOid,r.status as status,w.ward_name as wardName,w.oid as wardOid from room r join ward w "
+					+ "on r.ward_oid=w.oid join room_maintance_details rm on r.maintenance_oid=rm.oid";
 			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
 					.addScalar("oid")
 					.addScalar("bedName")
 					.addScalar("occupancy")
-					.addScalar("maintenance")
+					.addScalar("maintenanceName")
+					.addScalar("maintenanceOid")
 					.addScalar("status")
 					.addScalar("wardName")
+					.addScalar("wardOid")
 					.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
 			list = sqlQuery.list();
 		}finally{
@@ -426,7 +431,7 @@ public class CommonDaoImpl extends AhanaDaoSupport implements CommonDao {
 		List<Map<String, String>> list=null;
 		String query=null;
 		try{
-			query="select f.oid as value,f.floor_name as label from floor f";
+			query="select f.oid as value,f.floor_name as label from floor f where f.status='"+Constants.ACT+"'";
 			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
 					.addScalar("value")
 					.addScalar("label")
@@ -446,7 +451,7 @@ public class CommonDaoImpl extends AhanaDaoSupport implements CommonDao {
 		List<Map<String, String>> list=null;
 		String query=null;
 		try{
-			query="select s.oid as value,s.speciality_name as label from speciality_details s";
+			query="select s.oid as value,s.speciality_name as label from speciality_details s where s.status='"+Constants.ACT+"'";
 			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
 					.addScalar("value")
 					.addScalar("label")
@@ -487,7 +492,7 @@ public class CommonDaoImpl extends AhanaDaoSupport implements CommonDao {
 		List<Map<String, String>> list=null;
 		String query=null;
 		try{
-			query="select w.oid as value,w.ward_name as label from ward w";
+			query="select w.oid as value,w.ward_name as label from ward w where w.status='"+Constants.ACT+"'";
 			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
 					.addScalar("value")
 					.addScalar("label")
@@ -507,7 +512,7 @@ public class CommonDaoImpl extends AhanaDaoSupport implements CommonDao {
 		List<Map<String, String>> list=null;
 		String query=null;
 		try{
-			query="select c.oid as value,c.category as label from category_item c";
+			query="select c.oid as value,c.category as label from category_item c where c.status='"+Constants.ACT+"'";
 			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
 					.addScalar("value")
 					.addScalar("label")
@@ -527,7 +532,7 @@ public class CommonDaoImpl extends AhanaDaoSupport implements CommonDao {
 		List<Map<String, String>> list=null;
 		String query=null;
 		try{
-			query="select r.oid as value,r.room_name as label from room_type r";
+			query="select r.oid as value,r.room_name as label from room_type r where r.status='"+Constants.ACT+"'";
 			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
 					.addScalar("value")
 					.addScalar("label")
@@ -547,7 +552,7 @@ public class CommonDaoImpl extends AhanaDaoSupport implements CommonDao {
 		List<Map<String, String>> list=null;
 		String query=null;
 		try{
-			query="select r.oid as value,r.item as label from room_charges_item r";
+			query="select r.oid as value,r.item as label from room_charges_item r where r.status='"+Constants.ACT+"'";
 			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
 					.addScalar("value")
 					.addScalar("label")
@@ -565,5 +570,25 @@ public class CommonDaoImpl extends AhanaDaoSupport implements CommonDao {
 		String commaSeprateOids=CommonUtils.convertCommoaSeprated(organizationModuleOids);
 		SQLQuery sqlQuery = getSessionFactory().getCurrentSession().createSQLQuery("update organization_module set status='INACT' where oid in("+commaSeprateOids+")");
 		sqlQuery.executeUpdate();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Map<String, String>> getMaintenancesValues() {
+		Query sqlQuery=null;
+		List<Map<String, String>> list=null;
+		String query=null;
+		try{
+			query="select r.oid as value,r.maintenance_name as label from room_maintance_details r where r.status='"+Constants.ACT+"'";
+			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
+					.addScalar("value")
+					.addScalar("label")
+					.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+			list = sqlQuery.list();
+		}finally{
+			sqlQuery=null;
+			query=null;
+		}
+		return list;
 	}
 }
