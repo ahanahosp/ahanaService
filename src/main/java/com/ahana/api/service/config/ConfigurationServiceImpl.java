@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -155,11 +156,17 @@ public class ConfigurationServiceImpl extends BaseService implements Configurati
 		if (logger.isDebugEnabled()) {
 			logger.debug("createOrUpdateMultipleConfig----start--->"	+ System.currentTimeMillis());
 		}
-		configurationManager.createOrUpdateMultipleConfig(configWrapper.getRoles());
-		if (logger.isDebugEnabled()) {
-			logger.debug("createOrUpdateMultipleConfig: Success");
+		if(CollectionUtils.isNotEmpty(configWrapper.getRoles())){
+			configurationManager.createOrUpdateMultipleConfig(configWrapper.getRoles());
+			return handleSuccess("multipleConfig",configWrapper.getRoles());
+		}else if(CollectionUtils.isNotEmpty(configWrapper.getFloors())){
+			configurationManager.createOrUpdateMultipleConfig(configWrapper.getFloors());
+			return handleSuccess("multipleConfig",configWrapper.getFloors());
+		}else if(CollectionUtils.isNotEmpty(configWrapper.getRoomTypes())){
+			configurationManager.createOrUpdateMultipleConfig(configWrapper.getRoomTypes());
+			return handleSuccess("multipleConfig",configWrapper.getRoomTypes());
 		}
-		return handleSuccess("multipleConfig",configWrapper.getRoles());
+		return handleStatus();
 	}
 	
 	@Override

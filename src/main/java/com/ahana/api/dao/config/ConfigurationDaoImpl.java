@@ -68,8 +68,8 @@ public class ConfigurationDaoImpl extends AhanaDaoSupport implements Configurati
 	@SuppressWarnings("unchecked")
 	@Override
 	public void createOrUpdateMultipleConfig(List<?> ahanaVOs) {
-		for(AhanaVO role:(List<AhanaVO>)ahanaVOs){
-			saveOrUpdate(role);
+		for(AhanaVO obj:(List<AhanaVO>)ahanaVOs){
+			saveOrUpdate(obj);
 		}
 	}
 
