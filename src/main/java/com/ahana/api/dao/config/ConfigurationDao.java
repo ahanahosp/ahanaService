@@ -3,6 +3,8 @@ package com.ahana.api.dao.config;
 import java.util.List;
 import java.util.Map;
 
+import com.ahana.api.domain.common.RoomAndBedType;
+import com.ahana.api.domain.config.BedVsRoomType;
 import com.ahana.commons.system.domain.common.AhanaVO;
 
 public interface ConfigurationDao {
@@ -15,7 +17,7 @@ public interface ConfigurationDao {
 
 	List<Map<String, String>> getAllAlertType();
 
-	List<Map<String, String>> getAllActiveRoomAndBedType();
+	List<Map<String, Object>> getAllActiveRoomAndBedType();
 
 	void createOrUpdateMultipleConfig(List<?> ahanaVOs);
 
@@ -28,5 +30,13 @@ public interface ConfigurationDao {
 	List<Map<String, String>> getAllActiveAlliedCharges();
 
 	List<Map<String, String>> getAllActiveProcedures();
+
+	void createRoomAndBedType(RoomAndBedType roomAndBedType);
+
+	void deleteBedVsRoomType(String oid);
+
+	void createBedVsRoomType(BedVsRoomType bedVsRoomType);
+
+	List<Map<String, String>> enhanceRoomType(String string);
 
 }

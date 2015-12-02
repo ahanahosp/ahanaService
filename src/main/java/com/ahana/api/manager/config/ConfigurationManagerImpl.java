@@ -1,14 +1,19 @@
 package com.ahana.api.manager.config;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ahana.api.dao.config.ConfigurationDao;
+import com.ahana.api.domain.common.RoomAndBedType;
+import com.ahana.api.domain.config.BedVsRoomType;
 import com.ahana.commons.system.domain.common.AhanaVO;
 import com.ahana.commons.system.security.error.CommonErrorConstants;
 import com.ahana.commons.system.security.exception.AhanaBusinessException;
@@ -51,10 +56,16 @@ public class ConfigurationManagerImpl implements ConfigurationManager {
 	}
 
 	@Override
-	public List<Map<String, String>> getAllActiveRoomAndBedType() throws AhanaBusinessException {
-		List<Map<String,String>> roomAndBedType=configurationDao.getAllActiveRoomAndBedType();
+	public List<Map<String, Object>> getAllActiveRoomAndBedType() throws AhanaBusinessException {
+		List<Map<String,Object>> roomAndBedType=configurationDao.getAllActiveRoomAndBedType();
 		if(CollectionUtils.isEmpty(roomAndBedType)){
 			throw new AhanaBusinessException(CommonErrorConstants.NO_RECORDS_FOUND);
+		}
+		List<Map<String, String>> roomTypes=null;
+		for(Map<String, Object> mapObj:roomAndBedType){
+			roomTypes=new ArrayList<Map<String, String>>();
+			roomTypes=configurationDao.enhanceRoomType((String)mapObj.get("oid"));
+			mapObj.put("roomTypes", roomTypes);
 		}
 		return roomAndBedType;
 	}
@@ -102,5 +113,23 @@ public class ConfigurationManagerImpl implements ConfigurationManager {
 	@Override
 	public List<Map<String, String>> getAllActiveProcedures() {
 		return configurationDao.getAllActiveProcedures();
+	}
+
+	@Override
+	public void createRoomAndBedType(RoomAndBedType roomAndBedType) throws AhanaBusinessException {
+		if(roomAndBedType==null){
+			throw new AhanaBusinessException(CommonErrorConstants.NO_RECORDS_FOUND);
+		}
+		configurationDao.createRoomAndBedType(roomAndBedType);
+		if(StringUtils.isNotBlank(roomAndBedType.getRoomTypeOids())){
+			configurationDao.deleteBedVsRoomType(roomAndBedType.getOid());
+			List<String> roomTypes = Arrays.asList(roomAndBedType.getRoomTypeOids().split("\\s*,\\s*"));
+			for(String roomTypeOid:roomTypes){
+				BedVsRoomType bedVsRoomType=new BedVsRoomType();
+				bedVsRoomType.setRoomAndBedTypeOid(roomAndBedType.getOid());
+				bedVsRoomType.setRoomTypeOid(roomTypeOid);
+				configurationDao.createBedVsRoomType(bedVsRoomType);
+			}
+		}
 	}
 }

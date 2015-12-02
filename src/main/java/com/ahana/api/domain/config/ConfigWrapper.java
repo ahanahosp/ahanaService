@@ -8,9 +8,11 @@ import javax.validation.Valid;
 import org.hibernate.validator.constraints.NotBlank;
 
 import com.ahana.api.domain.common.Floor;
+import com.ahana.api.domain.common.Procedures;
 import com.ahana.api.domain.common.Room;
 import com.ahana.api.domain.common.RoomMaintenanceDetails;
 import com.ahana.api.domain.common.RoomType;
+import com.ahana.api.domain.common.SpecialityDetails;
 import com.ahana.api.domain.common.Ward;
 import com.ahana.commons.system.domain.user.Roles;
 import com.ahana.commons.system.security.validation.custom.DepententField;
@@ -42,6 +44,21 @@ public class ConfigWrapper implements Serializable {
 
 	@Valid
 	private List<Room> rooms;
+
+	@Valid
+	private List<Procedures> procedures;
+
+	@Valid
+	private List<SpecialityDetails> specialityDetails;
+
+	@Valid
+	private List<AlliedCharges> alliedCharges;
+
+	@Valid
+	private List<AlertType> alertTypes;
+
+	@Valid
+	private List<PatientCategory> patientCategories;
 
 	@NotBlank
 	private String source;
@@ -100,6 +117,46 @@ public class ConfigWrapper implements Serializable {
 
 	public void setRooms(List<Room> rooms) {
 		this.rooms = rooms;
+	}
+
+	public List<Procedures> getProcedures() {
+		return procedures;
+	}
+
+	public void setProcedures(List<Procedures> procedures) {
+		this.procedures = procedures;
+	}
+
+	public List<SpecialityDetails> getSpecialityDetails() {
+		return specialityDetails;
+	}
+
+	public void setSpecialityDetails(List<SpecialityDetails> specialityDetails) {
+		this.specialityDetails = specialityDetails;
+	}
+
+	public List<AlliedCharges> getAlliedCharges() {
+		return alliedCharges;
+	}
+
+	public void setAlliedCharges(List<AlliedCharges> alliedCharges) {
+		this.alliedCharges = alliedCharges;
+	}
+
+	public List<AlertType> getAlertTypes() {
+		return alertTypes;
+	}
+
+	public void setAlertTypes(List<AlertType> alertTypes) {
+		this.alertTypes = alertTypes;
+	}
+
+	public List<PatientCategory> getPatientCategories() {
+		return patientCategories;
+	}
+
+	public void setPatientCategories(List<PatientCategory> patientCategories) {
+		this.patientCategories = patientCategories;
 	}
 
 	public ConfigWrapper() {

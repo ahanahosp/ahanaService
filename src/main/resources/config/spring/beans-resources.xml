@@ -11,9 +11,9 @@
 		<property name="lookupDBIpLabel"><value>database.ip</value></property>
 		<property name="lookupDBPortLabel"><value>database.port</value></property>
 		<property name="defaultReadOnly" value="false"/>
-       	<property name="maxTotal" value="20"/>
-		<property name="maxIdle" value="3"/>
-		<property name="minIdle" value="2"/>
+       	<property name="maxTotal" value="50"/>
+		<property name="maxIdle" value="5"/>
+		<property name="minIdle" value="5"/>
 		<property name="maxWaitMillis" value="10000"/>
 		<property name="validationQuery" value="select count(*) from seed_container"/>
 		<property name="testOnBorrow" value="true"/>
@@ -35,7 +35,7 @@
 		<property name="lookupDBPortLabel"><value>database.readonly.port</value></property>
 
 		<property name="defaultReadOnly" value="false"/>
-       	<property name="maxTotal" value="20"/>
+       	<property name="maxTotal" value="10"/>
 		<property name="maxIdle" value="3"/>
 		<property name="minIdle" value="2"/>
 		<property name="maxWaitMillis" value="10000"/>
@@ -91,6 +91,8 @@
 				<value>com.ahana.api.domain.config.ChargesForCategory</value>
 				<value>com.ahana.commons.system.domain.user.UserProfileView</value>
 				<value>com.ahana.commons.system.domain.user.Login</value>
+				<value>com.ahana.api.domain.config.BedVsRoomType</value>
+				<value>com.ahana.api.domain.common.RoomAndBedType</value>
 			</list>
 		</property>
 	</bean>
@@ -137,6 +139,8 @@
 				<value>com.ahana.api.domain.config.ChargesForCategory</value>
 				<value>com.ahana.commons.system.domain.user.UserProfileView</value>
 				<value>com.ahana.commons.system.domain.user.Login</value>
+				<value>com.ahana.api.domain.config.BedVsRoomType</value>
+				<value>com.ahana.api.domain.common.RoomAndBedType</value>
 			</list>
 		</property>
 	</bean>

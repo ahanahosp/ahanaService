@@ -9,6 +9,8 @@ import org.hibernate.transform.Transformers;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ahana.api.domain.common.RoomAndBedType;
+import com.ahana.api.domain.config.BedVsRoomType;
 import com.ahana.commons.system.dao.common.AhanaDaoSupport;
 import com.ahana.commons.system.domain.common.AhanaVO;
 import com.ahana.commons.system.security.util.Constants;
@@ -60,9 +62,26 @@ public class ConfigurationDaoImpl extends AhanaDaoSupport implements Configurati
 		return list;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public List<Map<String, String>> getAllActiveRoomAndBedType() {
-		return null;
+	public List<Map<String, Object>> getAllActiveRoomAndBedType() {
+		Query sqlQuery=null;
+		List<Map<String, Object>> list=null;
+		String query=null;
+		try{
+			query="select rbt.oid as oid,rbt.order_no as orderNo,rbt.bed_no as bedNo,rbt.status as status from room_bed_type rbt";
+			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
+					.addScalar("oid")
+					.addScalar("orderNo")
+					.addScalar("bedNo")
+					.addScalar("status")
+					.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+			list = sqlQuery.list();
+		}finally{
+			sqlQuery=null;
+			query=null;
+		}
+		return list;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -154,6 +173,44 @@ public class ConfigurationDaoImpl extends AhanaDaoSupport implements Configurati
 			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
 					.addScalar("value")
 					.addScalar("label")
+					.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+			list = sqlQuery.list();
+		}finally{
+			sqlQuery=null;
+			query=null;
+		}
+		return list;
+	}
+
+	@Override
+	public void createRoomAndBedType(RoomAndBedType roomAndBedType) {
+		saveOrUpdate(roomAndBedType);
+	}
+
+	@Override
+	public void deleteBedVsRoomType(String roomAndBedTypeOid) {
+		Query q = getSessionFactory().getCurrentSession().createQuery("delete BedVsRoomType where roomAndBedTypeOid ='"+roomAndBedTypeOid+"'");
+		q.executeUpdate();
+	}
+
+	@Override
+	public void createBedVsRoomType(BedVsRoomType bedVsRoomType) {
+		saveOrUpdate(bedVsRoomType);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Map<String, String>> enhanceRoomType(String roomAndBedTypeOid) {
+		Query sqlQuery=null;
+		List<Map<String, String>> list=null;
+		String query=null;
+		try{
+			query="select rt.oid as roomTypeOid,rt.room_name as roomName,br.room_type_oid as savedRoomTypeOid"
+					+ " from bed_vs_rooms br left join room_type rt on br.room_type_oid = rt.oid where br.room_and_bed_type_oid='"+roomAndBedTypeOid+"'";
+			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
+					.addScalar("roomTypeOid")
+					.addScalar("roomName")
+					.addScalar("savedRoomTypeOid")
 					.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
 			list = sqlQuery.list();
 		}finally{

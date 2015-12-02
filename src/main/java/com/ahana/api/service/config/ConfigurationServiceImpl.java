@@ -100,7 +100,7 @@ public class ConfigurationServiceImpl extends BaseService implements Configurati
 		if (logger.isDebugEnabled()) {
 			logger.debug("createRoomAndBedType----start--->"	+ System.currentTimeMillis());
 		}
-		configurationManager.createOrUpdateConfigData(roomAndBedType);
+		configurationManager.createRoomAndBedType(roomAndBedType);
 		if (logger.isDebugEnabled()) {
 			logger.debug("createRoomAndBedType: Success");
 		}
@@ -128,7 +128,7 @@ public class ConfigurationServiceImpl extends BaseService implements Configurati
 		if (logger.isDebugEnabled()) {
 			logger.debug("getAllActiveRoomAndBedType----start--->"	+ System.currentTimeMillis());
 		}
-		List<Map<String,String>> roomAndBedTypeDetails=configurationManager.getAllActiveRoomAndBedType();
+		List<Map<String,Object>> roomAndBedTypeDetails=configurationManager.getAllActiveRoomAndBedType();
 		if (logger.isDebugEnabled()) {
 			logger.debug("getAllActiveRoomAndBedType: Success");
 		}
@@ -174,6 +174,21 @@ public class ConfigurationServiceImpl extends BaseService implements Configurati
 		}else if(CollectionUtils.isNotEmpty(configWrapper.getRooms())){
 			configurationManager.createOrUpdateMultipleConfig(configWrapper.getRooms());
 			return handleSuccess("multipleConfig",configWrapper.getRooms());
+		}else if(CollectionUtils.isNotEmpty(configWrapper.getProcedures())){
+			configurationManager.createOrUpdateMultipleConfig(configWrapper.getProcedures());
+			return handleSuccess("multipleConfig",configWrapper.getProcedures());
+		}else if(CollectionUtils.isNotEmpty(configWrapper.getSpecialityDetails())){
+			configurationManager.createOrUpdateMultipleConfig(configWrapper.getSpecialityDetails());
+			return handleSuccess("multipleConfig",configWrapper.getSpecialityDetails());
+		}else if(CollectionUtils.isNotEmpty(configWrapper.getAlliedCharges())){
+			configurationManager.createOrUpdateMultipleConfig(configWrapper.getAlliedCharges());
+			return handleSuccess("multipleConfig",configWrapper.getAlliedCharges());
+		}else if(CollectionUtils.isNotEmpty(configWrapper.getAlertTypes())){
+			configurationManager.createOrUpdateMultipleConfig(configWrapper.getAlertTypes());
+			return handleSuccess("multipleConfig",configWrapper.getAlertTypes());
+		}else if(CollectionUtils.isNotEmpty(configWrapper.getPatientCategories())){
+			configurationManager.createOrUpdateMultipleConfig(configWrapper.getPatientCategories());
+			return handleSuccess("multipleConfig",configWrapper.getPatientCategories());
 		}
 		return handleStatus();
 	}

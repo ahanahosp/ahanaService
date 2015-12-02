@@ -3,6 +3,7 @@ package com.ahana.api.manager.config;
 import java.util.List;
 import java.util.Map;
 
+import com.ahana.api.domain.common.RoomAndBedType;
 import com.ahana.commons.system.domain.common.AhanaVO;
 import com.ahana.commons.system.security.exception.AhanaBusinessException;
 
@@ -16,7 +17,7 @@ public interface ConfigurationManager {
 
 	List<Map<String, String>> getAllAlertType() throws AhanaBusinessException;
 
-	List<Map<String, String>> getAllActiveRoomAndBedType() throws AhanaBusinessException;
+	List<Map<String, Object>> getAllActiveRoomAndBedType() throws AhanaBusinessException;
 
 	void createOrUpdateMultipleConfig(List<?> ahanaVOs) throws AhanaBusinessException;
 
@@ -29,5 +30,7 @@ public interface ConfigurationManager {
 	List<Map<String, String>> getAllActiveAlliedCharges() throws AhanaBusinessException;
 
 	List<Map<String, String>> getAllActiveProcedures();
+
+	void createRoomAndBedType(RoomAndBedType roomAndBedType) throws AhanaBusinessException;
 
 }
