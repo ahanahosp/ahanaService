@@ -43,6 +43,10 @@ public class ConfigurationManagerImpl implements ConfigurationManager {
 		if(ahanaVO==null){
 			throw new AhanaBusinessException(CommonErrorConstants.NO_RECORDS_FOUND);
 		}
+		List<String> savedRoomTypeOids=configurationDao.getSavedRoomTypeByOid(((RoomAndBedType)ahanaVO).getOid());
+		if(CollectionUtils.isNotEmpty(savedRoomTypeOids)){
+			((RoomAndBedType)ahanaVO).setSavedRoomTyes(savedRoomTypeOids);
+		}
 		return ahanaVO;
 	}
 
@@ -132,4 +136,15 @@ public class ConfigurationManagerImpl implements ConfigurationManager {
 			}
 		}
 	}
+
+	@Override
+	public List<Map<String, String>> getDoctorDetails() throws AhanaBusinessException {
+		List<Map<String, String>> doctorDetails=configurationDao.getDoctorDetails();
+		if(CollectionUtils.isEmpty(doctorDetails)){
+			throw new AhanaBusinessException(CommonErrorConstants.NO_RECORDS_FOUND);
+		}
+		return doctorDetails;
+	}
+	
+	
 }

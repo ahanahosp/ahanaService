@@ -1,5 +1,7 @@
 package com.ahana.api.domain.common;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -35,13 +37,13 @@ public class RoomAndBedType implements AhanaVO {
 	@Column(name = "oid")
 	private String oid;
 
-	@NotBlank(message=CommonErrorConstants.OID_IS_REQUIRED)
+	@NotBlank(message = CommonErrorConstants.OID_IS_REQUIRED)
 	@Length(min = 1, max = 5, message = CommonErrorConstants.OID_IS_INVALID_LENGTH)
 	@Pattern(regexp = RegConstants.ALPHA_NUMERIC_SPACE_HYPEN, message = CommonErrorConstants.OID_IS_INVALID_FORMAT)
 	@Column(name = "order_no")
 	private int orderId;
 
-	@NotBlank(message=CommonErrorConstants.BED_NO_IS_REQUIRED)
+	@NotBlank(message = CommonErrorConstants.BED_NO_IS_REQUIRED)
 	@Length(min = 1, max = 10, message = CommonErrorConstants.BED_NO_LENGTH_IS_INVALID)
 	@Pattern(regexp = RegConstants.ALPHA_NUMERIC_SPACE_HYPEN, message = CommonErrorConstants.BED_NO_IS_INVALID_FORMAT)
 	@Column(name = "bed_no")
@@ -50,9 +52,12 @@ public class RoomAndBedType implements AhanaVO {
 	@Column(name = "status")
 	private String status;
 
-	@NotBlank(message=CommonErrorConstants.ROOM_NAME_IS_REQUIRED)
+	@NotBlank(message = CommonErrorConstants.ROOM_NAME_IS_REQUIRED)
 	@Transient
 	private String roomTypeOids;
+
+	@Transient
+	private List<String> savedRoomTyes;
 
 	public String getOid() {
 		return oid;
@@ -92,6 +97,14 @@ public class RoomAndBedType implements AhanaVO {
 
 	public void setRoomTypeOids(String roomTypeOids) {
 		this.roomTypeOids = roomTypeOids;
+	}
+
+	public List<String> getSavedRoomTyes() {
+		return savedRoomTyes;
+	}
+
+	public void setSavedRoomTyes(List<String> savedRoomTyes) {
+		this.savedRoomTyes = savedRoomTyes;
 	}
 
 }

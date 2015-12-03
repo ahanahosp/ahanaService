@@ -385,5 +385,19 @@ public class ConfigurationServiceImpl extends BaseService implements Configurati
 		}
 		return handleSuccess("subCategoryDetails",subCategoryDetails);
 	}
+	
+	@Override
+	@RequestMapping(value = "/getDoctorDetails",method=RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> getDoctorDetails() throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("getDoctorDetails----start--->"	+ System.currentTimeMillis());
+		}
+		List<Map<String,String>> doctorDetails=configurationManager.getDoctorDetails();
+		if (logger.isDebugEnabled()) {
+			logger.debug("getDoctorDetails: Success");
+		}
+		return handleSuccess("doctorDetails",doctorDetails);
+	}
 		
 }

@@ -33,4 +33,6 @@ public interface ConfigurationManager {
 
 	void createRoomAndBedType(RoomAndBedType roomAndBedType) throws AhanaBusinessException;
 
+	List<Map<String, String>> getDoctorDetails() throws AhanaBusinessException;
+
 }

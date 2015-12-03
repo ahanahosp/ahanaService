@@ -39,4 +39,8 @@ public interface ConfigurationDao {
 
 	List<Map<String, String>> enhanceRoomType(String string);
 
+	List<Map<String, String>> getDoctorDetails();
+
+	List<String> getSavedRoomTypeByOid(String oid);
+
 }

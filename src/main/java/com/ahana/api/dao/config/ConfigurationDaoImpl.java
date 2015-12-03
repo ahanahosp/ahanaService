@@ -205,13 +205,50 @@ public class ConfigurationDaoImpl extends AhanaDaoSupport implements Configurati
 		List<Map<String, String>> list=null;
 		String query=null;
 		try{
-			query="select rt.oid as roomTypeOid,rt.room_name as roomName,br.room_type_oid as savedRoomTypeOid"
-					+ " from bed_vs_rooms br left join room_type rt on br.room_type_oid = rt.oid where br.room_and_bed_type_oid='"+roomAndBedTypeOid+"'";
+			query="select rt.oid as roomTypeOid,rt.room_name as roomName from bed_vs_rooms br left join room_type rt on br.room_type_oid = rt.oid "
+					+ "where br.room_and_bed_type_oid='"+roomAndBedTypeOid+"'";
 			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
 					.addScalar("roomTypeOid")
 					.addScalar("roomName")
-					.addScalar("savedRoomTypeOid")
 					.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+			list = sqlQuery.list();
+		}finally{
+			sqlQuery=null;
+			query=null;
+		}
+		return list;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Map<String, String>> getDoctorDetails() {
+		Query sqlQuery=null;
+		List<Map<String, String>> list=null;
+		String query=null;
+		try{
+			query="select oid as value,CONCAT(salutation,\" \",firstName,\" \",lastName,\"	    \",speciality) label"
+					+ " from user_view where careProvider='Yes' and userStatus='"+Constants.ACT+"';";
+			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
+					.addScalar("value")
+					.addScalar("label")
+					.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+			list = sqlQuery.list();
+		}finally{
+			sqlQuery=null;
+			query=null;
+		}
+		return list;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<String> getSavedRoomTypeByOid(String roomAndBedTypeOid) {
+		Query sqlQuery=null;
+		List<String> list=null;
+		String query=null;
+		try{
+			query="select br.room_type_oid from bed_vs_rooms br where br.room_and_bed_type_oid='"+roomAndBedTypeOid+"'";
+			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query);
 			list = sqlQuery.list();
 		}finally{
 			sqlQuery=null;

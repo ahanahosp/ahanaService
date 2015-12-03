@@ -93,6 +93,7 @@
 				<value>com.ahana.commons.system.domain.user.Login</value>
 				<value>com.ahana.api.domain.config.BedVsRoomType</value>
 				<value>com.ahana.api.domain.common.RoomAndBedType</value>
+				<value>com.ahana.api.domain.config.DoctorSchedule</value>
 			</list>
 		</property>
 	</bean>
@@ -141,6 +142,7 @@
 				<value>com.ahana.commons.system.domain.user.Login</value>
 				<value>com.ahana.api.domain.config.BedVsRoomType</value>
 				<value>com.ahana.api.domain.common.RoomAndBedType</value>
+				<value>com.ahana.api.domain.config.DoctorSchedule</value>
 			</list>
 		</property>
 	</bean>
