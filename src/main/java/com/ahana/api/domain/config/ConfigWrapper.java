@@ -22,7 +22,12 @@ import com.ahana.commons.system.security.validation.custom.DepententField;
 		@DepententField(fieldName = "source", fieldValue = "wards", dependFieldName = "wards"),
 		@DepententField(fieldName = "source", fieldValue = "roomTypes", dependFieldName = "roomTypes"),
 		@DepententField(fieldName = "source", fieldValue = "roomMaintenanceDetails", dependFieldName = "roomMaintenanceDetails"),
-		@DepententField(fieldName = "source", fieldValue = "rooms", dependFieldName = "rooms") })
+		@DepententField(fieldName = "source", fieldValue = "rooms", dependFieldName = "rooms"),
+		@DepententField(fieldName = "source", fieldValue = "alliedCharges", dependFieldName = "alliedCharges"),
+		@DepententField(fieldName = "source", fieldValue = "specialityDetails", dependFieldName = "specialityDetails"),
+		@DepententField(fieldName = "source", fieldValue = "procedures", dependFieldName = "procedures"),
+		@DepententField(fieldName = "source", fieldValue = "patientCategories", dependFieldName = "patientCategories"),
+		@DepententField(fieldName = "source", fieldValue = "alertTypes", dependFieldName = "alertTypes")})
 public class ConfigWrapper implements Serializable {
 
 	private static final long serialVersionUID = 1L;
