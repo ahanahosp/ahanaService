@@ -10,6 +10,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -37,9 +39,9 @@ public class RoomAndBedType implements AhanaVO {
 	@Column(name = "oid")
 	private String oid;
 
-	@NotBlank(message = CommonErrorConstants.OID_IS_REQUIRED)
-	@Length(min = 1, max = 5, message = CommonErrorConstants.OID_IS_INVALID_LENGTH)
-	@Pattern(regexp = RegConstants.ALPHA_NUMERIC_SPACE_HYPEN, message = CommonErrorConstants.OID_IS_INVALID_FORMAT)
+	@Min(value=1, message = CommonErrorConstants.OID_IS_REQUIRED)
+	@Max(value=1000,message = CommonErrorConstants.OID_IS_INVALID_LENGTH)
+	//@Pattern(regexp = RegConstants.NUMERIC, message = CommonErrorConstants.OID_IS_INVALID_FORMAT)
 	@Column(name = "order_no")
 	private int orderId;
 

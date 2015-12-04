@@ -69,10 +69,10 @@ public class ConfigurationDaoImpl extends AhanaDaoSupport implements Configurati
 		List<Map<String, Object>> list=null;
 		String query=null;
 		try{
-			query="select rbt.oid as oid,rbt.order_no as orderNo,rbt.bed_no as bedNo,rbt.status as status from room_bed_type rbt";
+			query="select rbt.oid as oid,rbt.order_no as orderId,rbt.bed_no as bedNo,rbt.status as status from room_bed_type rbt";
 			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
 					.addScalar("oid")
-					.addScalar("orderNo")
+					.addScalar("orderId")
 					.addScalar("bedNo")
 					.addScalar("status")
 					.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
