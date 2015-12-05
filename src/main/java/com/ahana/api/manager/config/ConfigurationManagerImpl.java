@@ -43,9 +43,11 @@ public class ConfigurationManagerImpl implements ConfigurationManager {
 		if(ahanaVO==null){
 			throw new AhanaBusinessException(CommonErrorConstants.NO_RECORDS_FOUND);
 		}
-		List<String> savedRoomTypeOids=configurationDao.getSavedRoomTypeByOid(((RoomAndBedType)ahanaVO).getOid());
-		if(CollectionUtils.isNotEmpty(savedRoomTypeOids)){
-			((RoomAndBedType)ahanaVO).setSavedRoomTyes(savedRoomTypeOids);
+		if(ahanaVO instanceof RoomAndBedType){
+			List<String> savedRoomTypeOids=configurationDao.getSavedRoomTypeByOid(((RoomAndBedType)ahanaVO).getOid());
+			if(CollectionUtils.isNotEmpty(savedRoomTypeOids)){
+				((RoomAndBedType)ahanaVO).setSavedRoomTyes(savedRoomTypeOids);
+			}
 		}
 		return ahanaVO;
 	}
