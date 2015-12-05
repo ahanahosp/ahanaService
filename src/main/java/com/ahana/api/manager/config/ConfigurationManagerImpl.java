@@ -147,6 +147,15 @@ public class ConfigurationManagerImpl implements ConfigurationManager {
 		}
 		return doctorDetails;
 	}
+
+	@Override
+	public List<Map<String, String>> getAllDoctorDetails() throws AhanaBusinessException {
+		List<Map<String, String>> doctorDetails=configurationDao.getAllDoctorDetails();
+		if(CollectionUtils.isEmpty(doctorDetails)){
+			throw new AhanaBusinessException(CommonErrorConstants.NO_RECORDS_FOUND);
+		}
+		return doctorDetails;
+	}
 	
 	
 }

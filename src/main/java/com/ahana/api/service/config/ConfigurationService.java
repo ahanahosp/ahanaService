@@ -58,4 +58,6 @@ public interface ConfigurationService {
 
 	Map<String, Object> getDoctorDetails() throws AhanaBusinessException;
 
+	Map<String, Object> getAllDoctorDetails() throws AhanaBusinessException;
+
 }

@@ -43,4 +43,6 @@ public interface ConfigurationDao {
 
 	List<String> getSavedRoomTypeByOid(String oid);
 
+	List<Map<String, String>> getAllDoctorDetails();
+
 }

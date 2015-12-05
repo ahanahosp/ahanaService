@@ -126,11 +126,10 @@ public class ConfigurationDaoImpl extends AhanaDaoSupport implements Configurati
 		List<Map<String, String>> list=null;
 		String query=null;
 		try{
-			query="select pa.oid as oid,pa.category_name as categoryName,pa.colour_picker as colourPicker,pa.activation_date as activationDate,pa.status as status from patient_category pa";
+			query="select pa.oid as oid,pa.category_name as categoryName,pa.activation_date as activationDate,pa.status as status from patient_category pa";
 			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
 					.addScalar("oid")
 					.addScalar("categoryName")
-					.addScalar("colourPicker")
 					.addScalar("activationDate")
 					.addScalar("status")
 					.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
@@ -249,6 +248,32 @@ public class ConfigurationDaoImpl extends AhanaDaoSupport implements Configurati
 		try{
 			query="select br.room_type_oid from bed_vs_rooms br where br.room_and_bed_type_oid='"+roomAndBedTypeOid+"'";
 			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query);
+			list = sqlQuery.list();
+		}finally{
+			sqlQuery=null;
+			query=null;
+		}
+		return list;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override 
+	public List<Map<String, String>> getAllDoctorDetails() {
+		Query sqlQuery=null;
+		List<Map<String, String>> list=null;
+		String query=null;
+		try{
+			query="select oid as oid,fullName as fullName,speciality as speciality,visitingDay as visitingDay,startTime as startTime,"
+					+ "endTime as endTime,userStatus as doctorStatus from doctor_schedule_view";
+			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
+					.addScalar("oid")
+					.addScalar("fullName")
+					.addScalar("speciality")
+					.addScalar("visitingDay")
+					.addScalar("startTime")
+					.addScalar("endTime")
+					.addScalar("doctorStatus")
+					.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
 			list = sqlQuery.list();
 		}finally{
 			sqlQuery=null;

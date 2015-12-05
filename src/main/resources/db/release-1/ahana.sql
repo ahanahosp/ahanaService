@@ -391,7 +391,6 @@ DROP TABLE IF EXISTS `patient_category`;
 CREATE TABLE `patient_category` (
   `oid` varchar(20) NOT NULL,
   `category_name` varchar(100) NOT NULL,
-  `colour_picker` varchar(20) NOT NULL,
   `activation_date` varchar(10) NOT NULL,
   `status` varchar(5) DEFAULT NULL,
   PRIMARY KEY (`oid`)

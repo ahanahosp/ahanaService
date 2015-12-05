@@ -1,5 +1,7 @@
 package com.ahana.api.domain.config;
 
+import java.security.Timestamp;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -41,11 +43,8 @@ public class PatientCategory implements AhanaVO {
 	@Column(name = "category_name")
 	private String categoryName;
 
-	@Column(name = "colour_picker")
-	private String colourPicker;
-
 	@Column(name = "activation_date")
-	private String activationDate;
+	private Timestamp activationDate;
 
 	@Column(name = "status")
 	private String status;
@@ -70,19 +69,11 @@ public class PatientCategory implements AhanaVO {
 		this.categoryName = categoryName;
 	}
 
-	public String getColourPicker() {
-		return colourPicker;
-	}
-
-	public void setColourPicker(String colourPicker) {
-		this.colourPicker = colourPicker;
-	}
-
-	public String getActivationDate() {
+	public Timestamp getActivationDate() {
 		return activationDate;
 	}
 
-	public void setActivationDate(String activationDate) {
+	public void setActivationDate(Timestamp activationDate) {
 		this.activationDate = activationDate;
 	}
 
