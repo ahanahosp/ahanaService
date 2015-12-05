@@ -341,11 +341,12 @@ public class CommonManagerImpl implements CommonManager {
 	}
 
 	@Override
-	public void deactivateOrganizationModule(String organizationModuleOids) throws AhanaBusinessException {
+	public void activateOrDeactivateOrganizationModule(String organizationModuleOids,String type) throws AhanaBusinessException {
 		if(StringUtils.isBlank(organizationModuleOids)){
 			throw new AhanaBusinessException(CommonErrorConstants.NO_RECORDS_FOUND);
 		}
-		commonDao.deactivateOrganizationModule(organizationModuleOids);
+		type=type.equalsIgnoreCase("DEACTIVATE")?"INACT":"ACT";
+		commonDao.deactivateOrganizationModule(organizationModuleOids,type);
 	}
 
 	@Override

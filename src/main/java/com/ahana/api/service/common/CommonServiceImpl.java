@@ -716,11 +716,11 @@ public class CommonServiceImpl extends BaseService implements CommonService {
 	@Override
 	@RequestMapping(value = "/deactivateOrganizationModule",method=RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> deactivateOrganizationModule(@RequestParam("oids") String organizationModuleOids) throws AhanaBusinessException {
+	public Map<String, Object> deactivateOrganizationModule(@RequestParam("oids") String organizationModuleOids,@RequestParam("type") String type) throws AhanaBusinessException {
 		if (logger.isDebugEnabled()) {
 			logger.debug("deactivateOrganizationModule----start--->"	+ System.currentTimeMillis());
 		}
-			commonManager.deactivateOrganizationModule(organizationModuleOids);
+		commonManager.activateOrDeactivateOrganizationModule(organizationModuleOids,type);
 		if (logger.isDebugEnabled()) {
 			logger.debug("deactivateOrganizationModule: Success");
 		}

@@ -89,7 +89,7 @@ public interface CommonDao {
 
 	List<Map<String, String>> getRoomChargeItemValues();
 
-	void deactivateOrganizationModule(String organizationModuleOids);
+	void deactivateOrganizationModule(String organizationModuleOids,String type);
 
 	List<Map<String, String>> getMaintenancesValues();
 

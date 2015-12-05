@@ -569,9 +569,9 @@ public class CommonDaoImpl extends AhanaDaoSupport implements CommonDao {
 	}
 
 	@Override
-	public void deactivateOrganizationModule(String organizationModuleOids) {
+	public void deactivateOrganizationModule(String organizationModuleOids,String type) {
 		String commaSeprateOids=CommonUtils.convertCommoaSeprated(organizationModuleOids);
-		SQLQuery sqlQuery = getSessionFactory().getCurrentSession().createSQLQuery("update organization_module set status='INACT' where oid in("+commaSeprateOids+")");
+		SQLQuery sqlQuery = getSessionFactory().getCurrentSession().createSQLQuery("update organization_module set status='"+type+"' where oid in("+commaSeprateOids+")");
 		sqlQuery.executeUpdate();
 	}
 
