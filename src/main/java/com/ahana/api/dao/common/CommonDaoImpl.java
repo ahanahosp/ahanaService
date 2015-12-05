@@ -281,7 +281,7 @@ public class CommonDaoImpl extends AhanaDaoSupport implements CommonDao {
 		String query=null;
 		try{
 			query="select r.oid as oid,r.item as item,r.code as code,r.description as description,r.status as status, "
-					+ "c.category as category from room_charges_item r join category_item c on r.category_oid=c.oid";
+					+ "c.category as category,c.oid as categoryOid from room_charges_item r join category_item c on r.category_oid=c.oid";
 			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
 					.addScalar("oid")
 					.addScalar("item")
@@ -289,6 +289,7 @@ public class CommonDaoImpl extends AhanaDaoSupport implements CommonDao {
 					.addScalar("description")
 					.addScalar("status")
 					.addScalar("category")
+					.addScalar("categoryOid")
 					.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
 			list = sqlQuery.list();
 		}finally{
@@ -406,15 +407,17 @@ public class CommonDaoImpl extends AhanaDaoSupport implements CommonDao {
 		List<Map<String, Object>> list=null;
 		String query=null;
 		try{
-			query="select r.oid as oid,r.charge as charge,r.status as status,rc.item as item,rt.room_name as roomName "
-					+ "from room_charges r join room_charges_item rc on r.room_charge_items_oid=rc.oid join room_type rt on "
-					+ "r.room_type_oid=rt.oid";
+			query="select r.oid as oid,r.charge as charge,r.status as status,rc.item as item,rc.oid as roomChargeItemsOid,"
+					+ "rt.room_name as roomName,rt.oid as roomTypeOid from room_charges r join room_charges_item rc on "
+					+ "r.room_charge_items_oid=rc.oid join room_type rt on r.room_type_oid=rt.oid";
 			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
 					.addScalar("oid")
 					.addScalar("charge")
 					.addScalar("status")
 					.addScalar("item")
+					.addScalar("roomChargeItemsOid")
 					.addScalar("roomName")
+					.addScalar("roomTypeOid")
 					.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
 			list = sqlQuery.list();
 		}finally{

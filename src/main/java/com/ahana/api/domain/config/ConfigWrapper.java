@@ -7,9 +7,12 @@ import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import com.ahana.api.domain.common.AccountHead;
 import com.ahana.api.domain.common.Floor;
 import com.ahana.api.domain.common.Procedures;
 import com.ahana.api.domain.common.Room;
+import com.ahana.api.domain.common.RoomChargeItem;
+import com.ahana.api.domain.common.RoomCharges;
 import com.ahana.api.domain.common.RoomMaintenanceDetails;
 import com.ahana.api.domain.common.RoomType;
 import com.ahana.api.domain.common.SpecialityDetails;
@@ -27,7 +30,10 @@ import com.ahana.commons.system.security.validation.custom.DepententField;
 		@DepententField(fieldName = "source", fieldValue = "specialityDetails", dependFieldName = "specialityDetails"),
 		@DepententField(fieldName = "source", fieldValue = "procedures", dependFieldName = "procedures"),
 		@DepententField(fieldName = "source", fieldValue = "patientCategories", dependFieldName = "patientCategories"),
-		@DepententField(fieldName = "source", fieldValue = "alertTypes", dependFieldName = "alertTypes")})
+		@DepententField(fieldName = "source", fieldValue = "alertTypes", dependFieldName = "alertTypes"),
+		@DepententField(fieldName = "source", fieldValue = "accountHeadDetails", dependFieldName = "accountHeadDetails"),
+		@DepententField(fieldName = "source", fieldValue = "roomCharges", dependFieldName = "roomCharges"),
+		@DepententField(fieldName = "source", fieldValue = "roomChargeItems", dependFieldName = "roomChargeItems")})
 public class ConfigWrapper implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -64,6 +70,15 @@ public class ConfigWrapper implements Serializable {
 
 	@Valid
 	private List<PatientCategory> patientCategories;
+
+	@Valid
+	private List<RoomChargeItem> roomChargeItems;
+
+	@Valid
+	private List<RoomCharges> roomCharges;
+
+	@Valid
+	private List<AccountHead> accountHeadDetails;
 
 	@NotBlank
 	private String source;
@@ -162,6 +177,30 @@ public class ConfigWrapper implements Serializable {
 
 	public void setPatientCategories(List<PatientCategory> patientCategories) {
 		this.patientCategories = patientCategories;
+	}
+
+	public List<RoomChargeItem> getRoomChargeItems() {
+		return roomChargeItems;
+	}
+
+	public void setRoomChargeItems(List<RoomChargeItem> roomChargeItems) {
+		this.roomChargeItems = roomChargeItems;
+	}
+
+	public List<RoomCharges> getRoomCharges() {
+		return roomCharges;
+	}
+
+	public void setRoomCharges(List<RoomCharges> roomCharges) {
+		this.roomCharges = roomCharges;
+	}
+
+	public List<AccountHead> getAccountHeadDetails() {
+		return accountHeadDetails;
+	}
+
+	public void setAccountHeadDetails(List<AccountHead> accountHeadDetails) {
+		this.accountHeadDetails = accountHeadDetails;
 	}
 
 	public ConfigWrapper() {
