@@ -142,13 +142,13 @@ public class CommonDaoImpl extends AhanaDaoSupport implements CommonDao {
 		List<Map<String, String>> list=null;
 		String query=null;
 		try{
-			query="select r.oid as oid,r.bed_name as bedName,r.occupancy_status as occupancy,rm.maintenance_name as maintenanceName,"
+			query="select r.oid as oid,r.bed_name as bedName,r.occupancy_status as occupancyStatus,rm.maintenance_name as maintenanceName,"
 					+ "rm.oid as maintenanceOid,r.status as status,w.ward_name as wardName,w.oid as wardOid from room r join ward w "
 					+ "on r.ward_oid=w.oid join room_maintance_details rm on r.maintenance_oid=rm.oid";
 			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
 					.addScalar("oid")
 					.addScalar("bedName")
-					.addScalar("occupancy")
+					.addScalar("occupancyStatus")
 					.addScalar("maintenanceName")
 					.addScalar("maintenanceOid")
 					.addScalar("status")
