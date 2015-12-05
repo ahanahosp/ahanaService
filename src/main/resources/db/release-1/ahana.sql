@@ -38,7 +38,7 @@ CREATE TABLE `alert_type` (
 
 LOCK TABLES `alert_type` WRITE;
 /*!40000 ALTER TABLE `alert_type` DISABLE KEYS */;
-INSERT INTO `alert_type` VALUES ('a010000001900000001a','New','ACT'),('a010000001900000001b','Alert','ACT'),('a010000001900000001c','Warning','ACT'),('a0100000022000000023','Test-11213313','ACT');
+INSERT INTO `alert_type` VALUES ('a010000001900000001a','New','ACT'),('a010000001900000001b','Alert','ACT'),('a010000001900000001c','Warning','ACT'),('a0100000022000000023','Emergency','ACT');
 /*!40000 ALTER TABLE `alert_type` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -63,7 +63,7 @@ CREATE TABLE `allied_charges` (
 
 LOCK TABLES `allied_charges` WRITE;
 /*!40000 ALTER TABLE `allied_charges` DISABLE KEYS */;
-INSERT INTO `allied_charges` VALUES ('a01000000af0000000b0','Test Charges123','INACT'),('a01000000af0000000b1','Test Charges','ACT');
+INSERT INTO `allied_charges` VALUES ('a01000000af0000000b0','Test Charges123','INACT'),('a01000000af0000000b1','Needle Charges','ACT');
 /*!40000 ALTER TABLE `allied_charges` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -87,6 +87,7 @@ CREATE TABLE `bed_vs_rooms` (
 
 LOCK TABLES `bed_vs_rooms` WRITE;
 /*!40000 ALTER TABLE `bed_vs_rooms` DISABLE KEYS */;
+INSERT INTO `bed_vs_rooms` VALUES ('a0100000013000000014','a01000000fd0000000fe'),('a0100000013000000014','a010000010e00000010f'),('a0100000013000000015','a01000000fd0000000fe'),('a0100000013000000015','a010000010e00000010f'),('a0100000013000000016','a010000010e00000010f');
 /*!40000 ALTER TABLE `bed_vs_rooms` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -112,7 +113,7 @@ CREATE TABLE `category_item` (
 
 LOCK TABLES `category_item` WRITE;
 /*!40000 ALTER TABLE `category_item` DISABLE KEYS */;
-INSERT INTO `category_item` VALUES ('a010000000a00000000c','General','Test General','ACT'),('a0100000010000000011','Test Category q','Test Description q','ACT');
+INSERT INTO `category_item` VALUES ('a010000000a00000000c','General','Test General','ACT'),('a0100000010000000011','Special','Special','ACT');
 /*!40000 ALTER TABLE `category_item` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -206,6 +207,54 @@ INSERT INTO `client` VALUES ('o0100000402000000501','ahana','574EBDD5B9D10563','
 UNLOCK TABLES;
 
 --
+-- Table structure for table `doctor_schedule`
+--
+
+DROP TABLE IF EXISTS `doctor_schedule`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `doctor_schedule` (
+  `oid` varchar(20) NOT NULL,
+  `doctor_oid` varchar(20) NOT NULL,
+  `visiting_day` varchar(20) NOT NULL,
+  `start_time` varchar(10) DEFAULT NULL,
+  `end_time` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`oid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `doctor_schedule`
+--
+
+LOCK TABLES `doctor_schedule` WRITE;
+/*!40000 ALTER TABLE `doctor_schedule` DISABLE KEYS */;
+INSERT INTO `doctor_schedule` VALUES ('a010000001e00000001f','a010000001e00000001f','All Day','1.00 PM','6.00 PM');
+/*!40000 ALTER TABLE `doctor_schedule` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Temporary view structure for view `doctor_schedule_view`
+--
+
+DROP TABLE IF EXISTS `doctor_schedule_view`;
+/*!50001 DROP VIEW IF EXISTS `doctor_schedule_view`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE VIEW `doctor_schedule_view` AS SELECT 
+ 1 AS `oid`,
+ 1 AS `salutation`,
+ 1 AS `fullName`,
+ 1 AS `designation`,
+ 1 AS `speciality`,
+ 1 AS `careProvider`,
+ 1 AS `userStatus`,
+ 1 AS `visitingDay`,
+ 1 AS `startTime`,
+ 1 AS `endTime`*/;
+SET character_set_client = @saved_cs_client;
+
+--
 -- Table structure for table `floor`
 --
 
@@ -283,7 +332,7 @@ CREATE TABLE `lookup` (
 
 LOCK TABLES `lookup` WRITE;
 /*!40000 ALTER TABLE `lookup` DISABLE KEYS */;
-INSERT INTO `lookup` VALUES ('A+','BLOODGROUP','A+',1,0),('A-','BLOODGROUP','A-',2,0),('AB+','BLOODGROUP','AB+',5,0),('AB-','BLOODGROUP','AB-',6,0),('Allied Charges','CHARGESCATEGORY','Allied Charges',1,0),('Andaman & Nicobar Islands','STATE_INDIA','Andaman & Nicobar Islands',29,0),('Andhra Pradesh','STATE_INDIA','Andhra Pradesh',2,0),('Arunachal Pradesh','STATE_INDIA','Arunachal Pradesh',3,0),('Assam','STATE_INDIA','Assam',4,0),('B+','BLOODGROUP','B+',3,0),('B-','BLOODGROUP','B-',4,0),('Bangladesh','COUNTRY','Bangladesh',3,0),('Bihar','STATE_INDIA','Bihar',5,0),('Chandigarh','STATE_INDIA','Chandigarh',30,0),('Chennai','CITY_TAMIL NADU','Chennai',30,0),('Chhattisgarh','STATE_INDIA','Chhattisgarh',6,0),('Coimbatore','CITY_TAMIL NADU','Coimbatore',2,0),('Cuddalore','CITY_TAMIL NADU','Cuddalore',3,0),('Dadra & Nagar Haveli','STATE_INDIA','Dadra & Nagar Haveli',31,0),('Daman & Diu','STATE_INDIA','Daman & Diu',32,0),('Delhi','STATE_INDIA','Delhi',33,0),('Dharmapuri','CITY_TAMIL NADU','Dharmapuri',4,0),('Dindigul','CITY_TAMIL NADU','Dindigul',5,0),('Dr','SALUTATION','Dr',3,0),('Erode','CITY_TAMIL NADU','Erode',6,0),('Free','CATEGORY','Free',2,0),('Goa','STATE_INDIA','Goa',7,0),('Gujarat','STATE_INDIA','Gujarat',8,0),('Haryana','STATE_INDIA','Haryana',9,0),('Himachal Pradesh','STATE_INDIA','Himachal Pradesh',10,0),('India','COUNTRY','India',1,0),('Indonesia','COUNTRY','Indonesia',4,0),('Jammu & kashmir','STATE_INDIA','Jammu & kashmir',11,0),('Jharkhand','STATE_INDIA','Jharkhand',12,0),('Kanchipuram','CITY_TAMIL NADU','Kanchipuram',7,0),('Kanyakumari','CITY_TAMIL NADU','Kanyakumari',8,0),('Karnataka','STATE_INDIA','Karnataka',13,0),('Karur','CITY_TAMIL NADU','Karur',9,0),('Kerala','STATE_INDIA','Kerala',14,0),('Krishnagiri','CITY_TAMIL NADU','Krishnagiri',10,0),('Laboratory Charges','CHARGESCATEGORY','Laboratory Charges',5,0),('Lakshadweep','STATE_INDIA','Lakshadweep',34,0),('Madhya Pradesh','STATE_INDIA','Madhya Pradesh',15,0),('Madurai','CITY_TAMIL NADU','Madurai',1,0),('Maharashtra','STATE_INDIA','Maharashtra',16,0),('Malaysia','COUNTRY','Malaysia',2,0),('Manipur','STATE_INDIA','Manipur',17,0),('Meghalaya','STATE_INDIA','Meghalaya',18,0),('Miss','SALUTATION','Miss',2,0),('Mizoram','STATE_INDIA','Mizoram',19,0),('Mr','SALUTATION','Mr',1,0),('Ms','SALUTATION','Ms',4,0),('Nagaland','STATE_INDIA','Nagaland',20,0),('Nagapattinam','CITY_TAMIL NADU','Nagapattinam',11,0),('Namakkal','CITY_TAMIL NADU','Namakkal',12,0),('Nepal','COUNTRY','Nepal',8,0),('O+','BLOODGROUP','O+',7,0),('O-','BLOODGROUP','O-',8,0),('Orissa','STATE_INDIA','Orissa',21,0),('Pakistan','COUNTRY','Pakistan',5,0),('Perambalur','CITY_TAMIL NADU','Perambalur',13,0),('Philippines','COUNTRY','Philippines',11,0),('Priority','CATEGORY','Priority',3,0),('Priority-Free','CATEGORY','Priority-Free',4,0),('Procedures Charges','CHARGESCATEGORY','Procedures Charges',4,0),('Prof','SALUTATION','Prof',5,0),('Professional Charges','CHARGESCATEGORY','Professional Charges',3,0),('Puducherry','STATE_INDIA','Puducherry',35,0),('Pudukkottai','CITY_TAMIL NADU','Pudukkottai',14,0),('Punjab','STATE_INDIA','Punjab',22,0),('Rajasthan','STATE_INDIA','Rajasthan',23,0),('Ramanathapuram','CITY_TAMIL NADU','Ramanathapuram',15,0),('Rev','SALUTATION','Rev',6,0),('Room Charges','CHARGESCATEGORY','Room Charges',2,0),('Salem','CITY_TAMIL NADU','Salem',16,0),('Sikkim','STATE_INDIA','Sikkim',24,0),('Singapore','COUNTRY','Singapore',6,0),('Sivaganga','CITY_TAMIL NADU','Sivaganga',17,0),('Sri Lanka','COUNTRY','Sri Lanka',7,0),('Standard-Default','CATEGORY','Standard-Default',1,0),('Tamil Nadu','STATE_INDIA','Tamil Nadu',1,0),('Thailand','COUNTRY','Thailand',9,0),('Thanjavur','CITY_TAMIL NADU','Thanjavur',18,0),('The Nilgiris','CITY_TAMIL NADU','The Nilgiris',19,0),('Theni','CITY_TAMIL NADU','Theni',20,0),('Thoothukudi','CITY_TAMIL NADU','Thoothukudi',21,0),('Tiruchirapalli','CITY_TAMIL NADU','Tiruchirapalli',22,0),('Tirunelveli','CITY_TAMIL NADU','Tirunelveli',23,0),('Tiruvallur','CITY_TAMIL NADU','Tiruvallur',24,0),('Tiruvannamalai','CITY_TAMIL NADU','Tiruvannamalai',25,0),('Tiruvarur','CITY_TAMIL NADU','Tiruvarur',26,0),('Tripura','STATE_INDIA','Tripura',25,0),('Uttar Pradesh','STATE_INDIA','Uttar Pradesh',26,0),('Uttarakhand','STATE_INDIA','Uttarakhand',27,0),('Vellore','CITY_TAMIL NADU','Vellore',27,0),('Vietnam','COUNTRY','Vietnam',10,0),('Viluppuram','CITY_TAMIL NADU','Viluppuram',28,0),('VIP','CATEGORY','VIP',5,0),('Virudhunagar','CITY_TAMIL NADU','Virudhunagar',29,0),('West Bengal','STATE_INDIA','West Bengal',28,0);
+INSERT INTO `lookup` VALUES ('A+','BLOODGROUP','A+',1,0),('A-','BLOODGROUP','A-',2,0),('AB+','BLOODGROUP','AB+',5,0),('AB-','BLOODGROUP','AB-',6,0),('All Days','DAYS','All Days',1,0),('Allied Charges','CHARGESCATEGORY','Allied Charges',1,0),('Andaman & Nicobar Islands','STATE_INDIA','Andaman & Nicobar Islands',29,0),('Andhra Pradesh','STATE_INDIA','Andhra Pradesh',2,0),('Arunachal Pradesh','STATE_INDIA','Arunachal Pradesh',3,0),('Assam','STATE_INDIA','Assam',4,0),('B+','BLOODGROUP','B+',3,0),('B-','BLOODGROUP','B-',4,0),('Bangladesh','COUNTRY','Bangladesh',3,0),('Bihar','STATE_INDIA','Bihar',5,0),('Chandigarh','STATE_INDIA','Chandigarh',30,0),('Chennai','CITY_TAMIL NADU','Chennai',30,0),('Chhattisgarh','STATE_INDIA','Chhattisgarh',6,0),('Coimbatore','CITY_TAMIL NADU','Coimbatore',2,0),('Cuddalore','CITY_TAMIL NADU','Cuddalore',3,0),('Dadra & Nagar Haveli','STATE_INDIA','Dadra & Nagar Haveli',31,0),('Daman & Diu','STATE_INDIA','Daman & Diu',32,0),('Delhi','STATE_INDIA','Delhi',33,0),('Dharmapuri','CITY_TAMIL NADU','Dharmapuri',4,0),('Dindigul','CITY_TAMIL NADU','Dindigul',5,0),('Dr','SALUTATION','Dr',3,0),('Erode','CITY_TAMIL NADU','Erode',6,0),('Free','CATEGORY','Free',2,0),('Friday','DAYS','Friday',7,0),('Goa','STATE_INDIA','Goa',7,0),('Gujarat','STATE_INDIA','Gujarat',8,0),('Haryana','STATE_INDIA','Haryana',9,0),('Himachal Pradesh','STATE_INDIA','Himachal Pradesh',10,0),('India','COUNTRY','India',1,0),('Indonesia','COUNTRY','Indonesia',4,0),('Jammu & kashmir','STATE_INDIA','Jammu & kashmir',11,0),('Jharkhand','STATE_INDIA','Jharkhand',12,0),('Kanchipuram','CITY_TAMIL NADU','Kanchipuram',7,0),('Kanyakumari','CITY_TAMIL NADU','Kanyakumari',8,0),('Karnataka','STATE_INDIA','Karnataka',13,0),('Karur','CITY_TAMIL NADU','Karur',9,0),('Kerala','STATE_INDIA','Kerala',14,0),('Krishnagiri','CITY_TAMIL NADU','Krishnagiri',10,0),('Laboratory Charges','CHARGESCATEGORY','Laboratory Charges',5,0),('Lakshadweep','STATE_INDIA','Lakshadweep',34,0),('Madhya Pradesh','STATE_INDIA','Madhya Pradesh',15,0),('Madurai','CITY_TAMIL NADU','Madurai',1,0),('Maharashtra','STATE_INDIA','Maharashtra',16,0),('Malaysia','COUNTRY','Malaysia',2,0),('Manipur','STATE_INDIA','Manipur',17,0),('Meghalaya','STATE_INDIA','Meghalaya',18,0),('Miss','SALUTATION','Miss',2,0),('Mizoram','STATE_INDIA','Mizoram',19,0),('Monday','DAYS','Monday',3,0),('Mr','SALUTATION','Mr',1,0),('Ms','SALUTATION','Ms',4,0),('Nagaland','STATE_INDIA','Nagaland',20,0),('Nagapattinam','CITY_TAMIL NADU','Nagapattinam',11,0),('Namakkal','CITY_TAMIL NADU','Namakkal',12,0),('Nepal','COUNTRY','Nepal',8,0),('O+','BLOODGROUP','O+',7,0),('O-','BLOODGROUP','O-',8,0),('Orissa','STATE_INDIA','Orissa',21,0),('Pakistan','COUNTRY','Pakistan',5,0),('Perambalur','CITY_TAMIL NADU','Perambalur',13,0),('Philippines','COUNTRY','Philippines',11,0),('Priority','CATEGORY','Priority',3,0),('Priority-Free','CATEGORY','Priority-Free',4,0),('Procedures Charges','CHARGESCATEGORY','Procedures Charges',4,0),('Prof','SALUTATION','Prof',5,0),('Professional Charges','CHARGESCATEGORY','Professional Charges',3,0),('Puducherry','STATE_INDIA','Puducherry',35,0),('Pudukkottai','CITY_TAMIL NADU','Pudukkottai',14,0),('Punjab','STATE_INDIA','Punjab',22,0),('Rajasthan','STATE_INDIA','Rajasthan',23,0),('Ramanathapuram','CITY_TAMIL NADU','Ramanathapuram',15,0),('Rev','SALUTATION','Rev',6,0),('Room Charges','CHARGESCATEGORY','Room Charges',2,0),('Salem','CITY_TAMIL NADU','Salem',16,0),('Saturday','DAYS','Saturday',8,0),('Sikkim','STATE_INDIA','Sikkim',24,0),('Singapore','COUNTRY','Singapore',6,0),('Sivaganga','CITY_TAMIL NADU','Sivaganga',17,0),('Sri Lanka','COUNTRY','Sri Lanka',7,0),('Standard-Default','CATEGORY','Standard-Default',1,0),('Sunday','DAYS','Sunday',2,0),('Tamil Nadu','STATE_INDIA','Tamil Nadu',1,0),('Thailand','COUNTRY','Thailand',9,0),('Thanjavur','CITY_TAMIL NADU','Thanjavur',18,0),('The Nilgiris','CITY_TAMIL NADU','The Nilgiris',19,0),('Theni','CITY_TAMIL NADU','Theni',20,0),('Thoothukudi','CITY_TAMIL NADU','Thoothukudi',21,0),('Thursday','DAYS','Thursday',6,0),('Tiruchirapalli','CITY_TAMIL NADU','Tiruchirapalli',22,0),('Tirunelveli','CITY_TAMIL NADU','Tirunelveli',23,0),('Tiruvallur','CITY_TAMIL NADU','Tiruvallur',24,0),('Tiruvannamalai','CITY_TAMIL NADU','Tiruvannamalai',25,0),('Tiruvarur','CITY_TAMIL NADU','Tiruvarur',26,0),('Tripura','STATE_INDIA','Tripura',25,0),('Tueday','DAYS','Tueday',4,0),('Uttar Pradesh','STATE_INDIA','Uttar Pradesh',26,0),('Uttarakhand','STATE_INDIA','Uttarakhand',27,0),('Vellore','CITY_TAMIL NADU','Vellore',27,0),('Vietnam','COUNTRY','Vietnam',10,0),('Viluppuram','CITY_TAMIL NADU','Viluppuram',28,0),('VIP','CATEGORY','VIP',5,0),('Virudhunagar','CITY_TAMIL NADU','Virudhunagar',29,0),('Wednesday','DAYS','Wednesday',5,0),('West Bengal','STATE_INDIA','West Bengal',28,0);
 /*!40000 ALTER TABLE `lookup` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -341,7 +390,7 @@ CREATE TABLE `organization_module` (
 
 LOCK TABLES `organization_module` WRITE;
 /*!40000 ALTER TABLE `organization_module` DISABLE KEYS */;
-INSERT INTO `organization_module` VALUES ('a0100000003000000005','Configuratiion','INACT'),('a0100000003000000006','Billing','INACT'),('a0100000003000000007','Patients','ACT'),('a0100000003000000008','Patient Registration','ACT');
+INSERT INTO `organization_module` VALUES ('a0100000003000000005','Configuratiion','ACT'),('a0100000003000000006','Billing','ACT'),('a0100000003000000007','Patients','ACT'),('a0100000003000000008','Patient Registration','ACT');
 /*!40000 ALTER TABLE `organization_module` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -389,10 +438,10 @@ DROP TABLE IF EXISTS `patient_category`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `patient_category` (
-  `oid` varchar(20) NOT NULL,
-  `category_name` varchar(100) NOT NULL,
-  `activation_date` varchar(10) NOT NULL,
-  `status` varchar(5) DEFAULT NULL,
+  `oid` varchar(100) NOT NULL,
+  `category_name` varchar(20) NOT NULL,
+  `activation_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `status` varchar(5) NOT NULL DEFAULT 'ACT',
   PRIMARY KEY (`oid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -403,7 +452,6 @@ CREATE TABLE `patient_category` (
 
 LOCK TABLES `patient_category` WRITE;
 /*!40000 ALTER TABLE `patient_category` DISABLE KEYS */;
-INSERT INTO `patient_category` VALUES ('a01000000b90000000ba','Test 123','Tet 123','Test 123','INACT');
 /*!40000 ALTER TABLE `patient_category` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -428,7 +476,7 @@ CREATE TABLE `procedures` (
 
 LOCK TABLES `procedures` WRITE;
 /*!40000 ALTER TABLE `procedures` DISABLE KEYS */;
-INSERT INTO `procedures` VALUES ('a010000000b00000000d','Test Procedure','ACT'),('a0100000011000000012','Test Procedures 3','ACT'),('a010000009900000009a','Test','ACT'),('a010000009900000009b','Test mas','InACT');
+INSERT INTO `procedures` VALUES ('a010000000b00000000d','Test Procedure','ACT'),('a0100000011000000012','Test Procedures 3','ACT'),('a010000009900000009a','Test 123','ACT'),('a010000009900000009b','Test Test','InACT');
 /*!40000 ALTER TABLE `procedures` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -533,6 +581,7 @@ CREATE TABLE `room_bed_type` (
 
 LOCK TABLES `room_bed_type` WRITE;
 /*!40000 ALTER TABLE `room_bed_type` DISABLE KEYS */;
+INSERT INTO `room_bed_type` VALUES ('a01000000fd0000000fe','1','100','ACT'),('a010000010e00000010f','1','100','INACT');
 /*!40000 ALTER TABLE `room_bed_type` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -559,7 +608,7 @@ CREATE TABLE `room_charges` (
 
 LOCK TABLES `room_charges` WRITE;
 /*!40000 ALTER TABLE `room_charges` DISABLE KEYS */;
-INSERT INTO `room_charges` VALUES ('a010000001d00000001e','a0100000017000000018',30000,'a0100000013000000015','ACT');
+INSERT INTO `room_charges` VALUES ('a010000001d00000001e','a0100000017000000018',50001,'a0100000013000000014','ACT');
 /*!40000 ALTER TABLE `room_charges` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -587,7 +636,7 @@ CREATE TABLE `room_charges_item` (
 
 LOCK TABLES `room_charges_item` WRITE;
 /*!40000 ALTER TABLE `room_charges_item` DISABLE KEYS */;
-INSERT INTO `room_charges_item` VALUES ('a0100000017000000018','Item Test 1','1234','Description Test 1','a010000000a00000000c','ACT');
+INSERT INTO `room_charges_item` VALUES ('a0100000017000000018','Item 01','IT01','Description Test 1','a010000000a00000000c','ACT');
 /*!40000 ALTER TABLE `room_charges_item` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -664,7 +713,7 @@ CREATE TABLE `seed_container` (
 
 LOCK TABLES `seed_container` WRITE;
 /*!40000 ALTER TABLE `seed_container` DISABLE KEYS */;
-INSERT INTO `seed_container` VALUES (242,'a01',1,'REST'),(4,'PAT',2,'PAT');
+INSERT INTO `seed_container` VALUES (285,'a01',1,'REST'),(4,'PAT',2,'PAT');
 /*!40000 ALTER TABLE `seed_container` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -689,7 +738,7 @@ CREATE TABLE `speciality_details` (
 
 LOCK TABLES `speciality_details` WRITE;
 /*!40000 ALTER TABLE `speciality_details` DISABLE KEYS */;
-INSERT INTO `speciality_details` VALUES ('a0100000012000000013','Test Speciality 1','ACT'),('a010000009a00000009b','Test Abc','ACT');
+INSERT INTO `speciality_details` VALUES ('a0100000012000000013','General Surgen','ACT'),('a010000009a00000009b','MD','ACT');
 /*!40000 ALTER TABLE `speciality_details` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -718,7 +767,7 @@ CREATE TABLE `token` (
 
 LOCK TABLES `token` WRITE;
 /*!40000 ALTER TABLE `token` DISABLE KEYS */;
-INSERT INTO `token` VALUES ('a01000000f00000000f1','ahana','ahana','2015-12-01 17:40:20','2015-12-01 17:40:20','ahana','ahana'),('a01000000f10000000f2','ahana','ahana','2015-12-01 17:56:42','2015-12-01 17:56:42','ahana','ahana');
+INSERT INTO `token` VALUES ('a0100000115000000116','ahana','ahana','2015-12-05 13:01:18','2015-12-05 13:01:18','ahana','ahana'),('a0100000116000000117','ahana','ahana','2015-12-05 13:04:17','2015-12-05 13:04:17','ahana','ahana'),('a0100000117000000118','ahana','ahana','2015-12-05 13:08:33','2015-12-05 13:08:33','ahana','ahana'),('a0100000118000000119','ahana','ahana','2015-12-05 13:13:14','2015-12-05 13:13:14','ahana','ahana'),('a010000011800000011a','ahana','ahana','2015-12-05 13:13:49','2015-12-05 13:13:49','ahana','ahana'),('a010000011900000011a','ahana','ahana','2015-12-05 13:26:03','2015-12-05 13:26:03','ahana','ahana'),('a010000011a00000011b','ahana','ahana','2015-12-05 13:40:47','2015-12-05 13:40:47','ahana','ahana'),('a010000011b00000011c','ahana','ahana','2015-12-05 13:43:56','2015-12-05 13:43:56','ahana','ahana'),('a010000011c00000011d','ahana','ahana','2015-12-05 13:49:23','2015-12-05 13:49:23','ahana','ahana');
 /*!40000 ALTER TABLE `token` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -886,6 +935,24 @@ UNLOCK TABLES;
 /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
+-- Final view structure for view `doctor_schedule_view`
+--
+
+/*!50001 DROP VIEW IF EXISTS `doctor_schedule_view`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `doctor_schedule_view` AS select distinct `up`.`oid` AS `oid`,`up`.`salutation` AS `salutation`,concat(`up`.`first_name`,' ',`up`.`last_name`) AS `fullName`,`up`.`designation` AS `designation`,`sp`.`speciality_name` AS `speciality`,`up`.`care_provider` AS `careProvider`,`up`.`user_status` AS `userStatus`,`ds`.`visiting_day` AS `visitingDay`,`ds`.`start_time` AS `startTime`,`ds`.`end_time` AS `endTime` from ((`user_profile` `up` left join `speciality_details` `sp` on((`up`.`speciality` = `sp`.`oid`))) left join `doctor_schedule` `ds` on((`up`.`oid` = `ds`.`doctor_oid`))) where (`up`.`care_provider` = 'Yes') */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
 -- Final view structure for view `user_profile_view`
 --
 
@@ -930,4 +997,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-12-02 15:25:01
+-- Dump completed on 2015-12-05 19:23:28
