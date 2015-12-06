@@ -165,4 +165,12 @@ public class ConfigurationManagerImpl implements ConfigurationManager {
 		}
 		return configRoomChargesDetails;
 	}
+
+	@Override
+	public void deleteMultipleObject(String source, String oids) throws AhanaBusinessException {
+		if(StringUtils.isBlank(oids) && StringUtils.isBlank(source)){
+			throw new AhanaBusinessException(CommonErrorConstants.NO_RECORDS_FOUND);
+		}
+		configurationDao.deleteMultipleObject(source,oids);
+	}
 }

@@ -494,5 +494,19 @@ public class ConfigurationServiceImpl extends BaseService implements Configurati
 		}
 		return handleStatus();
 	}
+	
+	@Override
+	@RequestMapping(value = "/deleteMultipleObject",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> deleteMultipleObject(@RequestParam("oids") String oids,@RequestParam("source") String source) throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("deleteMultipleObject----start--->"	+ System.currentTimeMillis());
+		}
+		configurationManager.deleteMultipleObject(source, oids);
+		if (logger.isDebugEnabled()) {
+			logger.debug("deleteMultipleObject: Success");
+		}
+		return handleStatus();
+	}
 		
 }

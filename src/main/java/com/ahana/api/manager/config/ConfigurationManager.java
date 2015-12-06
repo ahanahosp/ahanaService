@@ -39,4 +39,6 @@ public interface ConfigurationManager {
 
 	List<Map<String, String>> getAllConfigRoomCharges() throws AhanaBusinessException;
 
+	void deleteMultipleObject(String source, String oids) throws AhanaBusinessException;
+
 }

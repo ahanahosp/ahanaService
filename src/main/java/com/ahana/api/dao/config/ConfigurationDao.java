@@ -47,4 +47,6 @@ public interface ConfigurationDao {
 
 	List<Map<String, String>> getAllConfigRoomCharges();
 
+	void deleteMultipleObject(String source, String oids);
+
 }

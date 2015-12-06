@@ -72,4 +72,6 @@ public interface ConfigurationService {
 
 	Map<String, Object> deleteConfigRoomCharges(String configRoomChargesOid) throws AhanaBusinessException;
 
+	Map<String, Object> deleteMultipleObject(String oids, String source) throws AhanaBusinessException;
+
 }

@@ -13,6 +13,7 @@ import com.ahana.api.domain.common.RoomAndBedType;
 import com.ahana.api.domain.config.BedVsRoomType;
 import com.ahana.commons.system.dao.common.AhanaDaoSupport;
 import com.ahana.commons.system.domain.common.AhanaVO;
+import com.ahana.commons.system.security.util.CommonUtils;
 import com.ahana.commons.system.security.util.Constants;
 
 @Transactional(readOnly = false)
@@ -86,6 +87,7 @@ public class ConfigurationDaoImpl extends AhanaDaoSupport implements Configurati
 
 	@SuppressWarnings("unchecked")
 	@Override
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	public void createOrUpdateMultipleConfig(List<?> ahanaVOs) {
 		for(AhanaVO obj:(List<AhanaVO>)ahanaVOs){
 			saveOrUpdate(obj);
@@ -182,17 +184,20 @@ public class ConfigurationDaoImpl extends AhanaDaoSupport implements Configurati
 	}
 
 	@Override
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	public void createRoomAndBedType(RoomAndBedType roomAndBedType) {
 		saveOrUpdate(roomAndBedType);
 	}
 
 	@Override
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	public void deleteBedVsRoomType(String roomAndBedTypeOid) {
 		Query q = getSessionFactory().getCurrentSession().createQuery("delete BedVsRoomType where roomAndBedTypeOid ='"+roomAndBedTypeOid+"'");
 		q.executeUpdate();
 	}
 
 	@Override
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	public void createBedVsRoomType(BedVsRoomType bedVsRoomType) {
 		saveOrUpdate(bedVsRoomType);
 	}
@@ -303,5 +308,13 @@ public class ConfigurationDaoImpl extends AhanaDaoSupport implements Configurati
 			query=null;
 		}
 		return list;
-	}	
+	}
+
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
+	public void deleteMultipleObject(String source, String oids) {
+		String oidList=CommonUtils.convertCommoaSeprated(oids);
+		Query q = getSessionFactory().getCurrentSession().createQuery("update "+source+" set status='INACT' where oid in("+oidList+")");
+		q.executeUpdate();
+	}
 }
