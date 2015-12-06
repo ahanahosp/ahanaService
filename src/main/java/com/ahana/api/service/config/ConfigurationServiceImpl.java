@@ -21,6 +21,7 @@ import com.ahana.api.domain.config.AlertType;
 import com.ahana.api.domain.config.AlliedCharges;
 import com.ahana.api.domain.config.ChargesForCategory;
 import com.ahana.api.domain.config.ConfigWrapper;
+import com.ahana.api.domain.config.DoctorSchedule;
 import com.ahana.api.domain.config.PatientCategory;
 import com.ahana.api.manager.config.ConfigurationManager;
 import com.ahana.api.util.BusinessConstants;
@@ -421,6 +422,20 @@ public class ConfigurationServiceImpl extends BaseService implements Configurati
 			logger.debug("getAllDoctorDetails: Success");
 		}
 		return handleSuccess("doctorDetails",doctorDetails);
+	}
+	
+	@Override
+	@RequestMapping(value = "/createDoctorSchedule",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> createDoctorSchedule(@Valid @RequestBody DoctorSchedule doctorSchedule) throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("createDoctorSchedule----start--->"	+ System.currentTimeMillis());
+		}
+		configurationManager.createOrUpdateConfigData(doctorSchedule);
+		if (logger.isDebugEnabled()) {
+			logger.debug("createDoctorSchedule: Success");
+		}
+		return handleSuccess("doctorSchedule",doctorSchedule);
 	}
 		
 }

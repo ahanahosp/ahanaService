@@ -7,6 +7,7 @@ import com.ahana.api.domain.config.AlertType;
 import com.ahana.api.domain.config.AlliedCharges;
 import com.ahana.api.domain.config.ChargesForCategory;
 import com.ahana.api.domain.config.ConfigWrapper;
+import com.ahana.api.domain.config.DoctorSchedule;
 import com.ahana.api.domain.config.PatientCategory;
 import com.ahana.commons.system.security.exception.AhanaBusinessException;
 
@@ -59,5 +60,7 @@ public interface ConfigurationService {
 	Map<String, Object> getDoctorDetails() throws AhanaBusinessException;
 
 	Map<String, Object> getAllDoctorDetails() throws AhanaBusinessException;
+
+	Map<String, Object> createDoctorSchedule(DoctorSchedule doctorSchedule) throws AhanaBusinessException;
 
 }

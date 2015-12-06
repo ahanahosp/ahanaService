@@ -156,6 +156,4 @@ public class ConfigurationManagerImpl implements ConfigurationManager {
 		}
 		return doctorDetails;
 	}
-	
-	
 }

@@ -7,6 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
@@ -14,6 +16,7 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import com.ahana.commons.system.domain.common.AhanaVO;
 import com.ahana.commons.system.security.error.CommonErrorConstants;
+import com.ahana.commons.system.security.util.RegConstants;
 
 @Entity
 @Table(name = "doctor_schedule")
@@ -34,12 +37,21 @@ public class DoctorSchedule implements AhanaVO {
 	@Column(name = "doctor_oid")
 	private String doctorOid;
 
+	@NotBlank(message = CommonErrorConstants.VISITING_DAY_IS_REQUIRED)
+	@Size(message = CommonErrorConstants.VISITING_DAY_LENGTH_IS_INVALID, min = 3, max = 10)
+	@Pattern(regexp = RegConstants.ALPHAPET, message = CommonErrorConstants.VISITING_DAY_INVALID_FORMAT)
 	@Column(name = "visiting_day")
 	private String visitingDay;
-
+	
+	@NotBlank(message = CommonErrorConstants.START_TIME_IS_REQUIRED)
+	@Size(message = CommonErrorConstants.START_TIME_LENGTH_IS_INVALID, min = 8, max = 8)
+	@Pattern(regexp = RegConstants.TIME, message = CommonErrorConstants.START_TIME_INVALID_FORMAT)
 	@Column(name = "start_time")
 	private String startTime;
 
+	@NotBlank(message = CommonErrorConstants.END_TIME_IS_REQUIRED)
+	@Size(message = CommonErrorConstants.END_TIME_LENGTH_IS_INVALID, min = 8, max = 8)
+	@Pattern(regexp = RegConstants.TIME, message = CommonErrorConstants.END_TIME_INVALID_FORMAT)
 	@Column(name = "end_time")
 	private String endTime;
 
