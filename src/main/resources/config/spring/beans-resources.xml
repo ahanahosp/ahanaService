@@ -94,6 +94,7 @@
 				<value>com.ahana.api.domain.config.BedVsRoomType</value>
 				<value>com.ahana.api.domain.common.RoomAndBedType</value>
 				<value>com.ahana.api.domain.config.DoctorSchedule</value>
+				<value>com.ahana.api.domain.config.ConfigRoomCharges</value>
 			</list>
 		</property>
 	</bean>
@@ -143,6 +144,7 @@
 				<value>com.ahana.api.domain.config.BedVsRoomType</value>
 				<value>com.ahana.api.domain.common.RoomAndBedType</value>
 				<value>com.ahana.api.domain.config.DoctorSchedule</value>
+				<value>com.ahana.api.domain.config.ConfigRoomCharges</value>
 			</list>
 		</property>
 	</bean>

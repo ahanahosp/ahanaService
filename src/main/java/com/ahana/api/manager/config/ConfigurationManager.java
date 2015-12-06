@@ -37,4 +37,6 @@ public interface ConfigurationManager {
 
 	List<Map<String, String>> getAllDoctorDetails() throws AhanaBusinessException;
 
+	List<Map<String, String>> getAllConfigRoomCharges() throws AhanaBusinessException;
+
 }

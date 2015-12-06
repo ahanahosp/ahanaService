@@ -156,4 +156,13 @@ public class ConfigurationManagerImpl implements ConfigurationManager {
 		}
 		return doctorDetails;
 	}
+
+	@Override
+	public List<Map<String, String>> getAllConfigRoomCharges() throws AhanaBusinessException {
+		List<Map<String, String>> configRoomChargesDetails=configurationDao.getAllConfigRoomCharges();
+		if(CollectionUtils.isEmpty(configRoomChargesDetails)){
+			throw new AhanaBusinessException(CommonErrorConstants.NO_RECORDS_FOUND);
+		}
+		return configRoomChargesDetails;
+	}
 }

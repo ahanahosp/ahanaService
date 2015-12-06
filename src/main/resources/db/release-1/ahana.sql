@@ -87,7 +87,7 @@ CREATE TABLE `bed_vs_rooms` (
 
 LOCK TABLES `bed_vs_rooms` WRITE;
 /*!40000 ALTER TABLE `bed_vs_rooms` DISABLE KEYS */;
-INSERT INTO `bed_vs_rooms` VALUES ('a0100000013000000014','a01000000fd0000000fe'),('a0100000013000000014','a010000010e00000010f'),('a0100000013000000015','a01000000fd0000000fe'),('a0100000013000000015','a010000010e00000010f'),('a0100000013000000016','a010000010e00000010f');
+INSERT INTO `bed_vs_rooms` VALUES ('a0100000013000000014','a01000000fd0000000fe'),('a0100000013000000014','a010000010e00000010f'),('a0100000013000000014','a0100000125000000126'),('a0100000013000000015','a01000000fd0000000fe'),('a0100000013000000015','a010000010e00000010f'),('a0100000013000000015','a0100000125000000126'),('a0100000013000000016','a010000010e00000010f'),('a0100000013000000016','a0100000125000000126');
 /*!40000 ALTER TABLE `bed_vs_rooms` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -167,7 +167,7 @@ CREATE TABLE `charges_for_category` (
 
 LOCK TABLES `charges_for_category` WRITE;
 /*!40000 ALTER TABLE `charges_for_category` DISABLE KEYS */;
-INSERT INTO `charges_for_category` VALUES ('a01000000c50000000c6','Allied Charges','a01000000af0000000b1','Test','Test','Test','Test','Test','Test','Test','Test','Test','Test','TEst','Test','Test','Test','Test','Test');
+INSERT INTO `charges_for_category` VALUES ('a01000000c50000000c6','Allied Charges','a01000000af0000000b1','Test','Test','Test','Test','Test','Test','Test','Test','Test','Test','TEst','Test','Test','Test','Test','Test'),('a010000011e00000011f','Allied Charges','a01000000af0000000b1','Teat','666','hjhjk','njknkj','njknkjn','knkn','knknknk','njnkn','nk','nk','nkn','kn','kn','k','nk','nkn');
 /*!40000 ALTER TABLE `charges_for_category` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -204,6 +204,33 @@ LOCK TABLES `client` WRITE;
 /*!40000 ALTER TABLE `client` DISABLE KEYS */;
 INSERT INTO `client` VALUES ('o0100000402000000501','ahana','574EBDD5B9D10563','*','*','Internal','2010-11-01 14:34:04','2020-12-30 18:30:00','2020-12-30 18:30:00','2010-11-01 14:34:04','2010-11-01 14:34:04','selva','selva');
 /*!40000 ALTER TABLE `client` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `config_room_charges`
+--
+
+DROP TABLE IF EXISTS `config_room_charges`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `config_room_charges` (
+  `oid` varchar(20) NOT NULL,
+  `discount` double NOT NULL,
+  `format` varchar(20) NOT NULL,
+  `start_time` varchar(10) DEFAULT NULL,
+  `end_time` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`oid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `config_room_charges`
+--
+
+LOCK TABLES `config_room_charges` WRITE;
+/*!40000 ALTER TABLE `config_room_charges` DISABLE KEYS */;
+INSERT INTO `config_room_charges` VALUES ('276372637sgeufud',3.5,'24','01:00 AM','01:00 PM');
+/*!40000 ALTER TABLE `config_room_charges` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -555,7 +582,7 @@ CREATE TABLE `room` (
 
 LOCK TABLES `room` WRITE;
 /*!40000 ALTER TABLE `room` DISABLE KEYS */;
-INSERT INTO `room` VALUES ('a010000000900000000b','Sugery Ward','a0100000007000000009','vacant','ACT','a0100000018000000019'),('a010000001b00000001c','Test','a010000000700000000b','Free','ACT','a010000001a00000001b');
+INSERT INTO `room` VALUES ('a010000000900000000b','Sugery Ward','a0100000007000000009','vacant','ACT','a0100000018000000019'),('a010000001b00000001c','Emergency','a010000000700000000b','Free','ACT','a010000001a00000001b'),('a010000011f000000120','Accident','a010000000700000000b','Accident','ACT','a0100000018000000019');
 /*!40000 ALTER TABLE `room` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -581,7 +608,7 @@ CREATE TABLE `room_bed_type` (
 
 LOCK TABLES `room_bed_type` WRITE;
 /*!40000 ALTER TABLE `room_bed_type` DISABLE KEYS */;
-INSERT INTO `room_bed_type` VALUES ('a01000000fd0000000fe','1','100','ACT'),('a010000010e00000010f','1','100','INACT');
+INSERT INTO `room_bed_type` VALUES ('a01000000fd0000000fe','1','100','INACT'),('a010000010e00000010f','1','100','INACT'),('a0100000125000000126','1','1001','ACT');
 /*!40000 ALTER TABLE `room_bed_type` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -713,7 +740,7 @@ CREATE TABLE `seed_container` (
 
 LOCK TABLES `seed_container` WRITE;
 /*!40000 ALTER TABLE `seed_container` DISABLE KEYS */;
-INSERT INTO `seed_container` VALUES (285,'a01',1,'REST'),(4,'PAT',2,'PAT');
+INSERT INTO `seed_container` VALUES (308,'a01',1,'REST'),(4,'PAT',2,'PAT');
 /*!40000 ALTER TABLE `seed_container` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -767,7 +794,7 @@ CREATE TABLE `token` (
 
 LOCK TABLES `token` WRITE;
 /*!40000 ALTER TABLE `token` DISABLE KEYS */;
-INSERT INTO `token` VALUES ('a0100000115000000116','ahana','ahana','2015-12-05 13:01:18','2015-12-05 13:01:18','ahana','ahana'),('a0100000116000000117','ahana','ahana','2015-12-05 13:04:17','2015-12-05 13:04:17','ahana','ahana'),('a0100000117000000118','ahana','ahana','2015-12-05 13:08:33','2015-12-05 13:08:33','ahana','ahana'),('a0100000118000000119','ahana','ahana','2015-12-05 13:13:14','2015-12-05 13:13:14','ahana','ahana'),('a010000011800000011a','ahana','ahana','2015-12-05 13:13:49','2015-12-05 13:13:49','ahana','ahana'),('a010000011900000011a','ahana','ahana','2015-12-05 13:26:03','2015-12-05 13:26:03','ahana','ahana'),('a010000011a00000011b','ahana','ahana','2015-12-05 13:40:47','2015-12-05 13:40:47','ahana','ahana'),('a010000011b00000011c','ahana','ahana','2015-12-05 13:43:56','2015-12-05 13:43:56','ahana','ahana'),('a010000011c00000011d','ahana','ahana','2015-12-05 13:49:23','2015-12-05 13:49:23','ahana','ahana');
+INSERT INTO `token` VALUES ('a0100000132000000133','ahana','ahana','2015-12-06 13:04:29','2015-12-06 13:04:29','ahana','ahana'),('a0100000133000000134','ahana','ahana','2015-12-06 13:07:45','2015-12-06 13:07:45','ahana','ahana');
 /*!40000 ALTER TABLE `token` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -912,7 +939,7 @@ CREATE TABLE `ward` (
 
 LOCK TABLES `ward` WRITE;
 /*!40000 ALTER TABLE `ward` DISABLE KEYS */;
-INSERT INTO `ward` VALUES ('a0100000007000000009','Sugery Ward1','a010000000800000000a','ACT'),('a010000000700000000a','Sugery Ward','a010000000800000000a','ACT'),('a010000000700000000b','Sugery Ward 2nfkjnfkjdsnkjnsdkjnfkdsnfkdnkf','a010000000800000000a','ACT'),('a010000000700000000c','Sugery Ward 3','a010000000e00000000f','ACT'),('a010000000f000000010','Test Ward','a010000000e00000000f','ACT');
+INSERT INTO `ward` VALUES ('a0100000007000000009','OG Ward','a010000000800000000a','ACT'),('a010000000700000000a','Sugery Ward','a010000000800000000a','ACT'),('a010000000700000000b','ICU','a010000000800000000a','ACT'),('a010000000700000000c','Sugery Ward 3','a010000000e00000000f','ACT'),('a010000000f000000010','Test Ward','a010000000e00000000f','ACT');
 /*!40000 ALTER TABLE `ward` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -997,4 +1024,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-12-05 19:23:28
+-- Dump completed on 2015-12-06 19:26:08

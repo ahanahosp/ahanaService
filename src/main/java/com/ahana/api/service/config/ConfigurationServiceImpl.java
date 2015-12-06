@@ -20,6 +20,7 @@ import com.ahana.api.domain.common.RoomAndBedType;
 import com.ahana.api.domain.config.AlertType;
 import com.ahana.api.domain.config.AlliedCharges;
 import com.ahana.api.domain.config.ChargesForCategory;
+import com.ahana.api.domain.config.ConfigRoomCharges;
 import com.ahana.api.domain.config.ConfigWrapper;
 import com.ahana.api.domain.config.DoctorSchedule;
 import com.ahana.api.domain.config.PatientCategory;
@@ -436,6 +437,62 @@ public class ConfigurationServiceImpl extends BaseService implements Configurati
 			logger.debug("createDoctorSchedule: Success");
 		}
 		return handleSuccess("doctorSchedule",doctorSchedule);
+	}
+	
+	@Override
+	@RequestMapping(value = "/createConfigRoomCharges",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> createConfigRoomCharges(@Valid @RequestBody ConfigRoomCharges configRoomCharges) throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("createConfigRoomCharges----start--->"	+ System.currentTimeMillis());
+		}
+		configurationManager.createOrUpdateConfigData(configRoomCharges);
+		if (logger.isDebugEnabled()) {
+			logger.debug("createConfigRoomCharges: Success");
+		}
+		return handleSuccess("configRoomCharges",configRoomCharges);
+	}
+	
+	@Override
+	@RequestMapping(value = "/getConfigRoomChargesByOid",method=RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> getConfigRoomChargesByOid(@RequestParam("oid") String configRoomChargesOid) throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("getConfigRoomChargesByOid----start--->"	+ System.currentTimeMillis());
+		}
+		AhanaVO configRoomCharges=configurationManager.getConfigDataByOid("getConfigRoomChargesByOid", "configRoomChargesOid", configRoomChargesOid);
+		if (logger.isDebugEnabled()) {
+			logger.debug("getConfigRoomChargesByOid: Success");
+		}
+		return handleSuccess("configRoomCharges",(ConfigRoomCharges)configRoomCharges);
+	}
+	
+	@Override
+	@RequestMapping(value = "/getAllConfigRoomCharges",method=RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> getAllConfigRoomCharges() throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("getAllConfigRoomCharges----start--->"	+ System.currentTimeMillis());
+		}
+		List<Map<String,String>> configRoomChargesDetails=configurationManager.getAllConfigRoomCharges();
+		if (logger.isDebugEnabled()) {
+			logger.debug("getAllConfigRoomCharges: Success");
+		}
+		return handleSuccess("configRoomChargesDetails",configRoomChargesDetails);
+	}
+	
+	@Override
+	@RequestMapping(value = "/deleteConfigRoomCharges",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> deleteConfigRoomCharges(@RequestParam("oid") String configRoomChargesOid) throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("deleteConfigRoomCharges----start--->"	+ System.currentTimeMillis());
+		}
+		configurationManager.deleteConfigData("ConfigRoomCharges", configRoomChargesOid);
+		if (logger.isDebugEnabled()) {
+			logger.debug("deleteConfigRoomCharges: Success");
+		}
+		return handleStatus();
 	}
 		
 }

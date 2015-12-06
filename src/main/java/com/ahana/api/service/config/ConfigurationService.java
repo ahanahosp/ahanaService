@@ -6,6 +6,7 @@ import com.ahana.api.domain.common.RoomAndBedType;
 import com.ahana.api.domain.config.AlertType;
 import com.ahana.api.domain.config.AlliedCharges;
 import com.ahana.api.domain.config.ChargesForCategory;
+import com.ahana.api.domain.config.ConfigRoomCharges;
 import com.ahana.api.domain.config.ConfigWrapper;
 import com.ahana.api.domain.config.DoctorSchedule;
 import com.ahana.api.domain.config.PatientCategory;
@@ -62,5 +63,13 @@ public interface ConfigurationService {
 	Map<String, Object> getAllDoctorDetails() throws AhanaBusinessException;
 
 	Map<String, Object> createDoctorSchedule(DoctorSchedule doctorSchedule) throws AhanaBusinessException;
+
+	Map<String, Object> createConfigRoomCharges(ConfigRoomCharges configRoomCharges) throws AhanaBusinessException;
+
+	Map<String, Object> getConfigRoomChargesByOid(String configRoomChargesOid) throws AhanaBusinessException;
+
+	Map<String, Object> getAllConfigRoomCharges() throws AhanaBusinessException;
+
+	Map<String, Object> deleteConfigRoomCharges(String configRoomChargesOid) throws AhanaBusinessException;
 
 }

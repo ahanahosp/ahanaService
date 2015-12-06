@@ -45,4 +45,6 @@ public interface ConfigurationDao {
 
 	List<Map<String, String>> getAllDoctorDetails();
 
+	List<Map<String, String>> getAllConfigRoomCharges();
+
 }

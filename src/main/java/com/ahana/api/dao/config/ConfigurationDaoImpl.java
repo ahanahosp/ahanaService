@@ -280,5 +280,28 @@ public class ConfigurationDaoImpl extends AhanaDaoSupport implements Configurati
 			query=null;
 		}
 		return list;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Map<String, String>> getAllConfigRoomCharges() {
+		Query sqlQuery=null;
+		List<Map<String, String>> list=null;
+		String query=null;
+		try{
+			query="select oid as oid,discount as discount,start_time as startTime,end_time as endTime,format as format from config_room_charges";
+			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
+					.addScalar("oid")
+					.addScalar("discount")
+					.addScalar("startTime")
+					.addScalar("endTime")
+					.addScalar("format")
+					.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+			list = sqlQuery.list();
+		}finally{
+			sqlQuery=null;
+			query=null;
+		}
+		return list;
 	}	
 }
