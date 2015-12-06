@@ -7,6 +7,9 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -34,9 +37,9 @@ public class ConfigRoomCharges implements AhanaVO {
 	@Column(name = "oid")
 	private String oid;
 
-	@NotBlank(message = CommonErrorConstants.DISCOUNT_IS_REQUIRED)
-	@Size(message = CommonErrorConstants.DISCOUNT_LENGTH_IS_INVALID, min = 1, max = 10)
-	@Pattern(regexp = RegConstants.DOUBLE, message = CommonErrorConstants.DISCOUNT_IS_INVALID_FORMAT)
+	@DecimalMin(value="0.00",message = CommonErrorConstants.DISCOUNT_IS_REQUIRED)
+	@DecimalMax(value="100000.00",message = CommonErrorConstants.DISCOUNT_LENGTH_IS_INVALID)
+	@Digits(fraction=2,integer=10,message = CommonErrorConstants.DISCOUNT_IS_INVALID_FORMAT)
 	@Column(name = "discount")
 	private double discount;
 
