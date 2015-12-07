@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.transform.Transformers;
 import org.springframework.transaction.annotation.Propagation;
@@ -231,7 +230,7 @@ public class ConfigurationDaoImpl extends AhanaDaoSupport implements Configurati
 		List<Map<String, String>> list=null;
 		String query=null;
 		try{
-			query="select oid as value,CONCAT(salutation,\" \",firstName,\" \",lastName,\"	    \",speciality) label"
+			query="select oid as value,CONCAT(salutation,\" \",firstName,\" \",lastName,\"                  \",speciality) label"
 					+ " from user_view where careProvider='Yes' and userStatus='"+Constants.ACT+"';";
 			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
 					.addScalar("value")

@@ -508,5 +508,19 @@ public class ConfigurationServiceImpl extends BaseService implements Configurati
 		}
 		return handleStatus();
 	}
+	
+	@Override
+	@RequestMapping(value = "/getDoctorScheduleByOid",method=RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> getDoctorScheduleByOid(@RequestParam("oid") String dsOid) throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("getDoctorScheduleByOid----start--->"	+ System.currentTimeMillis());
+		}
+		AhanaVO doctorSchdule=configurationManager.getConfigDataByOid("getDoctorScheduleByOid", "dsOid", dsOid);
+		if (logger.isDebugEnabled()) {
+			logger.debug("getDoctorScheduleByOid: Success");
+		}
+		return handleSuccess("doctorSchdule",(DoctorSchedule)doctorSchdule);
+	}
 		
 }

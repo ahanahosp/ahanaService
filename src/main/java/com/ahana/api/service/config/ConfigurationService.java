@@ -74,4 +74,6 @@ public interface ConfigurationService {
 
 	Map<String, Object> deleteMultipleObject(String oids, String source) throws AhanaBusinessException;
 
+	Map<String, Object> getDoctorScheduleByOid(String dsOid) throws AhanaBusinessException;
+
 }
