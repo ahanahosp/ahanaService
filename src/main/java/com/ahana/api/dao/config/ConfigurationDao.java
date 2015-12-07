@@ -25,7 +25,7 @@ public interface ConfigurationDao {
 
 	List<Map<String, String>> getAllChargesForCategory();
 
-	List<Map<String, String>> getAllPatientCategory();
+	List<Map<String, Object>> getAllPatientCategory();
 
 	List<Map<String, String>> getAllActiveAlliedCharges();
 

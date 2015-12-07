@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.transform.Transformers;
 import org.springframework.transaction.annotation.Propagation;
@@ -123,9 +124,9 @@ public class ConfigurationDaoImpl extends AhanaDaoSupport implements Configurati
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Map<String, String>> getAllPatientCategory() {
+	public List<Map<String, Object>> getAllPatientCategory() {
 		Query sqlQuery=null;
-		List<Map<String, String>> list=null;
+		List<Map<String, Object>> list=null;
 		String query=null;
 		try{
 			query="select pa.oid as oid,pa.category_name as categoryName,pa.activation_date as activationDate,pa.status as status from patient_category pa";

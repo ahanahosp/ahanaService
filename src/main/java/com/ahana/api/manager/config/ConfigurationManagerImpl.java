@@ -103,8 +103,8 @@ public class ConfigurationManagerImpl implements ConfigurationManager {
 	}
 
 	@Override
-	public List<Map<String, String>> getAllPatientCategory() throws AhanaBusinessException {
-		List<Map<String,String>> patientCategory=configurationDao.getAllPatientCategory();
+	public List<Map<String, Object>> getAllPatientCategory() throws AhanaBusinessException {
+		List<Map<String,Object>> patientCategory=configurationDao.getAllPatientCategory();
 		if(CollectionUtils.isEmpty(patientCategory)){
 			throw new AhanaBusinessException(CommonErrorConstants.NO_RECORDS_FOUND);
 		}

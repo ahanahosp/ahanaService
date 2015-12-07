@@ -351,7 +351,7 @@ public class ConfigurationServiceImpl extends BaseService implements Configurati
 		if (logger.isDebugEnabled()) {
 			logger.debug("getAllPatientCategory----start--->"	+ System.currentTimeMillis());
 		}
-		List<Map<String,String>> patientCategoryDetails=configurationManager.getAllPatientCategory();
+		List<Map<String,Object>> patientCategoryDetails=configurationManager.getAllPatientCategory();
 		if (logger.isDebugEnabled()) {
 			logger.debug("getAllPatientCategory: Success");
 		}

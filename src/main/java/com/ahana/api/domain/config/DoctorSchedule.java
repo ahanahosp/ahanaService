@@ -39,18 +39,18 @@ public class DoctorSchedule implements AhanaVO {
 
 	@NotBlank(message = CommonErrorConstants.VISITING_DAY_IS_REQUIRED)
 	@Size(message = CommonErrorConstants.VISITING_DAY_LENGTH_IS_INVALID, min = 3, max = 10)
-	@Pattern(regexp = RegConstants.ALPHAPET, message = CommonErrorConstants.VISITING_DAY_INVALID_FORMAT)
+	@Pattern(regexp = RegConstants.ALPHAPET_SPACE, message = CommonErrorConstants.VISITING_DAY_INVALID_FORMAT)
 	@Column(name = "visiting_day")
 	private String visitingDay;
 	
 	@NotBlank(message = CommonErrorConstants.START_TIME_IS_REQUIRED)
-	@Size(message = CommonErrorConstants.START_TIME_LENGTH_IS_INVALID, min = 8, max = 8)
+	@Size(message = CommonErrorConstants.START_TIME_LENGTH_IS_INVALID, min = 5, max = 8)
 	@Pattern(regexp = RegConstants.TIME, message = CommonErrorConstants.START_TIME_INVALID_FORMAT)
 	@Column(name = "start_time")
 	private String startTime;
 
 	@NotBlank(message = CommonErrorConstants.END_TIME_IS_REQUIRED)
-	@Size(message = CommonErrorConstants.END_TIME_LENGTH_IS_INVALID, min = 8, max = 8)
+	@Size(message = CommonErrorConstants.END_TIME_LENGTH_IS_INVALID, min = 5, max = 8)
 	@Pattern(regexp = RegConstants.TIME, message = CommonErrorConstants.END_TIME_INVALID_FORMAT)
 	@Column(name = "end_time")
 	private String endTime;

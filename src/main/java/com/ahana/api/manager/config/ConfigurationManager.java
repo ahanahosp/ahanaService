@@ -25,7 +25,7 @@ public interface ConfigurationManager {
 
 	List<Map<String, String>> getAllChargesForCategory() throws AhanaBusinessException;
 
-	List<Map<String, String>> getAllPatientCategory() throws AhanaBusinessException;
+	List<Map<String, Object>> getAllPatientCategory() throws AhanaBusinessException;
 
 	List<Map<String, String>> getAllActiveAlliedCharges() throws AhanaBusinessException;
 
