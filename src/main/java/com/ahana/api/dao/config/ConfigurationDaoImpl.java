@@ -230,11 +230,12 @@ public class ConfigurationDaoImpl extends AhanaDaoSupport implements Configurati
 		List<Map<String, String>> list=null;
 		String query=null;
 		try{
-			query="select oid as value,CONCAT(salutation,\" \",firstName,\" \",lastName,\"                  \",speciality) label"
+			query="select oid as value,fullName as label,speciality as speciality"
 					+ " from user_view where careProvider='Yes' and userStatus='"+Constants.ACT+"';";
 			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
 					.addScalar("value")
 					.addScalar("label")
+					.addScalar("speciality")
 					.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
 			list = sqlQuery.list();
 		}finally{
