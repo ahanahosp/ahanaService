@@ -200,6 +200,9 @@ public class ConfigurationServiceImpl extends BaseService implements Configurati
 		}else if(CollectionUtils.isNotEmpty(configWrapper.getAccountHeadDetails())){
 			configurationManager.createOrUpdateMultipleConfig(configWrapper.getAccountHeadDetails());
 			return handleSuccess("multipleConfig",configWrapper.getAccountHeadDetails());
+		}else if(CollectionUtils.isNotEmpty(configWrapper.getDoctorSchedules())){
+			configurationManager.createOrUpdateMultipleConfig(configWrapper.getDoctorSchedules());
+			return handleSuccess("multipleConfig",configWrapper.getDoctorSchedules());
 		}
 		return handleStatus();
 	}

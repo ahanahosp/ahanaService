@@ -33,7 +33,8 @@ import com.ahana.commons.system.security.validation.custom.DepententField;
 		@DepententField(fieldName = "source", fieldValue = "alertTypes", dependFieldName = "alertTypes"),
 		@DepententField(fieldName = "source", fieldValue = "accountHeadDetails", dependFieldName = "accountHeadDetails"),
 		@DepententField(fieldName = "source", fieldValue = "roomCharges", dependFieldName = "roomCharges"),
-		@DepententField(fieldName = "source", fieldValue = "roomChargeItems", dependFieldName = "roomChargeItems")})
+		@DepententField(fieldName = "source", fieldValue = "roomChargeItems", dependFieldName = "roomChargeItems"),
+		@DepententField(fieldName = "source", fieldValue = "roomChargeItems", dependFieldName = "roomChargeItems") })
 public class ConfigWrapper implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -79,6 +80,9 @@ public class ConfigWrapper implements Serializable {
 
 	@Valid
 	private List<AccountHead> accountHeadDetails;
+
+	@Valid
+	private List<DoctorSchedule> doctorSchedules;
 
 	@NotBlank
 	private String source;
@@ -201,6 +205,14 @@ public class ConfigWrapper implements Serializable {
 
 	public void setAccountHeadDetails(List<AccountHead> accountHeadDetails) {
 		this.accountHeadDetails = accountHeadDetails;
+	}
+
+	public List<DoctorSchedule> getDoctorSchedules() {
+		return doctorSchedules;
+	}
+
+	public void setDoctorSchedules(List<DoctorSchedule> doctorSchedules) {
+		this.doctorSchedules = doctorSchedules;
 	}
 
 	public ConfigWrapper() {
