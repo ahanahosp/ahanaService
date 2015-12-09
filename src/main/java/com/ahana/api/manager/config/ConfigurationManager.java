@@ -41,4 +41,6 @@ public interface ConfigurationManager {
 
 	void deleteMultipleObject(String source, String oids) throws AhanaBusinessException;
 
+	List<Map<String, String>> getAllActiveProfessional()throws AhanaBusinessException;
+
 }

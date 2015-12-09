@@ -39,58 +39,57 @@ public class ChargesForCategory implements AhanaVO {
 	@Pattern(regexp = RegConstants.ALPHA_NUMERIC_SPACE_HYPEN, message = CommonErrorConstants.CATEGORY_FORMAT_IS_INVALID)
 	@Column(name = "category")
 	private String category;
-	
-	@NotBlank(message = CommonErrorConstants.SUBCATEGORY_IS_REQUIRED)
+
 	@Column(name = "sub_category_oid")
 	private String subCategoryOid;
 
 	@Column(name = "default_value")
-	private String defaultValue;
+	private double defaultValue;
 
 	@Column(name = "free")
-	private String free;
+	private double free;
 
 	@Column(name = "standard_default")
-	private String standardDefault;
+	private double standardDefault;
 
 	@Column(name = "priority")
-	private String priority;
+	private double priority;
 
 	@Column(name = "priority_free")
-	private String priorityFree;
+	private double priorityFree;
 
 	@Column(name = "vip")
-	private String vip;
+	private double vip;
 
 	@Column(name = "vip_free")
-	private String vipFree;
+	private double vipFree;
 
 	@Column(name = "ac")
-	private String ac;
+	private double ac;
 
 	@Column(name = "ac_small")
-	private String acSmall;
+	private double acSmall;
 
 	@Column(name = "deluxe")
-	private String deluxe;
+	private double deluxe;
 
 	@Column(name = "economy_non_ac")
-	private String ecnomyNonAc;
+	private double ecnomyNonAc;
 
 	@Column(name = "non_ac")
-	private String nonAc;
+	private double nonAc;
 
 	@Column(name = "non_ac_small")
-	private String nonAcSmall;
+	private double nonAcSmall;
 
 	@Column(name = "semi_economy_non_ac")
-	private String semiEconomyNonAc;
+	private double semiEconomyNonAc;
 
 	@Column(name = "special_care_room")
-	private String specialCareRoom;
+	private double specialCareRoom;
 
 	@Column(name = "suite")
-	private String suite;
+	private double suite;
 
 	public String getOid() {
 		return oid;
@@ -116,131 +115,131 @@ public class ChargesForCategory implements AhanaVO {
 		this.subCategoryOid = subCategoryOid;
 	}
 
-	public String getDefaultValue() {
+	public double getDefaultValue() {
 		return defaultValue;
 	}
 
-	public void setDefaultValue(String defaultValue) {
+	public void setDefaultValue(double defaultValue) {
 		this.defaultValue = defaultValue;
 	}
 
-	public String getFree() {
+	public double getFree() {
 		return free;
 	}
 
-	public void setFree(String free) {
+	public void setFree(double free) {
 		this.free = free;
 	}
 
-	public String getStandardDefault() {
+	public double getStandardDefault() {
 		return standardDefault;
 	}
 
-	public void setStandardDefault(String standardDefault) {
+	public void setStandardDefault(double standardDefault) {
 		this.standardDefault = standardDefault;
 	}
 
-	public String getPriority() {
+	public double getPriority() {
 		return priority;
 	}
 
-	public void setPriority(String priority) {
+	public void setPriority(double priority) {
 		this.priority = priority;
 	}
 
-	public String getPriorityFree() {
+	public double getPriorityFree() {
 		return priorityFree;
 	}
 
-	public void setPriorityFree(String priorityFree) {
+	public void setPriorityFree(double priorityFree) {
 		this.priorityFree = priorityFree;
 	}
 
-	public String getVip() {
+	public double getVip() {
 		return vip;
 	}
 
-	public void setVip(String vip) {
+	public void setVip(double vip) {
 		this.vip = vip;
 	}
 
-	public String getVipFree() {
+	public double getVipFree() {
 		return vipFree;
 	}
 
-	public void setVipFree(String vipFree) {
+	public void setVipFree(double vipFree) {
 		this.vipFree = vipFree;
 	}
 
-	public String getAc() {
+	public double getAc() {
 		return ac;
 	}
 
-	public void setAc(String ac) {
+	public void setAc(double ac) {
 		this.ac = ac;
 	}
 
-	public String getAcSmall() {
+	public double getAcSmall() {
 		return acSmall;
 	}
 
-	public void setAcSmall(String acSmall) {
+	public void setAcSmall(double acSmall) {
 		this.acSmall = acSmall;
 	}
 
-	public String getDeluxe() {
+	public double getDeluxe() {
 		return deluxe;
 	}
 
-	public void setDeluxe(String deluxe) {
+	public void setDeluxe(double deluxe) {
 		this.deluxe = deluxe;
 	}
 
-	public String getEcnomyNonAc() {
+	public double getEcnomyNonAc() {
 		return ecnomyNonAc;
 	}
 
-	public void setEcnomyNonAc(String ecnomyNonAc) {
+	public void setEcnomyNonAc(double ecnomyNonAc) {
 		this.ecnomyNonAc = ecnomyNonAc;
 	}
 
-	public String getNonAc() {
+	public double getNonAc() {
 		return nonAc;
 	}
 
-	public void setNonAc(String nonAc) {
+	public void setNonAc(double nonAc) {
 		this.nonAc = nonAc;
 	}
 
-	public String getNonAcSmall() {
+	public double getNonAcSmall() {
 		return nonAcSmall;
 	}
 
-	public void setNonAcSmall(String nonAcSmall) {
+	public void setNonAcSmall(double nonAcSmall) {
 		this.nonAcSmall = nonAcSmall;
 	}
 
-	public String getSemiEconomyNonAc() {
+	public double getSemiEconomyNonAc() {
 		return semiEconomyNonAc;
 	}
 
-	public void setSemiEconomyNonAc(String semiEconomyNonAc) {
+	public void setSemiEconomyNonAc(double semiEconomyNonAc) {
 		this.semiEconomyNonAc = semiEconomyNonAc;
 	}
 
-	public String getSpecialCareRoom() {
+	public double getSpecialCareRoom() {
 		return specialCareRoom;
 	}
 
-	public void setSpecialCareRoom(String specialCareRoom) {
+	public void setSpecialCareRoom(double specialCareRoom) {
 		this.specialCareRoom = specialCareRoom;
 	}
 
-	public String getSuite() {
+	public double getSuite() {
 		return suite;
 	}
 
-	public void setSuite(String suite) {
+	public void setSuite(double suite) {
 		this.suite = suite;
 	}
 }

@@ -20,7 +20,8 @@ import com.ahana.commons.system.security.util.RegConstants;
 
 @Entity
 @Table(name = "doctor_schedule")
-@NamedQueries({ @NamedQuery(name = "getDoctorScheduleByOid", query = "from DoctorSchedule ds where ds.oid= :dsOid") })
+@NamedQueries({ @NamedQuery(name = "getDoctorScheduleByOid", query = "from DoctorSchedule ds where ds.oid= :dsOid"),
+	@NamedQuery(name = "getScheduledDoctorDetailsByOid", query = "from DoctorSchedule ds where ds.doctorOid= :doctorOid")	})
 public class DoctorSchedule implements AhanaVO {
 
 	private static final long serialVersionUID = 1L;

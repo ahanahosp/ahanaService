@@ -5,8 +5,10 @@ import java.util.List;
 import java.util.Map;
 
 import javax.validation.Valid;
+import javax.validation.ValidationException;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,6 +29,7 @@ import com.ahana.api.domain.config.PatientCategory;
 import com.ahana.api.manager.config.ConfigurationManager;
 import com.ahana.api.util.BusinessConstants;
 import com.ahana.commons.system.domain.common.AhanaVO;
+import com.ahana.commons.system.security.error.CommonErrorConstants;
 import com.ahana.commons.system.security.exception.AhanaBusinessException;
 import com.ahana.commons.system.service.BaseService;
 
@@ -270,6 +273,13 @@ public class ConfigurationServiceImpl extends BaseService implements Configurati
 		if (logger.isDebugEnabled()) {
 			logger.debug("createChargesForCategory----start--->"	+ System.currentTimeMillis());
 		}
+		if(chargesForCategory.getCategory().equalsIgnoreCase(BusinessConstants.PROFESSIONAL_CHARGES) ||
+			chargesForCategory.getCategory().equalsIgnoreCase(BusinessConstants.ALLIED_CHARGES) ||
+			chargesForCategory.getCategory().equalsIgnoreCase(BusinessConstants.PROCEDURES_CHARGES)){
+			if(StringUtils.isBlank(chargesForCategory.getSubCategoryOid())){
+				throw new ValidationException(CommonErrorConstants.SUBCATEGORY_IS_REQUIRED);
+			}
+		}
 		configurationManager.createOrUpdateConfigData(chargesForCategory);
 		if (logger.isDebugEnabled()) {
 			logger.debug("createChargesForCategory: Success");
@@ -388,7 +398,7 @@ public class ConfigurationServiceImpl extends BaseService implements Configurati
 		}else if(category.equalsIgnoreCase(BusinessConstants.ROOM_CHARGES)){
 			
 		}else if(category.equalsIgnoreCase(BusinessConstants.PROFESSIONAL_CHARGES)){
-			
+			subCategoryDetails=configurationManager.getAllActiveProfessional();
 		}else if(category.equalsIgnoreCase(BusinessConstants.PROCEDURES_CHARGES)){
 			subCategoryDetails=configurationManager.getAllActiveProcedures();
 		}else if(category.equalsIgnoreCase(BusinessConstants.LABORATORY_CHARGES)){
@@ -525,5 +535,20 @@ public class ConfigurationServiceImpl extends BaseService implements Configurati
 		}
 		return handleSuccess("doctorSchdule",(DoctorSchedule)doctorSchdule);
 	}
+	
+	@Override
+	@RequestMapping(value = "/getScheduledDoctorDetailsByOid",method=RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> getScheduledDoctorDetailsByOid(@RequestParam("doctorOid") String doctorOid) throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("getScheduledDoctorDetailsByOid----start--->"	+ System.currentTimeMillis());
+		}
+		AhanaVO doctorSchdule=configurationManager.getConfigDataByOid("getScheduledDoctorDetailsByOid", "doctorOid", doctorOid);
+		if (logger.isDebugEnabled()) {
+			logger.debug("getScheduledDoctorDetailsByOid: Success");
+		}
+		return handleSuccess("scheduledDoctorDetails",(DoctorSchedule)doctorSchdule);
+	}
+	
 		
 }

@@ -173,4 +173,13 @@ public class ConfigurationManagerImpl implements ConfigurationManager {
 		}
 		configurationDao.deleteMultipleObject(source,oids);
 	}
+
+	@Override
+	public List<Map<String, String>> getAllActiveProfessional() throws AhanaBusinessException {
+		List<Map<String, String>> professionalDetails=configurationDao.getAllActiveProfessional();
+		if(CollectionUtils.isEmpty(professionalDetails)){
+			throw new AhanaBusinessException(CommonErrorConstants.NO_RECORDS_FOUND);
+		}
+		return professionalDetails;
+	}
 }

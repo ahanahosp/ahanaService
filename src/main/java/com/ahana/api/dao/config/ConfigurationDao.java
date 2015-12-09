@@ -49,4 +49,6 @@ public interface ConfigurationDao {
 
 	void deleteMultipleObject(String source, String oids);
 
+	List<Map<String, String>> getAllActiveProfessional();
+
 }
