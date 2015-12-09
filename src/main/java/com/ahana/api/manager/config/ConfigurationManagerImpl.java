@@ -95,41 +95,56 @@ public class ConfigurationManagerImpl implements ConfigurationManager {
 	}
 
 	@Override
-	public List<Map<String, String>> getAllChargesForCategory() throws AhanaBusinessException {
+	public List<Map<String,String>> getAllChargesForCategory() throws AhanaBusinessException {
 		List<String> categoryNames=configurationDao.getCategoryNameForChargesForCategory();
 		if(CollectionUtils.isEmpty(categoryNames)){
 			throw new AhanaBusinessException(CommonErrorConstants.NO_RECORDS_FOUND);
 		}
-		List<Map<String,List<Map<String,String>>>> result=null;
-		Map<String,String> temp=null;
+		List<Map<String,String>> result=null;
 		List<Map<String,String>> chargesForCategory=null;
+		result=new ArrayList<Map<String,String>>();
 		for(String categoryName:categoryNames){
 			chargesForCategory=configurationDao.getAllChargesForCategory(categoryName);
-			temp=new HashMap<String,String>();
 			for(Map<String, String> mapObject:chargesForCategory){
-				populateValue(temp,mapObject.get("op"));
-				if(temp!=null && temp.size()>0){
-					temp.put("opOrIp", "OP");
-				}
-				populateValue(temp,mapObject.get("ip"));
-				if(temp!=null && temp.size()>0){
-					temp.put("opOrIp", "IP");
-				}
-				temp.put("", mapObject.get(""));
-				temp.put("", mapObject.get(""));
-				temp.put("", mapObject.get(""));
+				populateValue(result,mapObject);
 			}
 		}
-		return chargesForCategory;
+		return result;
 	}
 
-	private void populateValue(Map<String, String> temp, String opOrIp) {
-		if(StringUtils.isNotBlank(opOrIp)){
-			String[] strArray=opOrIp.split("#");
+	private void populateValue(List<Map<String,String>> result,Map<String, String> mapObject) {
+		Map<String, String> temp=null;
+		if(StringUtils.isNotBlank(mapObject.get("ip"))){
+			String[] strArray=mapObject.get("ip").split("#");
 			for(String innerOb:strArray){
 				String[] tempArr=innerOb.split(":");
 				if(Integer.valueOf(tempArr[1])>0){
-					temp.put(tempArr[0], tempArr[1]);
+					temp=new HashMap<String, String>();
+					temp.put("type",tempArr[0]);
+					temp.put("amount",tempArr[1]);
+					temp.put("subCategory", mapObject.get("subCategory"));
+					temp.put("subCategoryOid", mapObject.get("subCategoryOid"));
+					temp.put("oid", mapObject.get("oid"));
+					temp.put("category", mapObject.get("category"));
+					temp.put("opOrIp", "IP");
+					result.add(temp);
+				}
+			}
+		}
+		if(StringUtils.isNotBlank(mapObject.get("op"))){
+			String[] strArray=mapObject.get("op").split("#");
+			for(String innerOb:strArray){
+				String[] tempArr=innerOb.split(":");
+				if(Integer.valueOf(tempArr[1])>0){
+					temp=new HashMap<String, String>();
+					temp.put("type",tempArr[0]);
+					temp.put("amount",tempArr[1]);
+					temp.put("subCategory", mapObject.get("subCategory"));
+					temp.put("subCategoryOid", mapObject.get("subCategoryOid"));
+					temp.put("oid", mapObject.get("oid"));
+					temp.put("category", mapObject.get("category"));
+					temp.put("opOrIp", "OP");
+					result.add(temp);
 				}
 			}
 		}
