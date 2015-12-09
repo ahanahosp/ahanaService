@@ -95,9 +95,15 @@ public class ConfigurationManagerImpl implements ConfigurationManager {
 
 	@Override
 	public List<Map<String, String>> getAllChargesForCategory() throws AhanaBusinessException {
-		List<Map<String,String>> chargesForCategory=configurationDao.getAllChargesForCategory();
-		if(CollectionUtils.isEmpty(chargesForCategory)){
+		List<String> categoryNames=configurationDao.getCategoryNameForChargesForCategory();
+		if(CollectionUtils.isEmpty(categoryNames)){
 			throw new AhanaBusinessException(CommonErrorConstants.NO_RECORDS_FOUND);
+		}
+		List<Map<String,String>> chargesForCategory=null;
+		for(String categoryName:categoryNames){
+			chargesForCategory=configurationDao.getAllChargesForCategory(categoryName);
+			for(Map<String, String> mapObject:chargesForCategory){
+			}
 		}
 		return chargesForCategory;
 	}

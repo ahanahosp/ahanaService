@@ -115,10 +115,29 @@ public class ConfigurationDaoImpl extends AhanaDaoSupport implements Configurati
 		return list;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public List<Map<String, String>> getAllChargesForCategory() {
-
-		return null;
+	public List<Map<String, String>> getAllChargesForCategory(String name) {
+		Query sqlQuery=null;
+		List<Map<String, String>> list=null;
+		String query=null;
+		try{
+			query="select ca.oid as oid,ca.category as category,ca.subCategory as subCategory,ca.subCategoryOid as subCategoryOid,"
+					+ "ca.op as op,ca.ip as ip from charges_category_view ca where ca.category='"+name+"'";
+			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
+					.addScalar("oid")
+					.addScalar("category")
+					.addScalar("subCategory")
+					.addScalar("subCategoryOid")
+					.addScalar("op")
+					.addScalar("ip")
+					.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+			list = sqlQuery.list();
+		}finally{
+			sqlQuery=null;
+			query=null;
+		}
+		return list;	
 	}
 
 	@SuppressWarnings("unchecked")
@@ -334,6 +353,23 @@ public class ConfigurationDaoImpl extends AhanaDaoSupport implements Configurati
 					.addScalar("label")
 					.addScalar("speciality")
 					.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+			list = sqlQuery.list();
+		}finally{
+			sqlQuery=null;
+			query=null;
+		}
+		return list;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<String> getCategoryNameForChargesForCategory() {
+		Query sqlQuery=null;
+		List<String> list=null;
+		String query=null;
+		try{
+			query="select distinct category from charges_for_category order by category";
+			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query);
 			list = sqlQuery.list();
 		}finally{
 			sqlQuery=null;

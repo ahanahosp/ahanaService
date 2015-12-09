@@ -23,7 +23,7 @@ public interface ConfigurationDao {
 
 	List<Map<String, String>> getAllAlliedCharges();
 
-	List<Map<String, String>> getAllChargesForCategory();
+	List<Map<String, String>> getAllChargesForCategory(String name);
 
 	List<Map<String, Object>> getAllPatientCategory();
 
@@ -50,5 +50,7 @@ public interface ConfigurationDao {
 	void deleteMultipleObject(String source, String oids);
 
 	List<Map<String, String>> getAllActiveProfessional();
+
+	List<String> getCategoryNameForChargesForCategory();
 
 }

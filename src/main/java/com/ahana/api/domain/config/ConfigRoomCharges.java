@@ -44,13 +44,13 @@ public class ConfigRoomCharges implements AhanaVO {
 	private double discount;
 
 	@NotBlank(message = CommonErrorConstants.START_TIME_IS_REQUIRED)
-	@Size(message = CommonErrorConstants.START_TIME_LENGTH_IS_INVALID, min = 8, max = 8)
+	@Size(message = CommonErrorConstants.START_TIME_LENGTH_IS_INVALID, min = 5, max = 8)
 	@Pattern(regexp = RegConstants.TIME, message = CommonErrorConstants.START_TIME_INVALID_FORMAT)
 	@Column(name = "start_time")
 	private String startTime;
 
 	@NotBlank(message = CommonErrorConstants.END_TIME_IS_REQUIRED)
-	@Size(message = CommonErrorConstants.END_TIME_LENGTH_IS_INVALID, min = 8, max = 8)
+	@Size(message = CommonErrorConstants.END_TIME_LENGTH_IS_INVALID, min = 5, max = 8)
 	@Pattern(regexp = RegConstants.TIME, message = CommonErrorConstants.END_TIME_INVALID_FORMAT)
 	@Column(name = "end_time")
 	private String endTime;
