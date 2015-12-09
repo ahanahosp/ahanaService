@@ -2,6 +2,7 @@ package com.ahana.api.manager.config;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -99,13 +100,39 @@ public class ConfigurationManagerImpl implements ConfigurationManager {
 		if(CollectionUtils.isEmpty(categoryNames)){
 			throw new AhanaBusinessException(CommonErrorConstants.NO_RECORDS_FOUND);
 		}
+		List<Map<String,List<Map<String,String>>>> result=null;
+		Map<String,String> temp=null;
 		List<Map<String,String>> chargesForCategory=null;
 		for(String categoryName:categoryNames){
 			chargesForCategory=configurationDao.getAllChargesForCategory(categoryName);
+			temp=new HashMap<String,String>();
 			for(Map<String, String> mapObject:chargesForCategory){
+				populateValue(temp,mapObject.get("op"));
+				if(temp!=null && temp.size()>0){
+					temp.put("opOrIp", "OP");
+				}
+				populateValue(temp,mapObject.get("ip"));
+				if(temp!=null && temp.size()>0){
+					temp.put("opOrIp", "IP");
+				}
+				temp.put("", mapObject.get(""));
+				temp.put("", mapObject.get(""));
+				temp.put("", mapObject.get(""));
 			}
 		}
 		return chargesForCategory;
+	}
+
+	private void populateValue(Map<String, String> temp, String opOrIp) {
+		if(StringUtils.isNotBlank(opOrIp)){
+			String[] strArray=opOrIp.split("#");
+			for(String innerOb:strArray){
+				String[] tempArr=innerOb.split(":");
+				if(Integer.valueOf(tempArr[1])>0){
+					temp.put(tempArr[0], tempArr[1]);
+				}
+			}
+		}
 	}
 
 	@Override

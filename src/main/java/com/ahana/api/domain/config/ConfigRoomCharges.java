@@ -37,9 +37,9 @@ public class ConfigRoomCharges implements AhanaVO {
 	@Column(name = "oid")
 	private String oid;
 
-	@DecimalMin(value="0.00",message = CommonErrorConstants.DISCOUNT_IS_REQUIRED)
-	@DecimalMax(value="100000.00",message = CommonErrorConstants.DISCOUNT_LENGTH_IS_INVALID)
-	@Digits(fraction=2,integer=10,message = CommonErrorConstants.DISCOUNT_IS_INVALID_FORMAT)
+	@DecimalMin(value = "0.00", message = CommonErrorConstants.DISCOUNT_IS_REQUIRED)
+	@DecimalMax(value = "100000.00", message = CommonErrorConstants.DISCOUNT_LENGTH_IS_INVALID)
+	@Digits(fraction = 2, integer = 10, message = CommonErrorConstants.DISCOUNT_IS_INVALID_FORMAT)
 	@Column(name = "discount")
 	private double discount;
 
@@ -60,6 +60,9 @@ public class ConfigRoomCharges implements AhanaVO {
 	@Pattern(regexp = RegConstants.ALPHA_NUMERIC, message = CommonErrorConstants.HOUR_FORMATE_IS_INVALID_FORMAT)
 	@Column(name = "format")
 	private String format;
+
+	@Column(name = "status")
+	private String status;
 
 	public String getOid() {
 		return oid;
@@ -99,5 +102,13 @@ public class ConfigRoomCharges implements AhanaVO {
 
 	public void setFormat(String format) {
 		this.format = format;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 }
