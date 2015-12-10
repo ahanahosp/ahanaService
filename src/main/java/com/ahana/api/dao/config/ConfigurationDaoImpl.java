@@ -289,7 +289,7 @@ public class ConfigurationDaoImpl extends AhanaDaoSupport implements Configurati
 		String query=null;
 		try{
 			query="select oid as oid,doctorOid as doctorOid,fullName as fullName,speciality as speciality,visitingDay as visitingDay,"
-					+ "startTime as startTime,endTime as endTime,userStatus as doctorStatus from doctor_schedule_view";
+					+ "startTime as startTime,endTime as endTime,status as status from doctor_schedule_view";
 			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
 					.addScalar("oid")
 					.addScalar("doctorOid")
@@ -298,7 +298,7 @@ public class ConfigurationDaoImpl extends AhanaDaoSupport implements Configurati
 					.addScalar("visitingDay")
 					.addScalar("startTime")
 					.addScalar("endTime")
-					.addScalar("doctorStatus")
+					.addScalar("status")
 					.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
 			list = sqlQuery.list();
 		}finally{
