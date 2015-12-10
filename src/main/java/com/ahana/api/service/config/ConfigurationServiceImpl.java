@@ -583,12 +583,12 @@ public class ConfigurationServiceImpl extends BaseService implements Configurati
 	@RequestMapping(value = "/updateChangesForCategory",method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> updateChangesForCategory(@RequestParam("oid") String oid,
-			@RequestParam("filedName") String filedName,
+			@RequestParam("fieldName") String fieldName,
 			@RequestParam("fieldValue") String fieldValue) throws AhanaBusinessException {
 		if (logger.isDebugEnabled()) {
 			logger.debug("updateChangesForCategory----start--->"	+ System.currentTimeMillis());
 		}
-		configurationManager.updateChangesForCategory(oid,filedName,fieldValue);
+		configurationManager.updateChangesForCategory(oid,fieldName,fieldValue);
 		if (logger.isDebugEnabled()) {
 			logger.debug("updateChangesForCategory: Success");
 		}
