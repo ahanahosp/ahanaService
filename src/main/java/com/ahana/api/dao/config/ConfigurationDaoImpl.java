@@ -378,4 +378,37 @@ public class ConfigurationDaoImpl extends AhanaDaoSupport implements Configurati
 		}
 		return list;
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Map<String, Object> getChargesForCategoryByOidAndType(String oid, String type) {
+		Query sqlQuery=null;
+		List<Map<String, Object>> list=null;
+		String query=null;
+		try{
+			query="select oid as oid,category as category,sub_category_oid as subCategoryoid,"+type+" as amount"
+					+ " from charges_for_category where oid='"+oid+"'";
+			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
+					.addScalar("oid")
+					.addScalar("category")
+					.addScalar("subCategoryoid")
+					.addScalar("amount")
+					.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+			list = sqlQuery.list();
+			if(CollectionUtils.isNotEmpty(list)){
+				return list.get(0);
+			}
+		}finally{
+			sqlQuery=null;
+			query=null;
+		}
+		return null;
+	}
+
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
+	public void updateChangesForCategory(String oid, String filedName, String fieldValue) {
+		Query q = getSessionFactory().getCurrentSession().createSQLQuery("update charges_for_category set "+filedName+"="+fieldValue+" where oid='"+oid+"'");
+		q.executeUpdate();
+	}
 }

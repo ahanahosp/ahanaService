@@ -43,4 +43,8 @@ public interface ConfigurationManager {
 
 	List<Map<String, String>> getAllActiveProfessional()throws AhanaBusinessException;
 
+	Map<String,Object> getChargesForCategoryByOidAndType(String oid, String type) throws AhanaBusinessException;
+
+	void updateChangesForCategory(String oid, String filedName, String fieldValue);
+
 }

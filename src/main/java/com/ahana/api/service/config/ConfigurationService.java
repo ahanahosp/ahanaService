@@ -80,4 +80,9 @@ public interface ConfigurationService {
 
 	Map<String, Object> deleteDoctorSchedule(String dsOid) throws AhanaBusinessException;
 
+	Map<String, Object> updateChangesForCategory(String oid, String filedName, String fieldValue)
+			throws AhanaBusinessException;
+
+	Map<String, Object> getChargesForCategoryByOidAndType(String oid, String type) throws AhanaBusinessException;
+
 }

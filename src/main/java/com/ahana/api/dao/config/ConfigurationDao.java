@@ -53,4 +53,8 @@ public interface ConfigurationDao {
 
 	List<String> getCategoryNameForChargesForCategory();
 
+	Map<String, Object> getChargesForCategoryByOidAndType(String oid, String type);
+
+	void updateChangesForCategory(String oid, String filedName, String fieldValue);
+
 }

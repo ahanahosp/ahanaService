@@ -230,4 +230,18 @@ public class ConfigurationManagerImpl implements ConfigurationManager {
 		}
 		return professionalDetails;
 	}
+
+	@Override
+	public Map<String,Object> getChargesForCategoryByOidAndType(String oid, String type) throws AhanaBusinessException {
+		Map<String,Object> ahanaVO=configurationDao.getChargesForCategoryByOidAndType(oid,type);
+		if(ahanaVO==null){
+			throw new AhanaBusinessException(CommonErrorConstants.NO_RECORDS_FOUND);
+		}
+		return ahanaVO;
+	}
+
+	@Override
+	public void updateChangesForCategory(String oid, String filedName, String fieldValue) {
+		configurationDao.updateChangesForCategory(oid,filedName,fieldValue);
+	}
 }

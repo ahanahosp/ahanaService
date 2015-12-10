@@ -551,6 +551,21 @@ public class ConfigurationServiceImpl extends BaseService implements Configurati
 	}
 	
 	@Override
+	@RequestMapping(value = "/getChargesForCategoryByOidAndType",method=RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> getChargesForCategoryByOidAndType(@RequestParam("oid") String oid,
+			@RequestParam("type") String type) throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("getChargesForCategoryByOidAndType----start--->"	+ System.currentTimeMillis());
+		}
+		Map<String,Object> chargesForCategory=configurationManager.getChargesForCategoryByOidAndType(oid,type);
+		if (logger.isDebugEnabled()) {
+			logger.debug("getChargesForCategoryByOidAndType: Success");
+		}
+		return handleSuccess("chargesForCategory",(ChargesForCategory)chargesForCategory);
+	}
+	
+	@Override
 	@RequestMapping(value = "/deleteDoctorSchedule",method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> deleteDoctorSchedule(@RequestParam("oid") String dsOid) throws AhanaBusinessException {
@@ -560,6 +575,22 @@ public class ConfigurationServiceImpl extends BaseService implements Configurati
 		configurationManager.deleteConfigData("DoctorSchedule", dsOid);
 		if (logger.isDebugEnabled()) {
 			logger.debug("deleteDoctorSchedule: Success");
+		}
+		return handleStatus();
+	}
+	
+	@Override
+	@RequestMapping(value = "/updateChangesForCategory",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> updateChangesForCategory(@RequestParam("oid") String oid,
+			@RequestParam("filedName") String filedName,
+			@RequestParam("fieldValue") String fieldValue) throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("updateChangesForCategory----start--->"	+ System.currentTimeMillis());
+		}
+		configurationManager.updateChangesForCategory(oid,filedName,fieldValue);
+		if (logger.isDebugEnabled()) {
+			logger.debug("updateChangesForCategory: Success");
 		}
 		return handleStatus();
 	}
