@@ -315,13 +315,14 @@ public class ConfigurationDaoImpl extends AhanaDaoSupport implements Configurati
 		List<Map<String, String>> list=null;
 		String query=null;
 		try{
-			query="select oid as oid,discount as discount,start_time as startTime,end_time as endTime,format as format from config_room_charges";
+			query="select oid as oid,discount as discount,start_time as startTime,end_time as endTime,format as format,status as status from config_room_charges";
 			sqlQuery=getSessionFactory().getCurrentSession().createSQLQuery(query)
 					.addScalar("oid")
 					.addScalar("discount")
 					.addScalar("startTime")
 					.addScalar("endTime")
 					.addScalar("format")
+					.addScalar("status")
 					.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
 			list = sqlQuery.list();
 		}finally{
