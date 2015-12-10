@@ -78,4 +78,6 @@ public interface ConfigurationService {
 
 	Map<String, Object> getScheduledDoctorDetailsByOid(String doctorOid) throws AhanaBusinessException;
 
+	Map<String, Object> deleteDoctorSchedule(String dsOid) throws AhanaBusinessException;
+
 }

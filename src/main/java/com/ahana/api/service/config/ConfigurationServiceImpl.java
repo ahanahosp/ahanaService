@@ -396,7 +396,7 @@ public class ConfigurationServiceImpl extends BaseService implements Configurati
 		if(category.equalsIgnoreCase(BusinessConstants.ALLIED_CHARGES)){
 			subCategoryDetails=configurationManager.getAllActiveAlliedCharges();
 		}else if(category.equalsIgnoreCase(BusinessConstants.ROOM_CHARGES)){
-			
+			//subCategoryDetails=configurationManager.getChargesConfigByCategory(category);
 		}else if(category.equalsIgnoreCase(BusinessConstants.PROFESSIONAL_CHARGES)){
 			subCategoryDetails=configurationManager.getAllActiveProfessional();
 		}else if(category.equalsIgnoreCase(BusinessConstants.PROCEDURES_CHARGES)){
@@ -550,5 +550,18 @@ public class ConfigurationServiceImpl extends BaseService implements Configurati
 		return handleSuccess("scheduledDoctorDetails",(DoctorSchedule)doctorSchdule);
 	}
 	
-		
+	@Override
+	@RequestMapping(value = "/deleteDoctorSchedule",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> deleteDoctorSchedule(@RequestParam("oid") String dsOid) throws AhanaBusinessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("deleteDoctorSchedule----start--->"	+ System.currentTimeMillis());
+		}
+		configurationManager.deleteConfigData("DoctorSchedule", dsOid);
+		if (logger.isDebugEnabled()) {
+			logger.debug("deleteDoctorSchedule: Success");
+		}
+		return handleStatus();
+	}
+	
 }

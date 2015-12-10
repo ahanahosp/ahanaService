@@ -16,12 +16,13 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import com.ahana.commons.system.domain.common.AhanaVO;
 import com.ahana.commons.system.security.error.CommonErrorConstants;
+import com.ahana.commons.system.security.util.Constants;
 import com.ahana.commons.system.security.util.RegConstants;
 
 @Entity
 @Table(name = "doctor_schedule")
 @NamedQueries({ @NamedQuery(name = "getDoctorScheduleByOid", query = "from DoctorSchedule ds where ds.oid= :dsOid"),
-	@NamedQuery(name = "getScheduledDoctorDetailsByOid", query = "from DoctorSchedule ds where ds.doctorOid= :doctorOid")	})
+		@NamedQuery(name = "getScheduledDoctorDetailsByOid", query = "from DoctorSchedule ds where ds.doctorOid= :doctorOid") })
 public class DoctorSchedule implements AhanaVO {
 
 	private static final long serialVersionUID = 1L;
@@ -43,7 +44,7 @@ public class DoctorSchedule implements AhanaVO {
 	@Pattern(regexp = RegConstants.ALPHAPET_SPACE, message = CommonErrorConstants.VISITING_DAY_INVALID_FORMAT)
 	@Column(name = "visiting_day")
 	private String visitingDay;
-	
+
 	@NotBlank(message = CommonErrorConstants.START_TIME_IS_REQUIRED)
 	@Size(message = CommonErrorConstants.START_TIME_LENGTH_IS_INVALID, min = 5, max = 8)
 	@Pattern(regexp = RegConstants.TIME, message = CommonErrorConstants.START_TIME_INVALID_FORMAT)
@@ -56,7 +57,11 @@ public class DoctorSchedule implements AhanaVO {
 	@Column(name = "end_time")
 	private String endTime;
 
+	@Column(name = "status")
+	private String status;
+
 	public DoctorSchedule() {
+		this.status = Constants.ACT;
 	}
 
 	public String getOid() {
@@ -98,4 +103,13 @@ public class DoctorSchedule implements AhanaVO {
 	public void setEndTime(String endTime) {
 		this.endTime = endTime;
 	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 }
